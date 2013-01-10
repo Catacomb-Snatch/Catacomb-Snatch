@@ -5,6 +5,9 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Art {
+	public static Texture background;
+	public static Texture titleScreen;
+
 	/**
 	 * Loads all the artwork
 	 * 
@@ -12,7 +15,8 @@ public class Art {
 	 */
 	public static boolean loadResources() {
 		try {
-			// Load artwork in here
+			background = load( "art/screen/background.png" );
+			titleScreen = load( "art/screen/title.png" );
 
 			return true;
 		} catch ( Exception e ) {

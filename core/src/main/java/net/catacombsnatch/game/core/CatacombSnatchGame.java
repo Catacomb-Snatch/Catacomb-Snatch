@@ -5,7 +5,6 @@ import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 
 public class CatacombSnatchGame implements ApplicationListener {
 	private Screen screen;
@@ -21,7 +20,7 @@ public class CatacombSnatchGame implements ApplicationListener {
 
 	public void render() {
 		screen.getGraphics().begin();
-		screen.clear( Color.BLACK );
+		screen.getGraphics().draw( Art.background, 0, 0 );
 		screen.getGraphics().end();
 	}
 
