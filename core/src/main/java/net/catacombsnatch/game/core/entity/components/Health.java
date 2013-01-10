@@ -21,6 +21,6 @@ public class Health implements EntityComponent {
 	}
 
 	public float getHealthPercentage() {
-		return health / maxHealth;
+		return (float) (health) / (float) (maxHealth);
 	}
 }

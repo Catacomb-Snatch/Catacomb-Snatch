@@ -3,18 +3,30 @@ package net.catacombsnatch.game.core.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.utils.Disposable;
 
 public class Screen implements Disposable {
 	protected SpriteBatch batch;
+
 	protected int xOffset, yOffset;
+
+	protected Texture rect_tex;
 
 	public Screen() {
 		this.batch = new SpriteBatch();
+
+		// Custom texture for rectangles (used by fill())
+		Pixmap pmap = new Pixmap( 1, 1, Pixmap.Format.RGBA8888 );
+		pmap.setColor( Color.WHITE );
+		pmap.fillRectangle( 0, 0, 1, 1 );
+
+		rect_tex = new Texture( pmap, true );
+
+		pmap.dispose();
 	}
 
 	/**
@@ -48,12 +60,11 @@ public class Screen implements Disposable {
 	 * @param color
 	 */
 	public void fill( int x, int y, int width, int height, Color color ) {
-		ShapeRenderer rect = new ShapeRenderer();
+		Color old = getGraphics().getColor();
 
-		rect.begin( ShapeType.FilledRectangle );
-		rect.setColor( color.r, color.g, color.b, color.a );
-		rect.filledRect( x, getHeight() - y, width, -height );
-		rect.end();
+		getGraphics().setColor( color );
+		getGraphics().draw( rect_tex, x, y, width / 2, height / 2, width, height, 1, 1, 0, 0, 0, 1, 1, false, false );
+		getGraphics().setColor( old );
 	}
 
 	/**
