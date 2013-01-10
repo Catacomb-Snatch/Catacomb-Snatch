@@ -1,3 +1,8 @@
+# Maven #
+core/target/*
+desktop/target/*
+android/target/
+
 # Java stuff #
 *.class
 
