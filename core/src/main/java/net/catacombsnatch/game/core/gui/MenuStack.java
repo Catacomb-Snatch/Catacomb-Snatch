@@ -10,4 +10,21 @@ public class MenuStack extends Stack<GuiMenu> {
 	public MenuStack() {
 		super();
 	}
+
+	/**
+	 * Attempts to pop the top menu off the stack
+	 * 
+	 * @return The menu that was popped or null otherwise
+	 */
+	public GuiMenu pop() {
+		try {
+			GuiMenu menu = super.pop();
+			menu.exit();
+
+			return menu;
+		} catch ( Exception e ) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

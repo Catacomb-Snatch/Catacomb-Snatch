@@ -10,6 +10,10 @@ public abstract class GuiMenu extends GuiComponent implements InputProcessor {
 		Gdx.input.setInputProcessor( this );
 	}
 
+	/** Called whenever the menu is being closed */
+	public void exit() {
+	}
+
 	public boolean keyDown( int key ) {
 		return false;
 	}
