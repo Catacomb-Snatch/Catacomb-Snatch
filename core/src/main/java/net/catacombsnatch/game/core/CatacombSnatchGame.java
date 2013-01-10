@@ -31,5 +31,6 @@ public class CatacombSnatchGame implements ApplicationListener {
 	}
 
 	public void dispose() {
+		Art.unloadResources();
 	}
 }

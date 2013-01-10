@@ -26,6 +26,12 @@ public class Art {
 		return false;
 	}
 
+	/** Unloads all loaded resources */
+	public static void unloadResources() {
+		background.dispose();
+		titleScreen.dispose();
+	}
+
 	private static Texture load( String path ) {
 		Texture tex = new Texture( path );
 		tex.setFilter( TextureFilter.Linear, TextureFilter.Linear );
