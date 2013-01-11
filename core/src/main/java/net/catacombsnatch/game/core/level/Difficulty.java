@@ -1,7 +1,12 @@
 package net.catacombsnatch.game.core.level;
 
+import net.catacombsnatch.game.core.Game;
+
 public enum Difficulty {
-	EASY(.5f, .5f, 1.5f, .5f, false, 25, 3, 30), NORMAL(1, 1, 1, 1, false, 25, 7, 20), HARD(3, 3, .5f, 1.5f, true, 25, 12, 15), NIGHTMARE(6, 5, .25f, 2.5f, true, 15, 100000, 10);
+	EASY(Game.language.get( "difficulty.easy" ), .5f, .5f, 1.5f, .5f, false, 25, 3, 30),
+	NORMAL(Game.language.get( "difficulty.normal" ), 1, 1, 1, 1, false, 25, 7, 20),
+	HARD(Game.language.get( "difficulty.hard" ), 3, 3, .5f, 1.5f, true, 25, 12, 15),
+	NIGHTMARE(Game.language.get( "difficulty.nightmare" ), 6, 5, .25f, 2.5f, true, 15, 100000, 10);
 
 	private String name;
 
@@ -16,8 +21,8 @@ public enum Difficulty {
 
 	private boolean mobRegenerationAllowed;
 
-	private Difficulty( float mobHealthModifier, float mobStrengthModifier, float mobSpawnModifier, float shopCostsModifier, boolean mobRegeneration, int regenerationInterval, int allowedMobDensity, int coinLifespan ) {
-		this.name = "";
+	private Difficulty( String name, float mobHealthModifier, float mobStrengthModifier, float mobSpawnModifier, float shopCostsModifier, boolean mobRegeneration, int regenerationInterval, int allowedMobDensity, int coinLifespan ) {
+		this.name = name;
 
 		this.mobHealthModifier = mobHealthModifier;
 		this.mobStrengthModifier = mobStrengthModifier;

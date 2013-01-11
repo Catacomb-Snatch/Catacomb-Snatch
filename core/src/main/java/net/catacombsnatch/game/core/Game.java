@@ -13,7 +13,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 
 public class Game implements ApplicationListener {
-	public Language language;
+	public static Language language;
 
 	private Screen screen;
 	private MenuStack menuStack;
