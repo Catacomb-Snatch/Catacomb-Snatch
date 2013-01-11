@@ -1,0 +1,8 @@
+# Game texts encoded in UTF-8
+general.yes = yes
+general.no = no
+
+difficulty.easy = easy
+difficulty.normal = normal
+difficulty.hard = hard
+difficulty.nightmare = nightmare

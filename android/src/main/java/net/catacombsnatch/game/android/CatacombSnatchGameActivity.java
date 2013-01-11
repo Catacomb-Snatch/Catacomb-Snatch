@@ -1,6 +1,6 @@
 package net.catacombsnatch.game.android;
 
-import net.catacombsnatch.game.core.CatacombSnatchGame;
+import net.catacombsnatch.game.core.Game;
 
 import android.os.Bundle;
 
@@ -14,6 +14,6 @@ public class CatacombSnatchGameActivity extends AndroidApplication {
        super.onCreate(savedInstanceState);
        AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
        config.useGL20 = true;
-       initialize(new CatacombSnatchGame(), config);
+       initialize(new Game(), config);
    }
 }

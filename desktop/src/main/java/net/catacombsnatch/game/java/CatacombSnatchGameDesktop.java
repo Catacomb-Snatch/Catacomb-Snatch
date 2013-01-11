@@ -1,6 +1,6 @@
 package net.catacombsnatch.game.java;
 
-import net.catacombsnatch.game.core.CatacombSnatchGame;
+import net.catacombsnatch.game.core.Game;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -16,6 +16,6 @@ public class CatacombSnatchGameDesktop {
 		config.width = GAME_WIDTH;
 		config.height = GAME_HEIGHT;
 
-		new LwjglApplication( new CatacombSnatchGame(), config );
+		new LwjglApplication( new Game(), config );
 	}
 }
