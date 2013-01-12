@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import net.catacombsnatch.game.core.gui.MenuStack;
 import net.catacombsnatch.game.core.gui.menu.TitleScreen;
+import net.catacombsnatch.game.core.resources.Fonts;
 import net.catacombsnatch.game.core.resources.Language;
 import net.catacombsnatch.game.core.screen.Art;
 import net.catacombsnatch.game.core.screen.Screen;
@@ -49,5 +50,6 @@ public class Game implements ApplicationListener {
 
 	public void dispose() {
 		Art.unloadResources();
+		Fonts.unload();
 	}
 }
