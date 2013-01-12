@@ -64,14 +64,39 @@ public class EntityManager {
 	}
 
 	/**
+	 * Adds a component to an entity. An instance of the component will be
+	 * automatically created. This function is synchronized to prevent thread
+	 * safety issues.
+	 * 
+	 * @param entity The entity to add the component to
+	 * @param component The component to add
+	 * @return The component instance
+	 */
+	public synchronized <T extends EntityComponent> T addComponent( Entity entity, Class<T> component ) {
+		T instance = null;
+
+		try {
+			instance = component.newInstance();
+			this.addComponent( entity, component, instance );
+
+		} catch ( Exception e ) {
+			System.err.println( "Error adding component '" + component + "' to entity with id " + entity.getEntityId() );
+			e.printStackTrace();
+		}
+
+		return instance;
+	}
+
+	/**
 	 * Adds a component to an entity. This function is synchronized to prevent
 	 * thread safety issues.
 	 * 
 	 * @param entity The entity to add the component to
 	 * @param component The component to add
+	 * @param instance The component instance
+	 * @return The component instance
 	 */
-	@SuppressWarnings( "unchecked" )
-	public synchronized <T extends EntityComponent> T addComponent( Entity entity, Class<T> component ) {
+	public synchronized <T extends EntityComponent> T addComponent( Entity entity, Class<T> component, T instance ) {
 		ComponentStorage<? extends EntityComponent> stored = components.get( component );
 
 		if ( stored == null ) {
@@ -79,18 +104,9 @@ public class EntityManager {
 			components.put( component, stored );
 		}
 
-		EntityComponent instance = null;
+		stored.put( entity, instance );
 
-		try {
-			instance = component.newInstance();
-			stored.put( entity, instance );
-
-		} catch ( Exception e ) {
-			System.err.println( "Error adding component '" + component + "' to entity with id " + entity.getEntityId() );
-			e.printStackTrace();
-		}
-
-		return (T) instance;
+		return instance;
 	}
 
 	/**
@@ -113,7 +129,8 @@ public class EntityManager {
 
 	/**
 	 * Returns the instance of a component. If no instance could be found null
-	 * is returned.
+	 * is returned. This function is synchronized to prevent thread safety
+	 * issues.
 	 * 
 	 * @param entity The entity
 	 * @param component The component
@@ -133,6 +150,22 @@ public class EntityManager {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Removes a component from an entity. This function is synchronized to
+	 * prevent thread safety issues.
+	 * 
+	 * @param entity The entity
+	 * @param component The component
+	 * @return True on success, otherwise false
+	 */
+	public synchronized <T extends EntityComponent> boolean removeComponent( Entity entity, Class<T> component ) {
+		ComponentStorage<? extends EntityComponent> stored = components.get( component );
+
+		if ( stored != null ) return stored.remove( entity ) != null;
+
+		return false;
 	}
 
 	/**
