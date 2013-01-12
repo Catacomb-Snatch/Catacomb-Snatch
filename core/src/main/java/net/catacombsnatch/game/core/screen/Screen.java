@@ -29,6 +29,11 @@ public class Screen implements Disposable {
 		pmap.dispose();
 	}
 
+	/** Clears the screen with black */
+	public void clear() {
+		clear( Color.BLACK );
+	}
+
 	/**
 	 * Clears the screen with a given color
 	 * 

@@ -1,4 +1,4 @@
-package net.catacombsnatch.game.core.level;
+package net.catacombsnatch.game.core.world;
 
 import net.catacombsnatch.game.core.Game;
 
