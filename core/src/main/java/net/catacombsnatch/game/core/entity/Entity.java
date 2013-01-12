@@ -23,6 +23,10 @@ public class Entity {
 		return getManager() != null ? getManager().addComponent( this, component ) : null;
 	}
 
+	public <T extends EntityComponent> T addComponent( Class<T> component, T instance ) {
+		return getManager() != null ? getManager().addComponent( this, component, instance ) : null;
+	}
+
 	public <T extends EntityComponent> T getComponent( Class<T> component ) {
 		return getManager() != null ? getManager().getComponent( this, component ) : null;
 	}
