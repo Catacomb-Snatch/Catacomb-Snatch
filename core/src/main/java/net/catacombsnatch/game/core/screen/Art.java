@@ -1,5 +1,6 @@
 package net.catacombsnatch.game.core.screen;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -33,7 +34,7 @@ public class Art {
 	}
 
 	private static Texture load( String path ) {
-		Texture tex = new Texture( path );
+		Texture tex = new Texture(Gdx.files.internal(path));
 		tex.setFilter( TextureFilter.Linear, TextureFilter.Linear );
 
 		return tex;
