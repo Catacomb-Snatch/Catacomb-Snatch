@@ -31,11 +31,9 @@ public class Game implements ApplicationListener {
 		menuStack = new MenuStack();
 
 		menuStack.add( new TitleScreen() );
-		//soundPlayer.startTitleMusic();
 	}
 
-	public void resize( int width, int height ) {
-	}
+	public void resize( int width, int height ) {}
 
 	public void render() {
 		screen.getGraphics().begin();
@@ -44,7 +42,6 @@ public class Game implements ApplicationListener {
 		if ( !menuStack.isEmpty() ) menuStack.peek().render( screen );
 
 		screen.getGraphics().end();
-		//soundPlayer.startBackgroundMusic();
 	}
 
 	public void pause() {
