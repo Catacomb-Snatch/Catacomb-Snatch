@@ -21,20 +21,19 @@ public class GdxSoundPlayer implements ISoundPlayer{
 	private float musicVolume = 0.5f;
 	private float soundVolume = 1.0f;
 	
-	private long timeBetweenSongs = 0; // in seconds
+	private long timeBetweenSongs = 10; // in seconds
 	private long songEnded = 0;
 	
 	private static List<Music> backgroundMusicList;
 	
 	private static Music titleMusic;
-	private static boolean titleIsPlaying = false;
+	private static boolean titleMusicIsPlaying = false;
 	private static Music endMusic;
 	private static boolean endMusicIsPlaying = false;
 	private static Music backgroundMusic;
 	private static boolean backgroundIsPlaying = false;
 	private static int backgroundPlaying;
 	
-	public static Sound shot1Sound;
 	private static Map<String, Sound> soundsMap;
 	
 	public GdxSoundPlayer(){
@@ -61,14 +60,16 @@ public class GdxSoundPlayer implements ISoundPlayer{
 			titleMusic.setLooping(true);
 			titleMusic.setVolume(musicVolume);
 			titleMusic.play();
-			titleIsPlaying = true;
+			titleMusicIsPlaying = true;
 		}
 		
 	}
 	
 	public void stopTitleMusic(){
-		if (titleMusic.isPlaying()) titleMusic.stop();
-		titleIsPlaying = false;
+		if (titleMusicIsPlaying){
+			if (titleMusic.isPlaying()) titleMusic.stop();
+			titleMusicIsPlaying = false;
+		}
 	}
 
 	public void startEndMusic() {
@@ -83,8 +84,10 @@ public class GdxSoundPlayer implements ISoundPlayer{
 	}
 	
 	public void stopEndMusic(){
-		if (endMusic.isPlaying()) endMusic.stop();
-		endMusicIsPlaying = false;
+		if (endMusicIsPlaying){
+			if (endMusic.isPlaying()) endMusic.stop();
+			endMusicIsPlaying = false;
+		}
 	}
 
 	public void startBackgroundMusic() {
@@ -116,11 +119,13 @@ public class GdxSoundPlayer implements ISoundPlayer{
 	}
 
 	public void stopBackgroundMusic() {
-		for (Music m : backgroundMusicList){
-			if(m.isPlaying()) m.stop();
+		if (backgroundIsPlaying){
+			for (Music m : backgroundMusicList){
+				if(m.isPlaying()) m.stop();
+			}
+			backgroundPlaying = 0;
+			backgroundIsPlaying = false;
 		}
-		backgroundPlaying = 0;
-		backgroundIsPlaying = false;
 	}
 
 	public void pauseBackgroundMusic() {
@@ -128,7 +133,7 @@ public class GdxSoundPlayer implements ISoundPlayer{
 		if (backgroundIsPlaying){
 			backgroundMusic.pause(); 
 		}
-		if (titleIsPlaying){
+		if (titleMusicIsPlaying){
 			titleMusic.pause();
 		}
 		if (endMusicIsPlaying){
@@ -141,7 +146,7 @@ public class GdxSoundPlayer implements ISoundPlayer{
 		if (backgroundIsPlaying){
 			backgroundMusic.play();
 		}
-		if (titleIsPlaying){
+		if (titleMusicIsPlaying){
 			titleMusic.play();
 		}
 		if (endMusicIsPlaying){
