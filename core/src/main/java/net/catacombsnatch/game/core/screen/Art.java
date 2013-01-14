@@ -9,6 +9,8 @@ public class Art {
 	public static Texture background;
 	public static Texture titleScreen;
 
+	public static TextureRegion[][] lordLard;
+
 	/**
 	 * Loads all the artwork
 	 * 
@@ -18,6 +20,8 @@ public class Art {
 		try {
 			background = load( "art/screen/background.png" );
 			titleScreen = load( "art/screen/title.png" );
+
+			lordLard = cut( "art/player/lord_lard.png", 23, 32 );
 
 			return true;
 		} catch ( Exception e ) {
@@ -34,7 +38,7 @@ public class Art {
 	}
 
 	private static Texture load( String path ) {
-		Texture tex = new Texture(Gdx.files.internal(path));
+		Texture tex = new Texture( Gdx.files.internal( path ) );
 		tex.setFilter( TextureFilter.Linear, TextureFilter.Linear );
 
 		return tex;
@@ -42,5 +46,10 @@ public class Art {
 
 	private static TextureRegion load( String path, int x, int y, int w, int h ) {
 		return new TextureRegion( load( path ), x, y, w, h );
+	}
+
+	private static TextureRegion[][] cut( String path, int w, int h ) {
+		Texture tex = load( path );
+		return TextureRegion.split( tex, w, h );
 	}
 }
