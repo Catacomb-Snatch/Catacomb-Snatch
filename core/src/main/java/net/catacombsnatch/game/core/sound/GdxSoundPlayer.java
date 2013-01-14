@@ -185,9 +185,9 @@ public class GdxSoundPlayer implements ISoundPlayer {
 				float distance = (float) Math.sqrt( difx + dify );
 				System.out.println( "dis " + distance );
 
-				float distanceVolume = 1.0f;
-				distanceVolume = 1.0f - (distance / maxSoundDistance);
-				if ( distanceVolume > 1.0f ) distanceVolume = 1.0f;
+				float distanceVolume = soundVolume;
+				distanceVolume = soundVolume - (distance / maxSoundDistance);
+				if ( distanceVolume > soundVolume ) distanceVolume = soundVolume;
 				if ( distanceVolume < 0.0f ) distanceVolume = 0.0f;
 				System.out.println( "disVol " + distanceVolume );
 
