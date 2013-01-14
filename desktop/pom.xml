@@ -67,5 +67,13 @@
 			<artifactId>gdx-backend-lwjgl</artifactId>
 			<version>${gdx.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.badlogic.gdx.controllers</groupId>
+			<artifactId>gdx-controllers</artifactId>
+			<version>${gdx.version}</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/gdx-controllers-desktop-natives.jar</systemPath>
+		</dependency>
 	</dependencies>
 </project>
