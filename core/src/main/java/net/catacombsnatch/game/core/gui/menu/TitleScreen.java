@@ -9,6 +9,7 @@ import net.catacombsnatch.game.core.screen.Art;
 import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 public class TitleScreen extends GuiMenu {
@@ -47,6 +48,22 @@ public class TitleScreen extends GuiMenu {
 		else if ( selected < 0 ) selected = 2;
 
 		charEntity.getComponent( Animated.class ).setPosition( (Screen.getWidth() - 200) / 2, 82 - 8 + (-selected * 16) );
+
+		return true;
+	}
+
+	public boolean keyUp( int key ) {
+		switch ( key ) {
+		case Keys.ENTER:
+			switch ( selected ) {
+			case 0:
+			case 1:
+				break;
+
+			case 2:
+				Game.exitAll();
+			}
+		}
 
 		return true;
 	}

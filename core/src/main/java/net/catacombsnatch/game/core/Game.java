@@ -3,6 +3,7 @@ package net.catacombsnatch.game.core;
 import java.util.Locale;
 
 import net.catacombsnatch.game.core.gui.MenuStack;
+import net.catacombsnatch.game.core.gui.menu.GuiMenu;
 import net.catacombsnatch.game.core.gui.menu.TitleScreen;
 import net.catacombsnatch.game.core.resources.Fonts;
 import net.catacombsnatch.game.core.resources.Language;
@@ -19,7 +20,9 @@ public class Game implements ApplicationListener {
 	public static Language language;
 
 	private Screen screen;
-	private MenuStack menuStack;
+
+	private static MenuStack menuStack;
+
 	public static ISoundPlayer soundPlayer;
 
 	public void create() {
@@ -30,7 +33,38 @@ public class Game implements ApplicationListener {
 		screen = new Screen();
 		menuStack = new MenuStack();
 
-		menuStack.add( new TitleScreen() );
+		switchTo( TitleScreen.class );
+	}
+
+	public static void exitAll() {
+		while ( !menuStack.isEmpty() )
+			menuStack.pop();
+
+		Gdx.app.exit();
+	}
+
+	public static synchronized <T extends GuiMenu> T switchTo( Class<T> menu ) {
+		T instance = null;
+
+		try {
+			instance = menu.newInstance();
+			menuStack.add( instance );
+
+		} catch ( Exception e ) {
+			System.err.println( "Error switching to menu '" + menu + "': " + e.getMessage() );
+			e.printStackTrace();
+		}
+
+		return instance;
+	}
+
+	public static synchronized <T extends GuiMenu> T returnTo( Class<T> menu ) {
+		menuStack.pop();
+		return switchTo( menu );
+	}
+
+	public static synchronized void exitMenu() {
+		menuStack.pop();
 	}
 
 	public void resize( int width, int height ) {}
