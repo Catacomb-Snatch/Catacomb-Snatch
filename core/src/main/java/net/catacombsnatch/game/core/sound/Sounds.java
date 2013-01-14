@@ -2,10 +2,10 @@ package net.catacombsnatch.game.core.sound;
 
 public enum Sounds {
 	/** The title theme track name */
-	TITLE_THEME("TitleTheme"),
+	TITLE_THEME("ThemeTitle"),
 
 	/** The end theme track name */
-	END_THEME("EndTheme"),
+	END_THEME("ThemeEnd"),
 
 	/** First background theme track name */
 	BACKGROUND_TRACK_1("Background 1"),
