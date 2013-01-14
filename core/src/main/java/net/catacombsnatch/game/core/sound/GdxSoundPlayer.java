@@ -37,36 +37,40 @@ public class GdxSoundPlayer implements ISoundPlayer {
 		backgroundMusicList = new ArrayList<Music>();
 
 		// Load music
-		loadMusic( TITLE_THEME );
-		loadMusic( END_THEME );
-		loadMusic( BACKGROUND_TRACK_1 );
-		loadMusic( BACKGROUND_TRACK_2 );
-		loadMusic( BACKGROUND_TRACK_3 );
-		loadMusic( BACKGROUND_TRACK_4 );
+		loadMusic( Sounds.TITLE_THEME );
+		loadMusic( Sounds.END_THEME );
+		loadMusic( Sounds.BACKGROUND_TRACK_1 );
+		loadMusic( Sounds.BACKGROUND_TRACK_2 );
+		loadMusic( Sounds.BACKGROUND_TRACK_3 );
+		loadMusic( Sounds.BACKGROUND_TRACK_4 );
 
 		// Load sounds
-		loadSound( SOUND_SHOT_1 );
-		loadSound( SOUND_EXPLOSION );
+		loadSound( Sounds.SOUND_SHOT_1 );
+		loadSound( Sounds.SOUND_EXPLOSION );
 	}
 
-	private void loadMusic( String musicName ) {
-		Music music = Gdx.audio.newMusic( Gdx.files.internal( "sound/" + musicName + ".ogg" ) );
+	private void loadMusic( Sounds music ) {
+		Music file = Gdx.audio.newMusic( Gdx.files.internal( "sound/" + music.name + ".ogg" ) );
 
 		// If background track, add to playlist
-		if ( musicName.toLowerCase().startsWith( "background" ) ) backgroundMusicList.add( music );
+		if ( music.name.toLowerCase().startsWith( "background" ) ) backgroundMusicList.add( file );
 
-		musicMap.put( musicName, music );
+		musicMap.put( music.name, file );
 	}
 
-	private void loadSound( String soundName ) {
-		soundsMap.put( soundName, Gdx.audio.newSound( Gdx.files.internal( "sound/" + soundName + ".wav" ) ) );
+	private void loadSound( Sounds sound ) {
+		soundsMap.put( sound.name, Gdx.audio.newSound( Gdx.files.internal( "sound/" + sound.name + ".wav" ) ) );
+	}
+
+	private Music getMusic( Sounds music ) {
+		return musicMap.get( music.name );
 	}
 
 	public void startTitleMusic() {
 		stopBackgroundMusic();
 		stopEndMusic();
 
-		Music titleMusic = musicMap.get( TITLE_THEME );
+		Music titleMusic = getMusic( Sounds.TITLE_THEME );
 
 		if ( musicVolume > 0.0f && !titleMusic.isPlaying() && !paused ) {
 			titleMusic.setLooping( true );
@@ -76,7 +80,7 @@ public class GdxSoundPlayer implements ISoundPlayer {
 	}
 
 	public void stopTitleMusic() {
-		Music titleMusic = musicMap.get( TITLE_THEME );
+		Music titleMusic = getMusic( Sounds.TITLE_THEME );
 
 		if ( titleMusic.isPlaying() ) titleMusic.stop();
 	}
@@ -85,7 +89,7 @@ public class GdxSoundPlayer implements ISoundPlayer {
 		stopBackgroundMusic();
 		stopTitleMusic();
 
-		Music endMusic = musicMap.get( END_THEME );
+		Music endMusic = getMusic( Sounds.END_THEME );
 
 		if ( musicVolume > 0.0f && !endMusic.isPlaying() && !paused ) {
 			endMusic.setLooping( true );
@@ -95,7 +99,7 @@ public class GdxSoundPlayer implements ISoundPlayer {
 	}
 
 	public void stopEndMusic() {
-		Music endMusic = musicMap.get( END_THEME );
+		Music endMusic = getMusic( Sounds.END_THEME );
 
 		if ( endMusic.isPlaying() ) endMusic.stop();
 	}
@@ -142,8 +146,8 @@ public class GdxSoundPlayer implements ISoundPlayer {
 
 		if ( backgroundPlaying >= 0 ) backgroundMusicList.get( backgroundPlaying ).pause();
 
-		musicMap.get( TITLE_THEME ).pause();
-		musicMap.get( END_THEME ).pause();
+		getMusic( Sounds.TITLE_THEME ).pause();
+		getMusic( Sounds.END_THEME ).pause();
 	}
 
 	public void resumeBackgroundMusic() {
@@ -151,8 +155,8 @@ public class GdxSoundPlayer implements ISoundPlayer {
 
 		if ( backgroundPlaying >= 0 ) backgroundMusicList.get( backgroundPlaying ).play();
 
-		musicMap.get( TITLE_THEME ).play();
-		musicMap.get( END_THEME ).play();
+		getMusic( Sounds.TITLE_THEME ).play();
+		getMusic( Sounds.END_THEME ).play();
 	}
 
 	public void setListenerPosition( float x, float y ) {
@@ -199,11 +203,11 @@ public class GdxSoundPlayer implements ISoundPlayer {
 	public void shutdown() {
 		// unloading Title music
 		stopTitleMusic();
-		musicMap.get( TITLE_THEME ).dispose();
+		getMusic( Sounds.TITLE_THEME ).dispose();
 
 		// unloading End music
 		stopEndMusic();
-		musicMap.get( END_THEME ).dispose();
+		getMusic( Sounds.END_THEME ).dispose();
 
 		// unloading Background music
 		stopBackgroundMusic();
