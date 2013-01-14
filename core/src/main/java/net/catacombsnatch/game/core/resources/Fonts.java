@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 public class Fonts {
 	public static BitmapFont GOLD;
 
-	static {
+	public static void init() {
 		GOLD = load( "gold" );
 	}
 

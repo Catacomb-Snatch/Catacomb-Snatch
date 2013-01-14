@@ -11,6 +11,7 @@ import net.catacombsnatch.game.core.screen.Art;
 import net.catacombsnatch.game.core.screen.Screen;
 import net.catacombsnatch.game.core.sound.GdxSoundPlayer;
 import net.catacombsnatch.game.core.sound.ISoundPlayer;
+import net.catacombsnatch.game.core.sound.NoSoundPlayer;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -27,9 +28,13 @@ public class Game implements ApplicationListener {
 
 	public void create() {
 		language = new Language( new Locale( "en" ) );
-		soundPlayer = new GdxSoundPlayer();
 		if ( !Art.loadResources() ) Gdx.app.exit();
-
+		Fonts.init();
+		try {
+			soundPlayer = new GdxSoundPlayer();
+		}catch (Exception e){
+			soundPlayer = new NoSoundPlayer();
+		}
 		screen = new Screen();
 		menuStack = new MenuStack();
 
