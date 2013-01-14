@@ -53,7 +53,7 @@ public class Language {
 	 * @param args The arguments
 	 * @return The formatted language string
 	 */
-	public String getf( String property, String... args ) {
-		return MessageFormat.format( get( property ), (Object[]) args );
+	public String getf( String property, Object... args ) {
+		return MessageFormat.format( get( property ), args );
 	}
 }
