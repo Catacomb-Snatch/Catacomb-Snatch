@@ -7,7 +7,6 @@ import com.badlogic.gdx.Input.Keys;
 
 public class TestGameMenu extends GuiMenu {
 
-	@Override
 	public void render( Screen screen ) {
 		// TODO Auto-generated method stub
 

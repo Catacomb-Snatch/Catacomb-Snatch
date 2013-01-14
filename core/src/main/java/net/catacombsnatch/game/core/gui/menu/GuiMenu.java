@@ -2,17 +2,12 @@ package net.catacombsnatch.game.core.gui.menu;
 
 import net.catacombsnatch.game.core.gui.components.GuiComponent;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 
 public abstract class GuiMenu extends GuiComponent implements InputProcessor {
-	public GuiMenu() {
-		Gdx.input.setInputProcessor( this );
-	}
 
 	/** Called whenever the menu is being closed */
-	public void exit() {
-	}
+	public void exit() {}
 
 	public boolean keyDown( int key ) {
 		return false;

@@ -55,6 +55,7 @@ public class Game implements ApplicationListener {
 			e.printStackTrace();
 		}
 
+		Gdx.input.setInputProcessor( instance );
 		return instance;
 	}
 
@@ -65,6 +66,8 @@ public class Game implements ApplicationListener {
 
 	public static synchronized void exitMenu() {
 		menuStack.pop();
+
+		if ( !menuStack.isEmpty() ) Gdx.input.setInputProcessor( menuStack.peek() );
 	}
 
 	public void resize( int width, int height ) {}
