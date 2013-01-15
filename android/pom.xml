@@ -40,8 +40,15 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.badlogic.gdx.controllers</groupId>
+			<groupId>com.badlogic.gdx</groupId>
 			<artifactId>gdx-controllers</artifactId>
+			<version>${gdx.version}</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/../core/lib/gdx-controllers.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.badlogic.gdx</groupId>
+			<artifactId>gdx-controllers-android</artifactId>
 			<version>${gdx.version}</version>
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/gdx-controllers-android.jar</systemPath>

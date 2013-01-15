@@ -19,6 +19,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 
 public class Game implements ApplicationListener {
+	public static final String VERSION = "${pom.version}.{buildNumber}";
+
 	public static Language language;
 
 	private Screen screen;
@@ -88,6 +90,10 @@ public class Game implements ApplicationListener {
 		screen.clear( Color.BLACK );
 
 		if ( !menuStack.isEmpty() ) menuStack.peek().render( screen );
+
+		if ( Options.getBoolean( Options.DRAW_FPS, true ) ) {
+			Fonts.GOLD.draw( screen.getGraphics(), Integer.toString( Gdx.graphics.getFramesPerSecond() ) + " FPS", 2, Screen.getHeight() - 2 - 8 );
+		}
 
 		screen.getGraphics().end();
 	}

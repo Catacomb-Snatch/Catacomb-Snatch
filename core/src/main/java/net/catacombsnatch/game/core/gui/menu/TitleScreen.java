@@ -12,7 +12,6 @@ import net.catacombsnatch.game.core.resources.Fonts;
 import net.catacombsnatch.game.core.screen.Art;
 import net.catacombsnatch.game.core.screen.Screen;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
@@ -45,8 +44,6 @@ public class TitleScreen extends GuiMenu {
 
 		for ( int s = 0; s < menu.size(); s++ )
 			Fonts.GOLD.drawMultiLine( screen.getGraphics(), menu.get( s ), Screen.getWidth() / 2, 128 - 24 * s, 0, HAlignment.CENTER );
-
-		Fonts.GOLD.draw( screen.getGraphics(), Integer.toString( Gdx.graphics.getFramesPerSecond() ) + " FPS", 2, 2 );
 
 		charEntity.getComponent( Animated.class ).render( screen );
 	}
