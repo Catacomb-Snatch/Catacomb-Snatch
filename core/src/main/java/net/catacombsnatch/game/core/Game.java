@@ -7,6 +7,7 @@ import net.catacombsnatch.game.core.gui.menu.GuiMenu;
 import net.catacombsnatch.game.core.gui.menu.TitleScreen;
 import net.catacombsnatch.game.core.resources.Fonts;
 import net.catacombsnatch.game.core.resources.Language;
+import net.catacombsnatch.game.core.resources.Options;
 import net.catacombsnatch.game.core.screen.Art;
 import net.catacombsnatch.game.core.screen.Screen;
 import net.catacombsnatch.game.core.sound.GdxSoundPlayer;
@@ -27,14 +28,19 @@ public class Game implements ApplicationListener {
 	public static ISoundPlayer soundPlayer;
 
 	public void create() {
+		Options.load();
 		language = new Language( new Locale( "en" ) );
+
 		if ( !Art.loadResources() ) Gdx.app.exit();
+
 		Fonts.init();
+
 		try {
 			soundPlayer = new GdxSoundPlayer();
-		}catch (Exception e){
+		} catch ( Exception e ) {
 			soundPlayer = new NoSoundPlayer();
 		}
+
 		screen = new Screen();
 		menuStack = new MenuStack();
 
@@ -98,5 +104,6 @@ public class Game implements ApplicationListener {
 		Art.unloadResources();
 		Fonts.unload();
 		soundPlayer.shutdown();
+		Options.save();
 	}
 }
