@@ -28,7 +28,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>CatacombSnatch-Core-${parent.version}-r${buildNumber}</finalName>
+		<finalName>CatacombSnatch-Core-${parent.version}-r${BUILD_NUMBER}</finalName>
 	
 		<plugins>
 			<plugin>
