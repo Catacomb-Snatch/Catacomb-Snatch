@@ -17,11 +17,14 @@
 	</properties>
 
 	<build>
+		<finalName>CatacombSnatch-${parent.version}-r${buildNumber}</finalName>
+		
 		<resources>
 			<resource>
 				<directory>assets</directory>
 			</resource>
 		</resources>
+		
 		<plugins>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>

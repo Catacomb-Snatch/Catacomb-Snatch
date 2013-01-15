@@ -28,6 +28,8 @@
 	</dependencies>
 
 	<build>
+		<finalName>CatacombSnatch-Core-${parent.version}-r${buildNumber}</finalName>
+	
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -36,12 +38,12 @@
 		</plugins>
 
 		<resources>
-			<!-- include the source files in our main jar for use by GWT -->
-			<resource>
-				<directory>${project.build.sourceDirectory}</directory>
-			</resource>
 			<resource>
                 <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+            	<directory>src/main/java/net/catacombsnatch/game/core/resources</directory>
+            	<filtering>true</filtering>
             </resource>
 		</resources>
 	</build>
