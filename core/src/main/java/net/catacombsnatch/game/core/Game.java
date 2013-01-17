@@ -5,6 +5,7 @@ import java.util.Locale;
 import net.catacombsnatch.game.core.gui.MenuStack;
 import net.catacombsnatch.game.core.gui.menu.GuiMenu;
 import net.catacombsnatch.game.core.gui.menu.TitleScreen;
+import net.catacombsnatch.game.core.input.InputManager;
 import net.catacombsnatch.game.core.resources.Fonts;
 import net.catacombsnatch.game.core.resources.Language;
 import net.catacombsnatch.game.core.resources.Options;
@@ -28,6 +29,7 @@ public class Game implements ApplicationListener {
 	private static MenuStack menuStack;
 
 	public static ISoundPlayer sound;
+	public static InputManager input;
 
 	public void create() {
 		Options.load();
@@ -42,6 +44,8 @@ public class Game implements ApplicationListener {
 		} catch ( Exception e ) {
 			sound = new NoSoundPlayer();
 		}
+
+		input = new InputManager();
 
 		screen = new Screen();
 		menuStack = new MenuStack();
@@ -110,6 +114,7 @@ public class Game implements ApplicationListener {
 		Art.unloadResources();
 		Fonts.unload();
 
+		input.shutdown();
 		sound.shutdown();
 
 		Options.save();
