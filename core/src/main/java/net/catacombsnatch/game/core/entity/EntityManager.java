@@ -34,6 +34,16 @@ public class EntityManager {
 	}
 
 	/**
+	 * Returns a {@link Set} of entities that have a specific component
+	 * 
+	 * @param component The component
+	 * @return The {@link Set} of entities
+	 */
+	public Set<Entity> getAllWithComponent( Class<EntityComponent> component ) {
+		return (Set<Entity>) components.get( component ).keySet();
+	}
+
+	/**
 	 * Creates a new entity and returns it on success. If the entity could not
 	 * be created, null is being returned. This function is synchronized to
 	 * prevent thread safety issues.
