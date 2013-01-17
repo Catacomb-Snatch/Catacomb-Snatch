@@ -27,7 +27,7 @@ public class Game implements ApplicationListener {
 
 	private static MenuStack menuStack;
 
-	public static ISoundPlayer soundPlayer;
+	public static ISoundPlayer sound;
 
 	public void create() {
 		Options.load();
@@ -38,9 +38,9 @@ public class Game implements ApplicationListener {
 		Fonts.init();
 
 		try {
-			soundPlayer = new GdxSoundPlayer();
+			sound = new GdxSoundPlayer();
 		} catch ( Exception e ) {
-			soundPlayer = new NoSoundPlayer();
+			sound = new NoSoundPlayer();
 		}
 
 		screen = new Screen();
@@ -99,17 +99,19 @@ public class Game implements ApplicationListener {
 	}
 
 	public void pause() {
-		soundPlayer.pauseBackgroundMusic();
+		sound.pauseBackgroundMusic();
 	}
 
 	public void resume() {
-		soundPlayer.resumeBackgroundMusic();
+		sound.resumeBackgroundMusic();
 	}
 
 	public void dispose() {
 		Art.unloadResources();
 		Fonts.unload();
-		soundPlayer.shutdown();
+
+		sound.shutdown();
+
 		Options.save();
 	}
 }

@@ -32,11 +32,11 @@ public class TitleScreen extends GuiMenu {
 		charEntity.addComponent( Animated.class, new Animated( Art.lordLard[0], 0.15f ) );
 		scrolled( 0 );
 
-		Game.soundPlayer.startTitleMusic();
+		Game.sound.startTitleMusic();
 	}
 
 	public void exit() {
-		Game.soundPlayer.stopTitleMusic();
+		Game.sound.stopTitleMusic();
 	}
 
 	public void render( Screen screen ) {
