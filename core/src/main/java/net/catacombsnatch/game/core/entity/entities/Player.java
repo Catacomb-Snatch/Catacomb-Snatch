@@ -10,6 +10,8 @@ public class Player {
 	protected PlayerInput inputType;
 
 	protected Entity entity;
+	protected Health health;
+	protected Physics physics;
 
 	/**
 	 * Creates a new player entity
@@ -20,8 +22,8 @@ public class Player {
 	public Player( EntityManager manager, long id, int x, int y ) {
 		entity = new Entity( manager, id );
 
-		getEntity().addComponent( Health.class );
-		getEntity().addComponent( Physics.class, new Physics( x - 4, y - 4, 8, 8 ) );
+		health = getEntity().addComponent( Health.class );
+		physics = getEntity().addComponent( Physics.class, new Physics( x - 4, y - 4, 8, 8 ) );
 	}
 
 	/**
@@ -33,10 +35,38 @@ public class Player {
 		return entity;
 	}
 
+	/**
+	 * Returns the {@link Health} component for this player
+	 * 
+	 * @return The {@link Health} component
+	 */
+	public Health getHealth() {
+		return health;
+	}
+
+	/**
+	 * Returns the {@link Physics} component for this player
+	 * 
+	 * @return The {@link Physics} component
+	 */
+	public Physics getPhysics() {
+		return physics;
+	}
+
+	/**
+	 * Sets the {@link PlayerInput} type for this player
+	 * 
+	 * @param type The {@link PlayerInput} type
+	 */
 	public void setInputType( PlayerInput type ) {
 		this.inputType = type;
 	}
 
+	/**
+	 * Returns the {@link PlayerInput} type for this player
+	 * 
+	 * @return The {@link PlayerInput} type
+	 */
 	public PlayerInput getInputType() {
 		return inputType;
 	}
