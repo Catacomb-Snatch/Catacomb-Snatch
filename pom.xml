@@ -6,10 +6,10 @@
 	<artifactId>game</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>CatacombSnatchGame Parent</name>
+	<name>Catacomb-Snatch Game Parent</name>
 
 	<properties>
-		<gdx.version>0.9.8-SNAPSHOT</gdx.version>
+		<gdx.version>0.9.9-SNAPSHOT</gdx.version>
 		<android.version>2.1.2</android.version>
 		<android.maven.version>3.4.1</android.maven.version>
 		<gwt.version>2.5.0</gwt.version>

@@ -17,7 +17,7 @@
 	</properties>
 
 	<build>
-		<finalName>CatacombSnatch-${parent.version}-r${BUILD_NUMBER}</finalName>
+		<finalName>CatacombSnatch-${project.version}-r${BUILD_NUMBER}</finalName>
 		
 		<resources>
 			<resource>
