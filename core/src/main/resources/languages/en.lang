@@ -6,3 +6,8 @@ difficulty.easy = easy
 difficulty.normal = normal
 difficulty.hard = hard
 difficulty.nightmare = nightmare
+
+scene.title.demo = START DEMO
+scene.title.start = START GAME
+scene.title.options = OPTIONS
+scene.title.exit = EXIT GAME

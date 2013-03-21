@@ -1,5 +1,6 @@
 package net.catacombsnatch.game.core.entity;
 
+import com.badlogic.gdx.Gdx;
 import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,6 +14,8 @@ import java.util.Set;
 import net.catacombsnatch.game.core.entity.components.EntityComponent;
 
 public class EntityManager {
+	public final static String TAG = "[EntityManager]";
+	
 	protected List<Entity> entities;
 	protected Map<Class<? extends EntityComponent>, ComponentStorage<? extends EntityComponent>> components;
 	protected Map<Entity, EntityMeta> metadata;
@@ -91,8 +94,7 @@ public class EntityManager {
 			this.addComponent( entity, component, instance );
 
 		} catch ( Exception e ) {
-			System.err.println( "Error adding component '" + component + "' to entity with id " + entity.getEntityId() );
-			e.printStackTrace();
+			Gdx.app.error(TAG, "Error adding component '" + component + "' to entity with id " + entity.getEntityId(), e);
 		}
 
 		return instance;
@@ -197,7 +199,7 @@ public class EntityManager {
 		return m;
 	}
 
-	private class ComponentStorage<T extends EntityComponent> extends AbstractMap<Entity, T> {
+	protected class ComponentStorage<T extends EntityComponent> extends AbstractMap<Entity, T> {
 		private final Map<Entity, T> content = new HashMap<Entity, T>();
 
 		@Override

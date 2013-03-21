@@ -1,10 +1,10 @@
 package net.catacombsnatch.game.core;
 
-import java.util.Locale;
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 
-import net.catacombsnatch.game.core.gui.MenuStack;
-import net.catacombsnatch.game.core.gui.menu.GuiMenu;
-import net.catacombsnatch.game.core.gui.menu.TitleScreen;
 import net.catacombsnatch.game.core.input.InputManager;
 import net.catacombsnatch.game.core.resources.Fonts;
 import net.catacombsnatch.game.core.resources.Language;
@@ -14,78 +14,47 @@ import net.catacombsnatch.game.core.screen.Screen;
 import net.catacombsnatch.game.core.sound.GdxSoundPlayer;
 import net.catacombsnatch.game.core.sound.ISoundPlayer;
 import net.catacombsnatch.game.core.sound.NoSoundPlayer;
-
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
+import net.catacombsnatch.game.core.scene.Scene;
+import net.catacombsnatch.game.core.scene.SceneManager;
+import net.catacombsnatch.game.core.scene.scenes.TitleScreen;
 
 public class Game implements ApplicationListener {
-	public static final String VERSION = "${pom.version}.{buildNumber}";
+	public final static String TAG = "[Core]";
 
-	public static Language language;
-
-	private Screen screen;
-
-	private static MenuStack menuStack;
+	protected Language language;
+	protected Screen screen;
+	protected SceneManager sceneManager;
 
 	public static ISoundPlayer sound;
 	public static InputManager input;
 
 	@Override
 	public void create() {
+		// Load static content
+		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+		
 		Options.load();
-		language = new Language( new Locale( "en" ) );
+		Language.set("en");
 
 		if ( !Art.loadResources() ) Gdx.app.exit();
 
 		Fonts.init();
 
+		input = new InputManager();
+		
 		try {
 			sound = new GdxSoundPlayer();
 		} catch ( Exception e ) {
+			Gdx.app.log(TAG, "Could not enable sound system, falling back to NoSound!", e);
 			sound = new NoSoundPlayer();
 		}
 
-		input = new InputManager();
-
+		// Load main managers
+		sceneManager = new SceneManager();
 		screen = new Screen();
-		menuStack = new MenuStack();
-
-		switchTo( TitleScreen.class );
-	}
-
-	public static void exitAll() {
-		while ( !menuStack.isEmpty() )
-			menuStack.pop();
-
-		Gdx.app.exit();
-	}
-
-	public static synchronized <T extends GuiMenu> T switchTo( Class<T> menu ) {
-		T instance = null;
-
-		try {
-			instance = menu.newInstance();
-			menuStack.add( instance );
-
-		} catch ( Exception e ) {
-			System.err.println( "Error switching to menu '" + menu + "': " + e.getMessage() );
-			e.printStackTrace();
-		}
-
-		Gdx.input.setInputProcessor( instance );
-		return instance;
-	}
-
-	public static synchronized <T extends GuiMenu> T returnTo( Class<T> menu ) {
-		menuStack.pop();
-		return switchTo( menu );
-	}
-
-	public static synchronized void exitMenu() {
-		menuStack.pop();
-
-		if ( !menuStack.isEmpty() ) Gdx.input.setInputProcessor( menuStack.peek() );
+		
+		// Dive in :)
+		SceneManager.switchTo(TitleScreen.class);
 	}
 
 	@Override
@@ -96,12 +65,15 @@ public class Game implements ApplicationListener {
 		screen.getGraphics().begin();
 		screen.clear( Color.BLACK );
 
-		if ( !menuStack.isEmpty() ) menuStack.peek().render( screen );
+		Scene current = SceneManager.getCurrent();
+		if (current != null) {
+			current.render( screen );
+		}
 
 		if ( Options.getBoolean( Options.DRAW_FPS, true ) ) {
 			Fonts.GOLD.draw( screen.getGraphics(), Integer.toString( Gdx.graphics.getFramesPerSecond() ) + " FPS", 2, Screen.getHeight() - 2 - 8 );
 		}
-
+		
 		screen.getGraphics().end();
 	}
 

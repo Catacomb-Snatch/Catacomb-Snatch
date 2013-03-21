@@ -1,4 +1,4 @@
-package net.catacombsnatch.game.core.gui.components;
+package net.catacombsnatch.game.core.gui;
 
 import net.catacombsnatch.game.core.screen.Screen;
 

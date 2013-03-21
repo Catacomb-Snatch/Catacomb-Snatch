@@ -1,12 +1,12 @@
 package net.catacombsnatch.game.core.world;
 
-import net.catacombsnatch.game.core.Game;
+import net.catacombsnatch.game.core.resources.Language;
 
 public enum Difficulty {
-	EASY(Game.language.get( "difficulty.easy" ), .5f, .5f, 1.5f, .5f, false, 25, 3, 30),
-	NORMAL(Game.language.get( "difficulty.normal" ), 1, 1, 1, 1, false, 25, 7, 20),
-	HARD(Game.language.get( "difficulty.hard" ), 3, 3, .5f, 1.5f, true, 25, 12, 15),
-	NIGHTMARE(Game.language.get( "difficulty.nightmare" ), 6, 5, .25f, 2.5f, true, 15, 100000, 10);
+	EASY("difficulty.easy", .5f, .5f, 1.5f, .5f, false, 25, 3, 30),
+	NORMAL("difficulty.normal", 1, 1, 1, 1, false, 25, 7, 20),
+	HARD("difficulty.hard", 3, 3, .5f, 1.5f, true, 25, 12, 15),
+	NIGHTMARE("difficulty.nightmare", 6, 5, .25f, 2.5f, true, 15, 100000, 10);
 
 	private String name;
 
@@ -40,7 +40,7 @@ public enum Difficulty {
 	 * @return The name
 	 */
 	public String getName() {
-		return name;
+		return Language.get(name);
 	}
 
 	/**
