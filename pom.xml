@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.catacombsnatch.game</groupId>
 	<artifactId>game</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Catacomb-Snatch Game Parent</name>
 
