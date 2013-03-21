@@ -67,8 +67,9 @@ public class EntityManager {
 	public synchronized boolean killEntity( Entity entity ) {
 		if ( !entities.remove( entity ) ) return false;
 
-		for ( ComponentStorage<? extends EntityComponent> storage : components.values() )
+		for ( ComponentStorage<? extends EntityComponent> storage : components.values() ) {
 			if ( storage.containsKey( entity ) ) storage.remove( entity );
+		}
 
 		return true;
 	}
@@ -130,8 +131,9 @@ public class EntityManager {
 		ComponentStorage<? extends EntityComponent> stored = components.get( component );
 
 		if ( stored != null ) {
-			for ( Entity e : stored.keySet() )
+			for ( Entity e : stored.keySet() ) {
 				if ( e.equals( entity ) ) return true;
+			}
 		}
 
 		return false;
@@ -198,19 +200,22 @@ public class EntityManager {
 	private class ComponentStorage<T extends EntityComponent> extends AbstractMap<Entity, T> {
 		private final Map<Entity, T> content = new HashMap<Entity, T>();
 
+		@Override
 		public Set<Entry<Entity, T>> entrySet() {
 			return content.entrySet();
 		}
 
+		@Override
 		public Set<Entity> keySet() {
 			return content.keySet();
 		}
 
+		@Override
 		public Collection<T> values() {
 			return content.values();
 		}
 
-		@SuppressWarnings( "unchecked" )
+		@Override
 		public T put( final Entity id, final EntityComponent instance ) {
 			return content.put( id, (T) instance );
 		}

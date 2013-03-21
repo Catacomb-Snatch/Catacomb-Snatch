@@ -129,6 +129,7 @@ public enum Difficulty {
 		return Difficulty.values()[ordinal];
 	}
 
+	@Override
 	public String toString() {
 		return name;
 	}

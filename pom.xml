@@ -18,6 +18,7 @@
 	<repositories>
 		<repository>
 			<id>gdx-nightlies</id>
+			<name>Main LibGDX repository</name>
 			<url>http://libgdx.badlogicgames.com/nightlies/maven</url>
 		</repository>
 	</repositories>

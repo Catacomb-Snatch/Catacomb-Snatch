@@ -16,7 +16,7 @@ public class Language {
 
 		String lang = locale.getLanguage();
 
-		if ( lang != "en" ) {
+		if ( !lang.equals("en") ) {
 			try {
 				language.load( Gdx.files.internal( "languages/" + lang + ".lang" ).read() );
 			} catch ( Exception e ) {
@@ -28,7 +28,6 @@ public class Language {
 			fallback.load( Gdx.files.internal( "languages/en.lang" ).read() );
 		} catch ( Exception e ) {
 			System.err.println( "Could not load default language file!" );
-			e.printStackTrace();
 		}
 	}
 
@@ -39,11 +38,13 @@ public class Language {
 	 * @return The language string
 	 */
 	public String get( String property ) {
-		if ( language != null && language.containsKey( property ) )
-			return language.getProperty( property );
-		else if ( fallback != null && fallback.containsKey( property ) )
-			return fallback.getProperty( property );
-		else return "{" + property + "}";
+		String p = property.toUpperCase();
+		
+		if ( language != null && language.containsKey( p ) )
+			return language.getProperty( p );
+		else if ( fallback != null && fallback.containsKey( p ) )
+			return fallback.getProperty( p );
+		else return "{" + p + "}";
 	}
 
 	/**

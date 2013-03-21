@@ -118,6 +118,7 @@ public class Screen implements Disposable {
 	 * Releases all resources of this screen
 	 * 
 	 */
+	@Override
 	public void dispose() {
 		batch.dispose();
 	}

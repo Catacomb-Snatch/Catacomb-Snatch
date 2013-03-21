@@ -10,7 +10,15 @@
 
 	<artifactId>game-core</artifactId>
 	<packaging>jar</packaging>
-	<name>CatacombSnatchGame Core</name>
+	<name>Catacomb-Snatch Game Core</name>
+
+	<repositories>
+		<!-- In-Project repository -->
+		<repository>
+			<id>core-libs</id>
+			<url>file://${project.basedir}/../lib</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -19,11 +27,9 @@
 			<version>${gdx.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.badlogic.gdx.controllers</groupId>
+			<groupId>extensions</groupId>
 			<artifactId>gdx-controllers</artifactId>
 			<version>${gdx.version}</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/gdx-controllers.jar</systemPath>
 		</dependency>
 	</dependencies>
 
@@ -39,12 +45,9 @@
 
 		<resources>
 			<resource>
-                <directory>src/main/resources</directory>
-            </resource>
-            <resource>
-            	<directory>src/main/java/net/catacombsnatch/game/core/resources</directory>
-            	<filtering>true</filtering>
-            </resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
 		</resources>
 	</build>
 </project>

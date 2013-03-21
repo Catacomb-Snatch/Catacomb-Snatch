@@ -16,6 +16,7 @@ public class MenuStack extends Stack<GuiMenu> {
 	 * 
 	 * @return The menu that was popped or null otherwise
 	 */
+	@Override
 	public GuiMenu pop() {
 		try {
 			GuiMenu menu = super.pop();

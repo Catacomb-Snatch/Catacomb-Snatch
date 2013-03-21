@@ -10,7 +10,15 @@
 
 	<artifactId>game-desktop</artifactId>
 	<packaging>jar</packaging>
-	<name>CatacombSnatchGame desktop</name>
+	<name>Catacomb-Snatch Game Desktop</name>
+
+	<repositories>
+		<!-- In-Project repository -->
+		<repository>
+			<id>desktop-libs</id>
+			<url>file://${project.basedir}/../lib</url>
+		</repository>
+	</repositories>
 
 	<properties>
 		<mainClass>net.catacombsnatch.game.java.CatacombSnatchGameDesktop</mainClass>
@@ -64,7 +72,6 @@
 			<artifactId>gdx</artifactId>
 			<version>${gdx.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.badlogic.gdx</groupId>
 			<artifactId>gdx-backend-lwjgl</artifactId>
@@ -72,25 +79,14 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>com.badlogic.gdx</groupId>
-			<artifactId>gdx-controllers</artifactId>
-			<version>${gdx.version}</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/../core/lib/gdx-controllers.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>com.badlogic.gdx</groupId>
+			<groupId>extensions</groupId>
 			<artifactId>gdx-controllers-desktop</artifactId>
 			<version>${gdx.version}</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/gdx-controllers-desktop.jar</systemPath>
 		</dependency>
 		<dependency>
-			<groupId>com.badlogic.gdx</groupId>
+			<groupId>extensions</groupId>
 			<artifactId>gdx-controllers-desktop-natives</artifactId>
 			<version>${gdx.version}</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/gdx-controllers-desktop-natives.jar</systemPath>
 		</dependency>
 	</dependencies>
 </project>

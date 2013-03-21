@@ -22,8 +22,8 @@ public class Player {
 	public Player( EntityManager manager, long id, int x, int y ) {
 		entity = new Entity( manager, id );
 
-		health = getEntity().addComponent( Health.class );
-		physics = getEntity().addComponent( Physics.class, new Physics( x - 4, y - 4, 8, 8 ) );
+		health = entity.addComponent( Health.class );
+		physics = entity.addComponent( Physics.class, new Physics( x - 4, y - 4, 8, 8 ) );
 	}
 
 	/**

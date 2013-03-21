@@ -66,6 +66,7 @@ public class GdxSoundPlayer implements ISoundPlayer {
 		return musicMap.get( music.name );
 	}
 
+	@Override
 	public void startTitleMusic() {
 		stopBackgroundMusic();
 		stopEndMusic();
@@ -79,12 +80,14 @@ public class GdxSoundPlayer implements ISoundPlayer {
 		}
 	}
 
+	@Override
 	public void stopTitleMusic() {
 		Music titleMusic = getMusic( Sounds.TITLE_THEME );
 
 		if ( titleMusic.isPlaying() ) titleMusic.stop();
 	}
 
+	@Override
 	public void startEndMusic() {
 		stopBackgroundMusic();
 		stopTitleMusic();
@@ -98,12 +101,14 @@ public class GdxSoundPlayer implements ISoundPlayer {
 		}
 	}
 
+	@Override
 	public void stopEndMusic() {
 		Music endMusic = getMusic( Sounds.END_THEME );
 
 		if ( endMusic.isPlaying() ) endMusic.stop();
 	}
 
+	@Override
 	public void startBackgroundMusic() {
 		stopTitleMusic();
 		stopEndMusic();
@@ -132,15 +137,18 @@ public class GdxSoundPlayer implements ISoundPlayer {
 		}
 	}
 
+	@Override
 	public void stopBackgroundMusic() {
 		if ( backgroundPlaying < 0 ) return;
 
-		for ( Music m : backgroundMusicList )
+		for ( Music m : backgroundMusicList ) {
 			if ( m.isPlaying() ) m.stop();
+		}
 
 		backgroundPlaying = -1;
 	}
 
+	@Override
 	public void pauseBackgroundMusic() {
 		paused = true;
 
@@ -150,6 +158,7 @@ public class GdxSoundPlayer implements ISoundPlayer {
 		getMusic( Sounds.END_THEME ).pause();
 	}
 
+	@Override
 	public void resumeBackgroundMusic() {
 		paused = true;
 
@@ -159,19 +168,22 @@ public class GdxSoundPlayer implements ISoundPlayer {
 		getMusic( Sounds.END_THEME ).play();
 	}
 
+	@Override
 	public void setListenerPosition( float x, float y ) {
 		listenerX = x;
 		listenerY = y;
 	}
 
+	@Override
 	public boolean playSound( String soundName, float x, float y ) {
 		return playSound( soundName, x, y, false );
 	}
 
+	@Override
 	public boolean playSound( String soundName, float x, float y, boolean blocking ) {
 		if ( soundVolume > 0.0f ) {
 			if ( soundsMap.containsKey( soundName ) ) {
-				// todo
+				// TODO
 
 				// angle -> pan
 				double angle = Math.toDegrees( Math.atan2( x - listenerX, y - listenerY ) );
@@ -183,13 +195,10 @@ public class GdxSoundPlayer implements ISoundPlayer {
 				double difx = (x - listenerX) * (x - listenerX);
 				double dify = (y - listenerY) * (y - listenerY);
 				float distance = (float) Math.sqrt( difx + dify );
-				System.out.println( "dis " + distance );
 
-				float distanceVolume = soundVolume;
-				distanceVolume = soundVolume - (distance / maxSoundDistance);
+				float distanceVolume = soundVolume - (distance / maxSoundDistance);
 				if ( distanceVolume > soundVolume ) distanceVolume = soundVolume;
 				if ( distanceVolume < 0.0f ) distanceVolume = 0.0f;
-				System.out.println( "disVol " + distanceVolume );
 
 				soundsMap.get( soundName ).play( distanceVolume, 1, pan );
 
@@ -200,6 +209,7 @@ public class GdxSoundPlayer implements ISoundPlayer {
 		return false;
 	}
 
+	@Override
 	public void shutdown() {
 		// unloading Title music
 		stopTitleMusic();
@@ -226,10 +236,12 @@ public class GdxSoundPlayer implements ISoundPlayer {
 		}
 	}
 
+	@Override
 	public boolean isMuted() {
 		return muted;
 	}
 
+	@Override
 	public void setMuted( boolean muted ) {
 		this.muted = muted;
 	}

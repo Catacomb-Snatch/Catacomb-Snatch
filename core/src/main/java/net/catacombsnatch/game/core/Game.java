@@ -31,6 +31,7 @@ public class Game implements ApplicationListener {
 	public static ISoundPlayer sound;
 	public static InputManager input;
 
+	@Override
 	public void create() {
 		Options.load();
 		language = new Language( new Locale( "en" ) );
@@ -87,8 +88,10 @@ public class Game implements ApplicationListener {
 		if ( !menuStack.isEmpty() ) Gdx.input.setInputProcessor( menuStack.peek() );
 	}
 
+	@Override
 	public void resize( int width, int height ) {}
 
+	@Override
 	public void render() {
 		screen.getGraphics().begin();
 		screen.clear( Color.BLACK );
@@ -102,14 +105,17 @@ public class Game implements ApplicationListener {
 		screen.getGraphics().end();
 	}
 
+	@Override
 	public void pause() {
 		sound.pauseBackgroundMusic();
 	}
 
+	@Override
 	public void resume() {
 		sound.resumeBackgroundMusic();
 	}
 
+	@Override
 	public void dispose() {
 		Art.unloadResources();
 		Fonts.unload();
