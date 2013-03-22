@@ -123,13 +123,13 @@ public class Language {
 	 * @return True on success, otherwise false
 	 */
 	protected static boolean loadFile( FileHandle file ) {
-		if(!file.isDirectory() && file.extension().equalsIgnoreCase(".lang")) {
+		if(!file.isDirectory() && file.extension().equalsIgnoreCase("lang")) {
 			try {
 				Properties lang = languages.get(file.name());
 
 				if(lang == null) {
 					lang = new Properties();
-					languages.put(file.name(), lang);
+					languages.put(file.nameWithoutExtension(), lang);
 				}
 
 				lang.load(file.read());

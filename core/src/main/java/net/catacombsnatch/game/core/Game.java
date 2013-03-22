@@ -31,7 +31,7 @@ public class Game implements ApplicationListener {
 	@Override
 	public void create() {
 		// Load static content
-		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+		Gdx.app.setLogLevel(Application.LOG_INFO | Application.LOG_DEBUG | Application.LOG_ERROR);
 		
 		Options.load();
 		Language.set("en");
