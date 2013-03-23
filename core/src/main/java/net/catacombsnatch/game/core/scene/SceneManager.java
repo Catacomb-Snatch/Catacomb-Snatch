@@ -1,5 +1,7 @@
 package net.catacombsnatch.game.core.scene;
 
+import java.util.Stack;
+
 import com.badlogic.gdx.Gdx;
 
 public class SceneManager {
@@ -66,5 +68,32 @@ public class SceneManager {
 			scenes.pop();
 		}
 	}
+	
+	protected class SceneStack extends Stack<Scene> {
+		private static final long serialVersionUID = 1L;
+
+		public SceneStack() {
+			super();
+		}
+
+		/**
+		 * Attempts to pop the top menu off the stack
+		 * 
+		 * @return The menu that was popped or null otherwise
+		 */
+		@Override
+		public Scene pop() {
+			try {
+				Scene top = super.pop();
+				top.exit();
+
+				return top;
+			} catch ( Exception e ) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+	}
+
 	
 }

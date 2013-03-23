@@ -217,6 +217,7 @@ public class EntityManager {
 			return content.values();
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public T put( final Entity id, final EntityComponent instance ) {
 			return content.put( id, (T) instance );

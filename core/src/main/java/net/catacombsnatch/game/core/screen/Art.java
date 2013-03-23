@@ -3,9 +3,17 @@ package net.catacombsnatch.game.core.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 public class Art {
+	public final static String TAG = "[Art]";
+	
+	public static Skin skin;
+	public static TextButtonStyle buttonStyle;
+	
 	public static Texture background;
 	public static Texture titleScreen;
 
@@ -18,14 +26,20 @@ public class Art {
 	 */
 	public static boolean loadResources() {
 		try {
+			// Load interface
+			skin = new Skin(Gdx.files.internal("packed/interface.skin"), new TextureAtlas("packed/interface.atlas"));
+			buttonStyle = skin.get("default", TextButtonStyle.class);
+			
+			// Load backgrounds
 			background = load( "art/screen/background.png" );
 			titleScreen = load( "art/screen/title.png" );
 
+			// Load characters
 			lordLard = cut( "art/player/lord_lard.png", 23, 32 );
 
 			return true;
 		} catch ( Exception e ) {
-			System.err.println( "Something went wrong while loading a resource: " + e.getMessage() );
+			Gdx.app.error(TAG, "Something went wrong while loading a resource: ", e);
 		}
 
 		return false;
@@ -42,10 +56,6 @@ public class Art {
 		tex.setFilter( TextureFilter.Linear, TextureFilter.Linear );
 
 		return tex;
-	}
-
-	private static TextureRegion load( String path, int x, int y, int w, int h ) {
-		return new TextureRegion( load( path ), x, y, w, h );
 	}
 
 	private static TextureRegion[][] cut( String path, int w, int h ) {
