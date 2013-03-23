@@ -5,20 +5,34 @@
 	<parent>
 		<groupId>net.catacombsnatch.game</groupId>
 		<artifactId>game</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>game-android</artifactId>
 	<packaging>apk</packaging>
-	<name>CatacombSnatchGame Android</name>
+	<name>Catacomb-Snatch Game Android</name>
 
+    <repositories>
+        <!-- In-Project repository -->
+        <repository>
+            <id>desktop-libs</id>
+            <url>file://${project.basedir}/../lib</url>
+        </repository>
+    </repositories>
+    
 	<dependencies>
 		<dependency>
 			<groupId>net.catacombsnatch.game</groupId>
 			<artifactId>game-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
+		
+        <dependency>
+            <groupId>com.badlogic.gdx</groupId>
+            <artifactId>gdx</artifactId>
+            <version>${gdx.version}</version>
+        </dependency>
+        
 		<dependency>
 			<groupId>com.badlogic.gdx</groupId>
 			<artifactId>gdx-backend-android</artifactId>
@@ -39,19 +53,11 @@
 			<classifier>natives-armeabi-v7a</classifier>
 			<scope>provided</scope>
 		</dependency>
+		
 		<dependency>
-			<groupId>com.badlogic.gdx</groupId>
-			<artifactId>gdx-controllers</artifactId>
-			<version>${gdx.version}</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/../core/lib/gdx-controllers.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>com.badlogic.gdx</groupId>
-			<artifactId>gdx-controllers-android</artifactId>
-			<version>${gdx.version}</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/gdx-controllers-android.jar</systemPath>
+            <groupId>extensions</groupId>
+            <artifactId>gdx-controllers-android</artifactId>
+            <version>${gdx.version}</version>
 		</dependency>
 		
 		<dependency>
@@ -63,6 +69,7 @@
 	</dependencies>
 
 	<build>
+
 	    <!-- output APK doesn't contain version number, needed for Intellij Idea -->
 	    <finalName>${project.artifactId}</finalName>
 	    
@@ -93,10 +100,10 @@
 				<version>${android.maven.version}</version>
 				<configuration>
 					<androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
-					<assetsDirectory>../desktop/assets</assetsDirectory>
+					<assetsDirectory>${project.basedir}/../core/src/main/resources</assetsDirectory>
 					<resourceDirectory>${project.basedir}/res</resourceDirectory>
 					<sdk>
-						<platform>15</platform>
+						<platform>16</platform>
 					</sdk>
 					<undeployBeforeDeploy>true</undeployBeforeDeploy>
 					<dex>
