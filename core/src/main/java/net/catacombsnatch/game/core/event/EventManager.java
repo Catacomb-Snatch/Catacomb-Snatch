@@ -39,7 +39,7 @@ public class EventManager {
 					registry.put((Class<? extends Event>) eventParam, array);
 				}
 				
-				array.add(new EventRegisterEntry(method, listener));
+				array.add(new EventRegisterEntry(handler, method, listener));
 				
 			} else {
 				throw new GdxRuntimeException("Method " + method.getName() + " does not have a proper event parameter!");
@@ -56,10 +56,12 @@ public class EventManager {
 	}
 	
 	protected class EventRegisterEntry {
+		public final EventHandler handler;
 		public final Method method;
 		public final Object instance;
 		
-		public EventRegisterEntry(Method m, Object o) {
+		public EventRegisterEntry(EventHandler h, Method m, Object o) {
+			handler = h;
 			method = m;
 			instance = o;
 		}
