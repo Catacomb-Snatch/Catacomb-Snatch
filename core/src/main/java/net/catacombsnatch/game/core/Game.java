@@ -1,6 +1,5 @@
 package net.catacombsnatch.game.core;
 
-import net.catacombsnatch.game.core.input.InputManager;
 import net.catacombsnatch.game.core.resources.Language;
 import net.catacombsnatch.game.core.resources.Options;
 import net.catacombsnatch.game.core.scene.Scene;
@@ -25,7 +24,6 @@ public class Game implements ApplicationListener {
 	protected SceneManager sceneManager;
 
 	public static ISoundPlayer sound;
-	public static InputManager input;
 
 	@Override
 	public void create() {
@@ -36,8 +34,6 @@ public class Game implements ApplicationListener {
 		Language.set("en");
 
 		if ( !Art.loadResources() ) Gdx.app.exit();
-
-		input = new InputManager();
 		
 		try {
 			sound = new GdxSoundPlayer();
@@ -88,7 +84,6 @@ public class Game implements ApplicationListener {
 	public void dispose() {
 		Art.unloadResources();
 
-		input.shutdown();
 		sound.shutdown();
 
 		Options.save();
