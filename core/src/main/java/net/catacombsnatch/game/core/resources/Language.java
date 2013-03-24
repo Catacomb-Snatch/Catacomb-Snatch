@@ -1,20 +1,20 @@
 package net.catacombsnatch.game.core.resources;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-
 import java.io.BufferedReader;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Properties;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 
 public class Language {
 	public final static String TAG = "[Language]";
-	public final static String DIRECTORY = "languages/";
+	public final static String DIRECTORY = "lang/";
 	public final static String DEFAULT = "en";
 	
 	protected final static Map<String, Properties> languages;

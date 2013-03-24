@@ -50,7 +50,7 @@ public class GdxSoundPlayer implements ISoundPlayer {
 	}
 
 	private void loadMusic( Sounds music ) {
-		Music file = Gdx.audio.newMusic( Gdx.files.internal( "sound/" + music.name + ".ogg" ) );
+		Music file = Gdx.audio.newMusic( Gdx.files.internal( "music/" + music.name + ".ogg" ) );
 
 		// If background track, add to playlist
 		if ( music.name.toLowerCase().startsWith( "background" ) ) backgroundMusicList.add( file );

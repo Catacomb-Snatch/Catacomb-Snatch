@@ -1,8 +1,5 @@
 package net.catacombsnatch.game.core.scene.scenes;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.catacombsnatch.game.core.Game;
 import net.catacombsnatch.game.core.entity.Entity;
 import net.catacombsnatch.game.core.entity.EntityManager;
@@ -12,20 +9,19 @@ import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.screen.Art;
 import net.catacombsnatch.game.core.screen.Screen;
 
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-
 public class TitleScreen extends Scene {
-	private List<TextButton> menu;
-
 	private Entity charEntity;
 
 	public TitleScreen() {
-		menu = new ArrayList<TextButton>();
-		menu.add(new TextButton(Language.get("scene.title.demo"), Art.skin));
-		menu.add(new TextButton(Language.get("scene.title.start"), Art.skin));
-		menu.add(new TextButton(Language.get("scene.title.options"), Art.skin));
-		menu.add(new TextButton(Language.get("scene.title.exit"), Art.skin));
-
+		super();
+		
+		this.setBackground(Art.titleScreen);
+		
+		addTextButton(Language.get("scene.title.demo"), Screen.getWidth() / 2, 250);
+		addTextButton(Language.get("scene.title.start"), Screen.getWidth() / 2, 200);
+		addTextButton(Language.get("scene.title.options"), Screen.getWidth() / 2, 150);
+		addTextButton(Language.get("scene.title.exit"), Screen.getWidth() / 2, 100);
+		
 		charEntity = new EntityManager().createEntity();
 		charEntity.addComponent( Animated.class, new Animated( Art.lordLard[0], 0.15f ) );
 
@@ -39,12 +35,8 @@ public class TitleScreen extends Scene {
 
 	@Override
 	public void render( Screen screen ) {
-		screen.getGraphics().draw( Art.titleScreen, 0, 0 );
-
-		for(TextButton button : menu) {
-			button.draw(screen.getGraphics(), 1);
-		}
-
+		super.render(screen);
+		
 		charEntity.getComponent( Animated.class ).render( screen );
 	}
 }

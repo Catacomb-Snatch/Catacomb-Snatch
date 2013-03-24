@@ -6,13 +6,11 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 public class Art {
 	public final static String TAG = "[Art]";
 	
 	public static Skin skin;
-	public static TextButtonStyle buttonStyle;
 	
 	public static Texture background;
 	public static Texture titleScreen;
@@ -27,8 +25,7 @@ public class Art {
 	public static boolean loadResources() {
 		try {
 			// Load interface
-			skin = new Skin(Gdx.files.internal("packed/interface.skin"), new TextureAtlas("packed/interface.atlas"));
-			buttonStyle = skin.get("default", TextButtonStyle.class);
+			skin = new Skin(Gdx.files.internal("art/interface.skin"), new TextureAtlas("art/interface.atlas"));
 			
 			// Load backgrounds
 			background = load( "art/screen/background.png" );

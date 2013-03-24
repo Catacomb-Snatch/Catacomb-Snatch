@@ -1,22 +1,21 @@
 package net.catacombsnatch.game.core;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-
 import net.catacombsnatch.game.core.input.InputManager;
-import net.catacombsnatch.game.core.resources.Fonts;
 import net.catacombsnatch.game.core.resources.Language;
 import net.catacombsnatch.game.core.resources.Options;
+import net.catacombsnatch.game.core.scene.Scene;
+import net.catacombsnatch.game.core.scene.SceneManager;
+import net.catacombsnatch.game.core.scene.scenes.TitleScreen;
 import net.catacombsnatch.game.core.screen.Art;
 import net.catacombsnatch.game.core.screen.Screen;
 import net.catacombsnatch.game.core.sound.GdxSoundPlayer;
 import net.catacombsnatch.game.core.sound.ISoundPlayer;
 import net.catacombsnatch.game.core.sound.NoSoundPlayer;
-import net.catacombsnatch.game.core.scene.Scene;
-import net.catacombsnatch.game.core.scene.SceneManager;
-import net.catacombsnatch.game.core.scene.scenes.TitleScreen;
+
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 
 public class Game implements ApplicationListener {
 	public final static String TAG = "[Core]";
@@ -37,8 +36,6 @@ public class Game implements ApplicationListener {
 		Language.set("en");
 
 		if ( !Art.loadResources() ) Gdx.app.exit();
-
-		Fonts.init();
 
 		input = new InputManager();
 		
@@ -71,7 +68,7 @@ public class Game implements ApplicationListener {
 		}
 
 		if ( Options.getBoolean( Options.DRAW_FPS, true ) ) {
-			Fonts.GOLD.draw( screen.getGraphics(), Integer.toString( Gdx.graphics.getFramesPerSecond() ) + " FPS", 2, Screen.getHeight() - 2 - 8 );
+			// Fonts.GOLD.draw( screen.getGraphics(), Integer.toString( Gdx.graphics.getFramesPerSecond() ) + " FPS", 2, Screen.getHeight() - 2 - 8 );
 		}
 		
 		screen.getGraphics().end();
@@ -90,7 +87,6 @@ public class Game implements ApplicationListener {
 	@Override
 	public void dispose() {
 		Art.unloadResources();
-		Fonts.unload();
 
 		input.shutdown();
 		sound.shutdown();

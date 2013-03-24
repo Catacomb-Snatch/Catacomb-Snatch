@@ -1,0 +1,16 @@
+{
+	com.badlogic.gdx.graphics.g2d.BitmapFont: {
+		gold: { file: "fonts/gold.fnt" }
+	},
+	
+	com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+		default: {
+			down: button-default, up: button-default, over: button-hover,
+			font: gold
+		}
+	},
+	
+	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+		default: { font: gold }
+	}
+}
