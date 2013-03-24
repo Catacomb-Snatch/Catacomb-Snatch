@@ -54,8 +54,9 @@ public class Scene extends GuiComponent {
 	 * 
 	 * @param actor The actor to add
 	 */
-	public void addActor(Actor actor) {
+	public Actor addActor(Actor actor) {
 		actors.add(actor);
+		return actor;
 	}
 	
 	/**
@@ -64,11 +65,12 @@ public class Scene extends GuiComponent {
 	 * @param text The text it contains
 	 * @param x The x-position
 	 * @param y The y-position
+	 * @return The created {@link TextButton}
 	 */
-	public void addTextButton(String text, int x, int y) {
+	public TextButton addTextButton(String text, int x, int y) {
 		TextButton button = new TextButton(text, Art.skin);
 		button.setPosition(x, y);
-		addActor(button);
+		return (TextButton) addActor(button);
 	}
 	
 }

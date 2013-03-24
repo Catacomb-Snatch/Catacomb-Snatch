@@ -17,10 +17,11 @@ public class TitleScreen extends Scene {
 		
 		this.setBackground(Art.titleScreen);
 		
-		addTextButton(Language.get("scene.title.demo"), Screen.getWidth() / 2, 250);
-		addTextButton(Language.get("scene.title.start"), Screen.getWidth() / 2, 200);
-		addTextButton(Language.get("scene.title.options"), Screen.getWidth() / 2, 150);
-		addTextButton(Language.get("scene.title.exit"), Screen.getWidth() / 2, 100);
+		int w = 150, x = (Screen.getWidth() - w) / 2, i = 40;
+		addTextButton(Language.get("scene.title.demo"), x, i * 4).setWidth(w);
+		addTextButton(Language.get("scene.title.start"), x, i * 3).setWidth(w);
+		addTextButton(Language.get("scene.title.options"), x, i * 2).setWidth(w);
+		addTextButton(Language.get("scene.title.exit"), x, i).setWidth(w);
 		
 		charEntity = new EntityManager().createEntity();
 		charEntity.addComponent( Animated.class, new Animated( Art.lordLard[0], 0.15f ) );
