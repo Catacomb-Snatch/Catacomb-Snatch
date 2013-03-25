@@ -14,6 +14,7 @@ import net.catacombsnatch.game.core.sound.NoSoundPlayer;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Color;
 import net.catacombsnatch.game.core.event.input.InputManager;
 
@@ -47,6 +48,7 @@ public class Game implements ApplicationListener {
 		// Load main managers
 		input = new InputManager();
 		Gdx.input.setInputProcessor(input);
+		Controllers.addListener(input);
 		
 		sceneManager = new SceneManager();
 		screen = new Screen();

@@ -3,9 +3,9 @@ package net.catacombsnatch.game.core.event.input;
 
 /** Called whenever a key is getting pressed (down state) */
 public class KeyPressedEvent extends InputEvent {
-	protected final int key;
+	protected final Key key;
 	
-	public KeyPressedEvent(InputSource source, int key) {
+	public KeyPressedEvent(InputSource source, Key key) {
 		super(source);
 		
 		this.key = key;
@@ -13,9 +13,9 @@ public class KeyPressedEvent extends InputEvent {
 
 	/**
 	 * The key that is getting pressed
-	 * @return The internal key number
+	 * @return The key
 	 */
-	public int getKey() {
+	public Key getKey() {
 		return key;
 	}
 }

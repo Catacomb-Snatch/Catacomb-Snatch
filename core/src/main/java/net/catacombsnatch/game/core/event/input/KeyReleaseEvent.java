@@ -2,9 +2,9 @@ package net.catacombsnatch.game.core.event.input;
 
 /** Called whenever a key is getting released (up state) */
 public class KeyReleaseEvent extends InputEvent {
-	protected final int key;
+	protected final Key key;
 	
-	public KeyReleaseEvent(InputSource source, int key) {
+	public KeyReleaseEvent(InputSource source, Key key) {
 		super(source);
 		
 		this.key = key;
@@ -12,9 +12,9 @@ public class KeyReleaseEvent extends InputEvent {
 
 	/**
 	 * The key that is getting released
-	 * @return The internal key number
+	 * @return The key
 	 */
-	public int getKey() {
+	public Key getKey() {
 		return key;
 	}
 }

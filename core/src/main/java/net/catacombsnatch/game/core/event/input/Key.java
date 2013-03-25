@@ -1,0 +1,13 @@
+package net.catacombsnatch.game.core.event.input;
+
+
+public enum Key {
+	// General keys
+	UNKNOWN,
+	
+	// Movement keys
+	MOVE_LEFT, MOVE_RIGHT, MOVE_UP, MOVE_DOWN,
+	
+	// Action keys
+	USE, FIRE, SPRINT;
+}

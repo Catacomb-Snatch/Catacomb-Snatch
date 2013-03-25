@@ -5,7 +5,7 @@ import net.catacombsnatch.game.core.event.Event;
 
 public class InputEvent extends Event {
 	public enum InputSource {
-		KEYBOARD, MOUSE, GAMEPAD;
+		KEYBOARD, MOUSE, CONTROLLER;
 	}
 	
 	protected final InputSource source;
