@@ -32,7 +32,7 @@ public class InputManager extends InputAdapter implements ControllerListener {
 	@Override
 	public boolean keyDown(int keycode) {
 		InputSource source = InputSource.KEYBOARD;
-		KeyPressedEvent event = new KeyPressedEvent(source, getKeyForSource(source, keycode));
+		KeyPressedEvent event = new KeyPressedEvent(source, getKeyForSource(source, keycode), null);
 		EventManager.callEvent(event);
 		
 		return !event.isCancelled();
@@ -41,7 +41,7 @@ public class InputManager extends InputAdapter implements ControllerListener {
 	@Override
 	public boolean keyUp(int keycode) {
 		InputSource source = InputSource.KEYBOARD;
-		KeyReleaseEvent event = new KeyReleaseEvent(source, getKeyForSource(source, keycode));
+		KeyReleaseEvent event = new KeyReleaseEvent(source, getKeyForSource(source, keycode), null);
 		EventManager.callEvent(event);
 		
 		return !event.isCancelled();
@@ -71,7 +71,7 @@ public class InputManager extends InputAdapter implements ControllerListener {
 	@Override
 	public boolean buttonDown(Controller controller, int button) {
 		InputSource source = InputSource.CONTROLLER;
-		KeyPressedEvent event = new KeyPressedEvent(source, getKeyForSource(source, button));
+		KeyPressedEvent event = new KeyPressedEvent(source, getKeyForSource(source, button), controller);
 		EventManager.callEvent(event);
 		
 		return !event.isCancelled();
@@ -80,7 +80,7 @@ public class InputManager extends InputAdapter implements ControllerListener {
 	@Override
 	public boolean buttonUp(Controller controller, int button) {
 		InputSource source = InputSource.CONTROLLER;
-		KeyReleaseEvent event = new KeyReleaseEvent(source, getKeyForSource(source, button));
+		KeyReleaseEvent event = new KeyReleaseEvent(source, getKeyForSource(source, button), controller);
 		EventManager.callEvent(event);
 		
 		return !event.isCancelled();

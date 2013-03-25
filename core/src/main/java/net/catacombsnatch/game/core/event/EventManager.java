@@ -19,6 +19,7 @@ public class EventManager {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	public static void registerListener(Object listener) {
 		for(Method method : listener.getClass().getMethods()) {
 			EventHandler handler = method.getAnnotation(EventHandler.class);
@@ -35,7 +36,7 @@ public class EventManager {
 			
 			Class<?> eventParam = method.getParameterTypes()[0];
 			if(Event.class.isAssignableFrom(eventParam)) {
-				EventRegistry entry = registry.get((Class<? extends Event>) eventParam);
+				EventRegistry entry = registry.get(eventParam);
 				
 				if(entry == null) {
 					entry = new EventRegistry();
