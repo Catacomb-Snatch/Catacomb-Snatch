@@ -19,7 +19,7 @@ public class EventManager {
 	}
 	
 	
-	public void registerListener(Object listener) {
+	public static void registerListener(Object listener) {
 		for(Method method : listener.getClass().getMethods()) {
 			EventHandler handler = method.getAnnotation(EventHandler.class);
 			if(handler == null) continue;
@@ -34,7 +34,7 @@ public class EventManager {
 			}
 			
 			Class<?> eventParam = method.getParameterTypes()[0];
-			if(eventParam.isAssignableFrom(Event.class)) {
+			if(Event.class.isAssignableFrom(eventParam)) {
 				EventRegistry entry = registry.get((Class<? extends Event>) eventParam);
 				
 				if(entry == null) {
@@ -52,9 +52,11 @@ public class EventManager {
 	
 	public static void callEvent(Event event) {
 		EventRegistry entry = registry.get(event.getClass());
+		if(entry == null) return;
 		
 		for(EventOrder priority : EventOrder.values()) {
 			Array<Listener> listeners = entry.getListeners(priority);
+			if(listeners == null) continue;
 			
 			for(Listener listener : listeners) {
 				if(event.isCancelled() && !listener.ignoresCancelledEvents()) continue;
@@ -64,7 +66,7 @@ public class EventManager {
 		}
 	}
 	
-	protected class EventRegistry {
+	protected static class EventRegistry {
 		protected final Map<EventOrder, Array<Listener>> map;
 		
 		public EventRegistry() {
@@ -73,6 +75,12 @@ public class EventManager {
 		
 		public void addEntry(EventOrder priority, Listener entry) {
 			Array<Listener> listeners = map.get(priority);
+			
+			if(listeners == null) {
+				listeners = new Array<Listener>();
+				map.put(priority, listeners);
+			}
+			
 			listeners.add(entry);
 		}
 		
@@ -81,7 +89,7 @@ public class EventManager {
 		}
 	}
 	
-	protected class Listener {
+	protected static class Listener {
 		protected final boolean ignores;
 		protected final Method method;
 		protected final Object instance;

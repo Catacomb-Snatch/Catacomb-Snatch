@@ -4,11 +4,8 @@ import net.catacombsnatch.game.core.entity.Entity;
 import net.catacombsnatch.game.core.entity.EntityManager;
 import net.catacombsnatch.game.core.entity.components.Health;
 import net.catacombsnatch.game.core.entity.components.Physics;
-import net.catacombsnatch.game.core.input.PlayerInput;
 
 public class Player {
-	protected PlayerInput inputType;
-
 	protected Entity entity;
 	protected Health health;
 	protected Physics physics;
@@ -52,22 +49,5 @@ public class Player {
 	public Physics getPhysics() {
 		return physics;
 	}
-
-	/**
-	 * Sets the {@link PlayerInput} type for this player
-	 * 
-	 * @param type The {@link PlayerInput} type
-	 */
-	public void setInputType( PlayerInput type ) {
-		this.inputType = type;
-	}
-
-	/**
-	 * Returns the {@link PlayerInput} type for this player
-	 * 
-	 * @return The {@link PlayerInput} type
-	 */
-	public PlayerInput getInputType() {
-		return inputType;
-	}
+	
 }
