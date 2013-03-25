@@ -1,5 +1,6 @@
 package net.catacombsnatch.game.core.event;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.lang.reflect.Method;
@@ -96,8 +97,11 @@ public class EventManager {
 		}
 		
 		public void listen(Event event) {
-			try { method.invoke(instance, event); }
-			catch (Exception ex) {}
+			try {
+				method.invoke(instance, event);
+			} catch (Exception ex) {
+				Gdx.app.error("Event", "Error listening to event " + event + " in listener " + instance, ex);
+			}
 		}
 	}
 	
