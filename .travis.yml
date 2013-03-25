@@ -1,6 +1,11 @@
 language: java
 jdk: oraclejdk7
 env:
+    global:
+    - "ARTIFACTS_AWS_REGION=us-east-1"
+    - "ARTIFACTS_S3_BUCKET=builds.catacombsnatch.net"
+    - secure: "GWH+0o1NAs4SIpnVFOCkGV2f8DwUYmj0lnYYDAW/Q8GmLUfjVa0f2wWVeDVl\nd2M+1Jze8ntr78kSmeX4ep/ktos/1yRfhmXnP2uKTB1F41i/gM2RZxthtJXD\nxc7bARWz0bubdEcr+cZ+BM+p9cDptDvD2MT22tya5hFlBatYXTw="
+    - secure: "cQiIM3lR6t6NvPGwfprCzTli6MsDawoDbMXNQOtQWnoXAMWLVlOIncMCbWh+\no8vv/P4xdKp9yXHordT7joy8KVufMcGlV4zYd8JEccA4AG3y4P5teHmsIlwe\ndw/4qfujsUePOKgzWT6s1lKSXTPI0+gtzHZAomHkQwp4f6pT+Ag="
     matrix:
     - ANDROID_SDKS=android-8            ANDROID_TARGET=android-8   ANDROID_ABI=armeabi
     - ANDROID_SDKS=android-10           ANDROID_TARGET=android-10  ANDROID_ABI=armeabi
@@ -19,3 +24,8 @@ before_install:
     - android update sdk --filter platform-tools,android-16,extra-android-support,$ANDROID_SDKS --no-ui --force
 
 #Config found on http://rkistner.github.com/android/2013/02/05/android-builds-on-travis-ci/
+
+before_script:
+    - "gem install travis-artifacts"
+after_test:
+    - "travis-artifacts upload --target-path artifacts/$TRAVIS_BUILD_ID/$TRAVIS_JOB_ID"
