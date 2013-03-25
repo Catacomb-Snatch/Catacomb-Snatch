@@ -1,5 +1,6 @@
 package net.catacombsnatch.game.core;
 
+import net.catacombsnatch.game.core.event.input.InputManager;
 import net.catacombsnatch.game.core.resources.Language;
 import net.catacombsnatch.game.core.resources.Options;
 import net.catacombsnatch.game.core.scene.Scene;
@@ -16,7 +17,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Color;
-import net.catacombsnatch.game.core.event.input.InputManager;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class Game implements ApplicationListener {
 	public final static String TAG = "[Core]";
@@ -27,6 +28,8 @@ public class Game implements ApplicationListener {
 	protected SceneManager sceneManager;
 
 	public static ISoundPlayer sound;
+	
+	private Label fpsLabel;
 
 	@Override
 	public void create() {
@@ -55,6 +58,8 @@ public class Game implements ApplicationListener {
 		
 		// Dive in :)
 		SceneManager.switchTo(TitleScreen.class);
+		
+		fpsLabel = new Label("FPS", Art.skin);
 	}
 
 	@Override
@@ -71,7 +76,8 @@ public class Game implements ApplicationListener {
 		}
 
 		if ( Options.getBoolean( Options.DRAW_FPS, true ) ) {
-			// Fonts.GOLD.draw( screen.getGraphics(), Integer.toString( Gdx.graphics.getFramesPerSecond() ) + " FPS", 2, Screen.getHeight() - 2 - 8 );
+			fpsLabel.setText(Gdx.graphics.getFramesPerSecond() + " FPS");
+			fpsLabel.draw(screen.getGraphics(), 1);
 		}
 		
 		screen.getGraphics().end();

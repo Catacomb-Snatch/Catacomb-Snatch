@@ -12,8 +12,12 @@ import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.screen.Art;
 import net.catacombsnatch.game.core.screen.Screen;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+
 public class TitleScreen extends Scene {
-	private Entity charEntity;
+	private int index = 0;
+	private final Entity charEntity;
+	private final Animated charAnimation; // Reference for quick access
 
 	public TitleScreen() {
 		super();
@@ -27,11 +31,12 @@ public class TitleScreen extends Scene {
 		addTextButton(Language.get("scene.title.exit"), x, i).setWidth(w);
 		
 		charEntity = new EntityManager().createEntity();
-		charEntity.addComponent( Animated.class, new Animated( Art.lordLard[0], 0.15f ) );
+		charAnimation = charEntity.addComponent( Animated.class, new Animated( Art.lordLard[0], 0.15f ) );
 
-		Game.sound.startTitleMusic();
-		
 		EventManager.registerListener(this);
+		update();
+		
+		Game.sound.startTitleMusic();
 	}
 
 	@Override
@@ -43,12 +48,20 @@ public class TitleScreen extends Scene {
 	public void render( Screen screen ) {
 		super.render(screen);
 		
-		charEntity.getComponent( Animated.class ).render( screen );
+		charAnimation.render( screen );
 	}
 	
 	@EventHandler
 	public void keyPressed(KeyPressedEvent event) {
-		System.out.println(event.getKey().name());
+		index++;
+		if(index >= actors.size) index = 0;
+		
+		update();
+	}
+	
+	protected void update() {
+		Actor actor = actors.get(index);
+		charAnimation.setPosition((int) (actor.getX() - 32), (int) actor.getY());
 	}
 	
 }
