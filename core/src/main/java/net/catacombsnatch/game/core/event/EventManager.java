@@ -4,19 +4,21 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
 
+/** Manages event handling. */
 public class EventManager {
-	protected final static Map<Class<? extends Event>, Array<EventRegisterEntry>> registry;
+	protected final static Map<Class<? extends Event>, EventRegistry> registry;
 	
 	static {
-		registry = new HashMap<Class<? extends Event>, Array<EventRegisterEntry>>();
+		registry = new HashMap<Class<? extends Event>, EventRegistry>();
 	}
 	
 	
-	public void register(Object listener) {
+	public void registerListener(Object listener) {
 		for(Method method : listener.getClass().getMethods()) {
 			EventHandler handler = method.getAnnotation(EventHandler.class);
 			if(handler == null) continue;
@@ -32,14 +34,14 @@ public class EventManager {
 			
 			Class<?> eventParam = method.getParameterTypes()[0];
 			if(eventParam.isAssignableFrom(Event.class)) {
-				Array<EventRegisterEntry> array = registry.get((Class<? extends Event>) eventParam);
+				EventRegistry entry = registry.get((Class<? extends Event>) eventParam);
 				
-				if(array == null) {
-					array = new Array<EventRegisterEntry>();
-					registry.put((Class<? extends Event>) eventParam, array);
+				if(entry == null) {
+					entry = new EventRegistry();
+					registry.put((Class<? extends Event>) eventParam, entry);
 				}
 				
-				array.add(new EventRegisterEntry(handler, method, listener));
+				entry.addEntry(handler.priority(), new Listener(handler.ignoreCancelled(), method, listener));
 				
 			} else {
 				throw new GdxRuntimeException("Method " + method.getName() + " does not have a proper event parameter!");
@@ -48,22 +50,55 @@ public class EventManager {
 	}
 	
 	public static void callEvent(Event event) {
-		Array<EventRegisterEntry> entries = registry.get(event.getClass());
+		EventRegistry entry = registry.get(event.getClass());
 		
-		if(entries != null) for(EventRegisterEntry  entry : entries) {
-			// TODO
+		for(EventOrder priority : EventOrder.values()) {
+			Array<Listener> listeners = entry.getListeners(priority);
+			
+			for(Listener listener : listeners) {
+				if(event.isCancelled() && !listener.ignoresCancelledEvents()) continue;
+				
+				listener.listen(event);
+			}
 		}
 	}
 	
-	protected class EventRegisterEntry {
-		public final EventHandler handler;
-		public final Method method;
-		public final Object instance;
+	protected class EventRegistry {
+		protected final Map<EventOrder, Array<Listener>> map;
 		
-		public EventRegisterEntry(EventHandler h, Method m, Object o) {
-			handler = h;
-			method = m;
-			instance = o;
+		public EventRegistry() {
+			map = new EnumMap<EventOrder, Array<Listener>>(EventOrder.class);
+		}
+		
+		public void addEntry(EventOrder priority, Listener entry) {
+			Array<Listener> listeners = map.get(priority);
+			listeners.add(entry);
+		}
+		
+		public Array<Listener> getListeners(EventOrder priority) {
+			return map.get(priority);
 		}
 	}
+	
+	protected class Listener {
+		protected final boolean ignores;
+		protected final Method method;
+		protected final Object instance;
+		
+		public Listener(boolean ignores, Method method, Object clazz) {
+			this.ignores = ignores;
+			this.method = method;
+			this.instance = clazz;
+		}
+
+		public boolean ignoresCancelledEvents() {
+			return ignores;
+		}
+		
+		public void listen(Event event) {
+			try { method.invoke(instance, event); }
+			catch (Exception ex) {}
+		}
+	}
+	
 }
