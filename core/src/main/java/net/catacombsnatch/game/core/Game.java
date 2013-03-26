@@ -64,7 +64,7 @@ public class Game implements ApplicationListener {
 
 	@Override
 	public void resize( int width, int height ) {
-		screen.resize();
+		screen.resize(width, height);
 		sceneManager.resize();
 	}
 

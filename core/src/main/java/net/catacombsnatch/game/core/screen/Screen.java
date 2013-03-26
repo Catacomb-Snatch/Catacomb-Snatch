@@ -1,5 +1,7 @@
 package net.catacombsnatch.game.core.screen;
 
+import net.catacombsnatch.game.core.resources.Options;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
@@ -10,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 
 public class Screen implements Disposable {
+	protected static int SCALE = 1;
 	protected SpriteBatch batch;
 
 	protected int xOffset, yOffset;
@@ -17,6 +20,8 @@ public class Screen implements Disposable {
 	protected Texture rect_tex;
 
 	public Screen() {
+		this.batch = new SpriteBatch();
+		
 		// Custom texture for rectangles (used by fill())
 		Pixmap pmap = new Pixmap( 1, 1, Pixmap.Format.RGBA8888 );
 		pmap.setColor( Color.WHITE );
@@ -27,8 +32,13 @@ public class Screen implements Disposable {
 		pmap.dispose();
 	}
 	
-	public void resize() {
-		this.batch = new SpriteBatch();
+	public void resize(int width, int height) {
+		if(Options.getBoolean(Options.SCALE, true)) {
+			if(width > 1024 && height > 768) SCALE = 2;
+			else SCALE = 1;
+		}
+		
+		getGraphics().getProjectionMatrix().setToOrtho2D(0, 0, width / SCALE, height / SCALE);
 	}
 
 	/** Clears the screen with black */
@@ -131,7 +141,7 @@ public class Screen implements Disposable {
 	 * @return
 	 */
 	public static int getWidth() {
-		return Gdx.graphics.getWidth();
+		return Gdx.graphics.getWidth() / SCALE;
 	}
 
 	/**
@@ -140,6 +150,6 @@ public class Screen implements Disposable {
 	 * @return
 	 */
 	public static int getHeight() {
-		return Gdx.graphics.getHeight();
+		return Gdx.graphics.getHeight() / SCALE;
 	}
 }
