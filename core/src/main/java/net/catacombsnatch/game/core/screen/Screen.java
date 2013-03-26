@@ -17,8 +17,6 @@ public class Screen implements Disposable {
 	protected Texture rect_tex;
 
 	public Screen() {
-		this.batch = new SpriteBatch();
-
 		// Custom texture for rectangles (used by fill())
 		Pixmap pmap = new Pixmap( 1, 1, Pixmap.Format.RGBA8888 );
 		pmap.setColor( Color.WHITE );
@@ -27,6 +25,10 @@ public class Screen implements Disposable {
 		rect_tex = new Texture( pmap, true );
 
 		pmap.dispose();
+	}
+	
+	public void resize() {
+		this.batch = new SpriteBatch();
 	}
 
 	/** Clears the screen with black */

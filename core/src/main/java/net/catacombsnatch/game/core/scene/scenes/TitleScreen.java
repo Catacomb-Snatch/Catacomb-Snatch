@@ -24,17 +24,16 @@ public class TitleScreen extends Scene {
 		
 		this.setBackground(Art.titleScreen);
 		
-		int w = 150, x = (Screen.getWidth() - w) / 2, i = 40;
-		addTextButton(Language.get("scene.title.demo"), x, i * 4).setWidth(w);
-		addTextButton(Language.get("scene.title.start"), x, i * 3).setWidth(w);
-		addTextButton(Language.get("scene.title.options"), x, i * 2).setWidth(w);
-		addTextButton(Language.get("scene.title.exit"), x, i).setWidth(w);
+		addTextButton(Language.get("scene.title.exit"), 0, 0).setWidth(150);
+		addTextButton(Language.get("scene.title.options"), 0, 0).setWidth(150);
+		addTextButton(Language.get("scene.title.start"), 0, 0).setWidth(150);
+		addTextButton(Language.get("scene.title.demo"), 0, 0).setWidth(150);
 		
 		charEntity = new EntityManager().createEntity();
 		charAnimation = charEntity.addComponent( Animated.class, new Animated( Art.lordLard[0], 0.15f ) );
 
 		EventManager.registerListener(this);
-		update();
+		update(true);
 		
 		Game.sound.startTitleMusic();
 	}
@@ -53,13 +52,21 @@ public class TitleScreen extends Scene {
 	
 	@EventHandler
 	public void keyPressed(KeyPressedEvent event) {
-		index++;
-		if(index >= actors.size) index = 0;
+		index--;
+		if(index < 0) index = actors.size - 1;
 		
-		update();
+		update(false);
 	}
 	
-	protected void update() {
+	@Override
+	public void update(boolean resize) {
+		if(resize) {
+			int x = (Screen.getWidth() - 150) / 2, p = 40;
+			for(int i = 0; i < actors.size; i++) {
+				actors.get(i).setPosition(x, p + (p * i));
+			}
+		}
+		
 		Actor actor = actors.get(index);
 		charAnimation.setPosition((int) (actor.getX() - 32), (int) actor.getY());
 	}

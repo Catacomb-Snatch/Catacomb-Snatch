@@ -14,6 +14,9 @@ public class SceneManager {
 		scenes = new SceneStack();
 	}
 	
+	public void resize() {
+		getCurrent().update(true);
+	}
 	
 	/**
 	 * Returns current open scene.

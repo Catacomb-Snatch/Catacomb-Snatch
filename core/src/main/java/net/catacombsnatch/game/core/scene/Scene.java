@@ -28,10 +28,18 @@ public class Scene extends GuiComponent {
 	 */
 	public void exit() {}
 	
+	/**
+	 * Called whenever the screen should get updated
+	 * 
+	 * @param update If update has been called through a resize
+	 */
+	public void update(boolean resize) {}
+	
+	@Override
 	public void render(Screen screen) {
 		// Draw background
 		if(background != null) {
-			screen.getGraphics().draw(background, 0, 0);
+			screen.getGraphics().draw(background, 0, 0, Screen.getWidth(), Screen.getHeight());
 		}
 		
 		// Draw actors
