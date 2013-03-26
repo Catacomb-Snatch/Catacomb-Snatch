@@ -12,8 +12,8 @@ public class Art {
 	
 	public static Skin skin;
 	
-	public static Texture background;
-	public static Texture titleScreen;
+	public static Texture pyramid;
+	public static Texture logo;
 
 	public static TextureRegion[][] lordLard;
 
@@ -28,12 +28,14 @@ public class Art {
 			skin = new Skin(Gdx.files.internal("art/interface.skin"), new TextureAtlas("art/interface.atlas"));
 			
 			// Load backgrounds
-			background = load( "art/screen/background.png" );
-			titleScreen = load( "art/screen/title.png" );
+			pyramid = load( "art/screen/pyramid.png" );
 
 			// Load characters
 			lordLard = cut( "art/player/lord_lard.png", 23, 32 );
 
+			// Load extras
+			logo = load( "art/logo.png" );
+			
 			return true;
 		} catch ( Exception e ) {
 			Gdx.app.error(TAG, "Something went wrong while loading a resource: ", e);
@@ -44,8 +46,8 @@ public class Art {
 
 	/** Unloads all loaded resources */
 	public static void unloadResources() {
-		background.dispose();
-		titleScreen.dispose();
+		pyramid.dispose();
+		logo.dispose();
 	}
 
 	private static Texture load( String path ) {

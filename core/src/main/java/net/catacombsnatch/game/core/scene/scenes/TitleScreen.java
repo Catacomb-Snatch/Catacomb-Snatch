@@ -22,7 +22,7 @@ public class TitleScreen extends Scene {
 	public TitleScreen() {
 		super();
 		
-		this.setBackground(Art.titleScreen);
+		this.setBackground(Art.pyramid);
 		
 		addTextButton(Language.get("scene.title.exit"), 0, 0).setWidth(150);
 		addTextButton(Language.get("scene.title.options"), 0, 0).setWidth(150);
@@ -47,6 +47,8 @@ public class TitleScreen extends Scene {
 	public void render( Screen screen ) {
 		super.render(screen);
 		
+		screen.getGraphics().draw(Art.logo, (Screen.getWidth() - Art.logo.getWidth()) / 2, Screen.getHeight() - (int) (1.5f * Art.logo.getHeight()));
+		
 		charAnimation.render( screen );
 	}
 	
@@ -68,7 +70,7 @@ public class TitleScreen extends Scene {
 		}
 		
 		Actor actor = actors.get(index);
-		charAnimation.setPosition((int) (actor.getX() - 32), (int) actor.getY());
+		charAnimation.setPosition((int) (actor.getX() - (Art.lordLard[0][0].getRegionWidth() / 2)), (int) actor.getY());
 	}
 	
 }
