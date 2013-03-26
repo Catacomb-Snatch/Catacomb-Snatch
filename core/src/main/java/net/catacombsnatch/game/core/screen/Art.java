@@ -50,7 +50,7 @@ public class Art {
 
 	private static Texture load( String path ) {
 		Texture tex = new Texture( Gdx.files.internal( path ) );
-		tex.setFilter( TextureFilter.Linear, TextureFilter.Linear );
+		tex.setFilter( TextureFilter.Nearest, TextureFilter.Nearest );
 
 		return tex;
 	}
