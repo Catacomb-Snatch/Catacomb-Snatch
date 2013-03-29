@@ -1,12 +1,8 @@
 package net.catacombsnatch.game.core.event.input;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Peripheral;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.controllers.Controller;
-import com.badlogic.gdx.controllers.ControllerListener;
-import com.badlogic.gdx.controllers.PovDirection;
-import com.badlogic.gdx.math.Vector3;
+import java.util.HashMap;
+import java.util.Map;
+
 import net.catacombsnatch.game.core.event.EventManager;
 import net.catacombsnatch.game.core.event.input.InputEvent.InputSource;
 import net.catacombsnatch.game.core.event.input.events.ControllerConnectEvent;
@@ -15,20 +11,49 @@ import net.catacombsnatch.game.core.event.input.events.KeyPressedEvent;
 import net.catacombsnatch.game.core.event.input.events.KeyReleaseEvent;
 import net.catacombsnatch.game.core.event.input.events.KeyTypeEvent;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Peripheral;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.ControllerListener;
+import com.badlogic.gdx.controllers.PovDirection;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.GdxRuntimeException;
+
 
 public class InputManager extends InputAdapter implements ControllerListener {
-	
-	public InputManager() {
-		
+	protected static KeyMap keyboard;
+	protected static Map<Controller, KeyMap> controllers;
+	static {
+		keyboard = KeyMap.defaultMapping;
+		controllers = new HashMap<Controller, KeyMap>();
 	}
 	
 	public static boolean isKeyboardEnabled() {
 		return Gdx.input.isPeripheralAvailable(Peripheral.HardwareKeyboard);
 	}
 	
+	public static void registerMapping(InputSource source, KeyMap map, Controller controller) {
+		if(source.equals(InputSource.KEYBOARD)) {
+			keyboard = map;
+			
+		} else if(source.equals(InputSource.CONTROLLER)) {
+			if(controller == null) throw new GdxRuntimeException("Controller should not be null");
+			
+			controllers.put(controller, map);
+		}
+		
+		throw new GdxRuntimeException("Only KEYBOARD and CONTROLLER allowed as sources!");
+	}
+	
 	public Key getKeyForSource(InputSource source, int keycode) {
+		Key k = null;
+		
+		if(source.equals(InputSource.KEYBOARD)) k = keyboard.getKeyFor(source, keycode);
+		
 		// TODO
-		return Key.UNKNOWN;
+		
+		return k != null ? k : Key.UNKNOWN;
 	}
 	
 	

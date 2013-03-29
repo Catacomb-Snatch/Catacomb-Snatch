@@ -54,8 +54,20 @@ public class TitleScreen extends Scene {
 	
 	@EventHandler
 	public void keyPressed(KeyPressedEvent event) {
-		index--;
-		if(index < 0) index = actors.size - 1;
+		switch(event.getKey()) {
+			case MOVE_DOWN:
+				index--;
+				if(index < 0) index = actors.size - 1;
+				break;
+				
+			case MOVE_UP:
+				index++;
+				if(index >= actors.size) index = 0;
+				break;
+				
+			default:
+				// Nothing to do here
+		}
 		
 		update(false);
 	}
