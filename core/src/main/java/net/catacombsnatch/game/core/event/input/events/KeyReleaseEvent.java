@@ -1,4 +1,7 @@
-package net.catacombsnatch.game.core.event.input;
+package net.catacombsnatch.game.core.event.input.events;
+
+import net.catacombsnatch.game.core.event.input.InputEvent;
+import net.catacombsnatch.game.core.event.input.Key;
 
 import com.badlogic.gdx.controllers.Controller;
 

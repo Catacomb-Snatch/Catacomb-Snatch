@@ -5,6 +5,6 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EventHandler {
-	public EventOrder priority() default EventOrder.NORMAL;
+	public int priority() default 0;
 	public boolean ignoreCancelled() default false;
 }

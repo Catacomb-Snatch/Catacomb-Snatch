@@ -9,6 +9,11 @@ import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.math.Vector3;
 import net.catacombsnatch.game.core.event.EventManager;
 import net.catacombsnatch.game.core.event.input.InputEvent.InputSource;
+import net.catacombsnatch.game.core.event.input.events.ControllerConnectEvent;
+import net.catacombsnatch.game.core.event.input.events.ControllerDisconnectEvent;
+import net.catacombsnatch.game.core.event.input.events.KeyPressedEvent;
+import net.catacombsnatch.game.core.event.input.events.KeyReleaseEvent;
+import net.catacombsnatch.game.core.event.input.events.KeyTypeEvent;
 
 
 public class InputManager extends InputAdapter implements ControllerListener {

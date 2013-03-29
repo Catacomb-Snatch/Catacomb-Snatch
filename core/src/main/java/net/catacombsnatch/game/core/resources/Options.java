@@ -1,7 +1,5 @@
 package net.catacombsnatch.game.core.resources;
 
-import net.catacombsnatch.game.core.entity.GameCharacter;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
@@ -9,22 +7,14 @@ public final class Options {
 
 	/* KEYS for common options */
 	public static final String DRAW_FPS = "drawFps";
-	public static final String TRAP_MOUSE = "trapMouse";
 	public static final String FULLSCREEN = "fullscreen";
 	public static final String MUSIC = "music";
 	public static final String SOUND = "sound";
 	public static final String VOLUME = "volume";
 
-	public static final String CREATIVE = "creative";
-	public static final String CHARACTER_ID = "character";
-
-	public static final String MP_PORT = "mpPort";
-
 	public static final String LOCALE = "locale";
 	public static final String SCALE = "scale";
 
-	public static final String DLSYSTEM = "dlsystem";
-	public static final String DLBUFFERSIZE = "dlbuffer";
 	public static final String ENABLE_MODS = "enableMods";
 
 	private static final String PREFERENCES_FILENAME = "options.xml";
@@ -78,15 +68,6 @@ public final class Options {
 		return preferences.getLong( key, defaultValue );
 	}
 
-	public static int getCharacterID() {
-		if ( !isSet( CHARACTER_ID ) ) { return GameCharacter.LordLard.ordinal(); }
-
-		int id = preferences.getInteger( CHARACTER_ID );
-
-		if ( id < 0 || id >= GameCharacter.values().length - 1 ) { return GameCharacter.LordLard.ordinal(); }
-
-		return id;
-	}
 
 	public static void set( String key, String value ) {
 		preferences.putString( key, value );

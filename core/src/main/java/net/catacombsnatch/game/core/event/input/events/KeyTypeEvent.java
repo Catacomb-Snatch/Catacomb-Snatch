@@ -1,4 +1,6 @@
-package net.catacombsnatch.game.core.event.input;
+package net.catacombsnatch.game.core.event.input.events;
+
+import net.catacombsnatch.game.core.event.input.InputEvent;
 
 
 public class KeyTypeEvent extends InputEvent {

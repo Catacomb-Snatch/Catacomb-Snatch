@@ -1,13 +1,16 @@
 package net.catacombsnatch.game.core.event;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
-import java.util.EnumMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 
 
 /** Manages event handling. */
@@ -43,7 +46,7 @@ public class EventManager {
 					registry.put((Class<? extends Event>) eventParam, entry);
 				}
 				
-				entry.addEntry(handler.priority(), new Listener(handler.ignoreCancelled(), method, listener));
+				entry.addEntry(new Listener(handler.priority(), handler.ignoreCancelled(), method, listener));
 				
 			} else {
 				throw new GdxRuntimeException("Method " + method.getName() + " does not have a proper event parameter!");
@@ -55,50 +58,51 @@ public class EventManager {
 		EventRegistry entry = registry.get(event.getClass());
 		if(entry == null) return;
 		
-		for(EventOrder priority : EventOrder.values()) {
-			Array<Listener> listeners = entry.getListeners(priority);
-			if(listeners == null) continue;
+		for(Listener listener : entry.getListeners()) {
+			if(event.isCancelled() && !listener.ignoresCancelledEvents()) continue;
 			
-			for(Listener listener : listeners) {
-				if(event.isCancelled() && !listener.ignoresCancelledEvents()) continue;
-				
-				listener.listen(event);
-			}
+			listener.listen(event);
 		}
 	}
 	
 	protected static class EventRegistry {
-		protected final Map<EventOrder, Array<Listener>> map;
+		protected List<Listener> listeners;
 		
 		public EventRegistry() {
-			map = new EnumMap<EventOrder, Array<Listener>>(EventOrder.class);
+			listeners = new ArrayList<Listener>();
 		}
 		
-		public void addEntry(EventOrder priority, Listener entry) {
-			Array<Listener> listeners = map.get(priority);
-			
-			if(listeners == null) {
-				listeners = new Array<Listener>();
-				map.put(priority, listeners);
-			}
-			
+		public void addEntry(Listener entry) {
 			listeners.add(entry);
+			
+			Collections.sort(listeners, new Comparator<Listener>() {
+				@Override
+			    public int compare(Listener l1, Listener l2) {
+			        return l2.getPriority() - l1.getPriority();
+			    }
+			});
 		}
 		
-		public Array<Listener> getListeners(EventOrder priority) {
-			return map.get(priority);
+		public List<Listener> getListeners() {
+			return listeners;
 		}
 	}
 	
 	protected static class Listener {
+		protected final int priority;
 		protected final boolean ignores;
 		protected final Method method;
 		protected final Object instance;
 		
-		public Listener(boolean ignores, Method method, Object clazz) {
+		public Listener(int priority, boolean ignores, Method method, Object clazz) {
+			this.priority = priority;
 			this.ignores = ignores;
 			this.method = method;
 			this.instance = clazz;
+		}
+		
+		public int getPriority() {
+			return priority;
 		}
 
 		public boolean ignoresCancelledEvents() {
