@@ -1,14 +1,27 @@
 package net.catacombsnatch.game.core.world;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.catacombsnatch.game.core.resources.Language;
 
-public enum Difficulty {
-	EASY("difficulty.easy", .5f, .5f, 1.5f, .5f, false, 25, 3, 30),
-	NORMAL("difficulty.normal", 1, 1, 1, 1, false, 25, 7, 20),
-	HARD("difficulty.hard", 3, 3, .5f, 1.5f, true, 25, 12, 15),
-	NIGHTMARE("difficulty.nightmare", 6, 5, .25f, 2.5f, true, 15, 100000, 10);
-
-	private String name;
+public class Difficulty {
+	public final static Difficulty EASY = new Difficulty("difficulty.easy", .5f, .5f, 1.5f, .5f, false, 25, 3, 30);
+	public final static Difficulty NORMAL = new Difficulty("difficulty.normal", 1, 1, 1, 1, false, 25, 7, 20);
+	public final static Difficulty HARD = new Difficulty("difficulty.hard", 3, 3, .5f, 1.5f, true, 25, 12, 15);
+	public final static Difficulty NIGHTMARE = new Difficulty("difficulty.nightmare", 6, 5, .25f, 2.5f, true, 15, 100000, 10);
+	
+	private final static Map<String, Difficulty> registry;
+	static {
+		registry = new HashMap<String, Difficulty>();
+		
+		EASY.register("easy");
+		NORMAL.register("normal");
+		HARD.register("hard");
+		NIGHTMARE.register("nightmare");
+	}	
+	
+	private final String name;
 
 	private final float mobHealthModifier;
 	private final float mobStrengthModifier;
@@ -19,7 +32,7 @@ public enum Difficulty {
 	private final int allowedMobDensity;
 	private final int coinLifespan;
 
-	private boolean mobRegenerationAllowed;
+	private final boolean mobRegenerationAllowed;
 
 	private Difficulty( String name, float mobHealthModifier, float mobStrengthModifier, float mobSpawnModifier, float shopCostsModifier, boolean mobRegeneration, int regenerationInterval, int allowedMobDensity, int coinLifespan ) {
 		this.name = name;
@@ -34,6 +47,15 @@ public enum Difficulty {
 		this.coinLifespan = coinLifespan;
 	}
 
+	/**
+	 * Registers a difficulty under a given name
+	 * 
+	 * @param as The internal registration name
+	 */
+	protected final void register(String as) {
+		registry.put(as, this);
+	}
+	
 	/**
 	 * Returns the name of this {@link Difficulty}.
 	 * 
@@ -120,13 +142,13 @@ public enum Difficulty {
 	}
 
 	/**
-	 * Look up a Difficulty by the ordinal number
+	 * Look up a Difficulty by its registered name
 	 * 
-	 * @param ordinal The number to look up
+	 * @param ordinal The name to look up for
 	 * @return The found {@link Difficulty}
 	 */
-	public static Difficulty getByInt( int ordinal ) {
-		return Difficulty.values()[ordinal];
+	public static Difficulty getByName( String name ) {
+		return registry.get(name);
 	}
 
 	@Override
