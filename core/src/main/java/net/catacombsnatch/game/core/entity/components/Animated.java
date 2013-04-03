@@ -1,12 +1,13 @@
 package net.catacombsnatch.game.core.entity.components;
 
+import net.catacombsnatch.game.core.screen.Renderable;
 import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Animated implements EntityComponent {
+public class Animated implements EntityComponent, Renderable {
 	private static final long serialVersionUID = 1L;
 
 	protected Animation animation;
@@ -24,6 +25,7 @@ public class Animated implements EntityComponent {
 		this.x = this.y = 0;
 	}
 
+	@Override
 	public void render( Screen screen ) {
 		timeState += Gdx.graphics.getDeltaTime();
 		screen.getGraphics().draw( animation.getKeyFrame( timeState, true ), x, y );

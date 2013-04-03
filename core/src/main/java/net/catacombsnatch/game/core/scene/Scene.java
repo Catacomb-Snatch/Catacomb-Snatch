@@ -1,7 +1,7 @@
 package net.catacombsnatch.game.core.scene;
 
-import net.catacombsnatch.game.core.gui.GuiComponent;
 import net.catacombsnatch.game.core.screen.Art;
+import net.catacombsnatch.game.core.screen.Renderable;
 import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 
-public class Scene extends GuiComponent {
+public class Scene implements Renderable {
 	/** The background image */
 	protected Texture background;
 	
