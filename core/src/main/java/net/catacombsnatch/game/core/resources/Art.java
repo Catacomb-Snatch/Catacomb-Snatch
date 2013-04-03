@@ -1,4 +1,4 @@
-package net.catacombsnatch.game.core.screen;
+package net.catacombsnatch.game.core.resources;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

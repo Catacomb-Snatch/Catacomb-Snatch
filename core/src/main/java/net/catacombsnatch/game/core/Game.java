@@ -1,12 +1,12 @@
 package net.catacombsnatch.game.core;
 
 import net.catacombsnatch.game.core.event.input.InputManager;
+import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.resources.Language;
 import net.catacombsnatch.game.core.resources.Options;
 import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.scene.SceneManager;
 import net.catacombsnatch.game.core.scene.scenes.TitleScreen;
-import net.catacombsnatch.game.core.screen.Art;
 import net.catacombsnatch.game.core.screen.Screen;
 import net.catacombsnatch.game.core.sound.GdxSoundPlayer;
 import net.catacombsnatch.game.core.sound.ISoundPlayer;

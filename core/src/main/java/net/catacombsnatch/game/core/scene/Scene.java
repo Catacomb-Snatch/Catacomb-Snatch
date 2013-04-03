@@ -1,6 +1,6 @@
 package net.catacombsnatch.game.core.scene;
 
-import net.catacombsnatch.game.core.screen.Art;
+import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.screen.Renderable;
 import net.catacombsnatch.game.core.screen.Screen;
 

@@ -7,9 +7,9 @@ import net.catacombsnatch.game.core.entity.components.Animated;
 import net.catacombsnatch.game.core.event.EventHandler;
 import net.catacombsnatch.game.core.event.EventManager;
 import net.catacombsnatch.game.core.event.input.events.KeyPressedEvent;
+import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.resources.Language;
 import net.catacombsnatch.game.core.scene.Scene;
-import net.catacombsnatch.game.core.screen.Art;
 import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
