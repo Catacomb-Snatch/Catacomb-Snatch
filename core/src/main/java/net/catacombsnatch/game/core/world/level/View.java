@@ -1,5 +1,6 @@
 package net.catacombsnatch.game.core.world.level;
 
+import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.screen.Renderable;
 import net.catacombsnatch.game.core.screen.Screen;
 import net.catacombsnatch.game.core.world.tile.Tile;
@@ -20,14 +21,14 @@ public class View implements Renderable {
 	}
 	
 	@Override
-	public void render( Screen screen ) {
+	public void render( Scene scene ) {
 		if(viewport == null) return;
 		
 		for(Layer layer : level.getLayers()) {
 			for(Tile tile : layer.getTiles()) {
 				if(!tile.getBounds().overlaps(viewport))  continue;
 				
-				tile.render(screen);
+				tile.render(scene);
 				rendered++;
 			}
 		}

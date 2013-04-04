@@ -1,7 +1,7 @@
 package net.catacombsnatch.game.core.entity.components;
 
+import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.screen.Renderable;
-import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -26,9 +26,9 @@ public class Animated implements EntityComponent, Renderable {
 	}
 
 	@Override
-	public void render( Screen screen ) {
+	public void render( Scene scene ) {
 		timeState += Gdx.graphics.getDeltaTime();
-		screen.getGraphics().draw( animation.getKeyFrame( timeState, true ), x, y );
+		scene.getSpriteBatch().draw( animation.getKeyFrame( timeState, true ), x, y );
 	}
 
 	public void setPosition( int x, int y ) {

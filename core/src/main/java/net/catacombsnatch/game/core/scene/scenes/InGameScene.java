@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.catacombsnatch.game.core.scene.Scene;
-import net.catacombsnatch.game.core.screen.Screen;
 import net.catacombsnatch.game.core.world.level.View;
 
 public class InGameScene extends Scene {
@@ -17,11 +16,11 @@ public class InGameScene extends Scene {
 	}
 	
 	@Override
-	public void render(Screen screen) {
-		super.render(screen);
+	public void render() {
+		super.render();
 		
 		for(View view : views) {
-			view.render(screen);
+			view.render(this);
 		}
 	}
 }

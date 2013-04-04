@@ -16,7 +16,6 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class Game implements ApplicationListener {
@@ -24,7 +23,6 @@ public class Game implements ApplicationListener {
 
 	protected InputManager input;
 	protected Language language;
-	protected Screen screen;
 	protected SceneManager sceneManager;
 
 	public static ISoundPlayer sound;
@@ -54,7 +52,6 @@ public class Game implements ApplicationListener {
 		Controllers.addListener(input);
 		
 		sceneManager = new SceneManager();
-		screen = new Screen();
 		
 		// Dive in :)
 		SceneManager.switchTo(TitleScreen.class);
@@ -64,26 +61,25 @@ public class Game implements ApplicationListener {
 
 	@Override
 	public void resize( int width, int height ) {
-		screen.resize(width, height);
+		Screen.resize(width, height);
 		sceneManager.resize();
 	}
 
 	@Override
 	public void render() {
-		screen.getGraphics().begin();
-		screen.clear( Color.BLACK );
+		Screen.clear();
 
 		Scene current = SceneManager.getCurrent();
 		if (current != null) {
-			current.render( screen );
+			current.render();
+			
+			if ( Options.getBoolean( Options.DRAW_FPS, true ) ) {
+				fpsLabel.setText(Gdx.graphics.getFramesPerSecond() + " FPS");
+				fpsLabel.draw(current.getSpriteBatch(), 1);
+			}
+			
+			current.getSpriteBatch().end();
 		}
-
-		if ( Options.getBoolean( Options.DRAW_FPS, true ) ) {
-			fpsLabel.setText(Gdx.graphics.getFramesPerSecond() + " FPS");
-			fpsLabel.draw(screen.getGraphics(), 1);
-		}
-		
-		screen.getGraphics().end();
 	}
 
 	@Override

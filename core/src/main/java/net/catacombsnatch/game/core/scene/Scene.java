@@ -1,32 +1,25 @@
 package net.catacombsnatch.game.core.scene;
 
 import net.catacombsnatch.game.core.resources.Art;
-import net.catacombsnatch.game.core.screen.Renderable;
 import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.utils.Array;
 
-public class Scene implements Renderable {
+public class Scene extends Stage {
 	/** The background image */
 	protected Texture background;
-	
-	/** Holds all drawable objects (actors) */
-	protected Array<Actor> actors;
-	
-	
-	public Scene() {
-		actors = new Array<Actor>();
-	}
+
 	
 	/**
 	 * Called whenever the scene is getting closed.
 	 * This function should be used to dispose resources that are
 	 * no longer needed.
 	 */
-	public void exit() {}
+	public void exit() {
+		this.dispose();
+	}
 	
 	/**
 	 * Called whenever the screen should get updated
@@ -35,17 +28,16 @@ public class Scene implements Renderable {
 	 */
 	public void update(boolean resize) {}
 	
-	@Override
-	public void render(Screen screen) {
+	public void render() {
 		// Draw background
 		if(background != null) {
-			screen.getGraphics().draw(background, 0, 0, Screen.getWidth(), Screen.getHeight());
+			getSpriteBatch().begin();
+			getSpriteBatch().draw(background, 0, 0, Screen.getWidth(), Screen.getHeight());
+			getSpriteBatch().end();
 		}
 		
-		// Draw actors
-		for(Actor actor : actors) {
-			actor.draw(screen.getGraphics(), 1);
-		}
+		super.draw();
+		getSpriteBatch().begin();
 	}
 	
 	/**
@@ -55,16 +47,6 @@ public class Scene implements Renderable {
 	 */
 	public void setBackground(Texture background) {
 		this.background = background;
-	}
-	
-	/**
-	 * Adds an actor to the scene
-	 * 
-	 * @param actor The actor to add
-	 */
-	public Actor addActor(Actor actor) {
-		actors.add(actor);
-		return actor;
 	}
 	
 	/**
@@ -78,7 +60,9 @@ public class Scene implements Renderable {
 	public TextButton addTextButton(String text, int x, int y) {
 		TextButton button = new TextButton(text, Art.skin);
 		button.setPosition(x, y);
-		return (TextButton) addActor(button);
+		addActor(button);
+		
+		return button;
 	}
 	
 }

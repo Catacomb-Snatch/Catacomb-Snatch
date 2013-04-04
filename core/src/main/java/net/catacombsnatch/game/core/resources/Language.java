@@ -1,6 +1,5 @@
 package net.catacombsnatch.game.core.resources;
 
-import java.io.BufferedReader;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +7,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+
+import net.catacombsnatch.game.core.util.FileUtil;
+
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -29,18 +31,15 @@ public class Language {
 		try {
 			Gdx.app.debug(TAG, "Reading default languages");
 			
-			BufferedReader br = new BufferedReader(Gdx.files.internal(DIRECTORY + "index").reader());
-			String line;
+			List<String> langs = FileUtil.readSimpleFile(Gdx.files.internal(DIRECTORY + "index"));
 			
-			while((line = br.readLine()) != null) {
-				if(line.startsWith("#") || line.length() < 2) continue; // 2 because of '\n'
-				
-				FileHandle file = Gdx.files.internal(DIRECTORY + line);
+			for(String s : langs) {
+				FileHandle file = Gdx.files.internal(DIRECTORY + s);
 				
 				if(file != null) {
 					vanilla.add(new Locale(file.name()));
 					loadFile(file);
-				} else throw new Exception("Could not find file for: " + line);
+				} else throw new Exception("Could not find file for: " + s);
 			}
 			
 		} catch (Exception ex) {
@@ -59,7 +58,7 @@ public class Language {
 	 * @return True if successful, otherwise false
 	 */
 	public static boolean load( FileHandle files ) {
-		if(!files.isDirectory()) return false;
+		if(!files.isDirectory()) return loadFile(files);
 		
 		boolean outcome = true;
 		

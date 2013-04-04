@@ -41,15 +41,17 @@ public class TitleScreen extends Scene {
 	@Override
 	public void exit() {
 		Game.sound.stopTitleMusic();
+		
+		super.exit();
 	}
 
 	@Override
-	public void render( Screen screen ) {
-		super.render(screen);
+	public void render() {
+		super.render();
 		
-		screen.getGraphics().draw(Art.logo, (Screen.getWidth() - Art.logo.getWidth()) / 2, Screen.getHeight() - (int) (1.5f * Art.logo.getHeight()));
+		getSpriteBatch().draw(Art.logo, (Screen.getWidth() - Art.logo.getWidth()) / 2, Screen.getHeight() - (int) (1.5f * Art.logo.getHeight()));
 		
-		charAnimation.render( screen );
+		charAnimation.render( this );
 	}
 	
 	@EventHandler
@@ -57,12 +59,12 @@ public class TitleScreen extends Scene {
 		switch(event.getKey()) {
 			case MOVE_DOWN:
 				index--;
-				if(index < 0) index = actors.size - 1;
+				if(index < 0) index = getActors().size - 1;
 				break;
 				
 			case MOVE_UP:
 				index++;
-				if(index >= actors.size) index = 0;
+				if(index >= getActors().size) index = 0;
 				break;
 			
 			case FIRE:
@@ -80,12 +82,12 @@ public class TitleScreen extends Scene {
 	public void update(boolean resize) {
 		if(resize) {
 			int x = (Screen.getWidth() - 150) / 2, p = 40;
-			for(int i = 0; i < actors.size; i++) {
-				actors.get(i).setPosition(x, p + (p * i));
+			for(int i = 0; i < getActors().size; i++) {
+				getActors().get(i).setPosition(x, p + (p * i));
 			}
 		}
 		
-		Actor actor = actors.get(index);
+		Actor actor = getActors().get(index);
 		charAnimation.setPosition((int) (actor.getX() - (Art.lordLard[0][0].getRegionWidth() / 2)), (int) actor.getY());
 	}
 	

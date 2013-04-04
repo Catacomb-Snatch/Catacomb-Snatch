@@ -1,7 +1,7 @@
 package net.catacombsnatch.game.core.entity.components;
 
+import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.screen.Renderable;
-import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -15,8 +15,8 @@ public class Render implements EntityComponent, Renderable {
 	}
 
 	@Override
-	public void render( Screen screen ) {
-		sprite.draw( screen.getGraphics() );
+	public void render( Scene scene ) {
+		sprite.draw( scene.getSpriteBatch() );
 	}
 
 	public Sprite getSprite() {

@@ -5,6 +5,7 @@ import net.catacombsnatch.game.core.entity.components.Physics;
 import net.catacombsnatch.game.core.screen.Renderable;
 import net.catacombsnatch.game.core.world.level.Level;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -14,9 +15,14 @@ public abstract class Tile implements Renderable {
 
 	protected Level level;
 	protected Sprite sprite;
+	protected Color minimapColor;
 
 	protected Rectangle bb;
 
+	
+	public Tile(Color color) {
+		minimapColor = color;
+	}
 	
 	public void init(Level level, int x, int y) {
 		this.level = level;
@@ -33,6 +39,11 @@ public abstract class Tile implements Renderable {
 	/** @return The {@link Rectangle} of the tile boundaries. */
 	public Rectangle getBounds() {
 		return bb;
+	}
+	
+	/** @return The {@link Color} shown on the minimap. */
+	public Color getMinimapColor() {
+		return minimapColor;
 	}
 
 	/**
