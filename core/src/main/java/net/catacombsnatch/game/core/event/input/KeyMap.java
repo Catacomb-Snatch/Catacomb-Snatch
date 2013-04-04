@@ -3,8 +3,6 @@ package net.catacombsnatch.game.core.event.input;
 import java.util.EnumMap;
 import java.util.Map.Entry;
 
-import net.catacombsnatch.game.core.event.input.InputEvent.InputSource;
-
 import com.badlogic.gdx.Input;
 
 

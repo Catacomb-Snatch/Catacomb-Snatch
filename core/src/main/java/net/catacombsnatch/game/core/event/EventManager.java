@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -54,14 +55,37 @@ public class EventManager {
 		}
 	}
 	
+	public static void unregisterListener(Object listener) {
+		for(Method method : listener.getClass().getMethods()) {
+			EventHandler handler = method.getAnnotation(EventHandler.class);
+			if(handler == null) continue;
+			
+			Class<?> eventParam = method.getParameterTypes()[0];
+			if(Event.class.isAssignableFrom(eventParam)) {
+				EventRegistry entry = registry.get(eventParam);
+				
+				if(entry != null) entry.remove(listener);
+			}
+		}
+	}
+	
 	public static void callEvent(Event event) {
 		EventRegistry entry = registry.get(event.getClass());
 		if(entry == null) return;
 		
-		for(Listener listener : entry.getListeners()) {
-			if(event.isCancelled() && !listener.ignoresCancelledEvents()) continue;
+		if (event instanceof CancellableEvent) {
+			CancellableEvent cancellableEvent = (CancellableEvent) event;
 			
-			listener.listen(event);
+			for(Listener listener : entry.getListeners()) {
+				if(cancellableEvent.isCancelled() && !listener.ignoresCancelledEvents()) continue;
+				
+				listener.listen(cancellableEvent);
+			}
+			
+		} else {
+			for(Listener listener : entry.getListeners()) {
+				listener.listen(event);
+			}
 		}
 	}
 	
@@ -81,6 +105,11 @@ public class EventManager {
 			        return l2.getPriority() - l1.getPriority();
 			    }
 			});
+		}
+		
+		public void remove(Object listener) {
+			Iterator<Listener> it = listeners.iterator();
+			while(it.hasNext()) if(it.next().equals(listener)) it.remove();
 		}
 		
 		public List<Listener> getListeners() {
@@ -115,6 +144,11 @@ public class EventManager {
 			} catch (Exception ex) {
 				Gdx.app.error("Event", "Error listening to event " + event + " in listener " + instance, ex);
 			}
+		}
+		
+		@Override
+		public boolean equals(Object obj) {
+			return instance.equals(obj);
 		}
 	}
 	

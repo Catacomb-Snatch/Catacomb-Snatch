@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.catacombsnatch.game.core.event.EventManager;
-import net.catacombsnatch.game.core.event.input.InputEvent.InputSource;
 import net.catacombsnatch.game.core.event.input.events.ControllerConnectEvent;
 import net.catacombsnatch.game.core.event.input.events.ControllerDisconnectEvent;
 import net.catacombsnatch.game.core.event.input.events.KeyPressedEvent;
@@ -65,7 +64,7 @@ public class InputManager extends InputAdapter implements ControllerListener {
 		KeyPressedEvent event = new KeyPressedEvent(source, getKeyForSource(source, keycode), null);
 		EventManager.callEvent(event);
 		
-		return !event.isCancelled();
+		return true;
 	}
 
 	@Override
@@ -74,7 +73,7 @@ public class InputManager extends InputAdapter implements ControllerListener {
 		KeyReleaseEvent event = new KeyReleaseEvent(source, getKeyForSource(source, keycode), null);
 		EventManager.callEvent(event);
 		
-		return !event.isCancelled();
+		return true;
 	}
 
 	@Override
@@ -82,7 +81,7 @@ public class InputManager extends InputAdapter implements ControllerListener {
 		KeyTypeEvent event = new KeyTypeEvent(InputSource.KEYBOARD, character);
 		EventManager.callEvent(event);
 		
-		return !event.isCancelled();
+		return true;
 	}
 	
 	
@@ -104,7 +103,7 @@ public class InputManager extends InputAdapter implements ControllerListener {
 		KeyPressedEvent event = new KeyPressedEvent(source, getKeyForSource(source, button), controller);
 		EventManager.callEvent(event);
 		
-		return !event.isCancelled();
+		return true;
 	}
 
 	@Override
@@ -113,7 +112,7 @@ public class InputManager extends InputAdapter implements ControllerListener {
 		KeyReleaseEvent event = new KeyReleaseEvent(source, getKeyForSource(source, button), controller);
 		EventManager.callEvent(event);
 		
-		return !event.isCancelled();
+		return true;
 	}
 
 	@Override

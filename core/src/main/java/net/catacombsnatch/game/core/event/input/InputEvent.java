@@ -3,11 +3,7 @@ package net.catacombsnatch.game.core.event.input;
 import net.catacombsnatch.game.core.event.Event;
 
 
-public class InputEvent extends Event {
-	public enum InputSource {
-		KEYBOARD, MOUSE, CONTROLLER;
-	}
-	
+public abstract class InputEvent extends Event {
 	protected final InputSource source;
 	
 	public InputEvent(InputSource source) {
