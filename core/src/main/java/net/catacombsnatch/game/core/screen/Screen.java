@@ -133,6 +133,7 @@ public class Screen implements Disposable {
 	@Override
 	public void dispose() {
 		batch.dispose();
+		rect_tex.dispose();
 	}
 
 	/**

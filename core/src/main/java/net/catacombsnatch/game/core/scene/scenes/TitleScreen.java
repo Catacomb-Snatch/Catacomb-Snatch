@@ -64,6 +64,10 @@ public class TitleScreen extends Scene {
 				index++;
 				if(index >= actors.size) index = 0;
 				break;
+			
+			case FIRE:
+				// TODO
+				break;
 				
 			default:
 				// Nothing to do here
