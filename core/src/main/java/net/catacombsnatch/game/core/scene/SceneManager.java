@@ -32,13 +32,26 @@ public class SceneManager {
 	
 	/**
 	 * Adds and switches to the newly generated scene.
-	 * This creates a new scene from the class default constructor to switch to a scene using the
-	 * direct instance use ###.
+	 * This creates a new scene from the class default constructor.
 	 * 
 	 * @param menu The class of the menu to switch to.
 	 * @return The newly generated scene instance.
 	 */
 	public static synchronized <T extends Scene> T switchTo( Class<T> menu ) {
+		return switchTo(menu, false);
+	}
+	
+	/**
+	 * Adds and switches to the newly generated scene and optionally closes all other ones.
+	 * This creates a new scene from the class default constructor.
+	 * 
+	 * @param menu The class of the menu to switch to.
+	 * @param closeAll True if all previous scenes should be closed.
+	 * @return The newly generated scene instance.
+	 */
+	public static synchronized <T extends Scene> T switchTo( Class<T> menu, boolean closeAll ) {
+		if(closeAll) exitAll();
+		
 		T instance = null;
 
 		try {

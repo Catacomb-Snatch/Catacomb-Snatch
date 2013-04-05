@@ -77,7 +77,7 @@ public class TitleScreen extends Scene {
 			
 			case USE:
 				// TODO
-				SceneManager.switchTo(InGameScene.class);
+				SceneManager.switchTo(InGameScene.class, true);
 				break;
 				
 			default:
