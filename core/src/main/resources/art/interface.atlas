@@ -77,3 +77,31 @@ button-disabled
   orig: 9, 12
   offset: 0, 0
   index: 2
+minimap-frame
+  rotate: false
+  xy: 0, 32
+  size: 89, 92
+  orig: 0, 32
+  offset: 0, 0
+  index: 0
+player-panel
+  rotate: false
+  xy: 91, 0
+  size: 302, 59
+  orig: 91, 0
+  offset: 0, 0
+  index: 0
+player-bar
+  rotate: false
+  xy: 91, 60
+  size: 1, 10
+  orig: 91, 60
+  offset: 0, 0
+  index: 0
+player-bar
+  rotate: false
+  xy: 93, 60
+  size: 1, 10
+  orig: 93, 60
+  offset: 0, 0
+  index: 1
