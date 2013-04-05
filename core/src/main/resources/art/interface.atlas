@@ -80,7 +80,7 @@ button-disabled
 minimap-frame
   rotate: false
   xy: 0, 32
-  size: 89, 92
+  size: 89, 93
   orig: 0, 32
   offset: 0, 0
   index: 0

@@ -17,6 +17,7 @@ public abstract class StaticTile extends Tile {
 		super(color);
 		
 		sprite = new Sprite();
+		sprite.setSize(WIDTH, HEIGHT);
 	}
 	
 	protected void setRandomTexture(TextureRegion[] source) {
@@ -32,7 +33,7 @@ public abstract class StaticTile extends Tile {
 	public void init(Level level, int x, int y) {
 		super.init(level, x, y);
 		
-		sprite.setPosition(x, y);
+		sprite.setPosition(x * WIDTH, y * HEIGHT);
 	}
 
 	@Override

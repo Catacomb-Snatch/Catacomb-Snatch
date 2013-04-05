@@ -59,6 +59,7 @@ public class TitleScreen extends Scene {
 		
 		getSpriteBatch().draw(Art.logo, (Screen.getWidth() - Art.logo.getWidth()) / 2, Screen.getHeight() - (int) (1.5f * Art.logo.getHeight()));
 		
+		charAnimation.tick();
 		charAnimation.render( this );
 	}
 	
