@@ -4,6 +4,7 @@ import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
@@ -78,6 +79,16 @@ public class Scene extends Stage {
 		addActor(button);
 		
 		return button;
+	}
+	
+	public TextButton getTextButton(int index) {
+		int size = getActors().size;
+		for(int i = 0; i < size; i++) {
+			Actor actor = getActors().get(i);
+			if(actor instanceof TextButton && i == index) return (TextButton) actor;
+		}
+		
+		return null;
 	}
 	
 }
