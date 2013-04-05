@@ -13,8 +13,9 @@ import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.scene.SceneManager;
 import net.catacombsnatch.game.core.screen.Screen;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 public class TitleScreen extends Scene {
 	private int index = 0;
@@ -25,16 +26,29 @@ public class TitleScreen extends Scene {
 		super();
 		
 		this.setBackground(Art.pyramid);
+
+		addTextButton(Language.get("scene.title.exit"), 0, 0).addAction(new Action() {
+			@Override
+			public boolean act(float delta) {
+				Gdx.app.exit();
+				return true;
+			}
+		});
 		
-		String[] buttons = new String[] { "exit", "options", "start", "demo" };
-		for(String s : buttons) {
-			TextButton tb = addTextButton(Language.get("scene.title." + s), 0, 0);
-			tb.setDisabled(true);
-			tb.setWidth(150);
+		addTextButton(Language.get("scene.title.options"), 0, 0).setDisabled(true);
+		addTextButton(Language.get("scene.title.start"), 0, 0).setDisabled(true);
+		
+		addTextButton(Language.get("scene.title.demo"), 0, 0).addAction(new Action() {
+			@Override
+			public boolean act(float delta) {
+				SceneManager.switchTo(InGameScene.class, true);
+				return true;
+			}
+		});
+		
+		for(Actor actor : getActors()) {
+			actor.setWidth(150);
 		}
-		
-		((TextButton) getActors().get(0)).setDisabled(false); // Exit
-		((TextButton) getActors().get(3)).setDisabled(false); // Demo
 		
 		charEntity = new EntityManager().createEntity();
 		charAnimation = charEntity.addComponent( Animated.class, new Animated( Art.lordLard[0], 0.15f ) );
@@ -77,8 +91,9 @@ public class TitleScreen extends Scene {
 				break;
 			
 			case USE:
-				// TODO
-				SceneManager.switchTo(InGameScene.class, true);
+				Actor actor = getActors().get(index);
+				if(actor != null) actor.act(Gdx.graphics.getDeltaTime());
+				
 				break;
 				
 			default:

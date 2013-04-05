@@ -94,10 +94,10 @@ public class Game implements ApplicationListener {
 
 	@Override
 	public void dispose() {
+		SceneManager.exitAll();
+		
 		Art.unloadResources();
-
 		sound.shutdown();
-
 		Options.save();
 	}
 }
