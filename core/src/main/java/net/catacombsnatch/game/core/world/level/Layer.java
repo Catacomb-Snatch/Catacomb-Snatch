@@ -23,7 +23,7 @@ public class Layer {
 			TiledMapTileLayer tileLayer = (TiledMapTileLayer) layer;
 			
 			for(int x = 0; x < tileLayer.getWidth(); x++) {
-				for(int y = 0; y < tileLayer.getHeight(); y++) {
+				for(int y = tileLayer.getHeight()-1; y > -1; y--) {
 					Cell cell = tileLayer.getCell(x, y);
 					if(cell == null ||  cell.getTile() == null) continue;
 					
