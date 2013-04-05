@@ -18,7 +18,7 @@ public class DestroyableWallTile extends StaticTile {
 		super.init(level, x, y);
 		
 		sprite.setSize(WIDTH, Art.tiles_walls[0].getTexture().getHeight());
-		sprite.setTexture(Art.tiles_walls[0].getTexture());
+		sprite.setRegion(Art.tiles_walls[0]);
 	}
 
 	@Override
