@@ -17,7 +17,7 @@ public class Art {
 
 	public static TextureRegion[][] lordLard;
 	
-	public static TextureRegion[] tiles_floor;
+	public static TextureRegion[] tiles_floor, tiles_walls;
 
 	/**
 	 * Loads all the artwork
@@ -37,6 +37,7 @@ public class Art {
 
 			// Load tiles
 			tiles_floor = cut("art/tiles/floor.png", 32, 32)[0];
+			tiles_walls = cut("art/tiles/walls.png", 32, 56)[0];
 			
 			// Load extras
 			logo = load( "art/logo.png" );

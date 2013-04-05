@@ -6,8 +6,10 @@ import java.util.List;
 import net.catacombsnatch.game.core.world.tile.Tile;
 import net.catacombsnatch.game.core.world.tile.TileRegistry;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 
 public class Layer {
 	protected final Level level;
@@ -17,16 +19,30 @@ public class Layer {
 		this.level = level;
 		this.tiles = new ArrayList<Tile>();
 		
-		for(MapObject obj : layer.getObjects()) {
-			Class<? extends Tile> t = TileRegistry.getByName((String) obj.getProperties().get("type"));
+		if(layer instanceof TiledMapTileLayer) {
+			TiledMapTileLayer tileLayer = (TiledMapTileLayer) layer;
 			
-			if(t != null) try {
-				Tile tile = t.newInstance();
-				tile.init(level, 0, 0);
-				
-				tiles.add(tile);
+			for(int x = 0; x < tileLayer.getWidth(); x++) {
+				for(int y = 0; y < tileLayer.getHeight(); y++) {
+					Cell cell = tileLayer.getCell(x, y);
+					if(cell == null ||  cell.getTile() == null) continue;
 					
-			} catch (Exception e) {}
+					String type = (String) cell.getTile().getProperties().get("type");
+					Class<? extends Tile> t = TileRegistry.getByName(type);
+					
+					if(t != null) try {
+						Tile tile = t.newInstance();
+						tile.init(level, x, y);
+						
+						tiles.add(tile);
+							
+					} catch (Exception e) {
+						Gdx.app.error("MapLayer", "Could not add tile to layer", e);
+					} else {
+						Gdx.app.log("MapLayer", "Tile type not registered: " + type);
+					}
+				}
+			}
 		}
 	}
 	

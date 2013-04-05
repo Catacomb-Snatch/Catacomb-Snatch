@@ -11,6 +11,7 @@ import net.catacombsnatch.game.core.world.tile.Tile;
 
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 public class Level implements Tickable {
 	protected EntityManager entityManager;
@@ -24,6 +25,8 @@ public class Level implements Tickable {
 	protected boolean finished = false;
 
 	public Level(TiledMap tiledMap) {
+		random = new Random();
+		
 		entityManager = new EntityManager();
 		
 		map = tiledMap;
@@ -35,8 +38,10 @@ public class Level implements Tickable {
 			MapLayer layer = it.next();
 			layers.add(new Layer(this, layer));
 		}
-		
-		random = new Random();
+	}
+	
+	public static Level fromFile(String file) {
+		return new Level(new TmxMapLoader().load(file));
 	}
 
 	@Override

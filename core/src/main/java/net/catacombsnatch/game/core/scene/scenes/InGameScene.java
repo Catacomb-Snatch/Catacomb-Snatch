@@ -8,6 +8,7 @@ import net.catacombsnatch.game.core.screen.Screen;
 import net.catacombsnatch.game.core.world.Difficulty;
 import net.catacombsnatch.game.core.world.World;
 import net.catacombsnatch.game.core.world.World.MapRotation;
+import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.Minimap;
 import net.catacombsnatch.game.core.world.level.View;
 
@@ -24,12 +25,15 @@ public class InGameScene extends Scene {
 	public InGameScene() {
 		super();
 
+		Level level = Level.fromFile("maps/demo.tmx");
+		
 		world = new World(Difficulty.EASY, MapRotation.ONCE);
+		world.getLevels().add(level);
 		
 		views = new ArrayList<View>();
-		views.add(new View(world.getCurrentLevel()));
+		views.add(new View(level));
 		
-		minimap = new Minimap(null); // TODO
+		minimap = new Minimap(level);
 		update(true);
 	}
 	
