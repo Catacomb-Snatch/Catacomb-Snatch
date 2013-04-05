@@ -3,13 +3,14 @@ package net.catacombsnatch.game.core.world.tile;
 import net.catacombsnatch.game.core.entity.Entity;
 import net.catacombsnatch.game.core.entity.components.Physics;
 import net.catacombsnatch.game.core.screen.Renderable;
+import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.world.level.Level;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 
-public abstract class Tile implements Renderable {
+public abstract class Tile implements Renderable, Tickable {
 	public static final int HEIGHT = 32;
 	public static final int WIDTH = 32;
 
@@ -20,7 +21,7 @@ public abstract class Tile implements Renderable {
 	protected Rectangle bb;
 
 	
-	public Tile(Color color) {
+	protected Tile(Color color) {
 		minimapColor = color;
 	}
 	
@@ -28,8 +29,6 @@ public abstract class Tile implements Renderable {
 		this.level = level;
 		this.bb = new Rectangle( x, y, HEIGHT, WIDTH );
 	}
-
-	public abstract void tick();
 
 	/** @return The {@link Level} this tile is placed in */
 	public Level getLevel() {

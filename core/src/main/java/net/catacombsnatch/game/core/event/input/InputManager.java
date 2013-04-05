@@ -9,10 +9,12 @@ import net.catacombsnatch.game.core.event.input.events.ControllerDisconnectEvent
 import net.catacombsnatch.game.core.event.input.events.KeyPressedEvent;
 import net.catacombsnatch.game.core.event.input.events.KeyReleaseEvent;
 import net.catacombsnatch.game.core.event.input.events.KeyTypeEvent;
+import net.catacombsnatch.game.core.scene.Scene;
+import net.catacombsnatch.game.core.scene.SceneManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Peripheral;
-import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.PovDirection;
@@ -20,7 +22,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
 
-public class InputManager extends InputAdapter implements ControllerListener {
+public class InputManager implements InputProcessor, ControllerListener {
 	protected static KeyMap keyboard;
 	protected static Map<Controller, KeyMap> controllers;
 	static {
@@ -60,6 +62,9 @@ public class InputManager extends InputAdapter implements ControllerListener {
 
 	@Override
 	public boolean keyDown(int keycode) {
+		Scene scene = SceneManager.getCurrent();
+		if(scene != null) scene.keyDown(keycode);
+		
 		InputSource source = InputSource.KEYBOARD;
 		KeyPressedEvent event = new KeyPressedEvent(source, getKeyForSource(source, keycode), null);
 		EventManager.callEvent(event);
@@ -69,6 +74,9 @@ public class InputManager extends InputAdapter implements ControllerListener {
 
 	@Override
 	public boolean keyUp(int keycode) {
+		Scene scene = SceneManager.getCurrent();
+		if(scene != null) scene.keyUp(keycode);
+		
 		InputSource source = InputSource.KEYBOARD;
 		KeyReleaseEvent event = new KeyReleaseEvent(source, getKeyForSource(source, keycode), null);
 		EventManager.callEvent(event);
@@ -78,8 +86,51 @@ public class InputManager extends InputAdapter implements ControllerListener {
 
 	@Override
 	public boolean keyTyped(char character) {
+		Scene scene = SceneManager.getCurrent();
+		if(scene != null) scene.keyTyped(character);
+		
 		KeyTypeEvent event = new KeyTypeEvent(InputSource.KEYBOARD, character);
 		EventManager.callEvent(event);
+		
+		return true;
+	}
+
+	@Override
+	public boolean touchDown(int x, int y, int pointer, int button) {
+		Scene scene = SceneManager.getCurrent();
+		if(scene != null) scene.touchDown(x, y, pointer, button);
+		
+		return true;
+	}
+
+	@Override
+	public boolean touchUp(int x, int y, int pointer, int button) {
+		Scene scene = SceneManager.getCurrent();
+		if(scene != null) scene.touchUp(x, y, pointer, button);
+		
+		return true;
+	}
+
+	@Override
+	public boolean touchDragged(int x, int y, int pointer) {
+		Scene scene = SceneManager.getCurrent();
+		if(scene != null) scene.touchDragged(x, y, pointer);
+		
+		return true;
+	}
+
+	@Override
+	public boolean mouseMoved(int x, int y) {
+		Scene scene = SceneManager.getCurrent();
+		if(scene != null) scene.mouseMoved(x, y);
+		
+		return true;
+	}
+
+	@Override
+	public boolean scrolled(int amount) {
+		Scene scene = SceneManager.getCurrent();
+		if(scene != null) scene.scrolled(amount);
 		
 		return true;
 	}

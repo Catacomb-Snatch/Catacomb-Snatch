@@ -13,6 +13,7 @@ import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 public class TitleScreen extends Scene {
 	private int index = 0;
@@ -24,10 +25,12 @@ public class TitleScreen extends Scene {
 		
 		this.setBackground(Art.pyramid);
 		
-		addTextButton(Language.get("scene.title.exit"), 0, 0).setWidth(150);
-		addTextButton(Language.get("scene.title.options"), 0, 0).setWidth(150);
-		addTextButton(Language.get("scene.title.start"), 0, 0).setWidth(150);
-		addTextButton(Language.get("scene.title.demo"), 0, 0).setWidth(150);
+		String[] buttons = new String[] { "exit", "options", "start", "demo" };
+		for(String s : buttons) {
+			TextButton tb = addTextButton(Language.get("scene.title." + s), 0, 0);
+			tb.setDisabled(true);
+			tb.setWidth(150);
+		}
 		
 		charEntity = new EntityManager().createEntity();
 		charAnimation = charEntity.addComponent( Animated.class, new Animated( Art.lordLard[0], 0.15f ) );

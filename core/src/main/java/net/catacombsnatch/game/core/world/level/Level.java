@@ -5,12 +5,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.catacombsnatch.game.core.entity.EntityManager;
+import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.world.tile.Tile;
 
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
-public class Level {
+public class Level implements Tickable {
 	protected EntityManager entityManager;
 	
 	protected TiledMap map;
@@ -32,6 +33,7 @@ public class Level {
 		}
 	}
 
+	@Override
 	public void tick() {
 		for(Layer layer : layers) {
 			for(Tile tile : layer.getTiles()) {

@@ -14,7 +14,7 @@ public class Player {
 	 * Creates a new player entity
 	 * 
 	 * @param manager The {@link EntityManager}
-	 * @param id The entiy id
+	 * @param id The entity id
 	 */
 	public Player( EntityManager manager, long id, int x, int y ) {
 		entity = new Entity( manager, id );
