@@ -15,7 +15,8 @@ public class SceneManager {
 	}
 	
 	public void resize() {
-		getCurrent().update(true);
+		Scene current = getCurrent();
+		if(current != null) current.update(true);
 	}
 	
 	/**
@@ -46,7 +47,7 @@ public class SceneManager {
 			scenes.add(instance);
 
 		} catch ( Exception e ) {
-			Gdx.app.log(TAG, "Error switching to menu '" + menu + "': " + e.getMessage());
+			Gdx.app.error(TAG, "Error switching to menu '" + menu + "'", e);
 		}
 
 		return instance;
@@ -79,6 +80,17 @@ public class SceneManager {
 			super();
 		}
 
+		@Override
+		public boolean add(Scene scene) {
+			if(!empty()) {
+				Scene peek = super.peek();
+				if(peek != null) peek.leave();
+			}
+			
+			scene.enter();
+			return super.add(scene);
+		}
+		
 		/**
 		 * Attempts to pop the top menu off the stack
 		 * 
@@ -88,6 +100,7 @@ public class SceneManager {
 		public Scene pop() {
 			try {
 				Scene top = super.pop();
+				top.leave();
 				top.exit();
 
 				return top;

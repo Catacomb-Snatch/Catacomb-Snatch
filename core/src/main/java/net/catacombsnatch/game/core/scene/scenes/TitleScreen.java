@@ -10,6 +10,7 @@ import net.catacombsnatch.game.core.event.input.events.KeyPressedEvent;
 import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.resources.Language;
 import net.catacombsnatch.game.core.scene.Scene;
+import net.catacombsnatch.game.core.scene.SceneManager;
 import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -32,20 +33,24 @@ public class TitleScreen extends Scene {
 			tb.setWidth(150);
 		}
 		
+		((TextButton) getActors().get(0)).setDisabled(false); // Exit
+		((TextButton) getActors().get(3)).setDisabled(false); // Demo
+		
 		charEntity = new EntityManager().createEntity();
 		charAnimation = charEntity.addComponent( Animated.class, new Animated( Art.lordLard[0], 0.15f ) );
 
 		EventManager.registerListener(this);
 		update(true);
-		
-		Game.sound.startTitleMusic();
 	}
 
 	@Override
-	public void exit() {
+	public void enter() {
+		Game.sound.startTitleMusic();
+	}
+	
+	@Override
+	public void leave() {
 		Game.sound.stopTitleMusic();
-		
-		super.exit();
 	}
 
 	@Override
@@ -70,8 +75,9 @@ public class TitleScreen extends Scene {
 				if(index >= getActors().size) index = 0;
 				break;
 			
-			case FIRE:
+			case USE:
 				// TODO
+				SceneManager.switchTo(InGameScene.class);
 				break;
 				
 			default:

@@ -24,6 +24,8 @@ public class View implements Renderable {
 	public void render( Scene scene ) {
 		if(viewport == null) return;
 		
+		rendered = 0; // Reset counter
+		
 		for(Layer layer : level.getLayers()) {
 			for(Tile tile : layer.getTiles()) {
 				if(!tile.getBounds().overlaps(viewport))  continue;

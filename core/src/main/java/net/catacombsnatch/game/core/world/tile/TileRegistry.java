@@ -5,10 +5,15 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.catacombsnatch.game.core.world.tile.tiles.FloorTile;
+
 public class TileRegistry {
 	protected final static Map<String, Class<? extends Tile>> registry;
 	static {
 		registry = new HashMap<String, Class<? extends Tile>>();
+		
+		// Register default tiles
+		register(FloorTile.class, "floor");
 	}
 	
 	

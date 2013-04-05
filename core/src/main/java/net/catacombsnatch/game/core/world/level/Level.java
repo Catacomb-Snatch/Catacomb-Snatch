@@ -3,6 +3,7 @@ package net.catacombsnatch.game.core.world.level;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import net.catacombsnatch.game.core.entity.EntityManager;
 import net.catacombsnatch.game.core.screen.Tickable;
@@ -17,7 +18,10 @@ public class Level implements Tickable {
 	protected TiledMap map;
 	protected List<Layer> layers;
 	
+	protected Random random;
+	
 	protected boolean debug = false;
+	protected boolean finished = false;
 
 	public Level(TiledMap tiledMap) {
 		entityManager = new EntityManager();
@@ -31,6 +35,8 @@ public class Level implements Tickable {
 			MapLayer layer = it.next();
 			layers.add(new Layer(this, layer));
 		}
+		
+		random = new Random();
 	}
 
 	@Override
@@ -50,6 +56,34 @@ public class Level implements Tickable {
 	/** @return A list of all stored level layers. */
 	public List<Layer> getLayers() {
 		return layers;
+	}
+	
+	/**
+	 * Sets whether or not the level is finished.
+	 * 
+	 * @param finished True if finished, false if not
+	 */
+	public void setFinished(boolean finished) {
+		this.finished = finished;
+	}
+	
+	/** @return True if the level is finished, otherwise false */
+	public boolean hasFinished() {
+		return finished;
+	}
+	
+	/**
+	 * Sets the random for this level.
+	 * 
+	 * @param r The random number generator to set.
+	 */
+	public void setRandom(Random r) {
+		random = r;
+	}
+	
+	/** @return The random number generator for this level. */
+	public Random getRandom() {
+		return random;
 	}
 	
 }

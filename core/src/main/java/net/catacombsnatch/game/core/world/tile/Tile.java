@@ -1,13 +1,11 @@
 package net.catacombsnatch.game.core.world.tile;
 
 import net.catacombsnatch.game.core.entity.Entity;
-import net.catacombsnatch.game.core.entity.components.Physics;
 import net.catacombsnatch.game.core.screen.Renderable;
 import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.world.level.Level;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 
 public abstract class Tile implements Renderable, Tickable {
@@ -15,7 +13,6 @@ public abstract class Tile implements Renderable, Tickable {
 	public static final int WIDTH = 32;
 
 	protected Level level;
-	protected Sprite sprite;
 	protected Color minimapColor;
 
 	protected Rectangle bb;
@@ -51,8 +48,6 @@ public abstract class Tile implements Renderable, Tickable {
 	 * @param entity The entity to check
 	 * @return True if the entity can pass, otherwise false
 	 */
-	public boolean canPass( Entity entity ) {
-		Physics p = entity.getComponent(Physics.class);
-		return p != null ? p.intersects( getBounds() ) : true;
-	}
+	public abstract boolean canPass( Entity entity );
+	
 }

@@ -11,6 +11,21 @@ public class Scene extends Stage {
 	/** The background image */
 	protected Texture background;
 
+	/**
+	 * Called whenever this scene is getting created (or opened again).
+	 * For creation only actions use the constructor.
+	 */
+	public void enter() {
+		// Nothing to do in here
+	}
+	
+	/**
+	 * Called when the game switches to a new scene while the old one
+	 * still remains "open".
+	 */
+	public void leave() {
+		// Nothing to do in here
+	}
 	
 	/**
 	 * Called whenever the scene is getting closed.

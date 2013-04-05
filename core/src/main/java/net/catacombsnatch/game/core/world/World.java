@@ -6,14 +6,17 @@ import java.util.List;
 import java.util.Random;
 
 import net.catacombsnatch.game.core.entity.entities.Player;
+import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.world.level.Level;
 
-public class World {
+public class World implements Tickable {
 	protected List<Level> levels;
 	protected List<Player> players;
 
 	protected Difficulty difficulty;
 	protected MapRotation rotation;
+	
+	protected Level currentLevel;
 
 	public World( Difficulty diff, MapRotation rot ) {
 		levels = new LinkedList<Level>();
@@ -23,6 +26,23 @@ public class World {
 		rotation = rot;
 	}
 
+	@Override
+	public void tick() {
+		// TODO this could cause an infinite loop!
+		if(currentLevel == null || currentLevel.hasFinished()) {
+			currentLevel = getRotation().getNext(getLevels());
+		}
+		
+		if(currentLevel != null) {
+			currentLevel.tick();
+		}
+	}
+	
+	/** @return The current level that is being played in. */
+	public Level getCurrentLevel() {
+		return currentLevel;
+	}
+	
 	/**
 	 * Returns a list of levels inside this world.
 	 * 
