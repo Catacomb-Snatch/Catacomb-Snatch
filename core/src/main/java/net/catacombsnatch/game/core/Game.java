@@ -1,9 +1,9 @@
 package net.catacombsnatch.game.core;
 
 import net.catacombsnatch.game.core.event.input.InputManager;
+import net.catacombsnatch.game.core.resource.options.Options;
 import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.resources.Language;
-import net.catacombsnatch.game.core.resources.Options;
 import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.scene.SceneManager;
 import net.catacombsnatch.game.core.scene.scenes.TitleScreen;
@@ -73,10 +73,10 @@ public class Game implements ApplicationListener {
 		if (current != null) {
 			current.render();
 			
-			if ( Options.getBoolean( Options.DRAW_FPS, true ) ) {
+			//if ( Options.getBoolean( Options.DRAW_FPS, true ) ) {
 				fpsLabel.setText(Gdx.graphics.getFramesPerSecond() + " FPS");
 				fpsLabel.draw(current.getSpriteBatch(), 1);
-			}
+			//}
 			
 			current.getSpriteBatch().end();
 		}

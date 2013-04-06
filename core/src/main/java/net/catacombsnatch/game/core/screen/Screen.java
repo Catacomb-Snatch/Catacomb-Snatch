@@ -1,6 +1,5 @@
 package net.catacombsnatch.game.core.screen;
 
-import net.catacombsnatch.game.core.resources.Options;
 import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.scene.SceneManager;
 
@@ -15,10 +14,10 @@ public class Screen {
 	}
 	
 	public static void resize(int width, int height) {
-		if(Options.getBoolean(Options.SCALE, true)) {
+		//if(Options.getBoolean(Options.SCALE, true)) {
 			if(width > 800 && height > 600) SCALE = 2;
 			else SCALE = 1;
-		}
+		//}
 		
 		Scene current = SceneManager.getCurrent();
 		if(current != null) current.setViewport(width / SCALE, height / SCALE, true);
