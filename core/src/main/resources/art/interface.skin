@@ -5,7 +5,7 @@
 	
 	com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		default: {
-			down: button-default, up: button-default, over: button-hover,
+			down: button-pressed, up: button-default, over: button-hover,
 			disabled: button-disabled,
 			
 			font: gold

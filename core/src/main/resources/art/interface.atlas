@@ -77,6 +77,14 @@ button-disabled
   orig: 9, 12
   offset: 0, 0
   index: 2
+button-pressed
+  rotate: false
+  xy: 76, 0
+  size: 13, 15
+  split: 6, 6, 6, 8
+  orig: 13, 15
+  offset: 0, 0
+  index: 4
 minimap-frame
   rotate: false
   xy: 0, 32
