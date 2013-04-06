@@ -19,8 +19,13 @@ public abstract class StaticTile extends Tile {
 		sprite = new Sprite();
 	}
 	
+	protected void setTexture(TextureRegion region) {
+		sprite.setRegion(region);
+		sprite.setSize(region.getRegionWidth(), region.getRegionHeight());
+	}
+	
 	protected void setRandomTexture(TextureRegion[] source) {
-		sprite.setRegion(source[level.getRandom().nextInt(source.length)]);
+		setTexture(source[level.getRandom().nextInt(source.length)]);
 	}
 	
 	/** @return The sprite for this tile, holding coordinates and texture. */
@@ -32,7 +37,7 @@ public abstract class StaticTile extends Tile {
 	public void init(Level level, int x, int y) {
 		super.init(level, x, y);
 		
-		sprite.setBounds(x * WIDTH, y * HEIGHT, WIDTH, HEIGHT);
+		sprite.setPosition(x * WIDTH, y * HEIGHT);
 	}
 
 	@Override

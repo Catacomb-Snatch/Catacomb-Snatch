@@ -19,7 +19,6 @@ public class WallTile extends StaticTile {
 	public void init(Level level, int x, int y) {
 		super.init(level, x, y);
 		
-		sprite.setSize(WIDTH, Art.tiles_walls[0].getTexture().getHeight());
 		setRandomTexture(Arrays.copyOfRange(Art.tiles_walls, 1, Art.tiles_walls.length));
 	}
 
