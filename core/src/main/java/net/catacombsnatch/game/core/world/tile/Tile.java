@@ -64,30 +64,23 @@ public abstract class Tile implements Renderable, Tickable {
 		region.getTexture().getTextureData().prepare();
 		Pixmap pixmap = region.getTexture().getTextureData().consumePixmap();
 		
+		float t = region.getRegionHeight() * region.getRegionWidth();
+		float r = 0, g = 0, b = 0;
 		int ox = region.getRegionX(), oy = region.getRegionY();
 		
-		int rgba = pixmap.getPixel(ox, oy);
-		int i = 0;
-		
-		Color fc = new Color();
-		Color fcc = new Color();
-		
-		for (int yy = oy+1; yy < region.getRegionHeight(); yy++) {
-			for (int xx = ox+1; xx < region.getRegionWidth(); xx++) {
-				Color.rgba8888ToColor(fc, rgba);
-				Color.rgba8888ToColor(fcc, pixmap.getPixel(xx, yy));
-				fc.mul(0.5f);
-				fcc.mul(0.5f);
-				fc.add(fcc);
-				rgba = Color.rgba8888(fc);
+		Color c = new Color();
+		for (int y = oy; y < region.getRegionHeight(); y++) {
+			for (int x = ox; x < region.getRegionWidth(); x++) {
+				Color.rgba8888ToColor(c, pixmap.getPixel(x, y));
+				
+				r += c.r;
+				g += c.g;
+				b += c.b;
 			}
 		}
 		
 		pixmap.dispose();
-		
-		Color c = new Color();
-		Color.rgba8888ToColor(c, rgba);
-		return c;
+		return new Color(r / t, g / t, b / t, 1);
 	}
 	
 }
