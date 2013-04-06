@@ -3,10 +3,13 @@ package net.catacombsnatch.game.core.scene;
 import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.screen.Screen;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class Scene extends Stage {
 	/** The background image */
@@ -74,8 +77,14 @@ public class Scene extends Stage {
 	 * @return The created {@link TextButton}
 	 */
 	public TextButton addTextButton(String text, int x, int y) {
-		TextButton button = new TextButton(text, Art.skin);
+		final TextButton button = new TextButton(text, Art.skin);
 		button.setPosition(x, y);
+		button.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				super.clicked(event, x, y);
+				button.act(Gdx.graphics.getDeltaTime());
+			}
+		});
 		addActor(button);
 		
 		return button;
