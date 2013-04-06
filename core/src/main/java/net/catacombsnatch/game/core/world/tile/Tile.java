@@ -4,8 +4,11 @@ import net.catacombsnatch.game.core.entity.Entity;
 import net.catacombsnatch.game.core.screen.Renderable;
 import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.world.level.Level;
+import net.catacombsnatch.game.core.world.level.Minimap;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 public abstract class Tile implements Renderable, Tickable {
@@ -49,5 +52,33 @@ public abstract class Tile implements Renderable, Tickable {
 	 * @return True if the entity can pass, otherwise false
 	 */
 	public abstract boolean canPass( Entity entity );
+	
+	/**
+	 * Calculates the average color of a texture region.
+	 * Used for the {@link Minimap} colors.
+	 * 
+	 * @param region The texture region
+	 * @return The average color
+	 */
+	protected static Color getColor(TextureRegion region) {
+		region.getTexture().getTextureData().prepare();
+		Pixmap pixels = region.getTexture().getTextureData().consumePixmap();
+		
+		long r = 0, g = 0, b = 0, t = 0;
+		int ox = region.getRegionX(), oy = region.getRegionY();
+		
+		for(int y = 0; y < region.getRegionWidth(); y++) {
+			for(int x = 0; x < region.getRegionHeight(); x++) {
+				int c = pixels.getPixel(x + ox, y + oy); 
+				r += (c & 0x0000ff);
+				g += (c & 0x00ff00) >> 8;
+				b += (c & 0xff0000) >> 16;
+				
+				t++;
+			}
+		}
+		
+		return new Color(r / t, g / t, b / t, 1);
+	}
 	
 }

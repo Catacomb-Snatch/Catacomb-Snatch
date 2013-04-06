@@ -7,12 +7,10 @@ import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.tile.StaticTile;
 
-import com.badlogic.gdx.graphics.Color;
-
 public class WallTile extends StaticTile {
 
 	public WallTile() {
-		super(Color.BLACK);
+		super(getColor(Art.tiles_walls[1]));
 	}
 	
 	@Override

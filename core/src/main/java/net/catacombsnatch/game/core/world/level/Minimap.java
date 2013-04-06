@@ -23,9 +23,8 @@ public class Minimap implements Renderable {
 		
 		sprite = new Sprite(Art.skin.getAtlas().findRegion("minimap-frame"));
 		
-		pm = new Pixmap( 40, 40, Pixmap.Format.RGBA8888 );
-		map = new Texture( pm, true);
-		pm = new Pixmap( 40, 40, Pixmap.Format.RGBA8888 );
+		map = new Texture(new Pixmap( 40, 40, Pixmap.Format.RGBA8888 ), true);
+		pm = new Pixmap(40, 40, Pixmap.Format.RGBA8888);
 	}
 
 	@Override
@@ -34,15 +33,11 @@ public class Minimap implements Renderable {
 		
 		for (Layer layer : level.layers) {
 			for (Tile tile : layer.tiles) {
-				Color c = tile.getMinimapColor();
-				int x = (int) tile.getBounds().x;
-				int y = (int) tile.getBounds().y;
-				pm.setColor(c);
-				pm.drawRectangle(x, y, 1, 1);
+				pm.drawPixel((int) tile.getBounds().x, (int) tile.getBounds().y, Color.rgba8888(tile.getMinimapColor()));
 			}
 		}
-		map.draw(pm, 0, 0);
 		
+		map.draw(pm, 0, 0);
 		scene.getSpriteBatch().draw(map, sprite.getX() + 6, sprite.getY() + 5, 80, 80);
 	}
 	

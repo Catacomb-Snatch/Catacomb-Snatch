@@ -5,12 +5,10 @@ import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.tile.StaticTile;
 
-import com.badlogic.gdx.graphics.Color;
-
 public class FloorTile extends StaticTile {
 
 	public FloorTile() {
-		super(Color.WHITE);
+		super(getColor(Art.tiles_floor[0]));
 	}
 	
 	@Override

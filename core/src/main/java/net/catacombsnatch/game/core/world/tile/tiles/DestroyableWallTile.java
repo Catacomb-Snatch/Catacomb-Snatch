@@ -5,12 +5,10 @@ import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.tile.StaticTile;
 
-import com.badlogic.gdx.graphics.Color;
-
 public class DestroyableWallTile extends StaticTile {
 
 	public DestroyableWallTile() {
-		super(Color.GRAY);
+		super(getColor(Art.tiles_walls[0]));
 	}
 	
 	@Override
