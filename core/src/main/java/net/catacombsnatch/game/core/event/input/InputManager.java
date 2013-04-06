@@ -26,7 +26,7 @@ public class InputManager implements InputProcessor, ControllerListener {
 	protected static KeyMap keyboard;
 	protected static Map<Controller, KeyMap> controllers;
 	static {
-		keyboard = KeyMap.defaultMapping;
+		keyboard = KeyMap.KEYBOARD;
 		controllers = new HashMap<Controller, KeyMap>();
 	}
 	
@@ -47,12 +47,23 @@ public class InputManager implements InputProcessor, ControllerListener {
 		throw new GdxRuntimeException("Only KEYBOARD and CONTROLLER allowed as sources!");
 	}
 	
-	public Key getKeyForSource(InputSource source, int keycode) {
+	public Key getKeyForSource(InputSource source, int keycode, Controller controller) {
 		Key k = null;
 		
-		if(source.equals(InputSource.KEYBOARD)) k = keyboard.getKeyFor(source, keycode);
-		
-		// TODO
+		switch(source) {
+			case KEYBOARD:
+			case MOUSE:
+				k = keyboard.getKeyFor(source, keycode);
+				break;
+				
+			case CONTROLLER:
+				if(controller == null) return Key.UNKNOWN;
+				
+				KeyMap map = controllers.get(controller);
+					
+				if(map != null) k = map.getKeyFor(source, keycode);
+				else k = KeyMap.CONTROLLER.getKeyFor(source, keycode);
+		}
 		
 		return k != null ? k : Key.UNKNOWN;
 	}
@@ -66,7 +77,7 @@ public class InputManager implements InputProcessor, ControllerListener {
 		if(scene != null) scene.keyDown(keycode);
 		
 		InputSource source = InputSource.KEYBOARD;
-		KeyPressedEvent event = new KeyPressedEvent(source, getKeyForSource(source, keycode), null);
+		KeyPressedEvent event = new KeyPressedEvent(source, getKeyForSource(source, keycode, null), null);
 		EventManager.callEvent(event);
 		
 		return true;
@@ -78,7 +89,7 @@ public class InputManager implements InputProcessor, ControllerListener {
 		if(scene != null) scene.keyUp(keycode);
 		
 		InputSource source = InputSource.KEYBOARD;
-		KeyReleaseEvent event = new KeyReleaseEvent(source, getKeyForSource(source, keycode), null);
+		KeyReleaseEvent event = new KeyReleaseEvent(source, getKeyForSource(source, keycode, null), null);
 		EventManager.callEvent(event);
 		
 		return true;
@@ -150,8 +161,9 @@ public class InputManager implements InputProcessor, ControllerListener {
 
 	@Override
 	public boolean buttonDown(Controller controller, int button) {
+		System.out.println(button);
 		InputSource source = InputSource.CONTROLLER;
-		KeyPressedEvent event = new KeyPressedEvent(source, getKeyForSource(source, button), controller);
+		KeyPressedEvent event = new KeyPressedEvent(source, getKeyForSource(source, button, controller), controller);
 		EventManager.callEvent(event);
 		
 		return true;
@@ -160,7 +172,7 @@ public class InputManager implements InputProcessor, ControllerListener {
 	@Override
 	public boolean buttonUp(Controller controller, int button) {
 		InputSource source = InputSource.CONTROLLER;
-		KeyReleaseEvent event = new KeyReleaseEvent(source, getKeyForSource(source, button), controller);
+		KeyReleaseEvent event = new KeyReleaseEvent(source, getKeyForSource(source, button, controller), controller);
 		EventManager.callEvent(event);
 		
 		return true;
