@@ -50,6 +50,8 @@ public class TitleScreen extends Scene {
 			actor.setWidth(150);
 		}
 		
+		index = getActors().size-1;
+		
 		charEntity = new EntityManager().createEntity();
 		charAnimation = charEntity.addComponent( Animated.class, new Animated( Art.lordLard[0], 0.15f ) );
 
