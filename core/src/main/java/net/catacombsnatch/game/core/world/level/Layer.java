@@ -1,6 +1,7 @@
 package net.catacombsnatch.game.core.world.level;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.catacombsnatch.game.core.world.tile.Tile;
@@ -23,7 +24,7 @@ public class Layer {
 			TiledMapTileLayer tileLayer = (TiledMapTileLayer) layer;
 			
 			for(int x = 0; x < tileLayer.getWidth(); x++) {
-				for(int y = tileLayer.getHeight()-1; y > -1; y--) {
+				for(int y = 0; y < tileLayer.getHeight(); y++) {
 					Cell cell = tileLayer.getCell(x, y);
 					if(cell == null ||  cell.getTile() == null) continue;
 					
@@ -44,6 +45,8 @@ public class Layer {
 				}
 			}
 		}
+		
+		Collections.reverse(tiles);
 	}
 	
 	public List<Tile> getTiles() {
