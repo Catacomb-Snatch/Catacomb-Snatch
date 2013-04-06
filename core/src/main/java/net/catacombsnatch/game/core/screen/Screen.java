@@ -14,10 +14,8 @@ public class Screen {
 	}
 	
 	public static void resize(int width, int height) {
-		//if(Options.getBoolean(Options.SCALE, true)) {
-			if(width > 800 && height > 600) SCALE = 2;
-			else SCALE = 1;
-		//}
+		if(width > 800 && height > 600) SCALE = 2;
+		else SCALE = 1;
 		
 		Scene current = SceneManager.getCurrent();
 		if(current != null) current.setViewport(width / SCALE, height / SCALE, true);

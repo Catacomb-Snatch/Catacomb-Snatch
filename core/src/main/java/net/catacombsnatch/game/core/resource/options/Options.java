@@ -6,10 +6,20 @@ import com.badlogic.gdx.Preferences;
 public final class Options extends OptionGroup {
 	private static final String PREFERENCES_FILENAME = "options.xml";
 	private static Preferences preferences;
-
+	private static Options instance;
+	
+	// Default keys
+	public final static String DEBUG = "debugMode";
 	
 	public Options() {
 		super(null);
+		
+		// Set defaults
+		set(DEBUG, true);
+	}
+	
+	public static Options getOptions() {
+		return instance;
 	}
 	
 	public static void save() {
@@ -17,6 +27,10 @@ public final class Options extends OptionGroup {
 	}
 
 	public static void load() {
+		if(instance == null) {
+			instance = new Options();
+		}
+		
 		preferences = Gdx.app.getPreferences( PREFERENCES_FILENAME );
 	}
 	

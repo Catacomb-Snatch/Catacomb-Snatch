@@ -80,6 +80,7 @@ public class Scene extends Stage {
 		final TextButton button = new TextButton(text, Art.skin);
 		button.setPosition(x, y);
 		button.addListener(new ClickListener() {
+			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				super.clicked(event, x, y);
 				button.act(Gdx.graphics.getDeltaTime());

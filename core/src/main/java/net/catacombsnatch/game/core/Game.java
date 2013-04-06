@@ -73,10 +73,10 @@ public class Game implements ApplicationListener {
 		if (current != null) {
 			current.render();
 			
-			//if ( Options.getBoolean( Options.DRAW_FPS, true ) ) {
+			if (Options.getOptions().get(Options.DEBUG, true)) {
 				fpsLabel.setText(Gdx.graphics.getFramesPerSecond() + " FPS");
 				fpsLabel.draw(current.getSpriteBatch(), 1);
-			//}
+			}
 			
 			current.getSpriteBatch().end();
 		}

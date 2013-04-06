@@ -1,10 +1,15 @@
 package net.catacombsnatch.game.core.resource.options;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /** Represents an option section */
 public class OptionGroup {
 	protected OptionGroup parent;
 	protected String name;
+	
+	protected Map<String, Object> map;
 	
 	
 	public OptionGroup(String name) {
@@ -12,21 +17,34 @@ public class OptionGroup {
 	}
 	
 	public OptionGroup(String name, OptionGroup parent) {
+		this(name, parent, new HashMap<String, Object>());
+	}
+	
+	public OptionGroup(String name, OptionGroup parent, Map<String, Object> defaults) {
 		this.name = name;
 		this.parent = parent;
+		
+		map = defaults;
 	}
 	
 	
 	/* ------------ Grouping related functions ------------ */
 	
 	public OptionGroup getGroup(String name) {
-		return null; // TODO
+		OptionGroup current = this, group = null;
+		
+		String[] split = name.split(".");
+		for(String s : split) {
+			group = current.getGroup(s);
+			if(group == null) return null;
+		}
+		
+		return group;
 	}
 	
 	public OptionGroup createGroup(String name) {
 		OptionGroup group = new OptionGroup(name, this);
-		
-		// TODO
+		group.map.put(name, group);
 		
 		return group;
 	}
@@ -60,6 +78,8 @@ public class OptionGroup {
 		String path = getName();
 		
 		OptionGroup og = this;
+		if(og == getRoot()) return "";
+		
 		while(og != null) {
 			og = og.getParent();
 			
@@ -83,28 +103,43 @@ public class OptionGroup {
 	
 	/* ------------ Value / Key related functions ------------ */
 	
-	public boolean isSet() {
-		return true; // TODO
+	public boolean isSet(String key) {
+		OptionGroup group = getGroup(key);
+		if(group != null) {
+			return group.map.containsKey(key);
+		}
+		
+		return false;
 	}
 	
 	public Object get(String key) {
-		return null; // TODO
+		return get(key, null);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public <T> T get(String key, Class<T> type) {
-		return null; // TODO
+		return (T) get(key, null);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public <T> T get(String key, T def) {
-		return null; // TODO
+		OptionGroup group = getGroup(key);
+		if(group != null) {
+			Object obj = group.map.get(key);
+			if(obj != null) return (T) obj; 
+		}
+		
+		return def;
 	}
 	
-	public <T> T get(String key, T def, Class<T> type) {
-		return null; // TODO
-	}
-	
-	public void set(String key, Object value) {
-		// TODO
+	public boolean set(String key, Object value) {
+		OptionGroup group = getGroup(key);
+		if(group != null) {
+			group.map.put(key, value);
+			return true;
+		}
+		
+		return false;
 	}
 	
 }
