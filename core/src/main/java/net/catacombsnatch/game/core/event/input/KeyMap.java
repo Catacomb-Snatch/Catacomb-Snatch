@@ -11,6 +11,7 @@ public class KeyMap {
 	static {
 		// Keyboard & Mouse
 		KEYBOARD = new KeyMap();
+		KEYBOARD.setFor(Key.SCREENSHOT, InputSource.KEYBOARD, Input.Keys.F2);
 		KEYBOARD.setFor(Key.MOVE_LEFT, InputSource.KEYBOARD, Input.Keys.LEFT);
 		KEYBOARD.setFor(Key.MOVE_RIGHT, InputSource.KEYBOARD, Input.Keys.RIGHT);
 		KEYBOARD.setFor(Key.MOVE_UP, InputSource.KEYBOARD, Input.Keys.UP);

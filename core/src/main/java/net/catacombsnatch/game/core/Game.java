@@ -3,7 +3,10 @@ package net.catacombsnatch.game.core;
 import java.lang.reflect.Method;
 import java.nio.IntBuffer;
 
+import net.catacombsnatch.game.core.event.EventHandler;
+import net.catacombsnatch.game.core.event.EventManager;
 import net.catacombsnatch.game.core.event.input.InputManager;
+import net.catacombsnatch.game.core.event.input.events.KeyPressedEvent;
 import net.catacombsnatch.game.core.resource.options.Options;
 import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.resources.Language;
@@ -55,6 +58,7 @@ public class Game implements ApplicationListener {
 		input = new InputManager();
 		Gdx.input.setInputProcessor(input);
 		Controllers.addListener(input);
+		EventManager.registerListener(this);
 		
 		sceneManager = new SceneManager();
 		
@@ -146,5 +150,17 @@ public class Game implements ApplicationListener {
 		Art.unloadResources();
 		sound.shutdown();
 		Options.save();
+	}
+	
+	@EventHandler
+	public void keyPressed(KeyPressedEvent event) {
+		switch(event.getKey()) {
+		case SCREENSHOT:
+			Screen.saveScreenshot(Gdx.files.external("screen.png"));
+			break;
+			
+		default:
+			// Nothing to do here
+		}
 	}
 }

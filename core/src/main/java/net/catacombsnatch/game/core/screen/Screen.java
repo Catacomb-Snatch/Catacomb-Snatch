@@ -1,11 +1,17 @@
 package net.catacombsnatch.game.core.screen;
 
+import java.nio.ByteBuffer;
+
 import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.scene.SceneManager;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.PixmapIO;
 
 public class Screen {
 	protected static int SCALE = 1;
@@ -43,5 +49,49 @@ public class Screen {
 	/** @return The screen height */
 	public static int getHeight() {
 		return Gdx.graphics.getHeight() / SCALE;
+	}
+	
+	/**
+	 * Saves the current screen into a file.
+	 * @param file File where the screen will be saved to.
+	 */
+	public static void saveScreenshot(FileHandle file) {
+		Pixmap pixmap = getScreenshot(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+		PixmapIO.writePNG(file, pixmap);
+        pixmap.dispose();
+	}
+	
+	/**
+	 * Get a part of the screen as pixmap.
+	 * @param x section X
+	 * @param y section Y
+	 * @param w section W
+	 * @param h section H
+	 * @param flipY true (recommended) if segment should be returned flipped on Y axis
+	 * @return Pixmap containing the pixel data of the segment
+	 */
+	public static Pixmap getScreenshot(int x, int y, int w, int h, boolean flipY) {
+		Gdx.gl.glPixelStorei(GL10.GL_PACK_ALIGNMENT, 1);
+		
+		final Pixmap pixmap = new Pixmap(w, h, Format.RGBA8888);
+		ByteBuffer pixels = pixmap.getPixels();
+		Gdx.gl.glReadPixels(x, y, w, h, GL10.GL_RGBA, GL10.GL_UNSIGNED_BYTE, pixels);
+		
+		final int numBytes = w * h * 4;
+		byte[] lines = new byte[numBytes];
+		if (flipY) {
+			final int numBytesPerLine = w * 4;
+			for (int i = 0; i < h; i++) {
+				pixels.position((h - i - 1) * numBytesPerLine);
+				pixels.get(lines, i * numBytesPerLine, numBytesPerLine);
+			}
+			pixels.clear();
+			pixels.put(lines);
+        	} else {
+        		pixels.clear();
+        		pixels.get(lines);
+        	}
+		
+		return pixmap;
 	}
 }
