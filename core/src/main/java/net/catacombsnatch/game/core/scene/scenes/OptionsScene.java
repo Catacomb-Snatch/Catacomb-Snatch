@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 import net.catacombsnatch.game.core.Game;
 import net.catacombsnatch.game.core.entity.Entity;
@@ -38,7 +39,7 @@ public class OptionsScene extends Scene {
 		
 	}
 	
-	public void initGroup(OptionGroup group) {
+	public void initGroup(final OptionGroup group) {
 		addTextButton(Language.get("scene.options.back"), 0, 0).addAction(new ReusableAction() {
 			@Override
 			public boolean act0(float delta) {
@@ -48,11 +49,11 @@ public class OptionsScene extends Scene {
 		});
 		
 		for (Entry<String, Object> e : group.getMap().entrySet()) {
-			String key = e.getKey();
+			final String key = e.getKey();
 			Object o = e.getValue();
-			if (e instanceof OptionGroup) {
+			if (o instanceof OptionGroup) {
 				final OptionGroup newgroup = (OptionGroup) o;
-				addTextButton(key, 0, 0).addAction(new ReusableAction() {
+				addTextButton(Language.get("option."+key), 0, 0).addAction(new ReusableAction() {
 					@Override
 					public boolean act0(float delta) {
 						OptionsScene scene = SceneManager.switchTo(OptionsScene.class, false);
@@ -60,7 +61,20 @@ public class OptionsScene extends Scene {
 						return true;
 					}
 				});
-			} else { //TODO: add if-integer / float / boolean / ...-check
+			} else if (o instanceof Boolean) {
+				final boolean[] bool = {(group.get(key, Boolean.class))};
+				addTextButton(Language.get("option."+key)+": "+Language.get("scene.options."+(bool[0]?"on":"off")), 0, 0)
+				.addAction(new ReusableAction() {
+					@Override
+					public boolean act0(float delta) {
+						bool[0] = !bool[0];
+						group.set(key, bool[0]);
+						((TextButton)getActor())
+						.setText(Language.get("option."+key)+": "+Language.get("scene.options."+(bool[0]?"on":"off")));
+						return true;
+					}
+				});
+			} else { //TODO: add missing types
 				
 			}
 		}

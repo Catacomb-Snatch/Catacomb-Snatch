@@ -16,6 +16,10 @@ public final class Options extends OptionGroup {
 		
 		// Set defaults
 		set(DEBUG, true);
+		
+		if (instance == null) {
+			instance = this;
+		}
 	}
 	
 	public static Options getOptions() {

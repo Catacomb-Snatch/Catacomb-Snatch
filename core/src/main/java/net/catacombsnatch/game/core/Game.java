@@ -108,6 +108,9 @@ public class Game implements ApplicationListener {
 			}
 		}
 		
+		//Init options
+		new Options();
+		
 		// Dive in :)
 		SceneManager.switchTo(TitleScreen.class);
 		

@@ -118,7 +118,7 @@ public class OptionGroup {
 	
 	@SuppressWarnings("unchecked")
 	public <T> T get(String key, Class<T> type) {
-		return (T) get(key, null);
+		return (T) map.get(key);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -142,6 +142,7 @@ public class OptionGroup {
 			group.map.put(key, value);
 			return true;
 		}
+		map.put(key, value);
 		
 		return false;
 	}
