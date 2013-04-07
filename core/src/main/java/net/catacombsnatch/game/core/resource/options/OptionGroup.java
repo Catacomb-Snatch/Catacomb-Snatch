@@ -118,7 +118,11 @@ public class OptionGroup {
 	
 	@SuppressWarnings("unchecked")
 	public <T> T get(String key, Class<T> type) {
-		return (T) map.get(key);
+		Object obj = map.get(key);
+		if (obj instanceof OptionGroup) {
+			return (T) ((OptionGroup)obj).get(key, type);
+		}
+		return (T) obj;
 	}
 	
 	@SuppressWarnings("unchecked")
