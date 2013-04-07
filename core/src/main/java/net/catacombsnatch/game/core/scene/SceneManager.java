@@ -2,6 +2,8 @@ package net.catacombsnatch.game.core.scene;
 
 import java.util.Stack;
 
+import net.catacombsnatch.game.core.screen.Screen;
+
 import com.badlogic.gdx.Gdx;
 
 public class SceneManager {
@@ -57,6 +59,7 @@ public class SceneManager {
 		try {
 			// Create new menu instance from class
 			instance = menu.newInstance();
+			instance.setViewport(Screen.getWidth(), Screen.getHeight(), true);
 			scenes.add(instance);
 
 		} catch ( Exception e ) {
