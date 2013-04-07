@@ -119,7 +119,9 @@ public class SceneManager {
 				top.leave();
 				top.exit();
 				
-				getCurrent().enter();
+				if (getCurrent() != null) {
+					getCurrent().enter();
+				}
 
 				return top;
 			} catch ( Exception e ) {
