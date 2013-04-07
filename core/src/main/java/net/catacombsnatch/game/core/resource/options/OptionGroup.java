@@ -132,6 +132,10 @@ public class OptionGroup {
 		return def;
 	}
 	
+	public Map<String, Object> getMap() {
+		return map;
+	}
+	
 	public boolean set(String key, Object value) {
 		OptionGroup group = getGroup(key);
 		if(group != null) {

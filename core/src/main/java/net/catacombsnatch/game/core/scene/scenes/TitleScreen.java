@@ -7,6 +7,7 @@ import net.catacombsnatch.game.core.entity.components.Animated;
 import net.catacombsnatch.game.core.event.EventHandler;
 import net.catacombsnatch.game.core.event.EventManager;
 import net.catacombsnatch.game.core.event.input.events.KeyPressedEvent;
+import net.catacombsnatch.game.core.resource.options.Options;
 import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.resources.Language;
 import net.catacombsnatch.game.core.scene.ReusableAction;
@@ -39,7 +40,8 @@ public class TitleScreen extends Scene {
 		addTextButton(Language.get("scene.title.options"), 0, 0).addAction(new ReusableAction() {
 			@Override
 			public boolean act0(float delta) {
-				SceneManager.switchTo(OptionsScene.class, false);
+				OptionsScene scene = SceneManager.switchTo(OptionsScene.class, false);
+				scene.initGroup(Options.getOptions());
 				return true;
 			}
 		});

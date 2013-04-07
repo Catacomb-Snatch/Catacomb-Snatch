@@ -1,5 +1,7 @@
 package net.catacombsnatch.game.core.scene.scenes;
 
+import java.util.Map.Entry;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -11,6 +13,8 @@ import net.catacombsnatch.game.core.entity.components.Animated;
 import net.catacombsnatch.game.core.event.EventHandler;
 import net.catacombsnatch.game.core.event.EventManager;
 import net.catacombsnatch.game.core.event.input.events.KeyPressedEvent;
+import net.catacombsnatch.game.core.resource.options.OptionGroup;
+import net.catacombsnatch.game.core.resource.options.Options;
 import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.resources.Language;
 import net.catacombsnatch.game.core.scene.ReusableAction;
@@ -22,12 +26,19 @@ public class OptionsScene extends Scene {
 	private int index = 0;
 	private final Entity charEntity;
 	private final Animated charAnimation; // Reference for quick access
+	private OptionGroup group;
 
 	public OptionsScene() {
 		super();
 		
 		this.setBackground(Art.pyramid);
-
+		
+		charEntity = new EntityManager().createEntity();
+		charAnimation = charEntity.addComponent( Animated.class, new Animated( Art.lordLard[0], 0.15f ) );
+		
+	}
+	
+	public void initGroup(OptionGroup group) {
 		addTextButton(Language.get("scene.options.back"), 0, 0).addAction(new ReusableAction() {
 			@Override
 			public boolean act0(float delta) {
@@ -36,15 +47,30 @@ public class OptionsScene extends Scene {
 			}
 		});
 		
+		for (Entry<String, Object> e : group.getMap().entrySet()) {
+			String key = e.getKey();
+			Object o = e.getValue();
+			if (e instanceof OptionGroup) {
+				final OptionGroup newgroup = (OptionGroup) o;
+				addTextButton(key, 0, 0).addAction(new ReusableAction() {
+					@Override
+					public boolean act0(float delta) {
+						OptionsScene scene = SceneManager.switchTo(OptionsScene.class, false);
+						scene.initGroup(newgroup);
+						return true;
+					}
+				});
+			} else { //TODO: add if-integer / float / boolean / ...-check
+				
+			}
+		}
+		
 		for(Actor actor : getActors()) {
 			actor.setWidth(150);
 		}
 		
 		index = getActors().size-1;
 		
-		charEntity = new EntityManager().createEntity();
-		charAnimation = charEntity.addComponent( Animated.class, new Animated( Art.lordLard[0], 0.15f ) );
-
 		update(true);
 	}
 
