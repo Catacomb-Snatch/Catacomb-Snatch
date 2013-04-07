@@ -1,7 +1,11 @@
 package net.catacombsnatch.game.core;
 
+import java.io.File;
 import java.lang.reflect.Method;
+import java.net.URLDecoder;
 import java.nio.IntBuffer;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import net.catacombsnatch.game.core.event.EventHandler;
 import net.catacombsnatch.game.core.event.EventManager;
@@ -156,7 +160,17 @@ public class Game implements ApplicationListener {
 	public void keyPressed(KeyPressedEvent event) {
 		switch(event.getKey()) {
 		case SCREENSHOT:
-			Screen.saveScreenshot(Gdx.files.external("screen.png"));
+			String path = "";
+			try {
+				String rawpath = Game.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+				path = URLDecoder.decode(rawpath, "UTF-8");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			File dir = new File(path).getParentFile();
+			File logfile = new File(dir, "screen_"+(new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime()))+".png");
+			Screen.saveScreenshot(Gdx.files.absolute(logfile.getPath()));
 			break;
 			
 		default:
