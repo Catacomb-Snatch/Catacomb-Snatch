@@ -1,5 +1,7 @@
 package net.catacombsnatch.game.core.scene;
 
+import net.catacombsnatch.game.core.event.EventHandler;
+import net.catacombsnatch.game.core.event.input.events.KeyPressedEvent;
 import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.screen.Screen;
 
@@ -18,7 +20,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class Scene extends Stage {
 	/** The background image */
 	protected Texture background;
-
+	
+	/** Class- & Instanceshared boolean for avoiding repeated USE */
+	protected static boolean canUse = true;
+	
 	/**
 	 * Called whenever this scene is getting created (or opened again).
 	 * For creation only actions use the constructor.

@@ -1,5 +1,9 @@
 package net.catacombsnatch.game.core.scene.scenes;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+
 import net.catacombsnatch.game.core.Game;
 import net.catacombsnatch.game.core.entity.Entity;
 import net.catacombsnatch.game.core.entity.EntityManager;
@@ -14,41 +18,20 @@ import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.scene.SceneManager;
 import net.catacombsnatch.game.core.screen.Screen;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-
-public class TitleScreen extends Scene {
+public class OptionsScene extends Scene {
 	private int index = 0;
 	private final Entity charEntity;
 	private final Animated charAnimation; // Reference for quick access
-	
-	public TitleScreen() {
+
+	public OptionsScene() {
 		super();
 		
 		this.setBackground(Art.pyramid);
 
-		addTextButton(Language.get("scene.title.exit"), 0, 0).addAction(new ReusableAction() {
+		addTextButton(Language.get("scene.options.back"), 0, 0).addAction(new ReusableAction() {
 			@Override
 			public boolean act0(float delta) {
-				Gdx.app.exit();
-				return true;
-			}
-		});
-		
-		addTextButton(Language.get("scene.title.options"), 0, 0).addAction(new ReusableAction() {
-			@Override
-			public boolean act0(float delta) {
-				SceneManager.switchTo(OptionsScene.class, false);
-				return true;
-			}
-		});
-		addTextButton(Language.get("scene.title.start"), 0, 0).setDisabled(true);
-		
-		addTextButton(Language.get("scene.title.demo"), 0, 0).addAction(new ReusableAction() {
-			@Override
-			public boolean act0(float delta) {
-				SceneManager.switchTo(InGameScene.class, true);
+				SceneManager.exit();
 				return true;
 			}
 		});
@@ -76,7 +59,7 @@ public class TitleScreen extends Scene {
 		EventManager.unregisterListener(this);
 		Game.sound.stopTitleMusic();
 	}
-	
+
 	@Override
 	public void render() {
 		super.render();
@@ -140,5 +123,4 @@ public class TitleScreen extends Scene {
 		Actor actor = getActors().get(index);
 		charAnimation.setPosition((int) (actor.getX() - (Art.lordLard[0][0].getRegionWidth() / 2)), (int) actor.getY());
 	}
-	
 }

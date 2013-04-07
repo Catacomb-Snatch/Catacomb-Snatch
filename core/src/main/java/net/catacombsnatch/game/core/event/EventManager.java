@@ -83,7 +83,9 @@ public class EventManager {
 			}
 			
 		} else {
-			for(Listener listener : entry.getListeners()) {
+			//for(Listener listener : entry.getListeners()) {
+			for (int i = 0; i < entry.getListeners().size(); i++) {
+				Listener listener = entry.getListeners().get(i);
 				listener.listen(event);
 			}
 		}

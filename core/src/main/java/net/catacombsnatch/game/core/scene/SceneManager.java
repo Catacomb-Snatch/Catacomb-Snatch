@@ -118,6 +118,8 @@ public class SceneManager {
 				Scene top = super.pop();
 				top.leave();
 				top.exit();
+				
+				getCurrent().enter();
 
 				return top;
 			} catch ( Exception e ) {
