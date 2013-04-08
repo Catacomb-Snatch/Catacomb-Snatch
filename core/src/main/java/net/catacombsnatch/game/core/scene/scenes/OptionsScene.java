@@ -42,7 +42,7 @@ public class OptionsScene extends MenuScene {
 				
 			} else if (o instanceof Boolean) {
 				final boolean b = (Boolean) o;
-				final TextButton button = addTextButton(Language.get("option." + key + (b ? ".on" : ".off")), 0, 0);
+				final TextButton button = addTextButton(Language.get("option." + key + (b ? ".disable" : ".enable")), 0, 0);
 				
 				button.addAction(new ReusableAction() {
 					protected boolean down = b;
@@ -51,7 +51,7 @@ public class OptionsScene extends MenuScene {
 					public boolean use(float delta) {
 						down = !down;
 						group.set(key, down);
-						button.setText(Language.get("option." + key + (down ? ".on" : ".off")));
+						button.setText(Language.get("option." + key + (down ? ".disable" : ".enable")));
 						
 						return true;
 					}

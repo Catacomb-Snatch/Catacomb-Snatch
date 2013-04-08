@@ -13,5 +13,5 @@ scene.title.start = Start Game
 scene.title.options = Options
 scene.title.exit = Exit Game
 
-option.showDebug.enable = Show debug information
-option.showDebug.disable = Hide debug information
+option.debugMode.enable = Show debug information
+option.debugMode.disable = Hide debug information

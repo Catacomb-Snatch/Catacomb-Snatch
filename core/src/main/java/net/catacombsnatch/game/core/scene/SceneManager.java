@@ -101,7 +101,7 @@ public class SceneManager {
 			Scene before = null;
 			
 			if(!empty()) {
-				before = super.peek();
+				before = peek();
 				if(before != null) before.leave(scene);
 			}
 			
@@ -118,7 +118,7 @@ public class SceneManager {
 		public Scene pop() {
 			try {
 				Scene top = super.pop();
-				Scene peek = super.peek(); 
+				Scene peek = empty() ? null : peek(); 
 				
 				top.leave(peek);
 				top.exit();
@@ -127,7 +127,7 @@ public class SceneManager {
 
 				return top;
 			} catch ( Exception e ) {
-				e.printStackTrace();
+				Gdx.app.error(TAG, "Could not pop scene stack", e);
 				return null;
 			}
 		}

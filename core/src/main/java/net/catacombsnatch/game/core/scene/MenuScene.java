@@ -25,7 +25,7 @@ public abstract class MenuScene extends Scene {
 		setBackground(bg);
 		
 		// Add animated character cursor
-		ani = new Animation(0.5f, Art.lordLard[0]);
+		ani = new Animation(0.05f, Art.lordLard[0]);
 	}
 	
 	protected void init() {
