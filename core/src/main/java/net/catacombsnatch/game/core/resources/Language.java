@@ -10,7 +10,6 @@ import java.util.Properties;
 
 import net.catacombsnatch.game.core.util.FileUtil;
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
@@ -99,7 +98,12 @@ public class Language {
 		}
 		
 		Properties fallback = languages.get(DEFAULT);
-		return fallback != null ? fallback.getProperty(property) : "{" + property + "}";
+		if(fallback != null) {
+			String str = fallback.getProperty(property);
+			if(str != null) return str;
+		}
+		
+		return "{" + property + "}";
 	}
 
 	

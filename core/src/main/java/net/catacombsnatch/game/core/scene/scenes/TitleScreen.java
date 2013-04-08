@@ -29,7 +29,7 @@ public class TitleScreen extends Scene {
 
 		addTextButton(Language.get("scene.title.exit"), 0, 0).addAction(new ReusableAction() {
 			@Override
-			public boolean act0(float delta) {
+			public boolean use(float delta) {
 				Gdx.app.exit();
 				return true;
 			}
@@ -37,7 +37,7 @@ public class TitleScreen extends Scene {
 		
 		addTextButton(Language.get("scene.title.options"), 0, 0).addAction(new ReusableAction() {
 			@Override
-			public boolean act0(float delta) {
+			public boolean use(float delta) {
 				OptionsScene scene = SceneManager.switchTo(OptionsScene.class, false);
 				scene.initGroup(Game.options);
 				return true;
@@ -47,7 +47,7 @@ public class TitleScreen extends Scene {
 		
 		addTextButton(Language.get("scene.title.demo"), 0, 0).addAction(new ReusableAction() {
 			@Override
-			public boolean act0(float delta) {
+			public boolean use(float delta) {
 				SceneManager.switchTo(InGameScene.class, true);
 				return true;
 			}

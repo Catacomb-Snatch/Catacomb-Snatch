@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-
 /** Represents an option section */
 public class OptionGroup {
 	protected OptionGroup parent;
@@ -126,52 +125,75 @@ public class OptionGroup {
 	}
 	
 	public boolean isSet(String key) {
-		OptionGroup group = getGroup(key);
-		if(group != null) {
-			return group.map.containsKey(key);
-		}
-		
-		return false;
+		KeyPair pair = getPair(key);
+		return pair != null ? pair.group.map.containsKey(pair.key) : false;
 	}
 	
 	public Object get(String key) {
-		return get(key, null);
+		return get(key, Object.class);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public <T> T get(String key, Class<T> type) {
-		return (T) get(key);
+		KeyPair pair = getPair(key);
+		
+		if(pair != null) {
+			Object obj = pair.group.map.get(pair.key);
+			if(obj != null) return (T) obj; 
+		}
+		
+		return null;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public <T> T get(String key, T def) {
-		OptionGroup group = getGroup(key);
-		if(group != null) {
-			Object obj = group.map.get(key);
-			if(obj != null) return (T) obj; 
-		}
-		
-		return def;
+		return (T) get(key, def.getClass());
 	}
 	
 	public boolean set(String key, Object value) {
-		OptionGroup group = getGroup(key);
-		if(group != null) {
-			group.map.put(key, value);
-			return true;
-		}
+		KeyPair pair = getPair(key);
+		if(pair == null) return false;
 		
-		return false;
+		pair.group.map.put(pair.key, value);
+		
+		return true;
 	}
 	
 	public boolean setDefault(String key, Object value) {
-		OptionGroup group = getGroup(key);
-		if(group != null) {
-			if(!group.map.containsKey(key)) group.map.put(key, value);
-			return true;
+		KeyPair pair = getPair(key);
+		if(pair == null) return false;
+		
+		if(!pair.group.map.containsKey(pair.key)) {
+			pair.group.map.put(pair.key, value);
 		}
 		
-		return false;
+		return true;
+	}
+	
+	
+	/* ------------ Helper functions ------------ */
+	
+	protected KeyPair getPair(String key) {
+		OptionGroup group = this;
+		String[] split = key.split(".");
+		String str = key;
+		
+		if(split.length > 1) for(int s = 0; s < split.length - 1; s++) {
+			group = group.getGroup(split[s]);
+			if(group == null) return null;	
+		}
+		
+		return new KeyPair(group, str);
+	}
+	
+	protected class KeyPair {
+		public final OptionGroup group;
+		public final String key;
+		
+		public KeyPair(OptionGroup g, String k) {
+			group = g;
+			key = k;
+		}
 	}
 	
 }

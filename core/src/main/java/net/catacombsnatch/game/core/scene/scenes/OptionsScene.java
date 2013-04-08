@@ -38,45 +38,45 @@ public class OptionsScene extends Scene {
 	public void initGroup(final OptionGroup group) {
 		addTextButton(Language.get("scene.options.back"), 0, 0).addAction(new ReusableAction() {
 			@Override
-			public boolean act0(float delta) {
+			public boolean use(float delta) {
 				SceneManager.exit();
 				return true;
 			}
 		});
 		
-		for (final String key : group.getKeys()) {
-			Object o = group.get(key);
+		for (String k : group.getKeys()) {
+			final String key = group.getCurrentPath() + k;
+			final Object o = group.get(key);
 			
 			if (o instanceof OptionGroup) {
-				final OptionGroup newgroup = (OptionGroup) o;
-				
 				addTextButton(Language.get("option." + key), 0, 0).addAction(new ReusableAction() {
 					@Override
-					public boolean act0(float delta) {
-						OptionsScene scene = SceneManager.switchTo(OptionsScene.class, false);
-						scene.initGroup(newgroup);
+					public boolean use(float delta) {
+						OptionsScene scene = SceneManager.switchTo(OptionsScene.class);
+						scene.initGroup((OptionGroup) o);
 						return true;
 					}
 				});
 				
 			} else if (o instanceof Boolean) {
-				final boolean[] bool = {(Boolean) o};
+				final boolean b = (Boolean) o;
+				final TextButton button = addTextButton(Language.get("option." + key + (b ? ".on" : ".off")), 0, 0);
 				
-				addTextButton(Language.get("option."+key)+": "+Language.get("scene.options." + (bool[0]?"on":"off")), 0, 0)
-				.addAction(new ReusableAction() {
+				button.addAction(new ReusableAction() {
+					protected boolean down = b;
+					
 					@Override
-					public boolean act0(float delta) {
-						bool[0] = !bool[0];
-						group.set(key, bool[0]);
-						((TextButton)getActor())
-						.setText(Language.get("option."+key)+": "+Language.get("scene.options." + (bool[0]?"on":"off")));
+					public boolean use(float delta) {
+						down = !down;
+						group.set(key, down);
+						button.setText(Language.get("option." + key + (down ? ".on" : ".off")));
+						
 						return true;
 					}
 				});
-				
-			} else { // TODO: add missing types
-				
 			}
+			
+			// TODO add missing types
 		}
 		
 		for(Actor actor : getActors()) {

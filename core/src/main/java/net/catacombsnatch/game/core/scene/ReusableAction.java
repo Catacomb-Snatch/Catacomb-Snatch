@@ -3,22 +3,20 @@ package net.catacombsnatch.game.core.scene;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-/**
- * This class is a workaround for Actions being removed after act()ed.
- */
+/** This class is a wrapper for Actions being removed after {@link #act(float)}ed. */
 public abstract class ReusableAction extends Action {
 	
 	protected Actor a;
 	
 	@Override
 	public boolean act(float delta) {
-		if (a == null) {
-			a = getActor();
-		}
+		if (a == null) a = getActor();
+		
 		a.addAction(this);
-		return act0(delta);
+		return use(delta);
 	}
 	
-	public abstract boolean act0(float delta);
+	/** @see #act */
+	public abstract boolean use(float delta);
 
 }
