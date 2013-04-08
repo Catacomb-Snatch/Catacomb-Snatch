@@ -32,13 +32,11 @@ public class View implements Renderable {
 		
 		rendered = 0; // Reset counter
 		
-		if(level != null) for(Layer layer : level.getLayers()) {
-			for(Tile tile : layer.getTiles()) {
-				if(!tile.getBounds().overlaps(viewport))  continue;
+		for(Tile tile : level.getTiles()) {
+			if(!tile.getBounds().overlaps(viewport))  continue;
 				
-				tile.render(scene);
-				rendered++;
-			}
+			tile.render(scene);
+			rendered++;
 		}
 		
 		panel.draw(scene.getSpriteBatch());

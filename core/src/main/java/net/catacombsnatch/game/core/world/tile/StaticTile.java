@@ -25,7 +25,7 @@ public abstract class StaticTile extends Tile {
 	}
 	
 	protected void setRandomTexture(TextureRegion[] source) {
-		setTexture(source[level.getRandom().nextInt(source.length)]);
+		setTexture(source[level.getGenerator().randomizer().nextInt(source.length)]);
 	}
 	
 	/** @return The sprite for this tile, holding coordinates and texture. */

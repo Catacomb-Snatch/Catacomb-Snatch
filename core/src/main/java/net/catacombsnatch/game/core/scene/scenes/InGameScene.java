@@ -11,6 +11,7 @@ import net.catacombsnatch.game.core.world.World.MapRotation;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.Minimap;
 import net.catacombsnatch.game.core.world.level.View;
+import net.catacombsnatch.game.core.world.level.generator.TmxLevelGenerator;
 
 import com.badlogic.gdx.math.Rectangle;
 
@@ -25,7 +26,7 @@ public class InGameScene extends Scene {
 	public InGameScene() {
 		super();
 
-		Level level = Level.fromFile("maps/demo.tmx");
+		Level level = new TmxLevelGenerator("maps/demo.tmx").generate();
 		
 		world = new World(Difficulty.EASY, MapRotation.ONCE);
 		world.getLevels().add(level);

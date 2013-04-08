@@ -1,26 +1,36 @@
-package net.catacombsnatch.game.core.world.level;
+package net.catacombsnatch.game.core.world.level.generator;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
+import net.catacombsnatch.game.core.world.level.Level;
+import net.catacombsnatch.game.core.world.level.LevelGenerator;
 import net.catacombsnatch.game.core.world.tile.Tile;
 import net.catacombsnatch.game.core.world.tile.TileRegistry;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.utils.Array;
 
-public class Layer {
-	protected final Level level;
-	protected final List<Tile> tiles;
+public class TmxLevelGenerator extends LevelGenerator {
+	protected TiledMap map;
 	
-	public Layer(Level level, MapLayer layer) {
-		this.level = level;
-		this.tiles = new ArrayList<Tile>();
+	
+	public TmxLevelGenerator(String file) {
+		super();
 		
-		if(layer instanceof TiledMapTileLayer) {
+		map = new TmxMapLoader().load(file);
+	}
+	
+	@Override
+	public Level generate() {
+		Level level = new Level(this);
+		Array<Tile> tiles = level.getTiles();
+		
+		for(MapLayer layer : map.getLayers()) {
+			if(!(layer instanceof TiledMapTileLayer)) continue;
+		
 			TiledMapTileLayer tileLayer = (TiledMapTileLayer) layer;
 			
 			for(int x = 0; x < tileLayer.getWidth(); x++) {
@@ -46,10 +56,7 @@ public class Layer {
 			}
 		}
 		
-		Collections.reverse(tiles);
+		return level;
 	}
-	
-	public List<Tile> getTiles() {
-		return tiles;
-	}
+
 }

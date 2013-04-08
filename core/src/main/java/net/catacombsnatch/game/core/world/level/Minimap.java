@@ -31,11 +31,11 @@ public class Minimap implements Renderable {
 	public void render(Scene scene) {
 		sprite.draw(scene.getSpriteBatch());
 		
-		for (Layer layer : level.layers) {
-			for (Tile tile : layer.tiles) {
-				pm.drawPixel((int) tile.getBounds().x, (int) tile.getBounds().y, Color.rgba8888(tile.getMinimapColor()));
-			}
+		for (Tile tile : level.getTiles()) {
+			pm.drawPixel((int) tile.getBounds().x, (int) tile.getBounds().y, Color.rgba8888(tile.getMinimapColor()));
 		}
+		
+		// TODO add entity icons
 		
 		map.draw(pm, 0, 0);
 		scene.getSpriteBatch().draw(map, sprite.getX() + 6, sprite.getY() + 5, 80, 80);
