@@ -1,6 +1,7 @@
 package net.catacombsnatch.game.core.entity;
 
-import net.catacombsnatch.game.core.entity.components.EntityComponent;
+import java.util.Collection;
+
 
 public class Entity {
 	protected final EntityManager manager;
@@ -29,6 +30,10 @@ public class Entity {
 
 	public <T extends EntityComponent> T getComponent( Class<T> component ) {
 		return getManager() != null ? getManager().getComponent( this, component ) : null;
+	}
+	
+	public Collection<EntityComponent> getComponents() {
+		return getManager() != null ? getManager().getComponents(this) : null;
 	}
 
 	public <T extends EntityComponent> boolean hasComponent( Class<T> component ) {

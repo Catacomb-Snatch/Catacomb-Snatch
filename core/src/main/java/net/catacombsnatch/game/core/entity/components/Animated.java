@@ -1,5 +1,6 @@
 package net.catacombsnatch.game.core.entity.components;
 
+import net.catacombsnatch.game.core.entity.EntityComponent;
 import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.screen.Renderable;
 import net.catacombsnatch.game.core.screen.Tickable;
@@ -9,8 +10,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Animated implements EntityComponent, Renderable, Tickable {
-	private static final long serialVersionUID = 1L;
-
 	protected Animation animation;
 	protected float timeState;
 	protected int x, y;

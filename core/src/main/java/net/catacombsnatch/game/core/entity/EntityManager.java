@@ -1,17 +1,17 @@
 package net.catacombsnatch.game.core.entity;
 
-import com.badlogic.gdx.Gdx;
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import net.catacombsnatch.game.core.entity.components.EntityComponent;
+import com.badlogic.gdx.Gdx;
+
 
 public class EntityManager {
 	public final static String TAG = "[EntityManager]";
@@ -23,7 +23,7 @@ public class EntityManager {
 	protected long nextId;
 
 	public EntityManager() {
-		entities = new LinkedList<Entity>();
+		entities = new ArrayList<Entity>();
 		components = new HashMap<Class<? extends EntityComponent>, ComponentStorage<? extends EntityComponent>>();
 	}
 
@@ -43,7 +43,7 @@ public class EntityManager {
 	 * @return The {@link Set} of entities
 	 */
 	public Set<Entity> getAllWithComponent( Class<EntityComponent> component ) {
-		return (Set<Entity>) components.get( component ).keySet();
+		return components.get( component ).keySet();
 	}
 
 	/**
@@ -164,6 +164,17 @@ public class EntityManager {
 		}
 
 		return null;
+	}
+	
+	public synchronized List<EntityComponent> getComponents( Entity entity ) {
+		List<EntityComponent> list = new ArrayList<EntityComponent>();
+		
+		for(@SuppressWarnings("rawtypes") ComponentStorage storage : components.values()) {
+			EntityComponent component = (EntityComponent) storage.get(entity);
+			if(component != null) list.add(component);
+		}
+		
+		return list;
 	}
 
 	/**

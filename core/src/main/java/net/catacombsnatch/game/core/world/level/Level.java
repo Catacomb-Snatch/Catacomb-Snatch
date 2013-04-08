@@ -1,5 +1,7 @@
 package net.catacombsnatch.game.core.world.level;
 
+import net.catacombsnatch.game.core.entity.Entity;
+import net.catacombsnatch.game.core.entity.EntityComponent;
 import net.catacombsnatch.game.core.entity.EntityManager;
 import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.world.tile.Tile;
@@ -24,9 +26,18 @@ public class Level implements Tickable {
 	
 	@Override
 	public void tick() {
-		// TODO
+		// Tick through tiles (for animations, ...)
 		for(Tile tile : tiles) {
 			tile.tick();
+		}
+		
+		// Tick through entities (regenerate, physics, ...)
+		for(Entity entity : entityManager.getEntities()) {
+			for(EntityComponent component : entity.getComponents()) {
+				if(!(component instanceof Tickable)) continue;
+				
+				((Tickable) component).tick();
+			}
 		}
 	}
 

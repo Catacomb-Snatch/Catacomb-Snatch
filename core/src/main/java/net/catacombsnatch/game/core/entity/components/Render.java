@@ -1,13 +1,12 @@
 package net.catacombsnatch.game.core.entity.components;
 
+import net.catacombsnatch.game.core.entity.EntityComponent;
 import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.screen.Renderable;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Render implements EntityComponent, Renderable {
-	private static final long serialVersionUID = 1L;
-
 	protected final Sprite sprite;
 
 	public Render( Sprite sprite ) {
