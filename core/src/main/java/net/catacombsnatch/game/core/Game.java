@@ -84,7 +84,7 @@ public class Game implements ApplicationListener {
 			 *    Cons: Risk of cross-project messup. 
 			 * 3. Using le old Classloader class finding method finding variant. 
 			 *    Cons: Code less readable.
-			 */ 
+			 */
 			try {
 				int size = 17, center = (size / 2);
 				IntBuffer buffer = BufferUtils.newIntBuffer(size * size);

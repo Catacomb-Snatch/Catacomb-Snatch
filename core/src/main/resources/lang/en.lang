@@ -1,6 +1,7 @@
 # Game texts encoded in UTF-8
 general.yes = Yes
 general.no = No
+general.back = Back
 
 difficulty.easy = Easy
 difficulty.normal = Normal
@@ -11,3 +12,6 @@ scene.title.demo = Start Demo
 scene.title.start = Start Game
 scene.title.options = Options
 scene.title.exit = Exit Game
+
+option.showDebug.enable = Show debug information
+option.showDebug.disable = Hide debug information

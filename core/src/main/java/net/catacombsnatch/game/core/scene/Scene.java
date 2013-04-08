@@ -1,5 +1,6 @@
 package net.catacombsnatch.game.core.scene;
 
+import net.catacombsnatch.game.core.event.EventManager;
 import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.screen.Screen;
 
@@ -19,23 +20,24 @@ public class Scene extends Stage {
 	/** The background image */
 	protected Texture background;
 	
-	/** Class- & Instanceshared boolean for avoiding repeated USE */
-	protected static boolean canUse = true;
-	
 	/**
 	 * Called whenever this scene is getting created (or opened again).
 	 * For creation only actions use the constructor.
+	 * 
+	 * @return scene The {@link Scene} that was previously open.
 	 */
-	public void enter() {
-		// Nothing to do in here
+	public void enter(Scene scene) {
+		EventManager.registerListener(this);
 	}
 	
 	/**
 	 * Called when the game switches to a new scene while the old one
 	 * still remains "open".
+	 * 
+	 * @return scene The {@link Scene} is being switched to.
 	 */
-	public void leave() {
-		// Nothing to do in here
+	public void leave(Scene scene) {
+		EventManager.unregisterListener(this);
 	}
 	
 	/**

@@ -98,12 +98,14 @@ public class SceneManager {
 
 		@Override
 		public boolean add(Scene scene) {
+			Scene before = null;
+			
 			if(!empty()) {
-				Scene peek = super.peek();
-				if(peek != null) peek.leave();
+				before = super.peek();
+				if(before != null) before.leave(scene);
 			}
 			
-			scene.enter();
+			scene.enter(before);
 			return super.add(scene);
 		}
 		
@@ -116,12 +118,12 @@ public class SceneManager {
 		public Scene pop() {
 			try {
 				Scene top = super.pop();
-				top.leave();
+				Scene peek = super.peek(); 
+				
+				top.leave(peek);
 				top.exit();
 				
-				if (getCurrent() != null) {
-					getCurrent().enter();
-				}
+				if (peek != null) peek.enter(top);
 
 				return top;
 			} catch ( Exception e ) {
