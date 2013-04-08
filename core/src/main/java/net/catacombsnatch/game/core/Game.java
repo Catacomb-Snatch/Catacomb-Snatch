@@ -38,6 +38,7 @@ public class Game implements ApplicationListener {
 	protected SceneManager sceneManager;
 
 	public static ISoundPlayer sound;
+	public static Options options;
 	
 	private Label fpsLabel;
 
@@ -46,7 +47,7 @@ public class Game implements ApplicationListener {
 		// Load static content
 		Gdx.app.setLogLevel(Application.LOG_INFO | Application.LOG_DEBUG | Application.LOG_ERROR);
 		
-		Options.load();
+		options = new Options("options.xml");
 		Language.set("en");
 
 		if ( !Art.loadResources() ) Gdx.app.exit();
@@ -108,9 +109,6 @@ public class Game implements ApplicationListener {
 			}
 		}
 		
-		//Init options
-		new Options();
-		
 		// Dive in :)
 		SceneManager.switchTo(TitleScreen.class);
 		
@@ -131,7 +129,7 @@ public class Game implements ApplicationListener {
 		if (current != null) {
 			current.render();
 			
-			if (Options.getOptions().get(Options.DEBUG, true)) {
+			if (options.get(Options.DEBUG, true)) {
 				fpsLabel.setText(Gdx.graphics.getFramesPerSecond() + " FPS");
 				fpsLabel.draw(current.getSpriteBatch(), 1);
 			}
@@ -156,7 +154,7 @@ public class Game implements ApplicationListener {
 		
 		Art.unloadResources();
 		sound.shutdown();
-		Options.save();
+		options.save();
 	}
 	
 	@EventHandler

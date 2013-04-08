@@ -7,7 +7,6 @@ import net.catacombsnatch.game.core.entity.components.Animated;
 import net.catacombsnatch.game.core.event.EventHandler;
 import net.catacombsnatch.game.core.event.EventManager;
 import net.catacombsnatch.game.core.event.input.events.KeyPressedEvent;
-import net.catacombsnatch.game.core.resource.options.Options;
 import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.resources.Language;
 import net.catacombsnatch.game.core.scene.ReusableAction;
@@ -16,7 +15,6 @@ import net.catacombsnatch.game.core.scene.SceneManager;
 import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class TitleScreen extends Scene {
@@ -41,7 +39,7 @@ public class TitleScreen extends Scene {
 			@Override
 			public boolean act0(float delta) {
 				OptionsScene scene = SceneManager.switchTo(OptionsScene.class, false);
-				scene.initGroup(Options.getOptions());
+				scene.initGroup(Game.options);
 				return true;
 			}
 		});

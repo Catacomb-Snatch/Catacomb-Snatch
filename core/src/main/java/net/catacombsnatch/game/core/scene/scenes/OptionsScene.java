@@ -1,12 +1,5 @@
 package net.catacombsnatch.game.core.scene.scenes;
 
-import java.util.Map.Entry;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-
 import net.catacombsnatch.game.core.Game;
 import net.catacombsnatch.game.core.entity.Entity;
 import net.catacombsnatch.game.core.entity.EntityManager;
@@ -15,7 +8,6 @@ import net.catacombsnatch.game.core.event.EventHandler;
 import net.catacombsnatch.game.core.event.EventManager;
 import net.catacombsnatch.game.core.event.input.events.KeyPressedEvent;
 import net.catacombsnatch.game.core.resource.options.OptionGroup;
-import net.catacombsnatch.game.core.resource.options.Options;
 import net.catacombsnatch.game.core.resources.Art;
 import net.catacombsnatch.game.core.resources.Language;
 import net.catacombsnatch.game.core.scene.ReusableAction;
@@ -23,11 +15,15 @@ import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.scene.SceneManager;
 import net.catacombsnatch.game.core.screen.Screen;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+
 public class OptionsScene extends Scene {
 	private int index = 0;
 	private final Entity charEntity;
 	private final Animated charAnimation; // Reference for quick access
-	private OptionGroup group;
+	
 
 	public OptionsScene() {
 		super();
@@ -48,12 +44,13 @@ public class OptionsScene extends Scene {
 			}
 		});
 		
-		for (Entry<String, Object> e : group.getMap().entrySet()) {
-			final String key = e.getKey();
-			Object o = e.getValue();
+		for (final String key : group.getKeys()) {
+			Object o = group.get(key);
+			
 			if (o instanceof OptionGroup) {
 				final OptionGroup newgroup = (OptionGroup) o;
-				addTextButton(Language.get("option."+key), 0, 0).addAction(new ReusableAction() {
+				
+				addTextButton(Language.get("option." + key), 0, 0).addAction(new ReusableAction() {
 					@Override
 					public boolean act0(float delta) {
 						OptionsScene scene = SceneManager.switchTo(OptionsScene.class, false);
@@ -61,20 +58,23 @@ public class OptionsScene extends Scene {
 						return true;
 					}
 				});
+				
 			} else if (o instanceof Boolean) {
-				final boolean[] bool = {(group.get(key, Boolean.class))};
-				addTextButton(Language.get("option."+key)+": "+Language.get("scene.options."+(bool[0]?"on":"off")), 0, 0)
+				final boolean[] bool = {(Boolean) o};
+				
+				addTextButton(Language.get("option."+key)+": "+Language.get("scene.options." + (bool[0]?"on":"off")), 0, 0)
 				.addAction(new ReusableAction() {
 					@Override
 					public boolean act0(float delta) {
 						bool[0] = !bool[0];
 						group.set(key, bool[0]);
 						((TextButton)getActor())
-						.setText(Language.get("option."+key)+": "+Language.get("scene.options."+(bool[0]?"on":"off")));
+						.setText(Language.get("option."+key)+": "+Language.get("scene.options." + (bool[0]?"on":"off")));
 						return true;
 					}
 				});
-			} else { //TODO: add missing types
+				
+			} else { // TODO: add missing types
 				
 			}
 		}

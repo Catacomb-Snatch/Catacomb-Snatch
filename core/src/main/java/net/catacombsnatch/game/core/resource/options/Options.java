@@ -4,38 +4,28 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
 public final class Options extends OptionGroup {
-	private static final String PREFERENCES_FILENAME = "options.xml";
-	private static Preferences preferences;
-	private static Options instance;
+	protected String fileName;
+	protected Preferences preferences;
 	
 	// Default keys
 	public final static String DEBUG = "debugMode";
 	
-	public Options() {
+	public Options(String fileName) {
 		super(null);
 		
-		// Set defaults
-		set(DEBUG, true);
+		this.fileName = fileName;
+		load();
 		
-		if (instance == null) {
-			instance = this;
-		}
+		// Set defaults
+		setDefault(DEBUG, true);
 	}
 	
-	public static Options getOptions() {
-		return instance;
-	}
-	
-	public static void save() {
+	public void save() {
 		preferences.flush();
 	}
 
-	public static void load() {
-		if(instance == null) {
-			instance = new Options();
-		}
-		
-		preferences = Gdx.app.getPreferences( PREFERENCES_FILENAME );
+	public void load() {
+		preferences = Gdx.app.getPreferences( fileName );
 	}
 	
 }

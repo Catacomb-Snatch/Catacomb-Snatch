@@ -2,6 +2,8 @@ package net.catacombsnatch.game.core.resource.options;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 
 /** Represents an option section */
@@ -43,7 +45,11 @@ public class OptionGroup {
 	}
 	
 	public OptionGroup createGroup(String name) {
-		OptionGroup group = new OptionGroup(name, this);
+		return createGroup(name, new HashMap<String, Object>());
+	}
+	
+	public OptionGroup createGroup(String name, Map<String, Object> defaults) {
+		OptionGroup group = new OptionGroup(name, this, defaults);
 		group.map.put(name, group);
 		
 		return group;
@@ -102,6 +108,22 @@ public class OptionGroup {
 
 	
 	/* ------------ Value / Key related functions ------------ */
+
+	public Set<String> getKeys() {
+		return getKeys(true);
+	}
+	
+	public Set<String> getKeys(boolean deep) {
+		Set<String> keys = map.keySet();
+		
+		if(deep) for(Entry<String, Object> e: map.entrySet()) {
+			if(!(e.getValue() instanceof OptionGroup)) continue;
+			
+			keys.addAll(((OptionGroup) e.getValue()).getKeys(true));
+		}
+		
+		return keys;
+	}
 	
 	public boolean isSet(String key) {
 		OptionGroup group = getGroup(key);
@@ -118,11 +140,7 @@ public class OptionGroup {
 	
 	@SuppressWarnings("unchecked")
 	public <T> T get(String key, Class<T> type) {
-		Object obj = map.get(key);
-		if (obj instanceof OptionGroup) {
-			return (T) ((OptionGroup)obj).get(key, type);
-		}
-		return (T) obj;
+		return (T) get(key);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -136,17 +154,22 @@ public class OptionGroup {
 		return def;
 	}
 	
-	public Map<String, Object> getMap() {
-		return map;
-	}
-	
 	public boolean set(String key, Object value) {
 		OptionGroup group = getGroup(key);
 		if(group != null) {
 			group.map.put(key, value);
 			return true;
 		}
-		map.put(key, value);
+		
+		return false;
+	}
+	
+	public boolean setDefault(String key, Object value) {
+		OptionGroup group = getGroup(key);
+		if(group != null) {
+			if(!group.map.containsKey(key)) group.map.put(key, value);
+			return true;
+		}
 		
 		return false;
 	}
