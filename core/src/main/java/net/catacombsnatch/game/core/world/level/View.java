@@ -49,6 +49,11 @@ public class View implements Renderable {
 		panel.draw(scene.getSpriteBatch());
 	}
 	
+	public void move(int mx, int my) {
+		offX += mx;
+		offY += my;
+	}
+	
 	public void resize() {
 		if(viewport == null) return;
 		

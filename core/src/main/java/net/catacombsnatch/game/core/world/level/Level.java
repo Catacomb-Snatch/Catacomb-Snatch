@@ -79,6 +79,10 @@ public class Level implements Tickable {
 		return finished;
 	}
 	
+	/** @return The {@link EntityManager} for this level */
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
 	
 	/** @return The {@link LevelGenerator} used to generate this level */
 	public LevelGenerator getGenerator() {
