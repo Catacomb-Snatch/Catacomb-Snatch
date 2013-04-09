@@ -59,7 +59,7 @@ public class Scene extends Stage {
 	Rectangle r = new Rectangle();
 	Vector2 v2 = new Vector2();
 	
-	public void render() {
+	public void render(float delta) {
 		// Draw background
 		if(background != null) {
 			getSpriteBatch().begin();

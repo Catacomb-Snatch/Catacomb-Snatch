@@ -41,7 +41,7 @@ public class InGameScene extends Scene {
 	}
 	
 	@Override
-	public void render() {
+	public void render(float delta) {
 		if(!initialized) return;
 		
 		// Just some overlays
@@ -49,7 +49,7 @@ public class InGameScene extends Scene {
 		getSpriteBatch().begin();
 		
 		// Tick, tock - the world is just a clock...
-		world.tick();
+		world.tick(delta);
 		
 		// Open the windows to actually see the outside!
 		for(View view : views) {

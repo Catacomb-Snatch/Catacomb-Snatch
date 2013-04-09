@@ -28,12 +28,12 @@ public class Level implements Tickable {
 	}
 	
 	@Override
-	public void tick() {
+	public void tick(float delta) {
 		// Tick through tiles (for animations, ...)
 		for(Tile tile : tiles) {
 			if(tile == null) continue;
 			
-			tile.tick();
+			tile.tick(delta);
 		}
 		
 		// Tick through entities (regenerate, physics, ...)
@@ -41,7 +41,7 @@ public class Level implements Tickable {
 			for(EntityComponent component : entity.getComponents()) {
 				if(!(component instanceof Tickable)) continue;
 				
-				((Tickable) component).tick();
+				((Tickable) component).tick(delta);
 			}
 		}
 	}

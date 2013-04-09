@@ -8,7 +8,9 @@ import net.catacombsnatch.game.core.screen.Screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Array;
 
 public abstract class MenuScene extends Scene {
 	private final Animation ani;
@@ -25,7 +27,7 @@ public abstract class MenuScene extends Scene {
 		setBackground(bg);
 		
 		// Add animated character cursor
-		ani = new Animation(0.05f, Art.lordLard[0]);
+		ani = new Animation(0.2f, new Array<TextureRegion>(Art.lordLard[0]), Animation.LOOP);
 	}
 	
 	protected void init() {
@@ -41,9 +43,15 @@ public abstract class MenuScene extends Scene {
 		update(true);
 	}
 	
+	@Override
+	public void render(float delta) {
+		super.render(delta);
+		
+		tick += delta;
+	}
+	
 	protected void drawCharacter() {
-		tick += Gdx.graphics.getDeltaTime();
-		getSpriteBatch().draw( ani.getKeyFrame( tick, true ), aniX, aniY );
+		getSpriteBatch().draw( ani.getKeyFrame(tick), aniX, aniY );
 	}
 	
 

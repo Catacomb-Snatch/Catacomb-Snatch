@@ -5,7 +5,6 @@ import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.screen.Renderable;
 import net.catacombsnatch.game.core.screen.Tickable;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -26,8 +25,8 @@ public class Animated implements EntityComponent, Renderable, Tickable {
 	}
 
 	@Override
-	public void tick() {
-		timeState += Gdx.graphics.getDeltaTime();
+	public void tick(float delta) {
+		timeState += delta;
 	}
 	
 	@Override

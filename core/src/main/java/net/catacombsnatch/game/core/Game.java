@@ -129,7 +129,7 @@ public class Game implements ApplicationListener {
 
 		Scene current = SceneManager.getCurrent();
 		if (current != null) {
-			current.render();
+			current.render(Gdx.graphics.getDeltaTime());
 			
 			if (options.get(DefaultOptions.DEBUG, true)) {
 				fpsLabel.setText(Gdx.graphics.getFramesPerSecond() + " FPS");

@@ -27,14 +27,14 @@ public class World implements Tickable {
 	}
 
 	@Override
-	public void tick() {
+	public void tick(float delta) {
 		// TODO this could cause an infinite loop!
 		if(currentLevel == null || currentLevel.hasFinished()) {
 			currentLevel = getRotation().getNext(getLevels());
 		}
 		
 		if(currentLevel != null) {
-			currentLevel.tick();
+			currentLevel.tick(delta);
 		}
 	}
 	

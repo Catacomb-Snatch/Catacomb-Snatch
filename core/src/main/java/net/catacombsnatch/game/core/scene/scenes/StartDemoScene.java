@@ -43,8 +43,8 @@ public class StartDemoScene extends MenuScene {
 	}
 	
 	@Override
-	public void render() {
-		super.render();
+	public void render(float delta) {
+		super.render(delta);
 		
 		drawCharacter();
 	}

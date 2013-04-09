@@ -12,7 +12,7 @@ public class Health implements EntityComponent, Tickable {
 	public int maxHealth;
 
 	@Override
-	public void tick() {
+	public void tick(float delta) {
 		if(regenerate) {
 			if(tick < speed) tick++;
 			

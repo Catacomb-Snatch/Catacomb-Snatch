@@ -46,7 +46,7 @@ public abstract class StaticTile extends Tile {
 	}
 
 	@Override
-	public void tick() {
+	public void tick(float delta) {
 		// This is static, do nothing
 	}
 
