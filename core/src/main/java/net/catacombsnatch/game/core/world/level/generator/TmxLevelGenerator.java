@@ -11,7 +11,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.utils.Array;
 
 public class TmxLevelGenerator extends LevelGenerator {
 	protected TiledMap map;
@@ -25,13 +24,15 @@ public class TmxLevelGenerator extends LevelGenerator {
 	
 	@Override
 	public Level generate() {
-		Level level = new Level(this);
-		Array<Tile> tiles = level.getTiles();
+		Level level = null;
 		
 		for(MapLayer layer : map.getLayers()) {
 			if(!(layer instanceof TiledMapTileLayer)) continue;
 		
 			TiledMapTileLayer tileLayer = (TiledMapTileLayer) layer;
+			if(level == null) {
+				level = new Level(this, tileLayer.getWidth(), tileLayer.getHeight());
+			}
 			
 			for(int x = 0; x < tileLayer.getWidth(); x++) {
 				for(int y = 0; y < tileLayer.getHeight(); y++) {
@@ -45,8 +46,8 @@ public class TmxLevelGenerator extends LevelGenerator {
 						Tile tile = t.newInstance();
 						tile.init(level, x, y);
 						
-						tiles.add(tile);
-							
+						level.getTiles()[x + y * tileLayer.getWidth()] = tile;
+						
 					} catch (Exception e) {
 						Gdx.app.error("MapLayer", "Could not add tile to layer", e);
 					} else {

@@ -6,28 +6,33 @@ import net.catacombsnatch.game.core.entity.EntityManager;
 import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.world.tile.Tile;
 
-import com.badlogic.gdx.utils.Array;
-
 public class Level implements Tickable {
 	protected EntityManager entityManager;
-	protected Array<Tile> tiles;
+	protected Tile[] tiles;
 	
 	protected LevelGenerator generator;
+	
+	protected int width, height;
 	
 	protected boolean debug = false;
 	protected boolean finished = false;
 
-	public Level(LevelGenerator generator) {
+	public Level(LevelGenerator generator, int width, int height) {
 		this.generator = generator;
 		
 		entityManager = new EntityManager();
-		tiles = new Array<Tile>();
+		tiles = new Tile[width * height];
+		
+		this.width = width;
+		this.height = height;
 	}
 	
 	@Override
 	public void tick() {
 		// Tick through tiles (for animations, ...)
 		for(Tile tile : tiles) {
+			if(tile == null) continue;
+			
 			tile.tick();
 		}
 		
@@ -46,9 +51,17 @@ public class Level implements Tickable {
 		this.debug = debug;
 	}
 	
-	/** @return A list of all stored level layers. */
-	public Array<Tile> getTiles() {
+	/** @return An array of all stored tiles (size = level width * level height). */
+	public Tile[] getTiles() {
 		return tiles;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
 	}
 	
 	/**

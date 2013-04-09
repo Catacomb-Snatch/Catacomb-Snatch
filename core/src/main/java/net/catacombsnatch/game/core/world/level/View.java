@@ -13,11 +13,15 @@ public class View implements Renderable {
 	protected Level level;
 	protected Rectangle viewport;
 	protected int rendered;
+	protected int offX, offY;
 	
 	protected Sprite panel;
 	
 	public View(Level lvl) {
 		level = lvl;
+		
+		offX = 0;
+		offY = 0;
 		
 		panel = new Sprite(Art.skin.getAtlas().findRegion("player-panel"));
 	}
@@ -32,11 +36,14 @@ public class View implements Renderable {
 		
 		rendered = 0; // Reset counter
 		
-		for(Tile tile : level.getTiles()) {
-			if(!tile.getBounds().overlaps(viewport))  continue;
+		for(int y = 32; y >= offY; y--) {
+			for(int x = offX; x < 32; x++) {
+				Tile tile = level.getTiles()[x + y * level.getWidth()];
+				if(tile == null || !tile.getBounds().overlaps(viewport))  continue;
 				
-			tile.render(scene);
-			rendered++;
+				tile.render(scene);
+				rendered++;
+			}
 		}
 		
 		panel.draw(scene.getSpriteBatch());

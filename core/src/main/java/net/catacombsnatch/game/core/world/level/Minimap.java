@@ -32,6 +32,8 @@ public class Minimap implements Renderable {
 		sprite.draw(scene.getSpriteBatch());
 		
 		for (Tile tile : level.getTiles()) {
+			if(tile == null) continue;
+			
 			pm.drawPixel((int) tile.getBounds().x, (int) tile.getBounds().y, Color.rgba8888(tile.getMinimapColor()));
 		}
 		
