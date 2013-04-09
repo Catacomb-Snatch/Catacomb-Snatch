@@ -22,5 +22,15 @@ public class DestroyableWallTile extends StaticTile {
 	public boolean canPass(Entity entity) {
 		return false;
 	}
+
+	@Override
+	public void update() {
+		// Nothing to do ... yet
+	}
+
+	@Override
+	public Class<FloorTile> destroy() {
+		return FloorTile.class;
+	}
 	
 }

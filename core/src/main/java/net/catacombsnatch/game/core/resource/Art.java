@@ -17,7 +17,7 @@ public class Art {
 
 	public static TextureRegion[][] lordLard;
 	
-	public static TextureRegion[] tiles_floor, tiles_walls;
+	public static TextureRegion[] tiles_floor, tiles_sand, tiles_walls;
 
 	/**
 	 * Loads all the artwork
@@ -30,17 +30,18 @@ public class Art {
 			skin = new Skin(Gdx.files.internal("art/interface.skin"), new TextureAtlas("art/interface.atlas"));
 			
 			// Load backgrounds
-			pyramid = load( "art/screen/pyramid.png" );
+			pyramid = load("screen/pyramid.png");
 
 			// Load characters
-			lordLard = cut( "art/player/lord_lard.png", 23, 32 );
+			lordLard = cut("player/lord_lard.png", 23, 32);
 
 			// Load tiles
-			tiles_floor = cut("art/tiles/floor.png", 32, 32)[0];
-			tiles_walls = cut("art/tiles/walls.png", 32, 56)[0];
+			tiles_floor = cut("tiles/floor.png", 32, 32)[0];
+			tiles_sand = cut("tiles/sand.png", 32, 32)[0];
+			tiles_walls = cut("tiles/walls.png", 32, 56)[0];
 			
 			// Load extras
-			logo = load( "art/logo.png" );
+			logo = load("logo.png");
 			
 			return true;
 		} catch ( Exception e ) {
@@ -62,7 +63,7 @@ public class Art {
 	}
 
 	private static Texture load( String path ) {
-		Texture tex = new Texture( Gdx.files.internal( path ) );
+		Texture tex = new Texture( Gdx.files.internal( "art/" + path ) );
 		tex.setFilter( TextureFilter.Nearest, TextureFilter.Nearest );
 
 		return tex;

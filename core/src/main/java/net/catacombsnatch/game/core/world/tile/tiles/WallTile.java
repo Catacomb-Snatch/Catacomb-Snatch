@@ -25,4 +25,9 @@ public class WallTile extends StaticTile {
 		return false;
 	}
 
+	@Override
+	public void update() {
+		// Nothing to do ... yet
+	}
+
 }

@@ -5,11 +5,13 @@ import net.catacombsnatch.game.core.screen.Renderable;
 import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.Minimap;
+import net.catacombsnatch.game.core.world.tile.tiles.DestroyableWallTile;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 public abstract class Tile implements Renderable, Tickable {
 	public static final int HEIGHT = 32;
@@ -46,12 +48,45 @@ public abstract class Tile implements Renderable, Tickable {
 	}
 
 	/**
+	 * Called whenever a tile gets removed from the level.
+	 * Example: {@link DestroyableWallTile}
+	 * 
+	 * @return The class of the tile getting placed next, null this tile should not be replaced.
+	 */
+	public Class<? extends Tile> destroy() {
+		return null;
+	}
+	
+	/**
+	 * Used to update the tile.
+	 * Called whenever a tile gets {@link #destroy()}ed;
+	 */
+	public abstract void update();
+	
+	/**
 	 * Returns true if the entity can pass the tile.
 	 * 
 	 * @param entity The entity to check
 	 * @return True if the entity can pass, otherwise false
 	 */
 	public abstract boolean canPass( Entity entity );
+	
+	/**
+	 * Gets an attached tile by its {@link Side}.
+	 * 
+	 * @param side The side the tile should be attached to
+	 * @return The tile, if found, otherwise null.
+	 */
+	public Tile getRelative(Side side) {
+		try {
+			Vector2 vec = side.getFor(bb.x, bb.y);
+			return level.getTiles()[(int) (vec.x + vec.y * level.getWidth())];
+			
+		} catch(Exception e) {
+			// Thrown when out of bounds, etc.
+			return null;
+		}
+	}
 	
 	/**
 	 * Calculates the average color of a texture region.
@@ -81,6 +116,36 @@ public abstract class Tile implements Renderable, Tickable {
 		
 		pixmap.dispose();
 		return new Color(r / t, g / t, b / t, 1);
+	}
+	
+	/** Represents a side (and its edges) of a {@link Tile}. */
+	public enum Side {
+		// Linear sides
+		NORTH(0, 1, 0x1), EAST(1, 0, 0x2), SOUTH(0, -1, 0x4), WEST(-1, 0, 0x8),
+		
+		// Edges
+		NORTH_EAST(1, 1, 0), EAST_SOUTH(1, -1, 0), SOUTH_WEST(-1, -1, 0), WEST_NORTH(-1, 1, 0);
+		
+		
+		private Vector2 vector;
+		private byte weight;
+		
+		private Side(float x, float y, int b) {
+			vector = new Vector2(x, y);
+			weight = (byte) b;
+		}
+		
+		public Vector2 getFor(float x, float y) {
+			return new Vector2(x, y).add(vector);
+		}
+		
+		public byte getWeight() {
+			return weight;
+		}
+		
+		public boolean isEdge() {
+			return weight == 0;
+		}
 	}
 	
 }
