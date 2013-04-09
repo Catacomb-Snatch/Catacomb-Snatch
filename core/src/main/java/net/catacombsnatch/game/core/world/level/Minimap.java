@@ -40,7 +40,8 @@ public class Minimap implements Renderable {
 		// TODO add entity icons
 		
 		map.draw(pm, 0, 0);
-		scene.getSpriteBatch().draw(map, sprite.getX() + 6, sprite.getY() + 5, 80, 80);
+		
+		scene.getSpriteBatch().draw(map, sprite.getX() + 6, sprite.getY() + 5 + 80, 80, -80);
 	}
 	
 	public void update(boolean resize) {
