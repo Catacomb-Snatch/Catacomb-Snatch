@@ -124,7 +124,7 @@ public abstract class Tile implements Renderable, Tickable {
 		NORTH(0, 1, 0x1), EAST(1, 0, 0x2), SOUTH(0, -1, 0x4), WEST(-1, 0, 0x8),
 		
 		// Edges
-		NORTH_EAST(1, 1, 0), EAST_SOUTH(1, -1, 0), SOUTH_WEST(-1, -1, 0), WEST_NORTH(-1, 1, 0);
+		NORTH_EAST(1, 1, 0x9), EAST_SOUTH(1, -1, 0x10), SOUTH_WEST(-1, -1, 0x12), WEST_NORTH(-1, 1, 0xF);
 		
 		
 		private Vector2 vector;
@@ -139,12 +139,12 @@ public abstract class Tile implements Renderable, Tickable {
 			return new Vector2(x, y).add(vector);
 		}
 		
-		public byte getWeight() {
-			return weight;
+		public byte getMask() {
+			return isEdge() ? (byte) (weight - 0x8) : weight;
 		}
 		
 		public boolean isEdge() {
-			return weight == 0;
+			return weight > 0x8;
 		}
 	}
 	

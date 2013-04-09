@@ -7,6 +7,7 @@ import java.util.Map;
 
 import net.catacombsnatch.game.core.world.tile.tiles.DestroyableWallTile;
 import net.catacombsnatch.game.core.world.tile.tiles.FloorTile;
+import net.catacombsnatch.game.core.world.tile.tiles.SandTile;
 import net.catacombsnatch.game.core.world.tile.tiles.WallTile;
 
 public class TileRegistry {
@@ -16,6 +17,7 @@ public class TileRegistry {
 		
 		// Register default tiles
 		register(FloorTile.class, "floor");
+		register(SandTile.class, "sand");
 		register(WallTile.class, "wall");
 		register(DestroyableWallTile.class, "destroyable");
 	}

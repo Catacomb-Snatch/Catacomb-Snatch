@@ -32,7 +32,9 @@ public class FloorTile extends StaticTile {
 	public void render(Scene scene) {
 		super.render(scene);
 		
-		if(overlay != null) overlay.draw(scene.getSpriteBatch());
+		if(overlay != null) {
+			overlay.draw(scene.getSpriteBatch());
+		}
 	}
 
 	@Override
@@ -40,24 +42,20 @@ public class FloorTile extends StaticTile {
 		byte mask = 0x0;
 		
 		for(Side side : Side.values()) {
-			if(side.isEdge()) continue; // TODO
+			if(side.isEdge()) continue;
 			
 			Tile tile = getRelative(side);
 			if(tile == null) continue;
 			
-			if(tile instanceof WallTile || tile instanceof DestroyableWallTile) {
-				mask += side.getWeight();
+			if(tile instanceof SandTile || tile instanceof WallTile || tile instanceof DestroyableWallTile) {
+				mask += side.getMask();
 			}
 		}
 		
 		if(mask > 0) {
-			if(overlay == null) {
-				overlay = new Sprite();
-				sprite.setBounds(sprite.getX(), sprite.getY(), WIDTH, HEIGHT);
-			}
+			if(overlay == null) overlay = new Sprite(sprite);
 			
-			overlay.setRegion(Art.tiles_sand[mask]);
-			
+			overlay.setRegion(Art.tiles_shadows[mask - 1]);
 		} else {
 			overlay = null;
 		}
