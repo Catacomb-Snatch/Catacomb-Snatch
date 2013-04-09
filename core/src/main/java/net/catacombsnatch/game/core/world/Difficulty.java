@@ -3,7 +3,7 @@ package net.catacombsnatch.game.core.world;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.catacombsnatch.game.core.resources.Language;
+import net.catacombsnatch.game.core.resource.Language;
 
 public class Difficulty {
 	public final static Difficulty EASY = new Difficulty("difficulty.easy", .5f, .5f, 1.5f, .5f, false, 25, 3, 30);

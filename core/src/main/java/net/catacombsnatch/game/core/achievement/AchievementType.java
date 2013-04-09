@@ -1,6 +1,6 @@
 package net.catacombsnatch.game.core.achievement;
 
-import net.catacombsnatch.game.core.resources.Language;
+import net.catacombsnatch.game.core.resource.Language;
 
 public enum AchievementType {
 	DEFAULT("achievement.type.default"),

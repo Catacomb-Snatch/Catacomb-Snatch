@@ -1,7 +1,6 @@
 package net.catacombsnatch.game.core.world.level.generator;
 
 import net.catacombsnatch.game.core.world.level.Level;
-import net.catacombsnatch.game.core.world.level.LevelGenerator;
 import net.catacombsnatch.game.core.world.tile.Tile;
 import net.catacombsnatch.game.core.world.tile.TileRegistry;
 

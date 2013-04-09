@@ -1,4 +1,4 @@
-package net.catacombsnatch.game.core.resources;
+package net.catacombsnatch.game.core.resource;
 
 /** Represents build information added during maven compilation */
 public final class Version {

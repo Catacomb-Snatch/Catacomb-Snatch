@@ -1,7 +1,7 @@
 package net.catacombsnatch.game.core.world.tile.tiles;
 
 import net.catacombsnatch.game.core.entity.Entity;
-import net.catacombsnatch.game.core.resources.Art;
+import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.tile.StaticTile;
 

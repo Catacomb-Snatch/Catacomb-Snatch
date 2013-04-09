@@ -1,8 +1,8 @@
 package net.catacombsnatch.game.core.scene.scenes;
 
 import net.catacombsnatch.game.core.Game;
-import net.catacombsnatch.game.core.resources.Art;
-import net.catacombsnatch.game.core.resources.Language;
+import net.catacombsnatch.game.core.resource.Art;
+import net.catacombsnatch.game.core.resource.Language;
 import net.catacombsnatch.game.core.scene.MenuScene;
 import net.catacombsnatch.game.core.scene.ReusableAction;
 import net.catacombsnatch.game.core.scene.Scene;

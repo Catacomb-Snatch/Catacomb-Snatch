@@ -1,4 +1,4 @@
-package net.catacombsnatch.game.core.resources;
+package net.catacombsnatch.game.core.resource;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;

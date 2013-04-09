@@ -1,7 +1,7 @@
 package net.catacombsnatch.game.core.scene;
 
 import net.catacombsnatch.game.core.event.EventManager;
-import net.catacombsnatch.game.core.resources.Art;
+import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.Gdx;

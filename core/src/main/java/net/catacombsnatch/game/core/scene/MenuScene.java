@@ -2,7 +2,7 @@ package net.catacombsnatch.game.core.scene;
 
 import net.catacombsnatch.game.core.event.EventHandler;
 import net.catacombsnatch.game.core.event.input.events.KeyReleaseEvent;
-import net.catacombsnatch.game.core.resources.Art;
+import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.Gdx;
