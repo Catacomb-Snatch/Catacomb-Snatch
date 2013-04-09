@@ -7,7 +7,7 @@ import net.catacombsnatch.game.core.world.tile.StaticTile;
 
 public class SandTile extends StaticTile {
 
-	protected SandTile() {
+	public SandTile() {
 		super(getColor(Art.tiles_sand[0]));
 	}
 	

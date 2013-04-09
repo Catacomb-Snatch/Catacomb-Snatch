@@ -86,13 +86,16 @@ public class Game implements ApplicationListener {
 			 *    Cons: Code less readable.
 			 */
 			try {
-				int size = 17, center = (size / 2);
+				int size = 16, center = (size / 2);
 				IntBuffer buffer = BufferUtils.newIntBuffer(size * size);
 
 				int x = 0, y = 0;
 				for (int n = 0; n < buffer.limit(); n++) {
-					if (x == center || y == center + 1) buffer = buffer.put(n, 0xFFFFFFFF);
-					
+					if ((x == center || y == center) && 
+							!(x >= center-1 && y >= center-1 && 
+							x <= center+1 && y <= center+1)) {
+						buffer = buffer.put(n, 0xFFFFFFFF);
+					}
 					x++;
 					if(x == size) {
 						x = 0;
