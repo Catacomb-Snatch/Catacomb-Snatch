@@ -11,11 +11,11 @@ import net.catacombsnatch.game.core.world.World.MapRotation;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.Minimap;
 import net.catacombsnatch.game.core.world.level.View;
-import net.catacombsnatch.game.core.world.level.generator.TmxLevelGenerator;
 
 import com.badlogic.gdx.math.Rectangle;
 
 public class InGameScene extends Scene {
+	protected boolean initialized = false;
 	
 	/** The world we are playing in */
 	protected World world;
@@ -25,9 +25,9 @@ public class InGameScene extends Scene {
 	
 	public InGameScene() {
 		super();
-
-		Level level = new TmxLevelGenerator("maps/demo.tmx").generate();
-		
+	}
+	
+	public void init(Level level) {
 		world = new World(Difficulty.EASY, MapRotation.ONCE);
 		world.getLevels().add(level);
 		
@@ -35,11 +35,15 @@ public class InGameScene extends Scene {
 		views.add(new View(level));
 		
 		minimap = new Minimap(level);
+		
+		initialized = true;
 		update(true);
 	}
 	
 	@Override
 	public void render() {
+		if(!initialized) return;
+		
 		// Just some overlays
 		super.draw();
 		getSpriteBatch().begin();
@@ -58,6 +62,8 @@ public class InGameScene extends Scene {
 	
 	@Override
 	public void update(boolean resize) {
+		if(!initialized) return;
+		
 		if(resize) {
 			minimap.update(true);
 			

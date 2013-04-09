@@ -36,8 +36,8 @@ public class View implements Renderable {
 		
 		rendered = 0; // Reset counter
 		
-		for(int y = 32; y >= offY; y--) {
-			for(int x = offX; x < 32; x++) {
+		for(int y = level.getHeight() - 1; y >= offY; y--) {
+			for(int x = offX; x < level.getWidth(); x++) {
 				Tile tile = level.getTiles()[x + y * level.getWidth()];
 				if(tile == null || !tile.getBounds().overlaps(viewport))  continue;
 				

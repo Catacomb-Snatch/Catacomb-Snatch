@@ -37,7 +37,7 @@ public class TitleScreen extends MenuScene {
 		addTextButton(Language.get("scene.title.demo"), 0, 0).addAction(new ReusableAction() {
 			@Override
 			public boolean use(float delta) {
-				SceneManager.switchTo(InGameScene.class, true);
+				SceneManager.switchTo(StartDemoScene.class);
 				return true;
 			}
 		});
