@@ -54,7 +54,7 @@ public class Game implements ApplicationListener {
 		
 		// Load options
 		options = new PreferenceOptions("options.xml");
-		options.setDefault(DefaultOptions.DEBUG, true);
+		DefaultOption.setDefaults();
 		
 		// Load sound system
 		try {
@@ -134,7 +134,7 @@ public class Game implements ApplicationListener {
 		if (current != null) {
 			current.render(Gdx.graphics.getDeltaTime());
 			
-			if (options.get(DefaultOptions.DEBUG, true)) {
+			if (DefaultOption.DEBUG.get()) {
 				fpsLabel.setText(Gdx.graphics.getFramesPerSecond() + " FPS");
 				fpsLabel.draw(current.getSpriteBatch(), 1);
 			}
@@ -188,8 +188,56 @@ public class Game implements ApplicationListener {
 	}
 	
 	
-	public final static class DefaultOptions {
-		public final static String DEBUG = "debugMode";
+	public static enum DefaultOption {
+		DEBUG("debugMode", true),
+		VSYNC("vSyncEnabled", true, new Runnable() {
+			@Override
+			public void run() {
+				boolean b = (Boolean) DefaultOption.VSYNC.get();
+				System.out.println(b);
+				
+				Gdx.graphics.setVSync(b);
+			}
+		});
+		
+		private final String key;
+		private final Object value;
+		private final Runnable runnable;
+		
+		DefaultOption(String key, Object value) {
+			this(key, value, null);
+		}
+		
+		DefaultOption(String key, Object value, Runnable runnable) {
+			this.key = key;
+			this.value = value;
+			this.runnable = runnable;
+		}
+		
+		@SuppressWarnings("unchecked")
+		public <T> T get() {
+			return (T) Game.options.get(key, value);
+		}
+		
+		public void set(Object val) {
+			Game.options.set(key, val);
+			
+			if(runnable != null) runnable.run();
+		}
+		
+		public static void setDefaults() {
+			for(DefaultOption option : values()) {
+				Game.options.setDefault(option.key, option.value);
+			}
+		}
+		
+		public static DefaultOption getOption(String key) {
+			for(DefaultOption option : values()) {
+				if(option.key.equalsIgnoreCase(key)) return option;
+			}
+			
+			return null;
+		}
 	}
 
 }

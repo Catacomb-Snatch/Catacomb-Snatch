@@ -1,5 +1,6 @@
 package net.catacombsnatch.game.core.scene.scenes;
 
+import net.catacombsnatch.game.core.Game.DefaultOption;
 import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.resource.Language;
 import net.catacombsnatch.game.core.resource.options.OptionGroup;
@@ -42,6 +43,7 @@ public class OptionsScene extends MenuScene {
 				
 			} else if (o instanceof Boolean) {
 				final boolean b = (Boolean) o;
+				final DefaultOption option = DefaultOption.getOption(key);
 				final TextButton button = addTextButton(Language.get("option." + key + (b ? ".disable" : ".enable")), 0, 0);
 				
 				button.addAction(new ReusableAction() {
@@ -50,7 +52,10 @@ public class OptionsScene extends MenuScene {
 					@Override
 					public boolean use(float delta) {
 						down = !down;
-						group.set(key, down);
+						
+						if(option != null) option.set(down); 
+						else group.set(key, down);
+						
 						button.setText(Language.get("option." + key + (down ? ".disable" : ".enable")));
 						
 						return true;
