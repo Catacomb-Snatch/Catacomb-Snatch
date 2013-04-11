@@ -71,7 +71,7 @@ public class Level implements Tickable {
 	 * @return The tile, or null when x and / or y are out of level boundaries.
 	 */
 	public Tile getTile(int x, int y) {
-		return (x < 0 || y < 0 || x > width-1 || y > height-1) ? null : tiles[x + y * width];
+		return (x < 0 || y < 0 || x >= width || y >= height) ? null : tiles[x + y * width];
 	}
 	
 	/**
@@ -83,7 +83,7 @@ public class Level implements Tickable {
 	 * @param y The y position
 	 */
 	public void setTile(Tile tile, int x, int y) {
-		if(x < 0 || y < 0 || x > width-1 || y > height-1) return;
+		if(x < 0 || y < 0 || x >= width || y >= height) return;
 		
 		tiles[x + y * width] = tile;
 	}
