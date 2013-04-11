@@ -4,8 +4,6 @@ import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.tile.Tile;
 import net.catacombsnatch.game.core.world.tile.TileRegistry;
 
-import com.badlogic.gdx.Gdx;
-
 public class DebugLevelGenerator extends LevelGenerator {
 
 	@Override
@@ -14,15 +12,8 @@ public class DebugLevelGenerator extends LevelGenerator {
 		
 		int i = 0;
 		for(String type : TileRegistry.getTypes()) {
-			try {
-				Tile t = TileRegistry.getByName(type).newInstance();
-				t.init(level, i, 0);
-				
-				level.getTiles()[i] = t;
-				
-			} catch (Exception e) {
-				Gdx.app.error("DebugLevelGenerator", "Could not add tile with id: " + type, e);
-			}
+			Tile tile = TileRegistry.createFor(type, level, i, 0);
+			if(tile != null) level.getTiles()[i] = tile;
 			
 			i++;
 		}

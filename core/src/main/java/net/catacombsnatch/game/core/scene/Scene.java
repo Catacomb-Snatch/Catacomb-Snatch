@@ -19,6 +19,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class Scene extends Stage {
 	/** The background image */
 	protected Texture background;
+
+	private final Rectangle currentActorRect = new Rectangle();
+	private Vector2 mousePos = new Vector2();
 	
 	/**
 	 * Called whenever this scene is getting created (or opened again).
@@ -56,8 +59,6 @@ public class Scene extends Stage {
 	 */
 	public void update(boolean resize) {}
 	
-	Rectangle r = new Rectangle();
-	Vector2 v2 = new Vector2();
 	
 	public void render(float delta) {
 		// Draw background
@@ -67,24 +68,22 @@ public class Scene extends Stage {
 			getSpriteBatch().end();
 		}
 		
-		//Similar to Google's Android "Project Butter":
-		//Updating mouse dependent stuff in render() 
+		// Similar to Google's Android "Project Butter":
+		// Updating mouse dependent stuff in render() 
 		if (!Gdx.input.isTouched()) {
-			int mx = Gdx.input.getX();
-			int my = Gdx.input.getY();
-			v2.set(mx, my);
-			v2 = screenToStageCoordinates(v2);
-			//System.out.println("new: "+v2);
+			mousePos = screenToStageCoordinates(mousePos.set(Gdx.input.getX(), Gdx.input.getY()));
+			
 			for (Actor a : getActors()) {
-				r.set(a.getX(), a.getY(), a.getWidth(), a.getHeight());
+				currentActorRect.set(a.getX(), a.getY(), a.getWidth(), a.getHeight());
+				
 				for (EventListener el : a.getListeners()) {
-					if (el instanceof InputListener) {
-						InputListener il = (InputListener) el;
-						if (r.contains(v2.x, v2.y)) {
-							il.enter(null, v2.x, v2.y, -1, null);
-						} else {
-							il.exit(null, v2.x, v2.y, -1, null);
-						}
+					if (!(el instanceof InputListener)) continue;
+					
+					InputListener il = (InputListener) el;
+					if (currentActorRect.contains(mousePos.x, mousePos.y)) {
+						il.enter(null, mousePos.x, mousePos.y, -1, null);
+					} else {
+						il.exit(null, mousePos.x, mousePos.y, -1, null);
 					}
 				}
 			}

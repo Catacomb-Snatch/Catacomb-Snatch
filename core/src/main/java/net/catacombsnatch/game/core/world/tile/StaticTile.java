@@ -1,10 +1,11 @@
 package net.catacombsnatch.game.core.world.tile;
 
-import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.world.level.Level;
+import net.catacombsnatch.game.core.world.level.View;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public abstract class StaticTile extends Tile {
@@ -41,13 +42,24 @@ public abstract class StaticTile extends Tile {
 	}
 
 	@Override
-	public void render(Scene scene) {
-		sprite.draw(scene.getSpriteBatch());
+	public void render(SpriteBatch graphics, View view) {
+		renderSprite(sprite, graphics, view);
 	}
 
 	@Override
 	public void tick(float delta) {
 		// This is static, do nothing
 	}
-
+	
+	protected void renderSprite(Sprite sprite, SpriteBatch graphics, View view) {
+		graphics.draw(sprite.getTexture(),
+			sprite.getX() - view.getOffset().x,
+			sprite.getY() - view.getOffset().y,
+			sprite.getRegionX(),
+			sprite.getRegionY(),
+			sprite.getRegionWidth(),
+			sprite.getRegionHeight()
+		);
+	}
+	
 }

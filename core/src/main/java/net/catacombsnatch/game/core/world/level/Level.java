@@ -52,15 +52,48 @@ public class Level implements Tickable {
 		this.debug = debug;
 	}
 	
+	/** @return True if debug information should be shown, otherwise false. */
+	public boolean isDebug() {
+		return debug;
+	}
+	
 	/** @return An array of all stored tiles (size = level width * level height). */
 	public Tile[] getTiles() {
 		return tiles;
 	}
 	
+	/**
+	 * Gets a tile at the given x and y coordinate.
+	 * If x and / or y are out of the level boundaries, null is getting returned.
+	 * 
+	 * @param x The x position
+	 * @param y The y position
+	 * @return The tile, or null when x and / or y are out of level boundaries.
+	 */
+	public Tile getTile(int x, int y) {
+		return (x < 0 || y < 0 || x > width || y > height) ? null : tiles[x + y * width];
+	}
+	
+	/**
+	 * Sets a tile at the given x and y coordinate.
+	 * If x and / or y are out of the level boundaries, nothing is being set.
+	 * 
+	 * @param Tile The tile object to set
+	 * @param x The x position
+	 * @param y The y position
+	 */
+	public void setTile(Tile tile, int x, int y) {
+		if(x < 0 || y < 0 || x > width || y > height) return;
+		
+		tiles[x + y * width] = tile;
+	}
+	
+	/** @return The level width <b>in tiles</b> */
 	public int getWidth() {
 		return width;
 	}
 	
+	/** @return The level height <b>in tiles</b> */
 	public int getHeight() {
 		return height;
 	}

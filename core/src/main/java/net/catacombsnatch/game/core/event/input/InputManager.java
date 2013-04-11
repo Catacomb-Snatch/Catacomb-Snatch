@@ -1,5 +1,6 @@
 package net.catacombsnatch.game.core.event.input;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,13 +26,19 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 public class InputManager implements InputProcessor, ControllerListener {
 	protected static KeyMap keyboard;
 	protected static Map<Controller, KeyMap> controllers;
+	protected static Map<Key, Boolean> pressed;
 	static {
 		keyboard = KeyMap.KEYBOARD;
 		controllers = new HashMap<Controller, KeyMap>();
+		pressed = new EnumMap<Key, Boolean>(Key.class);
 	}
 	
 	public static boolean isKeyboardEnabled() {
 		return Gdx.input.isPeripheralAvailable(Peripheral.HardwareKeyboard);
+	}
+	
+	public static boolean isPressed(Key key) {
+		return pressed.containsKey(key) ? pressed.get(key) : false;
 	}
 	
 	public static void registerMapping(InputSource source, KeyMap map, Controller controller) {
@@ -77,7 +84,11 @@ public class InputManager implements InputProcessor, ControllerListener {
 		if(scene != null) scene.keyDown(keycode);
 		
 		InputSource source = InputSource.KEYBOARD;
-		KeyPressedEvent event = new KeyPressedEvent(source, getKeyForSource(source, keycode, null), null);
+		
+		Key key = getKeyForSource(source, keycode, null);
+		pressed.put(key, true);
+		
+		KeyPressedEvent event = new KeyPressedEvent(source, key, null);
 		EventManager.callEvent(event);
 		
 		return true;
@@ -89,7 +100,11 @@ public class InputManager implements InputProcessor, ControllerListener {
 		if(scene != null) scene.keyUp(keycode);
 		
 		InputSource source = InputSource.KEYBOARD;
-		KeyReleaseEvent event = new KeyReleaseEvent(source, getKeyForSource(source, keycode, null), null);
+		
+		Key key = getKeyForSource(source, keycode, null);
+		pressed.put(key, false);
+		
+		KeyReleaseEvent event = new KeyReleaseEvent(source, key, null);
 		EventManager.callEvent(event);
 		
 		return true;

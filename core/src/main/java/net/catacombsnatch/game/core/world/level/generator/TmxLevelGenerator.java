@@ -5,7 +5,6 @@ import net.catacombsnatch.game.core.world.level.generator.options.GeneratorStrin
 import net.catacombsnatch.game.core.world.tile.Tile;
 import net.catacombsnatch.game.core.world.tile.TileRegistry;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -27,9 +26,8 @@ public class TmxLevelGenerator extends LevelGenerator {
 	public Level generate() {
 		Level level = null;
 		
-		GeneratorStringOption emptyTile = (GeneratorStringOption) getOption("emptyTile");
-		Class<? extends Tile> fillTile = TileRegistry.getByName(emptyTile.getValue());
-		boolean fillEmpty = emptyTile.getValue() != null && fillTile != null;
+		GeneratorStringOption empty = (GeneratorStringOption) getOption("emptyTile");
+		boolean fill = empty.getValue() != null && TileRegistry.getByName(empty.getValue()) != null;
 		
 		for(MapLayer layer : map.getLayers()) {
 			if(!(layer instanceof TiledMapTileLayer)) continue;
@@ -42,30 +40,11 @@ public class TmxLevelGenerator extends LevelGenerator {
 			for(int x = 0; x < tileLayer.getWidth(); x++) {
 				for(int y = 0; y < tileLayer.getHeight(); y++) {
 					Cell cell = tileLayer.getCell(x, y);
-					Class<? extends Tile> t = null;
+					String type = (cell == null || cell.getTile() == null) ?
+						(fill ? empty.getValue() : null) :
+						(String) cell.getTile().getProperties().get("type");
 					
-					if(cell == null || cell.getTile() == null) {
-						if(fillEmpty) t = fillTile;
-						
-					} else {
-						String type = (String) cell.getTile().getProperties().get("type");
-						t = TileRegistry.getByName(type);
-						
-						if(t == null) {
-							Gdx.app.log("TmxLevelGenerator", "Tile type not registered: " + type);
-							continue;
-						}
-					}
-					
-					if(t != null) try {
-						Tile tile = t.newInstance();
-						tile.init(level, x, y);
-						
-						level.getTiles()[x + y * tileLayer.getWidth()] = tile;
-						
-					} catch (Exception e) {
-						Gdx.app.error("TmxLevelGenerator", "Could not add tile to layer", e);
-					}
+					if(type != null) level.setTile(TileRegistry.createFor(type, level, x, y), x, y);
 				}
 			}
 		}
@@ -73,7 +52,7 @@ public class TmxLevelGenerator extends LevelGenerator {
 		// Update all tiles
 		for(int x = 0; x < level.getWidth(); x++) {
 			for(int y = 0; y < level.getHeight(); y++) {
-				Tile tile = level.getTiles()[x + y * level.getWidth()];
+				Tile tile = level.getTile(x, y);
 				
 				if(tile != null) tile.update();
 			}

@@ -2,12 +2,13 @@ package net.catacombsnatch.game.core.world.tile.tiles;
 
 import net.catacombsnatch.game.core.entity.Entity;
 import net.catacombsnatch.game.core.resource.Art;
-import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.world.level.Level;
+import net.catacombsnatch.game.core.world.level.View;
 import net.catacombsnatch.game.core.world.tile.StaticTile;
 import net.catacombsnatch.game.core.world.tile.Tile;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class FloorTile extends StaticTile {
 	protected Sprite overlay;
@@ -29,12 +30,10 @@ public class FloorTile extends StaticTile {
 	}
 	
 	@Override
-	public void render(Scene scene) {
-		super.render(scene);
+	public void render(SpriteBatch graphics, View view) {
+		super.render(graphics, view);
 		
-		if(overlay != null) {
-			overlay.draw(scene.getSpriteBatch());
-		}
+		if(overlay != null) renderSprite(overlay, graphics, view);
 	}
 
 	@Override

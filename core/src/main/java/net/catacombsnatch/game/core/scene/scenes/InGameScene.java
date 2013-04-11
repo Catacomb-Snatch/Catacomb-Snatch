@@ -3,8 +3,8 @@ package net.catacombsnatch.game.core.scene.scenes;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.catacombsnatch.game.core.event.EventHandler;
-import net.catacombsnatch.game.core.event.input.events.KeyPressedEvent;
+import net.catacombsnatch.game.core.event.input.InputManager;
+import net.catacombsnatch.game.core.event.input.Key;
 import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.screen.Screen;
 import net.catacombsnatch.game.core.world.Difficulty;
@@ -46,6 +46,18 @@ public class InGameScene extends Scene {
 	public void render(float delta) {
 		if(!initialized) return;
 		
+		// Check keyboard inputs
+		int mx = 0, my = 0;
+		
+		if(InputManager.isPressed(Key.MOVE_LEFT)) mx--;
+		if(InputManager.isPressed(Key.MOVE_RIGHT)) mx++;
+		if(InputManager.isPressed(Key.MOVE_UP)) my++;
+		if(InputManager.isPressed(Key.MOVE_DOWN)) my--;
+
+		for(View view : views) {
+			view.move(mx, my);
+		}
+		
 		// Just some overlays
 		super.draw();
 		getSpriteBatch().begin();
@@ -60,24 +72,6 @@ public class InGameScene extends Scene {
 		
 		// Draw the minimap
 		minimap.render(this);
-	}
-	
-	@EventHandler
-	public void key(KeyPressedEvent event) {
-		int mx = 0, my = 0;
-		
-		switch(event.getKey()) {
-			case MOVE_LEFT: mx--; break;
-			case MOVE_RIGHT: mx++; break;
-			case MOVE_UP: my--; break;
-			case MOVE_DOWN: my++; break;
-			
-			default: // Nothing to do here
-		}
-		
-		for(View view : views) {
-			view.move(mx, my);
-		}
 	}
 	
 	@Override
