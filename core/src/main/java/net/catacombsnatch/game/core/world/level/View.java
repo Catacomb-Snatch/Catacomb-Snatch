@@ -31,8 +31,8 @@ public class View implements Renderable {
 		
 		rendered = 0; // Reset counter
 		
-		for(float y = viewport.height / Tile.HEIGHT; y >= (viewport.y - offset.y) / Tile.HEIGHT; y--) {
-			for(float x = (viewport.x - offset.x) / Tile.WIDTH; x < viewport.width / Tile.WIDTH; x++) {
+		for(float y = (viewport.height + offset.y) / Tile.HEIGHT + 2; y >= (viewport.y + offset.y) / Tile.HEIGHT - 2; y--) {
+			for(float x = (viewport.x + offset.x) / Tile.WIDTH - 2; x < (viewport.width + offset.x) / Tile.WIDTH + 2; x++) {
 				Tile tile = level.getTile((int) x, (int) y);
 				
 				if(tile != null && tile.getBounds().overlaps(viewport)) {
