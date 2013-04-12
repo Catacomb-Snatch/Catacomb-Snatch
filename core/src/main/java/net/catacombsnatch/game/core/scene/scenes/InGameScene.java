@@ -23,7 +23,6 @@ public class InGameScene extends Scene {
 	protected World world;
 	
 	protected List<View> views;
-	protected Minimap minimap;
 	
 	public InGameScene() {
 		super();
@@ -35,8 +34,6 @@ public class InGameScene extends Scene {
 		
 		views = new ArrayList<View>();
 		views.add(new View(level));
-		
-		minimap = new Minimap(level);
 		
 		initialized = true;
 		update(true);
@@ -69,9 +66,6 @@ public class InGameScene extends Scene {
 		for(View view : views) {
 			view.render(this);
 		}
-		
-		// Draw the minimap
-		minimap.render(this);
 	}
 	
 	@Override
@@ -79,8 +73,6 @@ public class InGameScene extends Scene {
 		if(!initialized) return;
 		
 		if(resize) {
-			minimap.update(true);
-			
 			for(View view : views) {
 				view.setViewport(new Rectangle(0, 0, Screen.getWidth(), Screen.getHeight()));
 				view.resize();

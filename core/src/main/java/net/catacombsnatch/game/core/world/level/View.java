@@ -18,11 +18,15 @@ public class View implements Renderable {
 	
 	protected Sprite panel;
 	
+	protected Minimap minimap;
+	
 	public View(Level lvl) {
 		level = lvl;
 		
 		offset = new Vector2();
 		panel = new Sprite(Art.skin.getAtlas().findRegion("player-panel"));
+		
+		minimap = new Minimap(level, this);
 	}
 	
 	@Override
@@ -43,6 +47,8 @@ public class View implements Renderable {
 		}
 		
 		panel.draw(scene.getSpriteBatch());
+		
+		minimap.render(scene);
 	}
 	
 	/**
@@ -59,6 +65,8 @@ public class View implements Renderable {
 		if(viewport == null) return;
 		
 		panel.setPosition((viewport.getWidth() - panel.getWidth()) / 2, viewport.getHeight() - panel.getHeight());
+		
+		minimap.update(true);
 	}
 	
 	public void setViewport(Rectangle view) {

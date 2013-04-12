@@ -10,36 +10,52 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Minimap implements Renderable {
 	protected Level level;
+	protected View view;
 	protected Sprite sprite;
 	
 	protected Texture map;
 	protected Pixmap pm;
 	
-	public Minimap(Level level) {
+	public Minimap(Level level, View view) {
 		this.level = level;
+		this.view = view;
 		
 		sprite = new Sprite(Art.skin.getAtlas().findRegion("minimap-frame"));
 		
 		map = new Texture(new Pixmap( 40, 40, Pixmap.Format.RGBA8888 ), true);
-		pm = new Pixmap(40, 40, Pixmap.Format.RGBA8888);
 	}
-
+	
+	Rectangle vp = new Rectangle();
+	
 	@Override
 	public void render(Scene scene) {
 		sprite.draw(scene.getSpriteBatch());
 		
+		vp.set(view.viewport);
+		vp.x += view.offset.x;
+		vp.y += view.offset.y;
+		
+		vp.x -= Screen.getWidth()/2;
+		vp.y -= Screen.getHeight()/2;
+		
+		pm = new Pixmap(40, 40, Pixmap.Format.RGBA8888);
+		
 		for (Tile tile : level.getTiles()) {
 			if(tile == null) continue;
 			
-			pm.drawPixel((int) tile.getBounds().x, (int) tile.getBounds().y, Color.rgba8888(tile.getMinimapColor()));
+			pm.drawPixel((int) tile.getBounds().x - (int) (vp.x / Tile.WIDTH), (int) tile.getBounds().y - (int) (vp.y / Tile.HEIGHT), 
+					Color.rgba8888(tile.getMinimapColor()));
 		}
 		
 		// TODO add entity icons
 		
 		map.draw(pm, 0, 0);
+		
+		pm.dispose();
 		
 		scene.getSpriteBatch().draw(map, sprite.getX() + 6, sprite.getY() + 5 + 80, 80, -80);
 	}
