@@ -1,4 +1,4 @@
-package net.catacombsnatch.game.core.achievement;
+package net.catacombsnatch.game.core.statistic.achievement;
 
 import java.util.HashMap;
 import java.util.Map;

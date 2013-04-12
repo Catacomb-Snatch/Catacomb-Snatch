@@ -1,4 +1,4 @@
-package net.catacombsnatch.game.core.achievement;
+package net.catacombsnatch.game.core.statistic.achievement;
 
 import net.catacombsnatch.game.core.resource.Language;
 
@@ -16,4 +16,5 @@ public enum AchievementType {
 	public String getName() {
 		return Language.get(name);
 	}
+	
 }

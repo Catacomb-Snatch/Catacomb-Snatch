@@ -193,10 +193,7 @@ public class Game implements ApplicationListener {
 		VSYNC("vSyncEnabled", true, new Runnable() {
 			@Override
 			public void run() {
-				boolean b = (Boolean) DefaultOption.VSYNC.get();
-				System.out.println(b);
-				
-				Gdx.graphics.setVSync(b);
+				Gdx.graphics.setVSync((Boolean) DefaultOption.VSYNC.get());
 			}
 		});
 		
