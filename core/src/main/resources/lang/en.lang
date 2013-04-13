@@ -15,3 +15,5 @@ scene.title.exit = Exit Game
 
 option.debugMode.enable = Show debug information
 option.debugMode.disable = Hide debug information
+option.vSyncEnabled.enable = Enable vSync
+option.vSyncEnabled.disable = Disable vSync
