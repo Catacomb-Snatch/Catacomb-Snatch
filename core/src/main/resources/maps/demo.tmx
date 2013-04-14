@@ -3,7 +3,7 @@
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer name="Layer A" width="41" height="49">
   <data encoding="base64" compression="zlib">
-   eJztlkEOwzAIBEn//+heoyrBYAabNCBxM2S0sHZE4nEoWSWakYlmFPmAeWYj+/729uaonugf7ZGdT2ak9sDLobFoNas9k6Ej4ZkZRmtvet6efWzGXMao30d7RzPSb9sKHa/unh06Ens6872nM1pnor0zs/WkjldeGL2RK2Zt0cyjLc1I7BjB6L2nKcbMf4odOnprqu1jNV//y/3ozTe+hXfnLTOM1hOM0dyho3XO2YyZ2Yx7GD17Nzpj7eH9pyC8Svo9w78zc/YyVsq3MBKese4B/b6RfYnQdKgSzchEM4p8AWogCCw=
+   eJztlt0OwyAIRlnf/6F3ZWLMRJCDtZ1fws068MhPqUhcH8V20WFkdBhFLtBqNjJuG9trI38ifjRGtj2ZkeoDL4fGovmsnhkyj0XEzMwwWmIXkfX29KOHscfZ6g5Gi2Uw1vEy5n3Ud1ZGzSdzt5Xf2rx7a+3JQ8Q/wkj06cx5T2e09ra2Z2b9yTz+moXRjlxRa0vOPLmlGYkeIxi972mKkf6muDuPXp/d+nG3uX7L+9Frb9mFojC2z3p3stRw1r9IYxSxnRG1rFprZ1jrnM3YWq1Ij65i7HFa75H9TWG9C8no6bvRfy4D46hPyfmlY1B5JGyGcSf7F0bLzFB9QO83Mi4hLQ+76DAyOowiX/H7CAQ=
   </data>
  </layer>
  <layer name="Layer B" width="41" height="49">

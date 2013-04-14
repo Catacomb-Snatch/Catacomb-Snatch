@@ -1,7 +1,9 @@
 package net.catacombsnatch.game.core.world.tile;
 
+import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.View;
+import net.catacombsnatch.game.core.world.tile.tiles.*;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -51,6 +53,7 @@ public abstract class StaticTile extends Tile {
 		// This is static, do nothing
 	}
 	
+	Sprite hole;
 	protected void renderSprite(Sprite sprite, SpriteBatch graphics, View view) {
 		graphics.draw(sprite.getTexture(),
 			sprite.getX() - view.getOffset().x,
@@ -60,6 +63,56 @@ public abstract class StaticTile extends Tile {
 			sprite.getRegionWidth(),
 			sprite.getRegionHeight()
 		);
+		if (level.getTile((int)bb.x, (int)bb.y-1) == null) {
+			if (hole == null) {
+				if	(this instanceof FloorTile || this instanceof SandTile) {
+					hole = sprite;
+				}
+				if (this instanceof DestroyableWallTile) {
+					Class destroy = destroy();
+					TextureRegion[] source = null;
+					TextureRegion region = null;
+					if (destroy.equals(FloorTile.class)) {
+						source = Art.tiles_floor;
+					}
+					if (destroy.equals(SandTile.class)) {
+						source = new TextureRegion[] {Art.tiles_sand[0]};
+					}
+					if (source != null) {
+						region = source[level.getGenerator().randomizer().nextInt(source.length)];
+						hole = new Sprite();
+						hole.setRegion(region);
+						hole.setSize(region.getRegionWidth(), region.getRegionHeight());
+					}
+				}
+				if (this instanceof WallTile) {
+					TextureRegion[] source = Art.tiles_floor;
+					TextureRegion region = null;
+					region = source[level.getGenerator().randomizer().nextInt(source.length)];
+					hole = new Sprite();
+					hole.setRegion(region);
+					hole.setSize(region.getRegionWidth(), region.getRegionHeight());
+				}
+			}
+			if (hole != null) {
+				graphics.draw(hole.getTexture(),
+					sprite.getX() - view.getOffset().x,
+					sprite.getY() - view.getOffset().y - HEIGHT,
+					hole.getRegionX(),
+					hole.getRegionY(),
+					hole.getRegionWidth(),
+					hole.getRegionHeight()
+				);
+				graphics.draw(Art.tiles_hole,
+					sprite.getX() - view.getOffset().x,
+					sprite.getY() - view.getOffset().y - HEIGHT,
+					0,
+					0,
+					WIDTH,
+					HEIGHT
+				);
+			}
+		}
 	}
 	
 }
