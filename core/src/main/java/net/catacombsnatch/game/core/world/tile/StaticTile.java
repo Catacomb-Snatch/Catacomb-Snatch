@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 public abstract class StaticTile extends Tile {
 
@@ -63,9 +64,18 @@ public abstract class StaticTile extends Tile {
 		return new Rectangle(position.x * WIDTH, position.y * HEIGHT, region.getRegionHeight(), region.getRegionWidth());
 	}
 	
+	protected static Rectangle tmpV = new Rectangle();
+	protected static Rectangle tmpT = new Rectangle();
+	
 	@Override
 	public boolean shouldRender(View view) {
-		return (view.getOffset().x / WIDTH < position.x && view.getOffset().y / HEIGHT < position.y);
+		Rectangle viewport = view.getViewport();
+		Vector2 offset = view.getOffset();
+		
+		tmpV.set((viewport.x + offset.x) / Tile.WIDTH - 2, (viewport.y + offset.y) / Tile.HEIGHT + 2, 
+				viewport.width / Tile.WIDTH + 2, viewport.height / Tile.HEIGHT + 2);
+		tmpT.set(position.x, position.y, Tile.WIDTH, Tile.HEIGHT);
+		return tmpV.overlaps(tmpT);
 	}
 	
 	protected void renderTile(SpriteBatch graphics, View view, TextureRegion tile) {

@@ -47,7 +47,7 @@ public class Minimap implements Renderable {
 		for (Tile tile : level.getTiles()) {
 			if(tile == null) continue;
 			
-			pm.drawPixel((int) tile.getBounds().x - (int) (vp.x / Tile.WIDTH), (int) tile.getBounds().y - (int) (vp.y / Tile.HEIGHT), 
+			pm.drawPixel((int) tile.getPosition().x - (int) (vp.x / Tile.WIDTH), (int) tile.getPosition().y - (int) (vp.y / Tile.HEIGHT), 
 					Color.rgba8888(tile.getMinimapColor()));
 		}
 		
