@@ -39,7 +39,7 @@ public class View implements Renderable {
 			for(float x = (viewport.x + offset.x) / Tile.WIDTH - 2; x < (viewport.width + offset.x) / Tile.WIDTH + 2; x++) {
 				Tile tile = level.getTile((int) x, (int) y);
 				
-				if(tile != null && tile.getBounds().overlaps(viewport)) {
+				if(tile != null && tile.shouldRender(this)) {
 					tile.render(scene.getSpriteBatch(), this);
 					rendered++;
 				}

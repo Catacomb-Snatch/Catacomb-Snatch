@@ -2,6 +2,7 @@ package net.catacombsnatch.game.core.world.tile;
 
 import net.catacombsnatch.game.core.entity.Entity;
 import net.catacombsnatch.game.core.screen.Tickable;
+import net.catacombsnatch.game.core.world.Direction;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.Minimap;
 import net.catacombsnatch.game.core.world.level.View;
@@ -21,7 +22,7 @@ public abstract class Tile implements Tickable {
 	protected Level level;
 	protected Color minimapColor;
 
-	protected Rectangle bb;
+	protected Vector2 position;
 
 	
 	protected Tile(Color color) {
@@ -30,17 +31,12 @@ public abstract class Tile implements Tickable {
 	
 	public void init(Level level, int x, int y) {
 		this.level = level;
-		this.bb = new Rectangle( x, y, HEIGHT, WIDTH );
+		this.position = new Vector2(x, y);
 	}
 
 	/** @return The {@link Level} this tile is placed in */
 	public Level getLevel() {
 		return level;
-	}
-
-	/** @return The {@link Rectangle} of the tile boundaries. */
-	public Rectangle getBounds() {
-		return bb;
 	}
 	
 	/** @return The {@link Color} shown on the minimap. */
@@ -74,6 +70,9 @@ public abstract class Tile implements Tickable {
 	 */
 	public abstract void render(SpriteBatch graphics, View view);
 	
+	/** @return A {@link Rectangle} containing the tile boundaries. */
+	public abstract Rectangle getBounds();
+
 	/**
 	 * Returns true if the entity can pass the tile.
 	 * 
@@ -82,21 +81,26 @@ public abstract class Tile implements Tickable {
 	 */
 	public abstract boolean canPass( Entity entity );
 	
+	public abstract boolean shouldRender(View view);
+	
 	/**
-	 * Gets an attached tile by its {@link Side}.
+	 * Gets an attached tile by its {@link Direction}.
 	 * 
-	 * @param side The side the tile should be attached to
+	 * @param dir The direction the tile is attached to
 	 * @return The tile, if found, otherwise null.
 	 */
-	public Tile getRelative(Side side) {
-		try {
-			Vector2 vec = side.getFor(bb.x, bb.y);
-			return level.getTiles()[(int) (vec.x + vec.y * level.getWidth())];
-			
-		} catch(Exception e) {
-			// Thrown when out of bounds, etc.
-			return null;
-		}
+	public Tile getRelative(Direction dir) {
+		Vector2 vec = dir.getFor(position.x, position.y);
+		return level.getTile((int) vec.x, (int) vec.y);
+	}
+	
+	public Tile getRelative(int x, int y) {
+		return level.getTile((int) position.x + x, (int) position.y + y);
+	}
+	
+	/** @return The vector of the current tile position. */
+	public Vector2 getPosition() {
+		return position;
 	}
 	
 	/**
@@ -127,36 +131,6 @@ public abstract class Tile implements Tickable {
 		
 		pixmap.dispose();
 		return new Color(r / t, g / t, b / t, 1);
-	}
-	
-	/** Represents a side (and its edges) of a {@link Tile}. */
-	public enum Side {
-		// Linear sides
-		NORTH(0, 1, 0x1), EAST(1, 0, 0x2), SOUTH(0, -1, 0x4), WEST(-1, 0, 0x8),
-		
-		// Edges
-		NORTH_EAST(1, 1, 0x9), EAST_SOUTH(1, -1, 0x10), SOUTH_WEST(-1, -1, 0x12), WEST_NORTH(-1, 1, 0xF);
-		
-		
-		private Vector2 vector;
-		private byte weight;
-		
-		private Side(float x, float y, int b) {
-			vector = new Vector2(x, y);
-			weight = (byte) b;
-		}
-		
-		public Vector2 getFor(float x, float y) {
-			return new Vector2(x, y).add(vector);
-		}
-		
-		public byte getMask() {
-			return isEdge() ? (byte) (weight - 0x8) : weight;
-		}
-		
-		public boolean isEdge() {
-			return weight > 0x8;
-		}
 	}
 	
 }

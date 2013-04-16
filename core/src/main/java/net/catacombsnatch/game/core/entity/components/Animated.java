@@ -7,6 +7,7 @@ import net.catacombsnatch.game.core.screen.Tickable;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 
 public class Animated implements EntityComponent, Renderable, Tickable {
 	protected Animation animation;
@@ -18,7 +19,11 @@ public class Animated implements EntityComponent, Renderable, Tickable {
 	}
 
 	public Animated( TextureRegion[] animation, float duration ) {
-		this.animation = new Animation( duration, animation );
+		this( animation, 1f, Animation.LOOP);
+	}
+		
+	public Animated( TextureRegion[] animation, float duration, int mode ) {
+		this.animation = new Animation( duration, new Array<TextureRegion>(animation), mode );
 		this.timeState = 0f;
 
 		this.x = this.y = 0;
@@ -31,7 +36,7 @@ public class Animated implements EntityComponent, Renderable, Tickable {
 	
 	@Override
 	public void render( Scene scene ) {
-		scene.getSpriteBatch().draw( animation.getKeyFrame( timeState, true ), x, y );
+		scene.getSpriteBatch().draw( animation.getKeyFrame( timeState ), x, y );
 	}
 
 	public void setPosition( int x, int y ) {

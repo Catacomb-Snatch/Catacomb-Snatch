@@ -2,16 +2,17 @@ package net.catacombsnatch.game.core.world.tile.tiles;
 
 import net.catacombsnatch.game.core.entity.Entity;
 import net.catacombsnatch.game.core.resource.Art;
+import net.catacombsnatch.game.core.world.Direction;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.View;
 import net.catacombsnatch.game.core.world.tile.StaticTile;
 import net.catacombsnatch.game.core.world.tile.Tile;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class FloorTile extends StaticTile {
-	protected Sprite overlay;
+	protected TextureRegion overlay;
 	
 	public FloorTile() {
 		super(getColor(Art.tiles_floor[0]));
@@ -23,7 +24,7 @@ public class FloorTile extends StaticTile {
 		
 		setRandomTexture(Art.tiles_floor);
 	}
-
+	
 	@Override
 	public boolean canPass(Entity entity) {
 		return true;
@@ -33,14 +34,14 @@ public class FloorTile extends StaticTile {
 	public void render(SpriteBatch graphics, View view) {
 		super.render(graphics, view);
 		
-		if(overlay != null) renderSprite(overlay, graphics, view);
+		if(overlay != null) renderTile(graphics, view, overlay);
 	}
 
 	@Override
 	public void update() {
 		byte mask = 0x0;
 		
-		for(Side side : Side.values()) {
+		for(Direction side : Direction.values()) {
 			if(side.isEdge()) continue;
 			
 			Tile tile = getRelative(side);
@@ -51,13 +52,7 @@ public class FloorTile extends StaticTile {
 			}
 		}
 		
-		if(mask > 0) {
-			if(overlay == null) overlay = new Sprite(sprite);
-			
-			overlay.setRegion(Art.tiles_shadows[mask - 1]);
-		} else {
-			overlay = null;
-		}
+		overlay = mask > 0 ? Art.tiles_shadows[mask - 1] : null;
 	}
 
 }

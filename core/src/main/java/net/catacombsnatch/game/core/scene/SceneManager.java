@@ -11,7 +11,6 @@ public class SceneManager {
 	
 	protected static SceneStack scenes;
 	
-	
 	public SceneManager() {
 		scenes = new SceneStack();
 	}
@@ -30,7 +29,6 @@ public class SceneManager {
 	public static synchronized Scene getCurrent() {
 		return scenes.isEmpty() ? null : scenes.peek();
 	}
-	
 	
 	/**
 	 * Adds and switches to the newly generated scene.
@@ -69,14 +67,10 @@ public class SceneManager {
 		return instance;
 	}
 	
-	
-	/**
-	 * Exits the currently showing scene.
-	 */
+	/** Exits the currently showing scene. */
 	public static void exit() {
 		scenes.pop();
 	}
-	
 	
 	/**
 	 * Exits all open scenes.
@@ -132,6 +126,5 @@ public class SceneManager {
 			}
 		}
 	}
-
 	
 }

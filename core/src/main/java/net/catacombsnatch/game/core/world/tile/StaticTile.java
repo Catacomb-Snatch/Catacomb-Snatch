@@ -1,51 +1,46 @@
 package net.catacombsnatch.game.core.world.tile;
 
-import net.catacombsnatch.game.core.resource.Art;
+import net.catacombsnatch.game.core.world.Direction;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.View;
-import net.catacombsnatch.game.core.world.tile.tiles.*;
+import net.catacombsnatch.game.core.world.tile.tiles.HoleTile;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 
 public abstract class StaticTile extends Tile {
 
-	/** The sprite for this tile */
-	protected Sprite sprite;
+	/** The texture(region) for this tile */
+	protected TextureRegion region;
 	
 	
 	protected StaticTile(Color color) {
 		super(color);
-		
-		sprite = new Sprite();
 	}
 	
 	protected void setTexture(TextureRegion region) {
-		sprite.setRegion(region);
-		sprite.setSize(region.getRegionWidth(), region.getRegionHeight());
+		this.region = region;
 	}
 	
 	protected void setRandomTexture(TextureRegion[] source) {
-		setTexture(source[level.getGenerator().randomizer().nextInt(source.length)]);
+		this.region = source[level.getGenerator().randomizer().nextInt(source.length)];
 	}
 	
-	/** @return The sprite for this tile, holding coordinates and texture. */
-	public Sprite getSprite() {
-		return sprite;
+	/** @return The {@link TextureRegion} for this tile. */
+	public TextureRegion getTextureRegion() {
+		return region;
 	}
 	
 	@Override
 	public void init(Level level, int x, int y) {
 		super.init(level, x, y);
-		
-		sprite.setPosition(x * WIDTH, y * HEIGHT);
 	}
 
 	@Override
 	public void render(SpriteBatch graphics, View view) {
-		renderSprite(sprite, graphics, view);
+		renderTile(graphics, view, region);
 	}
 
 	@Override
@@ -53,66 +48,28 @@ public abstract class StaticTile extends Tile {
 		// This is static, do nothing
 	}
 	
-	Sprite hole;
-	protected void renderSprite(Sprite sprite, SpriteBatch graphics, View view) {
-		graphics.draw(sprite.getTexture(),
-			sprite.getX() - view.getOffset().x,
-			sprite.getY() - view.getOffset().y,
-			sprite.getRegionX(),
-			sprite.getRegionY(),
-			sprite.getRegionWidth(),
-			sprite.getRegionHeight()
-		);
-		if (level.getTile((int)bb.x, (int)bb.y-1) == null) {
-			if (hole == null) {
-				if	(this instanceof FloorTile || this instanceof SandTile) {
-					hole = sprite;
-				}
-				if (this instanceof DestroyableWallTile) {
-					Class destroy = destroy();
-					TextureRegion[] source = null;
-					TextureRegion region = null;
-					if (destroy.equals(FloorTile.class)) {
-						source = Art.tiles_floor;
-					}
-					if (destroy.equals(SandTile.class)) {
-						source = new TextureRegion[] {Art.tiles_sand[0]};
-					}
-					if (source != null) {
-						region = source[level.getGenerator().randomizer().nextInt(source.length)];
-						hole = new Sprite();
-						hole.setRegion(region);
-						hole.setSize(region.getRegionWidth(), region.getRegionHeight());
-					}
-				}
-				if (this instanceof WallTile) {
-					TextureRegion[] source = Art.tiles_floor;
-					TextureRegion region = null;
-					region = source[level.getGenerator().randomizer().nextInt(source.length)];
-					hole = new Sprite();
-					hole.setRegion(region);
-					hole.setSize(region.getRegionWidth(), region.getRegionHeight());
-				}
-			}
-			if (hole != null) {
-				graphics.draw(hole.getTexture(),
-					sprite.getX() - view.getOffset().x,
-					sprite.getY() - view.getOffset().y - HEIGHT,
-					hole.getRegionX(),
-					hole.getRegionY(),
-					hole.getRegionWidth(),
-					hole.getRegionHeight()
-				);
-				graphics.draw(Art.tiles_hole,
-					sprite.getX() - view.getOffset().x,
-					sprite.getY() - view.getOffset().y - HEIGHT,
-					0,
-					0,
-					WIDTH,
-					HEIGHT
-				);
-			}
+	@Override
+	public void update() {
+		if(position.y + 1 < level.getHeight() && getRelative(Direction.SOUTH) != null) {
+			HoleTile tile = new HoleTile();
+			tile.init(level, (int) position.x, (int) position.y + 1);
+			
+			level.setTile(tile, (int) position.x, (int) position.y + 1);
 		}
+	}
+	
+	@Override
+	public Rectangle getBounds() {
+		return new Rectangle(position.x * WIDTH, position.y * HEIGHT, region.getRegionHeight(), region.getRegionWidth());
+	}
+	
+	@Override
+	public boolean shouldRender(View view) {
+		return (view.getOffset().x / WIDTH < position.x && view.getOffset().y / HEIGHT < position.y);
+	}
+	
+	protected void renderTile(SpriteBatch graphics, View view, TextureRegion tile) {
+		graphics.draw(tile, (position.x * WIDTH) - view.getOffset().x, (position.y * HEIGHT) - view.getOffset().y);
 	}
 	
 }

@@ -14,5 +14,9 @@ public class Physics implements EntityComponent {
 	public boolean intersects( Rectangle bb ) {
 		return bb.overlaps( bounds );
 	}
+	
+	public boolean isWithin( Rectangle bb ) {
+		return bb.contains(bounds);
+	}
 
 }

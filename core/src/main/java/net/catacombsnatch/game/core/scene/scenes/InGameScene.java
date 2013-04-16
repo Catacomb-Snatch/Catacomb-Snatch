@@ -11,7 +11,6 @@ import net.catacombsnatch.game.core.world.Difficulty;
 import net.catacombsnatch.game.core.world.World;
 import net.catacombsnatch.game.core.world.World.MapRotation;
 import net.catacombsnatch.game.core.world.level.Level;
-import net.catacombsnatch.game.core.world.level.Minimap;
 import net.catacombsnatch.game.core.world.level.View;
 
 import com.badlogic.gdx.math.Rectangle;
