@@ -31,6 +31,10 @@ public class GdxSoundPlayer implements ISoundPlayer {
 
 	private List<Music> backgroundMusicList;
 	private int backgroundPlaying;
+	private boolean backgroundIsPlaying = false;
+	private boolean TitleIsPlaying = false;
+	private boolean TheEndIsPlaying = false;
+	
 
 	public GdxSoundPlayer() {
 		// Initialize all lists
@@ -91,6 +95,7 @@ public class GdxSoundPlayer implements ISoundPlayer {
 			titleMusic.setVolume( musicVolume );
 			titleMusic.play();
 		}
+		TitleIsPlaying = true;
 	}
 
 	@Override
@@ -99,7 +104,10 @@ public class GdxSoundPlayer implements ISoundPlayer {
 		if (titleMusic == null){
 			return;
 		}
-		if ( titleMusic.isPlaying() ) titleMusic.stop();
+		if ( titleMusic.isPlaying() ){
+			titleMusic.stop();
+		}
+		TitleIsPlaying = false;
 	}
 
 	@Override
@@ -116,13 +124,19 @@ public class GdxSoundPlayer implements ISoundPlayer {
 			endMusic.setVolume( musicVolume );
 			endMusic.play();
 		}
+		TheEndIsPlaying = true;
 	}
 
 	@Override
 	public void stopEndMusic() {
 		Music endMusic = getMusic( Sounds.END_THEME );
-		if (endMusic == null) return;
-		if ( endMusic.isPlaying() ) endMusic.stop();
+		if (endMusic == null){
+			return;
+		}
+		if ( endMusic.isPlaying() ){
+			endMusic.stop();
+		}
+		TheEndIsPlaying = false;
 	}
 
 	@Override
@@ -152,6 +166,7 @@ public class GdxSoundPlayer implements ISoundPlayer {
 				}
 			}
 		}
+		backgroundIsPlaying = true;
 	}
 
 	@Override
@@ -163,6 +178,7 @@ public class GdxSoundPlayer implements ISoundPlayer {
 		}
 
 		backgroundPlaying = -1;
+		backgroundIsPlaying = false;
 	}
 
 	@Override
@@ -173,23 +189,26 @@ public class GdxSoundPlayer implements ISoundPlayer {
 		Music music;
 		
 		music = getMusic( Sounds.TITLE_THEME );
-		if (music != null){ 
+		if (music != null && TitleIsPlaying){ 
 			music.pause();
 		}
 		music = getMusic( Sounds.END_THEME );
-		if (music != null){ 
+		if (music != null && TheEndIsPlaying){ 
 			music.pause();
 		}
 	}
 
 	@Override
 	public void resumeBackgroundMusic() {
-		paused = true;
+		paused = false;
 
 		if ( backgroundPlaying >= 0 ) backgroundMusicList.get( backgroundPlaying ).play();
-
-		getMusic( Sounds.TITLE_THEME ).play();
-		getMusic( Sounds.END_THEME ).play();
+		if (TitleIsPlaying){
+			getMusic( Sounds.TITLE_THEME ).play();
+		}
+		if (TheEndIsPlaying){
+			getMusic( Sounds.END_THEME ).play();
+		}
 	}
 
 	@Override
