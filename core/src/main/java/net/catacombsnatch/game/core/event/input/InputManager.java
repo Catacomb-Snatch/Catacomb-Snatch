@@ -177,8 +177,14 @@ public class InputManager implements InputProcessor, ControllerListener {
 	@Override
 	public boolean buttonDown(Controller controller, int button) {
 		System.out.println(button);
+		
 		InputSource source = InputSource.CONTROLLER;
-		KeyPressedEvent event = new KeyPressedEvent(source, getKeyForSource(source, button, controller), controller);
+		
+		Key key = getKeyForSource(source, button, controller);
+		
+		pressed.put(key, true);
+		
+		KeyPressedEvent event = new KeyPressedEvent(source, key, controller);
 		EventManager.callEvent(event);
 		
 		return true;
@@ -187,7 +193,11 @@ public class InputManager implements InputProcessor, ControllerListener {
 	@Override
 	public boolean buttonUp(Controller controller, int button) {
 		InputSource source = InputSource.CONTROLLER;
-		KeyReleaseEvent event = new KeyReleaseEvent(source, getKeyForSource(source, button, controller), controller);
+		
+		Key key = getKeyForSource(source, button, controller);
+		pressed.put(key, false);
+		
+		KeyReleaseEvent event = new KeyReleaseEvent(source, key, controller);
 		EventManager.callEvent(event);
 		
 		return true;

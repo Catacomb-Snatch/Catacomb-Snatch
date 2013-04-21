@@ -4,6 +4,7 @@ import java.util.EnumMap;
 import java.util.Map.Entry;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.controllers.mappings.Ouya;
 
 
 public class KeyMap {
@@ -21,11 +22,23 @@ public class KeyMap {
 		KEYBOARD.setFor(Key.FIRE, InputSource.MOUSE, Input.Buttons.LEFT);
 		KEYBOARD.setFor(Key.SPRINT, InputSource.KEYBOARD, Input.Keys.SHIFT_LEFT);
 		
-		// Gamepad controller
+		
 		CONTROLLER = new KeyMap();
-		CONTROLLER.setFor(Key.USE, InputSource.CONTROLLER, 3);
-		CONTROLLER.setFor(Key.FIRE, InputSource.CONTROLLER, 2);
-		CONTROLLER.setFor(Key.SPRINT, InputSource.CONTROLLER, 6);
+		if (Ouya.runningOnOuya){
+			// OUYA controller
+			CONTROLLER.setFor(Key.MOVE_LEFT, InputSource.CONTROLLER, Ouya.BUTTON_DPAD_LEFT);
+			CONTROLLER.setFor(Key.MOVE_RIGHT, InputSource.CONTROLLER, Ouya.BUTTON_DPAD_RIGHT);
+			CONTROLLER.setFor(Key.MOVE_UP, InputSource.CONTROLLER, Ouya.BUTTON_DPAD_UP);
+			CONTROLLER.setFor(Key.MOVE_DOWN, InputSource.CONTROLLER, Ouya.BUTTON_DPAD_DOWN);
+			CONTROLLER.setFor(Key.USE, InputSource.CONTROLLER, Ouya.BUTTON_O);
+			CONTROLLER.setFor(Key.FIRE, InputSource.CONTROLLER, Ouya.AXIS_RIGHT_TRIGGER);	
+		}else{
+			// Gamepad controller
+			CONTROLLER.setFor(Key.USE, InputSource.CONTROLLER, 3);
+			CONTROLLER.setFor(Key.FIRE, InputSource.CONTROLLER, 2);
+			CONTROLLER.setFor(Key.SPRINT, InputSource.CONTROLLER, 6);
+		}
+		
 	}
 	
 	protected EnumMap<Key, KeyMapEntry> entries;
