@@ -3,6 +3,7 @@ package net.catacombsnatch.game.core.scene;
 import net.catacombsnatch.game.core.event.EventHandler;
 import net.catacombsnatch.game.core.event.input.events.KeyReleaseEvent;
 import net.catacombsnatch.game.core.resource.Art;
+import net.catacombsnatch.game.core.scene.scenes.TitleScreen;
 import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.Gdx;
@@ -69,8 +70,14 @@ public abstract class MenuScene extends Scene {
 				break;
 			
 			case USE:
-				Actor actor = getActors().get(index);
-				if(actor != null) actor.act(Gdx.graphics.getDeltaTime());
+				Actor actor_u = getActors().get(index);
+				if(actor_u != null) actor_u.act(Gdx.graphics.getDeltaTime());
+				break;
+				
+			case BACK:
+				if (SceneManager.getCurrent().getClass() != TitleScreen.class){
+					SceneManager.exit();
+				}
 				break;
 				
 			default:

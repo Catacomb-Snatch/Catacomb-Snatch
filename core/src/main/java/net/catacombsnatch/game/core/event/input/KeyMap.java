@@ -19,6 +19,7 @@ public class KeyMap {
 		KEYBOARD.setFor(Key.MOVE_DOWN, InputSource.KEYBOARD, Input.Keys.DOWN);
 
 		KEYBOARD.setFor(Key.USE, InputSource.KEYBOARD, Input.Keys.ENTER);
+		KEYBOARD.setFor(Key.BACK, InputSource.KEYBOARD, Input.Keys.ESCAPE);
 		KEYBOARD.setFor(Key.FIRE, InputSource.MOUSE, Input.Buttons.LEFT);
 		KEYBOARD.setFor(Key.SPRINT, InputSource.KEYBOARD, Input.Keys.SHIFT_LEFT);
 		
@@ -31,6 +32,7 @@ public class KeyMap {
 			CONTROLLER.setFor(Key.MOVE_UP, InputSource.CONTROLLER, Ouya.BUTTON_DPAD_UP);
 			CONTROLLER.setFor(Key.MOVE_DOWN, InputSource.CONTROLLER, Ouya.BUTTON_DPAD_DOWN);
 			CONTROLLER.setFor(Key.USE, InputSource.CONTROLLER, Ouya.BUTTON_O);
+			CONTROLLER.setFor(Key.BACK, InputSource.CONTROLLER, Ouya.BUTTON_A);
 			CONTROLLER.setFor(Key.FIRE, InputSource.CONTROLLER, Ouya.AXIS_RIGHT_TRIGGER);	
 		}else{
 			// Gamepad controller

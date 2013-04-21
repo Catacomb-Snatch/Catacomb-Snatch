@@ -45,10 +45,22 @@ public class InGameScene extends Scene {
 		// Check keyboard inputs
 		int mx = 0, my = 0;
 		
-		if(InputManager.isPressed(Key.MOVE_LEFT)) mx--;
-		if(InputManager.isPressed(Key.MOVE_RIGHT)) mx++;
-		if(InputManager.isPressed(Key.MOVE_UP)) my++;
-		if(InputManager.isPressed(Key.MOVE_DOWN)) my--;
+		if(InputManager.isPressed(Key.MOVE_LEFT)){
+			mx = mx-10;
+		}
+		if(InputManager.isPressed(Key.MOVE_RIGHT)){
+			mx = mx+10;
+		}
+		if(InputManager.isPressed(Key.MOVE_UP)){
+			my = my+10;
+		}
+		if(InputManager.isPressed(Key.MOVE_DOWN)){
+			my = my-10;
+		}
+		
+		if (InputManager.isPressed(Key.BACK)){
+			// Todo
+		}
 
 		for(View view : views) {
 			view.move(mx, my);
@@ -65,6 +77,12 @@ public class InGameScene extends Scene {
 		for(View view : views) {
 			view.render(this);
 		}
+	}
+	
+	public void destroy(){
+		initialized = false;
+		world = null;
+		views = null;
 	}
 	
 	@Override
