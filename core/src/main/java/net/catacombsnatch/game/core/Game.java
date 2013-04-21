@@ -11,6 +11,7 @@ import net.catacombsnatch.game.core.event.EventManager;
 import net.catacombsnatch.game.core.event.input.InputManager;
 import net.catacombsnatch.game.core.event.input.Key;
 import net.catacombsnatch.game.core.event.input.events.KeyPressedEvent;
+import net.catacombsnatch.game.core.multiplayer.sfs.SFSClient;
 import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.resource.Language;
 import net.catacombsnatch.game.core.resource.options.DefaultOptions;
@@ -43,6 +44,8 @@ public class Game implements ApplicationListener {
 	public static Options options;
 	
 	private Label fpsLabel;
+	
+	protected SFSClient sfsClient;
 
 	@Override
 	public void create() {
@@ -119,6 +122,8 @@ public class Game implements ApplicationListener {
 		SceneManager.switchTo(TitleScreen.class);
 		
 		fpsLabel = new Label("FPS", Art.skin);
+		sfsClient = new SFSClient();
+		//sfsClient.connect("test", "test");
 	}
 
 	@Override
