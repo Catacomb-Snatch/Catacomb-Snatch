@@ -4,7 +4,7 @@ import os
 import sys
 
 def listJars(dir):
-  return [dir + "/" + f for f in os.listdir(dir) if f.lower().endswith(".jar")]
+	return [dir + "/" + f for f in os.listdir(dir) if f.lower().endswith(".jar")]
 
 input = "install"
 output = "lib"
@@ -14,7 +14,7 @@ if not os.path.isdir(input):
 	print "No '" + input + "' directory found!"
 	sys.exit()
 
-print "Listing '" + input + "'' directory..."
+print "Listing '" + input + "' directory..."
 
 for (folder) in os.listdir(input):
 	group = folder.split(" ")
@@ -52,7 +52,7 @@ if user.upper() != "OK":
 print "Installing jars into '" + output + "'..."
 
 for(entry) in files:
-	print ":> Installing jar " + entry["name"] + " (GroupId: " + entry["group"] + ", Version: " + entry["version"] + ")"
+	print ":> Installing jar '" + entry["name"] + "' (GroupId: " + entry["group"] + ", Version: " + entry["version"] + ")"
 	
 	os.system(
 		"mvn install:install-file" + \
@@ -65,4 +65,13 @@ for(entry) in files:
 		" -DcreateChecksum=true"
 	)
 
-print "Done! Installed" + len(files) + " jars into '" + output + "'!"
+print "Done! Installed" + str(len(files)) + " jars into '" + output + "'!"
+print "Maven dependencies:"
+
+for(entry) in files:
+	print "\n\
+<dependency>\n\
+	<groupId>" + entry["group"] + "</groupId>\n\
+	<artifactId>" + entry["name"] + "</artifactId>\n\
+	<version>" + entry["version"] + "</version>\n\
+</dependency>\n"
