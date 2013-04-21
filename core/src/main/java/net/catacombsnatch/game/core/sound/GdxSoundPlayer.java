@@ -8,9 +8,11 @@ import java.util.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 
 public class GdxSoundPlayer implements ISoundPlayer {
-
+	public final static String TAG = "[SoundPlayer]";
+	
 	private float listenerX = 0.0f;
 	private float listenerY = 0.0f;
 
@@ -50,16 +52,25 @@ public class GdxSoundPlayer implements ISoundPlayer {
 	}
 
 	private void loadMusic( Sounds music ) {
-		Music file = Gdx.audio.newMusic( Gdx.files.internal( "music/" + music.name + ".ogg" ) );
+		try {
+			Gdx.app.log(TAG, Gdx.files.internal("music/"+music.name+".ogg").file().getAbsolutePath());
+			Music file = Gdx.audio.newMusic( Gdx.files.internal( "music/" + music.name + ".ogg" ) );
+			// If background track, add to playlist
+			if ( music.name.toLowerCase().startsWith( "background" ) ) backgroundMusicList.add( file );
 
-		// If background track, add to playlist
-		if ( music.name.toLowerCase().startsWith( "background" ) ) backgroundMusicList.add( file );
+			musicMap.put( music.name, file );
 
-		musicMap.put( music.name, file );
+		} catch (GdxRuntimeException e){
+			Gdx.app.log(TAG, "Error loading musicfile: " + music.name + ": " + e.getMessage());
+		}
 	}
 
 	private void loadSound( Sounds sound ) {
-		soundsMap.put( sound.name, Gdx.audio.newSound( Gdx.files.internal( "sound/" + sound.name + ".wav" ) ) );
+		try{
+			soundsMap.put( sound.name, Gdx.audio.newSound( Gdx.files.internal( "sound/" + sound.name + ".wav" ) ) );
+		}catch (GdxRuntimeException e){
+			Gdx.app.log(TAG, "Error loading soundfile: " + sound.name);
+		}
 	}
 
 	private Music getMusic( Sounds music ) {
@@ -72,7 +83,9 @@ public class GdxSoundPlayer implements ISoundPlayer {
 		stopEndMusic();
 
 		Music titleMusic = getMusic( Sounds.TITLE_THEME );
-
+		if (titleMusic == null){
+			return;
+		}
 		if ( musicVolume > 0.0f && !titleMusic.isPlaying() && !paused ) {
 			titleMusic.setLooping( true );
 			titleMusic.setVolume( musicVolume );
@@ -83,7 +96,9 @@ public class GdxSoundPlayer implements ISoundPlayer {
 	@Override
 	public void stopTitleMusic() {
 		Music titleMusic = getMusic( Sounds.TITLE_THEME );
-
+		if (titleMusic == null){
+			return;
+		}
 		if ( titleMusic.isPlaying() ) titleMusic.stop();
 	}
 
@@ -93,7 +108,9 @@ public class GdxSoundPlayer implements ISoundPlayer {
 		stopTitleMusic();
 
 		Music endMusic = getMusic( Sounds.END_THEME );
-
+		if (endMusic == null){
+			return;
+		}
 		if ( musicVolume > 0.0f && !endMusic.isPlaying() && !paused ) {
 			endMusic.setLooping( true );
 			endMusic.setVolume( musicVolume );
@@ -104,7 +121,7 @@ public class GdxSoundPlayer implements ISoundPlayer {
 	@Override
 	public void stopEndMusic() {
 		Music endMusic = getMusic( Sounds.END_THEME );
-
+		if (endMusic == null) return;
 		if ( endMusic.isPlaying() ) endMusic.stop();
 	}
 
@@ -117,7 +134,7 @@ public class GdxSoundPlayer implements ISoundPlayer {
 			if ( backgroundPlaying < 0 ) backgroundPlaying = 0;
 
 			Music music = backgroundMusicList.get( backgroundPlaying );
-
+			if (music == null) return;
 			if ( !music.isPlaying() ) {
 				if ( songEnded == 0 ) {
 					songEnded = System.currentTimeMillis();
@@ -151,11 +168,18 @@ public class GdxSoundPlayer implements ISoundPlayer {
 	@Override
 	public void pauseBackgroundMusic() {
 		paused = true;
-
+		
 		if ( backgroundPlaying >= 0 ) backgroundMusicList.get( backgroundPlaying ).pause();
-
-		getMusic( Sounds.TITLE_THEME ).pause();
-		getMusic( Sounds.END_THEME ).pause();
+		Music music;
+		
+		music = getMusic( Sounds.TITLE_THEME );
+		if (music != null){ 
+			music.pause();
+		}
+		music = getMusic( Sounds.END_THEME );
+		if (music != null){ 
+			music.pause();
+		}
 	}
 
 	@Override
@@ -211,14 +235,21 @@ public class GdxSoundPlayer implements ISoundPlayer {
 
 	@Override
 	public void shutdown() {
+		Music music;
 		// unloading Title music
 		stopTitleMusic();
-		getMusic( Sounds.TITLE_THEME ).dispose();
+		music = getMusic( Sounds.TITLE_THEME );
+		if (music != null){
+			music.dispose();
+		}
 
 		// unloading End music
 		stopEndMusic();
-		getMusic( Sounds.END_THEME ).dispose();
-
+		music = getMusic( Sounds.END_THEME );
+		if (music != null){
+			music.dispose();
+		}
+		
 		// unloading Background music
 		stopBackgroundMusic();
 
