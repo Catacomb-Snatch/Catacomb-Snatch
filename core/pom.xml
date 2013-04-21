@@ -33,7 +33,7 @@
 			<artifactId>gdx-controllers</artifactId>
 			<version>${gdx.version}</version>
 		</dependency>
-<<<<<<< HEAD
+
 		<!-- SmartFox -->
 		<dependency>
 		    <groupId>SmartFox</groupId>
@@ -69,44 +69,6 @@
 		    <groupId>SmartFox</groupId>
 		    <artifactId>slf4j-simple</artifactId>
 		    <version>1.6.1</version>
-=======
-
-		<!-- SmartFOX extensions -->
-		<dependency>
-			<groupId>smartfox</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.4</version>
-		</dependency>
-		<dependency>
-			<groupId>smartfox</groupId>
-			<artifactId>jdom</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>smartfox</groupId>
-			<artifactId>netty</artifactId>
-			<version>3.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>smartfox</groupId>
-			<artifactId>sfs2x-client-core</artifactId>
-			<version>1.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>smartfox</groupId>
-			<artifactId>SFS2X_API_Java</artifactId>
-			<version>1.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>smartfox</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.6.1</version>
-		</dependency>
-		<dependency>
-			<groupId>smartfox</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>1.6.1</version>
->>>>>>> Update maven repository and build scripts
 		</dependency>
 	</dependencies>
 
