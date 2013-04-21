@@ -73,7 +73,9 @@ public class SFSClient implements IEventListener {
 	public void destroy(){
 		// Remove event handlers and disconnect from the server.
 		if (sfsClient != null){
-			sfsClient.disconnect();
+			if (sfsClient.isConnected()){
+				sfsClient.disconnect();
+			}
 			sfsClient.removeAllEventListeners();
 		}
 		Gdx.app.log(TAG, "Unloaded.");
@@ -121,13 +123,13 @@ public class SFSClient implements IEventListener {
 			// Connection Lost
 			String reason = (String)event.getArguments().get("reason");
 			Gdx.app.log(TAG, "Connection lost: " + reason);
-			sfsClient.disconnect();
+			//sfsClient.disconnect();
 		}else if (event.getType().equalsIgnoreCase(SFSEvent.LOGIN)){
 			Gdx.app.log(TAG, "login succeeded.");
 			if(!sfsClient.isUdpInited() && sfsClient.isUdpAvailable()){
 				sfsClient.initUdp(SERVER_HOSTNAME, SERVER_PORT);
 			}
-			sfsClient.enableLagMonitor(true);
+			sfsClient.enableLagMonitor(true,5000);
 			//check if game groups is already subscribed, if not sub it
 			if (!sfsClient.getRoomManager().containsGroup(GAME_ROOMS_GROUP_NAME)){
 				sfsClient.send(new SubscribeRoomGroupRequest(GAME_ROOMS_GROUP_NAME));
