@@ -162,7 +162,7 @@ public class Game implements ApplicationListener {
 	@Override
 	public void dispose() {
 		SceneManager.exitAll();
-		
+		sfsClient.shutdown();
 		Art.unloadResources();
 		sound.shutdown();
 		options.save();

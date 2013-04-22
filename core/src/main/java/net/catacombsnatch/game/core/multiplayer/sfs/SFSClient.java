@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.slf4j.Logger;
-
 import com.badlogic.gdx.Gdx;
 import com.smartfoxserver.v2.exceptions.SFSException;
 
