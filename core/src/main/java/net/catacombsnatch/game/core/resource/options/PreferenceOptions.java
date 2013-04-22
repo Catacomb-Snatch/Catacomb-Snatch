@@ -21,7 +21,7 @@ public class PreferenceOptions extends Options {
 	
 	@Override
 	public void save() {
-		for(String change : changedList) {
+		if(changedList != null) for (String change : changedList) {
 			Object value = get(change);
 			
 			if(value instanceof Boolean) preferences.putBoolean(change, (Boolean) value);

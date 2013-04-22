@@ -20,7 +20,7 @@ public class OptionGroup {
 	}
 	
 	protected OptionGroup(Options options, String name, OptionGroup parent) {
-		this(options, name, parent, new HashMap<String, Object>());
+		this(options, name, parent, null);
 	}
 	
 	protected OptionGroup(Options options, String name, OptionGroup parent, Map<String, Object> defaults) {
@@ -28,7 +28,7 @@ public class OptionGroup {
 		this.name = name;
 		this.parent = parent;
 		
-		map = defaults;
+		map = defaults == null ? new HashMap<String, Object>() : defaults;
 	}
 	
 	
