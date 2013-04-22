@@ -5,10 +5,8 @@ env:
     - "ARTIFACTS_AWS_REGION=us-east-1"
     - "ARTIFACTS_S3_BUCKET=builds.catacombsnatch.net"
     - secure: "klyzaKQjpBXjR/1RLD9iCFA6f7KL2zUfxzmQRrlrkksMt7hMyzC8PALkxs4u\nfGXUv0+Eq6cTacHHR0szhMb9hTJA8678qLmZxbAlHlqaSs++WpGaU59y5Ap2\n0e7C42JWgtO/p8CNt5NdznnISdYUWI4UyIoDnmyF2oCaNEP1SVs="
-    - secure: "fG+FCV64Xg/m07hmWuX+3k2EheGE0m8dENqY8K+4NpfiiN7IeaxLO6F88p+J\nNXCd+WUvnunZM4SO83vPdMUhlwvPY2X8n91JaOez7KafZFniwWZK2SIrxON7\n0KXdGlAnpFWqrC04FlMLvLe9fmpSkMS0mWJPsZ2vk4bUVlKMwXc="
+    - secure: "KrVr7iCqHp+DRPT6OP5f4QFYPRprEGJ2sbbz7IPh637TwH7YuOQqWBgATfja\nEAiNq08Q3rc5TSqOHLSrApx7wcfu4BjBe3xcRPwc7qdZm0xYjmhcT0rGhjkR\ni20x/etaRXDNnnlA/2JX9VRK+zxQf9rrSkAuCmW+WNBf1NXH6x8="
     matrix:
-    - ANDROID_SDKS=android-8            ANDROID_TARGET=android-8   ANDROID_ABI=armeabi
-    - ANDROID_SDKS=android-10           ANDROID_TARGET=android-10  ANDROID_ABI=armeabi
     - ANDROID_SDKS=sysimg-16            ANDROID_TARGET=android-16  ANDROID_ABI=armeabi-v7a
     - ANDROID_SDKS=android-17,sysimg-17 ANDROID_TARGET=android-17  ANDROID_ABI=armeabi-v7a
 before_install:
