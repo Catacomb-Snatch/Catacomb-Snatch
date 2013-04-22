@@ -4,8 +4,8 @@ env:
     global:
     - "ARTIFACTS_AWS_REGION=us-east-1"
     - "ARTIFACTS_S3_BUCKET=builds.catacombsnatch.net"
-    - secure: "GWH+0o1NAs4SIpnVFOCkGV2f8DwUYmj0lnYYDAW/Q8GmLUfjVa0f2wWVeDVl\nd2M+1Jze8ntr78kSmeX4ep/ktos/1yRfhmXnP2uKTB1F41i/gM2RZxthtJXD\nxc7bARWz0bubdEcr+cZ+BM+p9cDptDvD2MT22tya5hFlBatYXTw="
-    - secure: "cQiIM3lR6t6NvPGwfprCzTli6MsDawoDbMXNQOtQWnoXAMWLVlOIncMCbWh+\no8vv/P4xdKp9yXHordT7joy8KVufMcGlV4zYd8JEccA4AG3y4P5teHmsIlwe\ndw/4qfujsUePOKgzWT6s1lKSXTPI0+gtzHZAomHkQwp4f6pT+Ag="
+    - secure: "klyzaKQjpBXjR/1RLD9iCFA6f7KL2zUfxzmQRrlrkksMt7hMyzC8PALkxs4u\nfGXUv0+Eq6cTacHHR0szhMb9hTJA8678qLmZxbAlHlqaSs++WpGaU59y5Ap2\n0e7C42JWgtO/p8CNt5NdznnISdYUWI4UyIoDnmyF2oCaNEP1SVs="
+    - secure: "fG+FCV64Xg/m07hmWuX+3k2EheGE0m8dENqY8K+4NpfiiN7IeaxLO6F88p+J\nNXCd+WUvnunZM4SO83vPdMUhlwvPY2X8n91JaOez7KafZFniwWZK2SIrxON7\n0KXdGlAnpFWqrC04FlMLvLe9fmpSkMS0mWJPsZ2vk4bUVlKMwXc="
     matrix:
     - ANDROID_SDKS=android-8            ANDROID_TARGET=android-8   ANDROID_ABI=armeabi
     - ANDROID_SDKS=android-10           ANDROID_TARGET=android-10  ANDROID_ABI=armeabi
