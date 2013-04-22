@@ -7,21 +7,24 @@ import java.util.Set;
 
 /** Represents an option section */
 public class OptionGroup {
+	protected Options options;
+	
 	protected OptionGroup parent;
 	protected String name;
 	
 	protected Map<String, Object> map;
 	
 	
-	public OptionGroup(String name) {
-		this(name, null);
+	protected OptionGroup(Options options, String name) {
+		this(options, name, null);
 	}
 	
-	public OptionGroup(String name, OptionGroup parent) {
-		this(name, parent, new HashMap<String, Object>());
+	protected OptionGroup(Options options, String name, OptionGroup parent) {
+		this(options, name, parent, new HashMap<String, Object>());
 	}
 	
-	public OptionGroup(String name, OptionGroup parent, Map<String, Object> defaults) {
+	protected OptionGroup(Options options, String name, OptionGroup parent, Map<String, Object> defaults) {
+		this.options = options;
 		this.name = name;
 		this.parent = parent;
 		
@@ -48,7 +51,7 @@ public class OptionGroup {
 	}
 	
 	public OptionGroup createGroup(String name, Map<String, Object> defaults) {
-		OptionGroup group = new OptionGroup(name, this, defaults);
+		OptionGroup group = new OptionGroup(options, name, this, defaults);
 		group.map.put(name, group);
 		
 		return group;
@@ -93,6 +96,11 @@ public class OptionGroup {
 		}
 		
 		return path;
+	}
+	
+	public String getPath(String key) {
+		String path = getCurrentPath();
+		return path.isEmpty() ? key : path + "." + key;
 	}
 	
 	/**
@@ -155,6 +163,7 @@ public class OptionGroup {
 		if(pair == null) return false;
 		
 		pair.group.map.put(pair.key, value);
+		options.addChange(getPath(key));
 		
 		return true;
 	}
