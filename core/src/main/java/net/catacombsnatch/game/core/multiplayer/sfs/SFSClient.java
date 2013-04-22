@@ -1,5 +1,6 @@
 package net.catacombsnatch.game.core.multiplayer.sfs;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -28,8 +29,8 @@ public class SFSClient implements IEventListener {
 	/** stored login error message */
 	private String mLoginError = "";
 	
-	private List<User> mUsers = null;
-	private List<String> mGameList = null;
+	private List<User> mUsers = new ArrayList<User>();
+	private List<String> mGameList = new ArrayList<String>();
 	
 	private int latency;
 	
@@ -60,9 +61,16 @@ public class SFSClient implements IEventListener {
 		sfsClient.addEventListener(SFSEvent.CONNECTION, this);
 		sfsClient.addEventListener(SFSEvent.CONNECTION_LOST, this);
 		sfsClient.addEventListener(SFSEvent.LOGIN, this);
-		sfsClient.addEventListener(SFSEvent.ROOM_JOIN, this);
+		sfsClient.addEventListener(SFSEvent.LOGIN_ERROR, this);
 		sfsClient.addEventListener(SFSEvent.UDP_INIT, this);
 		sfsClient.addEventListener(SFSEvent.PING_PONG, this);
+		sfsClient.addEventListener(SFSEvent.ROOM_JOIN, this);
+		sfsClient.addEventListener(SFSEvent.ROOM_JOIN_ERROR, this);
+		sfsClient.addEventListener(SFSEvent.ROOM_ADD, this);
+		sfsClient.addEventListener(SFSEvent.ROOM_REMOVE, this);
+		sfsClient.addEventListener(SFSEvent.USER_ENTER_ROOM, this);
+		sfsClient.addEventListener(SFSEvent.USER_EXIT_ROOM, this);
+		sfsClient.addEventListener(SFSEvent.PUBLIC_MESSAGE, this);
 		
 		Gdx.app.log(TAG, "Loaded");
 	}
@@ -135,7 +143,7 @@ public class SFSClient implements IEventListener {
 				sfsClient.send(new SubscribeRoomGroupRequest(GAME_ROOMS_GROUP_NAME));
 			}
 		}else if(event.getType().equalsIgnoreCase(SFSEvent.LOGIN_ERROR)){
-			mLoginError = event.getArguments().get("error").toString();
+			mLoginError = event.getArguments().get("errorMessage").toString();
 			Gdx.app.log(TAG, "Login failed: " + mLoginError);
 		}else if (event.getType().equalsIgnoreCase(SFSEvent.UDP_INIT)){
 			if (event.getArguments().get("success").equals(true)){
@@ -150,10 +158,16 @@ public class SFSClient implements IEventListener {
 			if (mUsers != null){
 				mUsers.clear();
 			}
+			String Users = "Users in room: ";
+			
 			Room room = (Room)event.getArguments().get("room");
 			for (User user : room.getUserList()){
-				//mUsers.add(user);
+				if (user != null){
+					mUsers.add(user);
+					Users = Users+" "+user.getName();
+				}
 			}
+			
 			// If a game is joined, set it up
 			if (room.isGame()){
 				mGameList.clear();
@@ -161,12 +175,14 @@ public class SFSClient implements IEventListener {
 				for (Room rm : GameList){
 					mGameList.add(rm.getName() + "	Users: " + rm.getUserCount() + "/" + rm.getMaxUsers());
 				}
+				Gdx.app.log(TAG, "Game Room [" + room.getName() + "] joined.");
 				//init the game here
 				
 			}else{
 				//chatbox stuff
 				Gdx.app.log(TAG, "Room [" + room.getName() + "] joined.");
 			}
+			Gdx.app.log(TAG, Users);
 		}else if (event.getType().equalsIgnoreCase(SFSEvent.ROOM_JOIN_ERROR)){
 			Gdx.app.log(TAG, "Unable to join room: "+event.getArguments().get("error").toString());
 		}else if (event.getType().equalsIgnoreCase(SFSEvent.ROOM_ADD) || event.getType().equalsIgnoreCase(SFSEvent.ROOM_REMOVE)){
@@ -176,16 +192,25 @@ public class SFSClient implements IEventListener {
 		}else if (event.getType().equalsIgnoreCase(SFSEvent.USER_ENTER_ROOM)){
 			User user = (User)event.getArguments().get("user");
 			Room room = (Room)event.getArguments().get("room");
-			if (room.isGame()){
+			if (user != null){
 				mUsers.add(user);
+			}
+			if (room.isGame()){
 				updateGameList();
 			}
 			Gdx.app.log(TAG, "User " + user.getName() + " joined room " + room.getName());
 		}else if (event.getType().equalsIgnoreCase(SFSEvent.USER_EXIT_ROOM)){
 			User user = (User)event.getArguments().get("user");
 			Room room = (Room)event.getArguments().get("room");
-			mUsers.remove(user.getName());
-			if (room.isGame()){
+			if (mUsers != null){
+				for (int i = 0; i < mUsers.size();i++) {
+					if (mUsers.get(i).getName() == user.getName()){
+						mUsers.remove(i);
+						break;
+					}
+				}
+			}
+			if (room.isGame()){	
 				updateGameList();
 			}
 			Gdx.app.log(TAG, "User " + user.getName() + " left room " + room.getName());
@@ -202,7 +227,9 @@ public class SFSClient implements IEventListener {
 	 * Update game list
 	 */
 	public void updateGameList(){
-		mGameList.clear();
+		if (mGameList != null){
+			mGameList.clear();
+		}
 		List<Room> gameList = sfsClient.getRoomListFromGroup(GAME_ROOMS_GROUP_NAME);
 		ListIterator<Room> gameRoomIterator = gameList.listIterator();
 		while (gameRoomIterator.hasNext()){
