@@ -1,6 +1,7 @@
 package net.catacombsnatch.game.core.resource.options;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ public abstract class Options extends OptionGroup {
 	}
 
 	public Options(String name, OptionGroup parent) {
-		this(name, parent, null);
+		this(name, parent, new HashMap<String, Object>());
 	}
 	
 	public Options(String name, OptionGroup parent, Map<String, Object> defaults) {
