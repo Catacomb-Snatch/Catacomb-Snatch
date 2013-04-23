@@ -1,13 +1,14 @@
 package net.catacombsnatch.game.android;
 
 import net.catacombsnatch.game.core.Game;
+import net.catacombsnatch.game.core.GamePlatformHelper;
 
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 
-public class CatacombSnatchGameActivity extends AndroidApplication {
+public class CatacombSnatchGameActivity extends AndroidApplication implements GamePlatformHelper {
 	
 	@Override
    public void onCreate(Bundle savedInstanceState) {
@@ -18,4 +19,9 @@ public class CatacombSnatchGameActivity extends AndroidApplication {
        config.useGL20 = true;
        initialize(new Game(), config);
    }
+	
+	@Override
+	public void initCursor() {
+	}
+	
 }

@@ -1,11 +1,19 @@
 package net.catacombsnatch.game.java;
 
+import java.nio.IntBuffer;
+
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Cursor;
+import org.lwjgl.input.Mouse;
+
 import net.catacombsnatch.game.core.Game;
+import net.catacombsnatch.game.core.GamePlatformHelper;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.utils.BufferUtils;
 
-public class CatacombSnatchGameDesktop {
+public class CatacombSnatchGameDesktop implements GamePlatformHelper {
 	public static final int GAME_WIDTH = 512;
 	public static final int GAME_HEIGHT = GAME_WIDTH * 3 / 4;
 	
@@ -19,9 +27,14 @@ public class CatacombSnatchGameDesktop {
 		config.title = "Catacomb-Snatch";
 		config.width = GAME_WIDTH;
 		config.height = GAME_HEIGHT;
+		
+		game = new LwjglApplication( new Game(new CatacombSnatchGameDesktop()), config );
+	}
 
+	@Override
+	public void initCursor() {
 		// Set game cursor
-		/*try {
+		try {
 			int size = 16, center = (size / 2);
 			IntBuffer buffer = BufferUtils.newIntBuffer(size * size);
 			
@@ -42,9 +55,7 @@ public class CatacombSnatchGameDesktop {
 			
 		} catch (LWJGLException e) {
 			System.err.println("Error setting native cursor!");
-		}*/
-		
-		game = new LwjglApplication( new Game(), config );
+		}
 	}
 	
 }

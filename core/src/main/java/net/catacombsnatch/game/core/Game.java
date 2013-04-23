@@ -43,6 +43,13 @@ public class Game implements ApplicationListener {
 	private Label fpsLabel;
 	
 	protected SFSClient sfsClient;
+	
+	protected final GamePlatformHelper platformHelper;
+
+	public Game(GamePlatformHelper platformHelper) {
+		super();
+		this.platformHelper = platformHelper;
+	}
 
 	@Override
 	public void create() {
@@ -70,6 +77,7 @@ public class Game implements ApplicationListener {
 		
 		input = new InputManager();
 		Gdx.input.setInputProcessor(input);
+		platformHelper.initCursor();
 		
 		Controllers.addListener(input);
 		EventManager.registerListener(this);
