@@ -44,11 +44,11 @@ public class Game implements ApplicationListener {
 	
 	protected SFSClient sfsClient;
 	
-	protected final GamePlatformHelper platformHelper;
+	private final PlatformDependent platform;
 
-	public Game(GamePlatformHelper platformHelper) {
+	public Game(PlatformDependent platform) {
 		super();
-		this.platformHelper = platformHelper;
+		this.platform = platform;
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class Game implements ApplicationListener {
 		
 		input = new InputManager();
 		Gdx.input.setInputProcessor(input);
-		platformHelper.initCursor();
+		platform.create();
 		
 		Controllers.addListener(input);
 		EventManager.registerListener(this);
@@ -131,6 +131,7 @@ public class Game implements ApplicationListener {
 		sfsClient.shutdown();
 		Art.unloadResources();
 		sound.shutdown();
+		platform.dispose();
 		options.save();
 	}
 	
