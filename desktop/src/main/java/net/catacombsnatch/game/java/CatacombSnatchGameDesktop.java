@@ -26,48 +26,47 @@ public class CatacombSnatchGameDesktop {
 		config.width = GAME_WIDTH;
 		config.height = GAME_HEIGHT;
 		
-		new LwjglApplication( new Game(
-
-new PlatformDependent {
-	@Override
-	public void create() {
-		// Set game cursor
-		try {
-			int size = 16, center = (size / 2);
-			IntBuffer buffer = BufferUtils.newIntBuffer(size * size);
-
-			int x = 0, y = 0;
-			for (int n = 0; n < buffer.limit(); n++) {
-				if ((x == center || y == center) &&
-					(x < center-1 || y < center-1 ||
-					 x > center+1 || y > center+1)) {
-					buffer = buffer.put(n, 0xFFFFFFFF);
-				}
-				
-				x++;
-				if(x == size) {
-					x = 0;
-					y++;
-				}
-			}
-
-			Mouse.setNativeCursor(new Cursor(size, size, center, center, 1, buffer, null));
+		new LwjglApplication( 
+			new Game(
+			new PlatformDependent (){
+				@Override
+				public void create() {
+					// Set game cursor
+					try {
+						int size = 16, center = (size / 2);
+						IntBuffer buffer = BufferUtils.newIntBuffer(size * size);
 			
-		} catch (LWJGLException e) {
-			System.err.print("Error setting native cursor!\n" + e);
-		}	
-	}
-		
-	@Override
-	public Object[] createPlatformObjects() {	
-		throw new UnsupportedOperationException("Unimplemented");
-	}
+						int x = 0, y = 0;
+						for (int n = 0; n < buffer.limit(); n++) {
+							if ((x == center || y == center) &&
+								(x < center-1 || y < center-1 ||
+								 x > center+1 || y > center+1)) {
+								buffer = buffer.put(n, 0xFFFFFFFF);
+							}
+							
+							x++;
+							if(x == size) {
+								x = 0;
+								y++;
+							}
+						}
 			
-	@Override
-	public void dispose() {	
-	}
-}
-		
-		), config );
+						Mouse.setNativeCursor(new Cursor(size, size, center, center, 1, buffer, null));
+						
+					} catch (LWJGLException e) {
+						System.err.print("Error setting native cursor!\n" + e);
+					}	
+				}
+					
+				@Override
+				public Object[] createPlatformObjects() {	
+					throw new UnsupportedOperationException("Unimplemented");
+				}
+						
+				@Override
+				public void dispose() {	
+				}
+			})
+		,config );
 	}
 }
