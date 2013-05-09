@@ -1,13 +1,13 @@
 package net.catacombsnatch.game.core.world.level;
 
-import net.catacombsnatch.game.core.entity.Entity;
 import net.catacombsnatch.game.core.entity.EntityComponent;
 import net.catacombsnatch.game.core.entity.EntityManager;
 import net.catacombsnatch.game.core.screen.Tickable;
+import net.catacombsnatch.game.core.util.Finishable;
 import net.catacombsnatch.game.core.world.level.generator.LevelGenerator;
 import net.catacombsnatch.game.core.world.tile.Tile;
 
-public class Level implements Tickable {
+public class Level implements Tickable, Finishable {
 	protected EntityManager entityManager;
 	protected Tile[] tiles;
 	
@@ -38,8 +38,8 @@ public class Level implements Tickable {
 		}
 		
 		// Tick through entities (regenerate, physics, ...)
-		for(Entity entity : entityManager.getEntities()) {
-			for(EntityComponent component : entity.getComponents()) {
+		for(long entity : entityManager.getEntities()) {
+			for(EntityComponent component : entityManager.getComponents(entity)) {
 				if(!(component instanceof Tickable)) continue;
 				
 				((Tickable) component).tick(delta);
@@ -47,6 +47,16 @@ public class Level implements Tickable {
 		}
 	}
 
+	@Override
+	public void setFinished(boolean finished) {
+		this.finished = finished;
+	}
+
+	@Override
+	public boolean hasFinished() {
+		return finished;
+	}
+	
 	/** @param debug True if debug information should be shown. */
 	public void showDebug(boolean debug) {
 		this.debug = debug;
@@ -96,20 +106,6 @@ public class Level implements Tickable {
 	/** @return The level height <b>in tiles</b> */
 	public int getHeight() {
 		return height;
-	}
-	
-	/**
-	 * Sets whether or not the level is finished.
-	 * 
-	 * @param finished True if finished, false if not
-	 */
-	public void setFinished(boolean finished) {
-		this.finished = finished;
-	}
-	
-	/** @return True if the level is finished, otherwise false */
-	public boolean hasFinished() {
-		return finished;
 	}
 	
 	/** @return The {@link EntityManager} for this level */

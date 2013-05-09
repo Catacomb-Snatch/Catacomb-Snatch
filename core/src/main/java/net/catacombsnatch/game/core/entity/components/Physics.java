@@ -4,10 +4,12 @@ import net.catacombsnatch.game.core.entity.EntityComponent;
 
 import com.badlogic.gdx.math.Rectangle;
 
-public class Physics implements EntityComponent {
+public class Physics extends EntityComponent {
 	protected Rectangle bounds;
 
-	public Physics( int x, int y, int w, int h ) {
+	public Physics( long id, int x, int y, int w, int h ) {
+		super(id);
+		
 		bounds = new Rectangle( x, y, w, h );
 	}
 

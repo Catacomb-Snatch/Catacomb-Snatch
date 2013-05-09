@@ -1,6 +1,5 @@
 package net.catacombsnatch.game.core.world.tile.tiles;
 
-import net.catacombsnatch.game.core.entity.Entity;
 import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.tile.StaticTile;
@@ -19,7 +18,7 @@ public class DestroyableWallTile extends StaticTile {
 	}
 
 	@Override
-	public boolean canPass(Entity entity) {
+	public boolean canPass(long entity) {
 		return false;
 	}
 

@@ -3,14 +3,22 @@ package net.catacombsnatch.game.core.entity.components;
 import net.catacombsnatch.game.core.entity.EntityComponent;
 import net.catacombsnatch.game.core.screen.Tickable;
 
-public class Health implements EntityComponent, Tickable {
-	protected int tick = 0;
-	protected boolean regenerate = false;
-	protected int speed = 60;
+public class Health extends EntityComponent implements Tickable {
+	protected int tick;
+	protected boolean regenerate;
+	protected int speed;
 	
 	public int health;
 	public int maxHealth;
 
+	public Health(long id) {
+		super(id);
+		
+		tick = 0;
+		regenerate = false;
+		speed = 60;
+	}
+	
 	@Override
 	public void tick(float delta) {
 		if(regenerate) {

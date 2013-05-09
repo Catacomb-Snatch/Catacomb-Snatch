@@ -6,10 +6,12 @@ import net.catacombsnatch.game.core.screen.Renderable;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-public class Render implements EntityComponent, Renderable {
+public class Render extends EntityComponent implements Renderable {
 	protected final Sprite sprite;
 
-	public Render( Sprite sprite ) {
+	public Render( long id, Sprite sprite ) {
+		super(id);
+		
 		this.sprite = sprite;
 	}
 

@@ -1,6 +1,5 @@
 package net.catacombsnatch.game.core.world.tile.tiles;
 
-import net.catacombsnatch.game.core.entity.Entity;
 import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.world.Direction;
 import net.catacombsnatch.game.core.world.level.Level;
@@ -26,7 +25,7 @@ public class FloorTile extends StaticTile {
 	}
 	
 	@Override
-	public boolean canPass(Entity entity) {
+	public boolean canPass(long entity) {
 		return true;
 	}
 	

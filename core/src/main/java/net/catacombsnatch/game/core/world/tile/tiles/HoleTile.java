@@ -1,6 +1,5 @@
 package net.catacombsnatch.game.core.world.tile.tiles;
 
-import net.catacombsnatch.game.core.entity.Entity;
 import net.catacombsnatch.game.core.entity.components.Physics;
 import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.world.level.Level;
@@ -25,8 +24,8 @@ public class HoleTile extends StaticTile {
 	public void update() {}
 
 	@Override
-	public boolean canPass(Entity entity) {
-		Physics p = entity.getComponent(Physics.class);
+	public boolean canPass(long entity) {
+		Physics p = level.getEntityManager().getComponent(entity, Physics.class);
 		if(p != null && p.isWithin(getBounds())) {
 			// TODO Kill entity by "falling"
 		}

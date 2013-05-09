@@ -1,6 +1,5 @@
 package net.catacombsnatch.game.core.world.tile;
 
-import net.catacombsnatch.game.core.entity.Entity;
 import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.world.Direction;
 import net.catacombsnatch.game.core.world.level.Level;
@@ -79,7 +78,7 @@ public abstract class Tile implements Tickable {
 	 * @param entity The entity to check
 	 * @return True if the entity can pass, otherwise false
 	 */
-	public abstract boolean canPass( Entity entity );
+	public abstract boolean canPass( long entity );
 	
 	public abstract boolean shouldRender(View view);
 	

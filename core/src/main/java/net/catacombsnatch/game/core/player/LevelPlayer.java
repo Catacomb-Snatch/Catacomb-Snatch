@@ -1,6 +1,5 @@
 package net.catacombsnatch.game.core.player;
 
-import net.catacombsnatch.game.core.entity.Entity;
 import net.catacombsnatch.game.core.entity.EntityManager;
 import net.catacombsnatch.game.core.entity.components.Health;
 import net.catacombsnatch.game.core.entity.components.Physics;
@@ -9,7 +8,7 @@ import net.catacombsnatch.game.core.world.level.Level;
 public class LevelPlayer {
 	protected final Level level;
 	
-	protected Entity entity;
+	protected long entityId;
 	protected Health health;
 	protected Physics physics;
 
@@ -22,9 +21,10 @@ public class LevelPlayer {
 	public LevelPlayer( Level level, int x, int y ) {
 		this.level = level;
 		
-		entity = level.getEntityManager().createEntity();
-		health = entity.addComponent( Health.class );
-		physics = entity.addComponent( Physics.class, new Physics( x - 4, y - 4, 8, 8 ) );
+		EntityManager eMng = level.getEntityManager();
+		entityId = eMng.createEntity();
+		health = eMng.addComponent( entityId, Health.class );
+		physics = eMng.addComponent( entityId, Physics.class, new Physics( entityId, x - 4, y - 4, 8, 8 ) );
 	}
 
 	/** @return The {@link Level} this player currently plays in. */
@@ -35,10 +35,10 @@ public class LevelPlayer {
 	/**
 	 * Returns the player entity
 	 * 
-	 * @return The player {@link Entity}
+	 * @return The player's entity id
 	 */
-	public Entity getEntity() {
-		return entity;
+	public long getEntityId() {
+		return entityId;
 	}
 
 	/**

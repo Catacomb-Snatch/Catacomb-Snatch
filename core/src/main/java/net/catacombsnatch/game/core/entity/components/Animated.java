@@ -9,20 +9,22 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
-public class Animated implements EntityComponent, Renderable, Tickable {
+public class Animated extends EntityComponent implements Renderable, Tickable {
 	protected Animation animation;
 	protected float timeState;
 	protected int x, y;
 
-	public Animated( TextureRegion[] animation ) {
-		this( animation, 1f );
+	public Animated( long id, TextureRegion[] animation ) {
+		this(id, animation, 1f );
 	}
 
-	public Animated( TextureRegion[] animation, float duration ) {
-		this( animation, 1f, Animation.LOOP);
+	public Animated( long id, TextureRegion[] animation, float duration ) {
+		this(id, animation, 1f, Animation.LOOP);
 	}
 		
-	public Animated( TextureRegion[] animation, float duration, int mode ) {
+	public Animated( long id, TextureRegion[] animation, float duration, int mode ) {
+		super(id);
+		
 		this.animation = new Animation( duration, new Array<TextureRegion>(animation), mode );
 		this.timeState = 0f;
 
