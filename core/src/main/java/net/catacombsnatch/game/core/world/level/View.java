@@ -94,5 +94,13 @@ public class View implements Renderable, Updateable {
 	public Rectangle getViewport() {
 		return viewport;
 	}
+	
+	/** @return The current view port + offset. */
+	public Rectangle getViewportOffset() {
+		Rectangle r = new Rectangle(viewport);
+		r.setX(viewport.x+offset.x);
+		r.setY(viewport.y+offset.y);
+		return r;
+	}
 
 }
