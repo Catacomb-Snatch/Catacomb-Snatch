@@ -17,7 +17,7 @@ public class EntityMeta {
 	 * @return True if found, otherwise false
 	 */
 	public synchronized boolean has( String key ) {
-		return get( key ) != null;
+		return data.containsKey( key );
 	}
 
 	/**

@@ -54,9 +54,13 @@ public class Art {
 
 	/** Unloads all loaded resources */
 	public static void unloadResources() {
-		for(int i = 0; i < lordLard.length; i++) {
-			dispose(lordLard[i]);
-		}
+		dispose(lordLard);
+		
+		dispose(tiles_floor);
+		dispose(tiles_sand);
+		dispose(tiles_walls);
+		dispose(tiles_hole);
+		dispose(tiles_shadows);
 		
 		skin.dispose();
 		pyramid.dispose();
@@ -73,6 +77,12 @@ public class Art {
 	private static TextureRegion[][] cut( String path, int w, int h ) {
 		Texture tex = load( path );
 		return TextureRegion.split( tex, w, h );
+	}
+	
+	private static void dispose(TextureRegion[][] tex) {
+		for(int i = 0; i < tex.length; i++) {
+			dispose(tex[i]);
+		}
 	}
 	
 	private static void dispose(TextureRegion[] tex) {
