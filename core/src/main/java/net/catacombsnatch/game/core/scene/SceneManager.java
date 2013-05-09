@@ -1,5 +1,6 @@
 package net.catacombsnatch.game.core.scene;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 import net.catacombsnatch.game.core.screen.Updateable;
@@ -45,20 +46,29 @@ public class SceneManager implements Updateable {
 	
 	/**
 	 * Adds and switches to the newly generated scene and optionally closes all other ones.
-	 * This creates a new scene from the class default constructor.
+	 * This creates a new scene from the class default constructor if no arguments given and 
+	 * a new scene from the class constructor containing the types according to the arguments.
 	 * 
 	 * @param menu The class of the menu to switch to.
 	 * @param closeAll True if all previous scenes should be closed.
+	 * @param args Arguments to pass to the constructor of the menu, leave "blank" to use default constructor.
 	 * @return The newly generated scene instance.
 	 */
-	public static synchronized <T extends Scene> T switchTo( Class<T> menu, boolean closeAll ) {
+	public static synchronized <T extends Scene> T switchTo( Class<T> menu, boolean closeAll, Object... args ) {
 		if(closeAll) exitAll();
 		
 		T instance = null;
 
 		try {
 			// Create new menu instance from class
-			instance = menu.newInstance();
+			Class[] types = new Class[0];
+			ArrayList<Class> typelist = new ArrayList<Class>();
+			for (Object o : args) {
+				typelist.add(o.getClass());
+			}
+			types = typelist.toArray(types);
+			
+			instance = (T) menu.getConstructor(types).newInstance(args);
 			instance.setViewport(Screen.getWidth(), Screen.getHeight(), true);
 			scenes.add(instance);
 

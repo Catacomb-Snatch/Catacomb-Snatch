@@ -55,7 +55,8 @@ public abstract class MenuScene extends Scene {
 		getSpriteBatch().draw( ani.getKeyFrame(tick), aniX, aniY );
 	}
 	
-
+	public boolean blockBack = false;
+	
 	@EventHandler
 	public void key(KeyReleaseEvent event) {
 		switch(event.getKey()) {
@@ -75,8 +76,12 @@ public abstract class MenuScene extends Scene {
 				break;
 				
 			case BACK:
-				if (SceneManager.getCurrent().getClass() != TitleScreen.class){
-					SceneManager.exit();
+				if (blockBack) {
+					blockBack = false;
+				} else {
+					if (SceneManager.getCurrent().getClass() != TitleScreen.class){
+						SceneManager.exit();
+					}
 				}
 				break;
 				

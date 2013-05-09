@@ -18,6 +18,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class InGameScene extends Scene {
 	protected boolean initialized = false;
+	public PauseScreen paused;
 	
 	/** The world we are playing in */
 	protected World world;
@@ -46,21 +47,24 @@ public class InGameScene extends Scene {
 		// Check keyboard inputs
 		int mx = 0, my = 0;
 		
-		if(InputManager.isPressed(Key.MOVE_LEFT)){
-			mx = mx-10;
-		}
-		if(InputManager.isPressed(Key.MOVE_RIGHT)){
-			mx = mx+10;
-		}
-		if(InputManager.isPressed(Key.MOVE_UP)){
-			my = my+10;
-		}
-		if(InputManager.isPressed(Key.MOVE_DOWN)){
-			my = my-10;
-		}
-		
-		if (InputManager.isPressed(Key.BACK)){
-			SceneManager.switchTo(TitleScreen.class, true); // TODO
+		if (paused == null) {
+			if(InputManager.isPressed(Key.MOVE_LEFT)){
+				mx = mx-10;
+			}
+			if(InputManager.isPressed(Key.MOVE_RIGHT)){
+				mx = mx+10;
+			}
+			if(InputManager.isPressed(Key.MOVE_UP)){
+				my = my+10;
+			}
+			if(InputManager.isPressed(Key.MOVE_DOWN)){
+				my = my-10;
+			}
+			
+			if (InputManager.isPressed(Key.BACK)){
+				//SceneManager.switchTo(TitleScreen.class, true); // TODO
+				SceneManager.switchTo(PauseScreen.class, false, this).blockBack = true; // TODO
+			}
 		}
 
 		for(View view : views) {
@@ -71,8 +75,10 @@ public class InGameScene extends Scene {
 		super.draw();
 		getSpriteBatch().begin();
 		
+		if (paused == null) {
 		// Tick, tock - the world is just a clock...
-		world.tick(delta);
+			world.tick(delta);
+		}
 		
 		// Open the windows to actually see the outside!
 		for(View view : views) {

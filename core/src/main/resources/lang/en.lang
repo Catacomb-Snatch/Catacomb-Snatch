@@ -13,6 +13,10 @@ scene.title.start = Start Game
 scene.title.options = Options
 scene.title.exit = Exit Game
 
+scene.pause.resume = Resume Game
+scene.pause.options = Options
+scene.pause.title = Back to Title
+
 option.debugMode.enable = Show debug information
 option.debugMode.disable = Hide debug information
 option.vSyncEnabled.enable = Enable vSync
