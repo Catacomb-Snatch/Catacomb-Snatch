@@ -2,6 +2,7 @@ package net.catacombsnatch.game.core.scene;
 
 import net.catacombsnatch.game.core.event.EventManager;
 import net.catacombsnatch.game.core.resource.Art;
+import net.catacombsnatch.game.core.screen.Updateable;
 import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.Gdx;
@@ -16,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class Scene extends Stage {
+public class Scene extends Stage implements Updateable {
 	/** The background image */
 	protected Texture background;
 
@@ -52,13 +53,8 @@ public class Scene extends Stage {
 		this.dispose();
 	}
 	
-	/**
-	 * Called whenever the screen should get updated
-	 * 
-	 * @param update If update has been called through a resize
-	 */
+	@Override
 	public void update(boolean resize) {}
-	
 	
 	public void render(float delta) {
 		// Draw background

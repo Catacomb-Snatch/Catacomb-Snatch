@@ -2,11 +2,12 @@ package net.catacombsnatch.game.core.scene;
 
 import java.util.Stack;
 
+import net.catacombsnatch.game.core.screen.Updateable;
 import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.Gdx;
 
-public class SceneManager {
+public class SceneManager implements Updateable {
 	public final static String TAG = "[SceneManager]";
 	
 	protected static SceneStack scenes;
@@ -15,7 +16,8 @@ public class SceneManager {
 		scenes = new SceneStack();
 	}
 	
-	public void resize() {
+	@Override
+	public void update(boolean resize) {
 		Scene current = getCurrent();
 		if(current != null) current.update(true);
 	}

@@ -92,7 +92,7 @@ public class InGameScene extends Scene {
 		if(resize) {
 			for(View view : views) {
 				view.setViewport(new Rectangle(0, 0, Screen.getWidth(), Screen.getHeight()));
-				view.resize();
+				view.update(true);
 			}
 		}
 	}

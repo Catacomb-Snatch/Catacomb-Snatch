@@ -3,6 +3,7 @@ package net.catacombsnatch.game.core.world.level;
 import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.screen.Renderable;
+import net.catacombsnatch.game.core.screen.Updateable;
 import net.catacombsnatch.game.core.screen.Screen;
 import net.catacombsnatch.game.core.world.tile.Tile;
 
@@ -10,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class View implements Renderable {
+public class View implements Renderable, Updateable {
 	protected Level level;
 	protected Rectangle viewport;
 	protected int rendered;
@@ -51,6 +52,15 @@ public class View implements Renderable {
 		minimap.render(scene);
 	}
 	
+	@Override
+	public void update(boolean resize) {
+		if(viewport == null) return;
+		
+		panel.setPosition((viewport.getWidth() - panel.getWidth()) / 2, viewport.getHeight() - panel.getHeight());
+		
+		minimap.update(true);
+	}
+
 	/**
 	 * Moves the view offset.
 	 * 
@@ -59,14 +69,6 @@ public class View implements Renderable {
 	 */
 	public void move(float x, float y) {
 		offset.add(x, y);
-	}
-	
-	public void resize() {
-		if(viewport == null) return;
-		
-		panel.setPosition((viewport.getWidth() - panel.getWidth()) / 2, viewport.getHeight() - panel.getHeight());
-		
-		minimap.update(true);
 	}
 	
 	public void setViewport(Rectangle view) {
