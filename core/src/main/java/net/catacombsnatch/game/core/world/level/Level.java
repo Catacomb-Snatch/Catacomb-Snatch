@@ -1,5 +1,7 @@
 package net.catacombsnatch.game.core.world.level;
 
+import java.util.Iterator;
+
 import net.catacombsnatch.game.core.entity.EntityComponent;
 import net.catacombsnatch.game.core.entity.EntityManager;
 import net.catacombsnatch.game.core.screen.Tickable;
@@ -37,13 +39,14 @@ public class Level implements Tickable, Finishable {
 			tile.tick(delta);
 		}
 		
-		// Tick through entities (regenerate, physics, ...)
-		for(long entity : entityManager.getEntities()) {
-			for(EntityComponent component : entityManager.getComponents(entity)) {
-				if(!(component instanceof Tickable)) continue;
-				
-				((Tickable) component).tick(delta);
-			}
+		// Tick through entity components (regenerate, physics, ...)
+		Iterator<EntityComponent> components = entityManager.getComponents().iterator();
+		
+		while(components.hasNext()) {
+			EntityComponent component = components.next();
+			if(!(component instanceof Tickable)) continue;
+			
+			((Tickable) component).tick(delta);
 		}
 	}
 

@@ -5,7 +5,6 @@ import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.View;
 import net.catacombsnatch.game.core.world.tile.tiles.HoleTile;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
@@ -17,7 +16,7 @@ public abstract class StaticTile extends Tile {
 	protected TextureRegion region;
 	
 	
-	protected StaticTile(Color color) {
+	protected StaticTile(int color) {
 		super(color);
 	}
 	

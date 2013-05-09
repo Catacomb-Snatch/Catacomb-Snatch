@@ -6,7 +6,6 @@ import net.catacombsnatch.game.core.screen.Renderable;
 import net.catacombsnatch.game.core.screen.Screen;
 import net.catacombsnatch.game.core.world.tile.Tile;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -48,7 +47,7 @@ public class Minimap implements Renderable {
 			if(tile == null) continue;
 			
 			pm.drawPixel((int) tile.getPosition().x - (int) (vp.x / Tile.WIDTH), (int) tile.getPosition().y - (int) (vp.y / Tile.HEIGHT), 
-					Color.rgba8888(tile.getMinimapColor()));
+					tile.getMinimapColor());
 		}
 		
 		// TODO add entity icons

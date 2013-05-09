@@ -5,12 +5,10 @@ import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.tile.StaticTile;
 
-import com.badlogic.gdx.graphics.Color;
-
 public class HoleTile extends StaticTile {
 	
 	public HoleTile() {
-		super(Color.BLACK);
+		super(0xFF000000); // Black
 	}
 
 	@Override

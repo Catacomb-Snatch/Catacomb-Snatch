@@ -19,12 +19,12 @@ public abstract class Tile implements Tickable {
 	public static final int WIDTH = 32;
 
 	protected Level level;
-	protected Color minimapColor;
+	protected int minimapColor;
 
 	protected Vector2 position;
 
 	
-	protected Tile(Color color) {
+	protected Tile(int color) {
 		minimapColor = color;
 	}
 	
@@ -38,8 +38,8 @@ public abstract class Tile implements Tickable {
 		return level;
 	}
 	
-	/** @return The {@link Color} shown on the minimap. */
-	public Color getMinimapColor() {
+	/** @return The color shown on the {@link Minimap} (in rgba8888 format). */
+	public int getMinimapColor() {
 		return minimapColor;
 	}
 
@@ -109,7 +109,7 @@ public abstract class Tile implements Tickable {
 	 * @param region The texture region
 	 * @return The average color
 	 */
-	protected static Color getColor(TextureRegion region) {
+	protected static int getColor(TextureRegion region) {
 		region.getTexture().getTextureData().prepare();
 		Pixmap pixmap = region.getTexture().getTextureData().consumePixmap();
 		
@@ -129,7 +129,7 @@ public abstract class Tile implements Tickable {
 		}
 		
 		pixmap.dispose();
-		return new Color(r / t, g / t, b / t, 1);
+		return ((int)((r / t) * 255) << 24) | ((int)((g / t) * 255) << 16) | ((int)((b / t) * 255) << 8) | 255;
 	}
 	
 }

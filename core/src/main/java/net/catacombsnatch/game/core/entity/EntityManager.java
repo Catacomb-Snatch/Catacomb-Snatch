@@ -165,6 +165,22 @@ public class EntityManager {
 	}
 	
 	/**
+	 * Returns all stored component instances for all entities.
+	 * 
+	 * @return A {@link List} of <b>all</b> {@link EntityComponent} instances. 
+	 */
+	@SuppressWarnings("unchecked")
+	public synchronized List<EntityComponent> getComponents() {
+		List<EntityComponent> list = new ArrayList<EntityComponent>();
+
+		for(@SuppressWarnings("rawtypes") ComponentStorage storage : components.values()) {
+			list.addAll(storage.values());
+		}
+		
+		return list;
+	}
+	
+	/**
 	 * Returns all stored component instances for an entity.
 	 * 
 	 * @param entityId The entity id
