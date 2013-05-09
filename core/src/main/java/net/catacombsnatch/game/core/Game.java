@@ -48,6 +48,7 @@ public class Game implements ApplicationListener {
 
 	public Game(PlatformDependent platform) {
 		super();
+		
 		this.platform = platform;
 	}
 
@@ -82,7 +83,7 @@ public class Game implements ApplicationListener {
 		Controllers.addListener(input);
 		EventManager.registerListener(this);
 		
-		// Enable muliplayer
+		// Enable multiplayer
 		sfsClient = new SFSClient();
 		//sfsClient.connect("test", "test");
 		

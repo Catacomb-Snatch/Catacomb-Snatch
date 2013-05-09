@@ -1,5 +1,7 @@
 package net.catacombsnatch.game.core;
 
+import com.badlogic.gdx.utils.Disposable;
+
 /**
  * An interface for cleaningly initalizing
  * and tearing down any platform dependent
@@ -8,9 +10,9 @@ package net.catacombsnatch.game.core;
  * e.g. Cursors on desktop and no Cursors
  * 		on mobile.
  *
- * 	@author Kyle Brodie
+ * @author Kyle Brodie
  */
-public interface PlatformDependent {
+public interface PlatformDependent extends Disposable {
 
 	/**
 	 * Creates all runtime static objects
@@ -31,11 +33,4 @@ public interface PlatformDependent {
 	 */
 	public Object[] createPlatformObjects();
 
-	/**
-	 * Destroys all runtime static objects
-	 * that are not maintained by the GC 
-	 * and cleans GC objects with pointers
-	 * to non GC objects.
-	 */
-	public void dispose();
 }
