@@ -88,7 +88,7 @@ public class EntityManager {
 		T instance = null;
 
 		try {
-			instance = component.getConstructor(Long.class).newInstance(entityId);
+			instance = component.getConstructor(getClass(), Long.class).newInstance(this, entityId);
 			this.addComponent( entityId, component, instance );
 
 		} catch ( Exception e ) {

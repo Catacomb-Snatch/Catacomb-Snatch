@@ -1,6 +1,7 @@
 package net.catacombsnatch.game.core.entity.components;
 
 import net.catacombsnatch.game.core.entity.EntityComponent;
+import net.catacombsnatch.game.core.entity.EntityManager;
 import net.catacombsnatch.game.core.screen.Tickable;
 
 public class Health extends EntityComponent implements Tickable {
@@ -11,8 +12,8 @@ public class Health extends EntityComponent implements Tickable {
 	public int health;
 	public int maxHealth;
 
-	public Health(long id) {
-		super(id);
+	public Health(EntityManager manager, long id) {
+		super(manager, id);
 		
 		tick = 0;
 		regenerate = false;

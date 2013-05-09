@@ -36,7 +36,7 @@ public class World implements Tickable, Finishable {
 		
 		if(currentLevel == null || currentLevel.hasFinished()) {
 			Level next = getRotation().getNext(getLevels());
-			if(next == null) hasFinished = true;
+			if(next == null) setFinished(true);
 			
 			currentLevel = next;
 		}

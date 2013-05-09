@@ -24,7 +24,7 @@ public class LevelPlayer {
 		EntityManager eMng = level.getEntityManager();
 		entityId = eMng.createEntity();
 		health = eMng.addComponent( entityId, Health.class );
-		physics = eMng.addComponent( entityId, Physics.class, new Physics( entityId, x - 4, y - 4, 8, 8 ) );
+		physics = eMng.addComponent( entityId, Physics.class, new Physics( eMng, entityId, x - 4, y - 4, 8, 8 ) );
 	}
 
 	/** @return The {@link Level} this player currently plays in. */

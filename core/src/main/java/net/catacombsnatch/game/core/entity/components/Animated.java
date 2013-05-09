@@ -1,6 +1,7 @@
 package net.catacombsnatch.game.core.entity.components;
 
 import net.catacombsnatch.game.core.entity.EntityComponent;
+import net.catacombsnatch.game.core.entity.EntityManager;
 import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.screen.Renderable;
 import net.catacombsnatch.game.core.screen.Tickable;
@@ -14,16 +15,16 @@ public class Animated extends EntityComponent implements Renderable, Tickable {
 	protected float timeState;
 	protected int x, y;
 
-	public Animated( long id, TextureRegion[] animation ) {
-		this(id, animation, 1f );
+	public Animated( EntityManager manager, long id, TextureRegion[] animation ) {
+		this(manager, id, animation, 1f );
 	}
 
-	public Animated( long id, TextureRegion[] animation, float duration ) {
-		this(id, animation, 1f, Animation.LOOP);
+	public Animated( EntityManager manager, long id, TextureRegion[] animation, float duration ) {
+		this(manager, id, animation, 1f, Animation.LOOP);
 	}
 		
-	public Animated( long id, TextureRegion[] animation, float duration, int mode ) {
-		super(id);
+	public Animated( EntityManager manager, long id, TextureRegion[] animation, float duration, int mode ) {
+		super(manager, id);
 		
 		this.animation = new Animation( duration, new Array<TextureRegion>(animation), mode );
 		this.timeState = 0f;
@@ -50,4 +51,5 @@ public class Animated extends EntityComponent implements Renderable, Tickable {
 		this.x += x;
 		this.y += y;
 	}
+	
 }
