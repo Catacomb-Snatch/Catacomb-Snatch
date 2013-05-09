@@ -6,6 +6,7 @@ import java.util.List;
 import net.catacombsnatch.game.core.event.input.InputManager;
 import net.catacombsnatch.game.core.event.input.Key;
 import net.catacombsnatch.game.core.scene.Scene;
+import net.catacombsnatch.game.core.scene.SceneManager;
 import net.catacombsnatch.game.core.screen.Screen;
 import net.catacombsnatch.game.core.world.Difficulty;
 import net.catacombsnatch.game.core.world.World;
@@ -59,11 +60,11 @@ public class InGameScene extends Scene {
 		}
 		
 		if (InputManager.isPressed(Key.BACK)){
-			// Todo
+			SceneManager.switchTo(TitleScreen.class, true); // TODO
 		}
 
 		for(View view : views) {
-			view.move(mx, my);
+			view.setTarget(view.getOffset().x + mx, view.getOffset().y + my);
 		}
 		
 		// Just some overlays

@@ -21,16 +21,11 @@ public abstract class Tile implements Tickable {
 	protected Level level;
 	protected int minimapColor;
 
+	protected Rectangle bb;
 	protected Vector2 position;
-
 	
 	protected Tile(int color) {
 		minimapColor = color;
-	}
-	
-	public void init(Level level, int x, int y) {
-		this.level = level;
-		this.position = new Vector2(x, y);
 	}
 
 	/** @return The {@link Level} this tile is placed in */
@@ -53,6 +48,8 @@ public abstract class Tile implements Tickable {
 		return null;
 	}
 	
+	public abstract void init(Level level, int x, int y);
+
 	/**
 	 * Used to update the tile.
 	 * Called whenever a tile gets {@link #destroy()}ed;
@@ -115,11 +112,10 @@ public abstract class Tile implements Tickable {
 		
 		float t = region.getRegionHeight() * region.getRegionWidth();
 		float r = 0, g = 0, b = 0;
-		int ox = region.getRegionX(), oy = region.getRegionY();
 		
 		Color c = new Color();
-		for (int y = oy; y < region.getRegionHeight(); y++) {
-			for (int x = ox; x < region.getRegionWidth(); x++) {
+		for (int y = region.getRegionY(); y < region.getRegionHeight(); y++) {
+			for (int x = region.getRegionX(); x < region.getRegionWidth(); x++) {
 				Color.rgba8888ToColor(c, pixmap.getPixel(x, y));
 				
 				r += c.r;

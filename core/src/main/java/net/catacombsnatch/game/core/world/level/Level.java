@@ -60,13 +60,13 @@ public class Level implements Tickable, Finishable {
 		return finished;
 	}
 	
-	/** @param debug True if debug information should be shown. */
-	public void showDebug(boolean debug) {
+	/** @param debug True if debug mode should be activated. */
+	public void setDebugMode(boolean debug) {
 		this.debug = debug;
 	}
 	
-	/** @return True if debug information should be shown, otherwise false. */
-	public boolean isDebug() {
+	/** @return True if debug mode is activated, otherwise false. */
+	public boolean isDebugModeActive() {
 		return debug;
 	}
 	

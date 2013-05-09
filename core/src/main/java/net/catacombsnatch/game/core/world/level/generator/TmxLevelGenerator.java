@@ -1,15 +1,18 @@
 package net.catacombsnatch.game.core.world.level.generator;
 
+import net.catacombsnatch.game.core.world.Direction;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.generator.options.GeneratorStringOption;
 import net.catacombsnatch.game.core.world.tile.Tile;
 import net.catacombsnatch.game.core.world.tile.TileRegistry;
+import net.catacombsnatch.game.core.world.tile.tiles.HoleTile;
 
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Vector2;
 
 public class TmxLevelGenerator extends LevelGenerator {
 	protected TiledMap map;
@@ -44,7 +47,10 @@ public class TmxLevelGenerator extends LevelGenerator {
 						(fill ? empty.getValue() : null) :
 						(String) cell.getTile().getProperties().get("type");
 					
-					if(type != null) level.setTile(TileRegistry.createFor(type, level, x, y), x, y);
+					if(type != null) {
+						int yy = tileLayer.getHeight() - y;
+						level.setTile(TileRegistry.createFor(type, level, x, yy), x, yy);
+					}
 				}
 			}
 		}
@@ -53,8 +59,17 @@ public class TmxLevelGenerator extends LevelGenerator {
 		for(int x = 0; x < level.getWidth(); x++) {
 			for(int y = 0; y < level.getHeight(); y++) {
 				Tile tile = level.getTile(x, y);
+				if(tile == null) continue;
+				 
+				if(y + 1 < level.getHeight() && tile.getRelative(Direction.SOUTH) == null) {
+					HoleTile hole = new HoleTile();
+					Vector2 vec = Direction.SOUTH.getFor(tile.getPosition());
+					
+					hole.init(level, (int) vec.x, (int) vec.y);
+					level.setTile(hole, (int) vec.x, (int) vec.y);
+				}
 				
-				if(tile != null) tile.update();
+				tile.update();
 			}
 		}
 		

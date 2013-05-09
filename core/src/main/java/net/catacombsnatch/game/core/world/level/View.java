@@ -3,10 +3,11 @@ package net.catacombsnatch.game.core.world.level;
 import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.screen.Renderable;
-import net.catacombsnatch.game.core.screen.Updateable;
 import net.catacombsnatch.game.core.screen.Screen;
+import net.catacombsnatch.game.core.screen.Updateable;
 import net.catacombsnatch.game.core.world.tile.Tile;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -15,7 +16,7 @@ public class View implements Renderable, Updateable {
 	protected Level level;
 	protected Rectangle viewport;
 	protected int rendered;
-	protected Vector2 offset;
+	protected Vector2 offset, target;
 	
 	protected Sprite panel;
 	
@@ -34,6 +35,10 @@ public class View implements Renderable, Updateable {
 	public void render( Scene scene ) {
 		if(viewport == null) return;
 		
+		// "Camera" movement
+		offset = target.lerp(offset, Gdx.graphics.getDeltaTime());
+		
+		// Draw tiles
 		rendered = 0; // Reset counter
 		
 		for(float y = (viewport.height + offset.y) / Tile.HEIGHT + 2; y >= (viewport.y + offset.y) / Tile.HEIGHT - 4; y--) {
@@ -67,8 +72,8 @@ public class View implements Renderable, Updateable {
 	 * @param x Amount of pixels to move along the x-coordinate
 	 * @param y Amount of pixels to move along the y-coordinate
 	 */
-	public void move(float x, float y) {
-		offset.add(x, y);
+	public void setTarget(float x, float y) {
+		target = new Vector2(x, y);
 	}
 	
 	public void setViewport(Rectangle view) {

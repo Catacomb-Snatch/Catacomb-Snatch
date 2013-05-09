@@ -13,9 +13,10 @@ public class HoleTile extends StaticTile {
 
 	@Override
 	public void init(Level level, int x, int y) {
-		super.init(level, x, y);
-		
+		this.level = level;
 		setRandomTexture(Art.tiles_hole);
+		
+		super.init(level, x, y);
 	}
 	
 	@Override

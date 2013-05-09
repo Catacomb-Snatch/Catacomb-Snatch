@@ -12,9 +12,10 @@ public class DestroyableWallTile extends StaticTile {
 	
 	@Override
 	public void init(Level level, int x, int y) {
-		super.init(level, x, y);
-		
+		this.level = level;
 		setTexture(Art.tiles_walls[0]);
+		
+		super.init(level, x, y);
 	}
 
 	@Override

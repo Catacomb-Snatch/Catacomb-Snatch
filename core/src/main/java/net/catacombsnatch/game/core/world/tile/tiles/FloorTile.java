@@ -19,9 +19,10 @@ public class FloorTile extends StaticTile {
 	
 	@Override
 	public void init(Level level, int x, int y) {
-		super.init(level, x, y);
-		
+		this.level = level;
 		setRandomTexture(Art.tiles_floor);
+		
+		super.init(level, x, y);
 	}
 	
 	@Override

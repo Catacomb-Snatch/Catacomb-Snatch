@@ -14,9 +14,10 @@ public class WallTile extends StaticTile {
 	
 	@Override
 	public void init(Level level, int x, int y) {
-		super.init(level, x, y);
-		
+		this.level = level;
 		setRandomTexture(Arrays.copyOfRange(Art.tiles_walls, 1, Art.tiles_walls.length));
+		
+		super.init(level, x, y);
 	}
 
 	@Override
