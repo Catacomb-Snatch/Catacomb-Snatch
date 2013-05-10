@@ -14,6 +14,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class PauseScreen extends MenuScene {
 	
@@ -94,6 +95,14 @@ public class PauseScreen extends MenuScene {
 		getSpriteBatch().draw(Art.logo, (Screen.getWidth() - Art.logo.getWidth()) / 2, Screen.getHeight() - (int) (1.5f * Art.logo.getHeight()));
 		
 		drawCharacter();
+	}
+	
+	@Override
+	public void update(boolean resize) {
+		if(resize) {
+			subScene.update(resize);
+		}
+		super.update(resize);
 	}
 	
 }

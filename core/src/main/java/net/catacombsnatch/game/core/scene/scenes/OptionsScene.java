@@ -91,4 +91,12 @@ public class OptionsScene extends MenuScene {
 		drawCharacter();
 	}
 	
+	@Override
+	public void update(boolean resize) {
+		if(resize) {
+			subScene.update(resize);
+		}
+		super.update(resize);
+	}
+	
 }

@@ -59,14 +59,15 @@ public class TmxLevelGenerator extends LevelGenerator {
 		for(int x = 0; x < level.getWidth(); x++) {
 			for(int y = 0; y < level.getHeight(); y++) {
 				Tile tile = level.getTile(x, y);
-				if(tile == null) continue;
-				 
-				if(y + 1 < level.getHeight() && tile.getRelative(Direction.SOUTH) == null) {
+				if (tile == null && level.getTile(x, y-1) != null && !(level.getTile(x, y-1) instanceof HoleTile)) {
 					HoleTile hole = new HoleTile();
-					Vector2 vec = Direction.SOUTH.getFor(tile.getPosition());
 					
-					hole.init(level, (int) vec.x, (int) vec.y);
-					level.setTile(hole, (int) vec.x, (int) vec.y);
+					hole.init(level, x, y);
+					level.setTile(hole, x, y);
+				}
+				
+				if (tile == null) {
+					continue;
 				}
 				
 				tile.update();

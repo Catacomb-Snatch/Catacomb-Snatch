@@ -39,14 +39,14 @@ public class Minimap implements Renderable {
 		vp.y += view.offset.y;
 		
 		vp.x -= Screen.getWidth()/2;
-		vp.y -= Screen.getHeight()/2;
+		vp.y += Screen.getHeight()/2;
 		
 		pm = new Pixmap(40, 40, Pixmap.Format.RGBA8888);
 		
 		for (Tile tile : level.getTiles()) {
 			if(tile == null) continue;
 			
-			pm.drawPixel((int) tile.getPosition().x - (int) (vp.x / Tile.WIDTH), (int) tile.getPosition().y - (int) (vp.y / Tile.HEIGHT), 
+			pm.drawPixel((int) tile.getPosition().x - (int) (vp.x / Tile.WIDTH), (int) tile.getPosition().y - (int) (vp.height / Tile.HEIGHT) - (int) (vp.y / Tile.HEIGHT), 
 					tile.getMinimapColor());
 		}
 		

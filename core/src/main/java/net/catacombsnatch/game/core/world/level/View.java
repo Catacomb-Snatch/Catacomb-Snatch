@@ -41,7 +41,8 @@ public class View implements Renderable, Updateable {
 		// Draw tiles
 		rendered = 0; // Reset counter
 		
-		for(float y = (viewport.height + offset.y) / Tile.HEIGHT + 2; y >= (viewport.y + offset.y) / Tile.HEIGHT - 4; y--) {
+		//for(float y = (viewport.height + offset.y) / Tile.HEIGHT + 2; y >= (viewport.y + offset.y) / Tile.HEIGHT - 4; y--) {
+		for(float y = (viewport.y - offset.y) / Tile.HEIGHT - 4; y <= (viewport.height - offset.y) / Tile.HEIGHT + 2; y++) {
 			for(float x = (viewport.x + offset.x) / Tile.WIDTH - 2; x < (viewport.width + offset.x) / Tile.WIDTH + 4; x++) {
 				Tile tile = level.getTile((int) x, (int) y);
 				
@@ -99,7 +100,7 @@ public class View implements Renderable, Updateable {
 	public Rectangle getViewportOffset() {
 		Rectangle r = new Rectangle(viewport);
 		r.setX(viewport.x+offset.x);
-		r.setY(viewport.y+offset.y);
+		r.setY(viewport.y-offset.y);
 		return r;
 	}
 

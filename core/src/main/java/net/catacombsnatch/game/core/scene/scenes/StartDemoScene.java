@@ -6,6 +6,7 @@ import net.catacombsnatch.game.core.scene.MenuScene;
 import net.catacombsnatch.game.core.scene.ReusableAction;
 import net.catacombsnatch.game.core.scene.SceneManager;
 import net.catacombsnatch.game.core.world.level.generator.DebugLevelGenerator;
+import net.catacombsnatch.game.core.world.level.generator.RandomLevelGenerator;
 import net.catacombsnatch.game.core.world.level.generator.TmxLevelGenerator;
 
 public class StartDemoScene extends MenuScene {
