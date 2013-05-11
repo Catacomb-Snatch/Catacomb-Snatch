@@ -35,7 +35,8 @@ public class StartDemoScene extends MenuScene {
 			@Override
 			public boolean use(float delta) {
 				InGameScene scene = SceneManager.switchTo(InGameScene.class, true);
-				scene.init(new DebugLevelGenerator().generate());
+				//scene.init(new DebugLevelGenerator().generate());
+				scene.init(new RandomLevelGenerator().generate()); //TODO
 				return true;
 			}
 		});
