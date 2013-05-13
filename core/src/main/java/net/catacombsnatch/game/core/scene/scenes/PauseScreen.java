@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.Color;
 public class PauseScreen extends MenuScene {
 	
 	public PauseScreen() {
-		super(Screen.createBlank(new Color(0f, 0f, 0f, 0.25f)));
+		super(Screen.createBlank(new Color(0f, 0f, 0f, 0.45f)));
 		
 		addTextButton(Language.get("scene.pause.title"), 0, 0).addAction(new ReusableAction() {
 			@Override

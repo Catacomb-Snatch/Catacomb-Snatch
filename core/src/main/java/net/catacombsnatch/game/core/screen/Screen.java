@@ -2,9 +2,6 @@ package net.catacombsnatch.game.core.screen;
 
 import java.nio.ByteBuffer;
 
-import net.catacombsnatch.game.core.scene.Scene;
-import net.catacombsnatch.game.core.scene.SceneManager;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -23,9 +20,6 @@ public class Screen {
 	public static void resize(int width, int height) {
 		if(width > 800 && height > 600) SCALE = 2;
 		else SCALE = 1;
-		
-		Scene current = SceneManager.getCurrent();
-		if(current != null) current.setViewport(width / SCALE, height / SCALE, true);
 	}
 
 	/** Clears the screen with black */

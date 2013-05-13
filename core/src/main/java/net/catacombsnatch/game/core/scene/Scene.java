@@ -22,6 +22,7 @@ public class Scene extends Stage implements Updateable, Tickable {
 	/** The background image */
 	protected Texture background;
 	
+	private boolean exit = false;
 	private boolean drawBackground = true;
 	private final Rectangle currentActorRect = new Rectangle();
 	private Vector2 mousePos = new Vector2();
@@ -53,6 +54,7 @@ public class Scene extends Stage implements Updateable, Tickable {
 	 */
 	public void exit() {
 		this.dispose();
+		exit = true;
 	}
 	
 	@Override
@@ -107,6 +109,10 @@ public class Scene extends Stage implements Updateable, Tickable {
 	
 	public void setDrawBackground(boolean draw) {
 		this.drawBackground = draw;
+	}
+	
+	public boolean hasBeenClosed() {
+		return exit;
 	}
 	
 	/**

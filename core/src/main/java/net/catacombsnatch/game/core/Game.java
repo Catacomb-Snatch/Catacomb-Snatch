@@ -47,8 +47,6 @@ public class Game implements ApplicationListener {
 	private final PlatformDependent platform;
 
 	public Game(PlatformDependent platform) {
-		super();
-		
 		this.platform = platform;
 	}
 
@@ -107,6 +105,8 @@ public class Game implements ApplicationListener {
 		
 		if(SceneManager.isDrawAllEnabled()) {
 			for(Scene scene : sceneManager.getScenes()) {
+				if(scene.hasBeenClosed()) continue;
+				
 				scene.tick(Gdx.graphics.getDeltaTime());
 				scene.getSpriteBatch().end();
 				

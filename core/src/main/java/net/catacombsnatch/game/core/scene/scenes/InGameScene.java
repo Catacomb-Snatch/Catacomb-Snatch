@@ -107,17 +107,16 @@ public class InGameScene extends Scene {
 		initialized = false;
 		
 		SceneManager.setDrawAllEnabled(false);
+		super.exit();
 	}
 	
 	@Override
 	public void update(boolean resize) {
-		if(!initialized) return;
+		if(!initialized || !resize) return;
 		
-		if(resize) {
-			for(View view : views) {
-				view.setViewport(new Rectangle(0, 0, Screen.getWidth(), Screen.getHeight()));
-				view.update(true);
-			}
+		for(View view : views) {
+			view.setViewport(new Rectangle(0, 0, Screen.getWidth(), Screen.getHeight()));
+			view.update(true);
 		}
 	}
 	

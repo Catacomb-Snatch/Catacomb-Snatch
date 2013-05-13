@@ -3,6 +3,7 @@ package net.catacombsnatch.game.core.scene;
 import java.util.Iterator;
 import java.util.Stack;
 
+import net.catacombsnatch.game.core.screen.Screen;
 import net.catacombsnatch.game.core.screen.Updateable;
 
 import com.badlogic.gdx.Gdx;
@@ -23,8 +24,17 @@ public class SceneManager implements Updateable {
 		Iterator<Scene> openScenes = scenes.iterator();
 		
 		while(openScenes.hasNext()) {
-			openScenes.next().update(true);
+			update(openScenes.next());
 		}
+	}
+
+	/**
+	 * Returns the content of all stored scenes.
+	 * 
+	 * @return A newly generated {@link Scene Scene[]} containing all scene instances.
+	 */
+	public Scene[] getScenes() {
+		return scenes.toArray(new Scene[scenes.size()]);
 	}
 	
 	/**
@@ -79,7 +89,7 @@ public class SceneManager implements Updateable {
 		if(closeAll) exitAll();
 		
 		scenes.add(scene);
-		scene.update(true);
+		update(scene);
 		
 		return scene;
 	}
@@ -116,16 +126,12 @@ public class SceneManager implements Updateable {
 		return drawAll;
 	}
 	
-	/**
-	 * Returns the content of all stored scenes.
-	 * 
-	 * @return A newly generated {@link Scene Scene[]} containing all scene instances.
-	 */
-	public Scene[] getScenes() {
-		return scenes.toArray(new Scene[scenes.size()]);
+	protected static void update(Scene scene) {
+		scene.setViewport(Screen.getWidth(), Screen.getHeight(), true);
+		scene.update(true);
 	}
 	
-	public final class SceneStack extends Stack<Scene> {
+	protected class SceneStack extends Stack<Scene> {
 		private static final long serialVersionUID = 1L;
 
 		public SceneStack() {
