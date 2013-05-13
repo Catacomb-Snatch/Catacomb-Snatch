@@ -55,8 +55,6 @@ public abstract class MenuScene extends Scene {
 		getSpriteBatch().draw( ani.getKeyFrame(tick), aniX, aniY );
 	}
 	
-	public boolean blockBack = false;
-	
 	@EventHandler
 	public void key(KeyReleaseEvent event) {
 		switch(event.getKey()) {
@@ -76,13 +74,10 @@ public abstract class MenuScene extends Scene {
 				break;
 				
 			case BACK:
-				if (blockBack) {
-					blockBack = false;
-				} else {
-					if (SceneManager.getCurrent().getClass() != TitleScreen.class){
-						SceneManager.exit();
-					}
+				if (SceneManager.getCurrent().getClass() != TitleScreen.class){
+					SceneManager.exit();
 				}
+				
 				break;
 				
 			default:
@@ -101,9 +96,11 @@ public abstract class MenuScene extends Scene {
 			}
 		}
 		
-		Actor actor = getActors().get(index);
-		aniX = (int) (actor.getX() - (Art.lordLard[0][0].getRegionWidth() / 2));
-		aniY = (int) (actor.getY());
+		if(index < getActors().size) {
+			Actor actor = getActors().get(index);
+			aniX = (int) (actor.getX() - (Art.lordLard[0][0].getRegionWidth() / 2));
+			aniY = (int) (actor.getY());
+		}
 	}
 	
 }

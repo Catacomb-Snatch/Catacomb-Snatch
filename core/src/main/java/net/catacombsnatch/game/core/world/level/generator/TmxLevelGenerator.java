@@ -1,6 +1,5 @@
 package net.catacombsnatch.game.core.world.level.generator;
 
-import net.catacombsnatch.game.core.world.Direction;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.generator.options.GeneratorStringOption;
 import net.catacombsnatch.game.core.world.tile.Tile;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.math.Vector2;
 
 public class TmxLevelGenerator extends LevelGenerator {
 	protected TiledMap map;

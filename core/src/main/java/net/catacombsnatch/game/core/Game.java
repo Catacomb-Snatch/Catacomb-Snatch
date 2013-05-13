@@ -103,16 +103,31 @@ public class Game implements ApplicationListener {
 	public void render() {
 		Screen.clear();
 
-		Scene current = SceneManager.getCurrent();
-		if (current != null) {
-			current.render(Gdx.graphics.getDeltaTime());
-			
-			if ((Boolean) DefaultOptions.DEBUG.get()) {
-				fpsLabel.setText(Gdx.graphics.getFramesPerSecond() + " FPS");
-				fpsLabel.draw(current.getSpriteBatch(), 1);
+		Scene last = null;
+		
+		if(SceneManager.isDrawAllEnabled()) {
+			for(Scene scene : sceneManager.getScenes()) {
+				scene.render(Gdx.graphics.getDeltaTime());
+				scene.getSpriteBatch().end();
+				
+				last = scene;
 			}
+		} else {
+			last = SceneManager.getCurrent();
 			
-			current.getSpriteBatch().end();
+			if(last != null) {
+				last.render(Gdx.graphics.getDeltaTime());
+				last.getSpriteBatch().end();
+			}
+		}
+		
+		if(last != null && (Boolean) DefaultOptions.DEBUG.get()) {
+			last.getSpriteBatch().begin();
+			
+			fpsLabel.setText(Gdx.graphics.getFramesPerSecond() + " FPS");
+			fpsLabel.draw(last.getSpriteBatch(), 1);
+			
+			last.getSpriteBatch().end();
 		}
 	}
 

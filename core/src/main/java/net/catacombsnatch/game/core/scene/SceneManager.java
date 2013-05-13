@@ -1,10 +1,9 @@
 package net.catacombsnatch.game.core.scene;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Stack;
 
 import net.catacombsnatch.game.core.screen.Updateable;
-import net.catacombsnatch.game.core.screen.Screen;
 
 import com.badlogic.gdx.Gdx;
 
@@ -12,15 +11,20 @@ public class SceneManager implements Updateable {
 	public final static String TAG = "[SceneManager]";
 	
 	protected static SceneStack scenes;
+	protected static boolean drawAll;
 	
 	public SceneManager() {
 		scenes = new SceneStack();
+		drawAll = false;
 	}
 	
 	@Override
 	public void update(boolean resize) {
-		Scene current = getCurrent();
-		if(current != null) current.update(true);
+		Iterator<Scene> openScenes = scenes.iterator();
+		
+		while(openScenes.hasNext()) {
+			openScenes.next().update(true);
+		}
 	}
 	
 	/**
@@ -34,49 +38,50 @@ public class SceneManager implements Updateable {
 	}
 	
 	/**
-	 * Adds and switches to the newly generated scene.
+	 * Adds and switches to the newly generated scene.<br />
 	 * This creates a new scene from the class default constructor.
 	 * 
-	 * @param menu The class of the menu to switch to.
+	 * @param scene The class of the scene to switch to.
 	 * @return The newly generated scene instance.
 	 */
-	public static synchronized <T extends Scene> T switchTo( Class<T> menu ) {
-		return switchTo(menu, false);
+	public static synchronized <T extends Scene> T switchTo( Class<T> scene ) {
+		return switchTo(scene, false);
 	}
 	
 	/**
-	 * Adds and switches to the newly generated scene and optionally closes all other ones.
-	 * This creates a new scene from the class default constructor if no arguments given and 
-	 * a new scene from the class constructor containing the types according to the arguments.
+	 * Adds and switches to the newly generated scene and optionally closes all other ones.<br />
+	 * This creates a new scene from the class default constructor.
 	 * 
-	 * @param menu The class of the menu to switch to.
+	 * @param scene The class of the scene to switch to.
 	 * @param closeAll True if all previous scenes should be closed.
-	 * @param args Arguments to pass to the constructor of the menu, leave "blank" to use default constructor.
 	 * @return The newly generated scene instance.
 	 */
-	public static synchronized <T extends Scene> T switchTo( Class<T> menu, boolean closeAll, Object... args ) {
+	public static synchronized <T extends Scene> T switchTo( Class<T> scene, boolean closeAll ) {
+		try {
+			return switchTo(scene.newInstance(), closeAll);
+			
+		} catch (Exception e) {
+			Gdx.app.error(TAG, "Error switching to scene '" + scene.getName() + "'", e);
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Adds and switches to a scene and optionally closes all other ones.<br />
+	 * <b>This takes an already existing menu instance.</b>
+	 * 
+	 * @param scene The scene instance to switch to.
+	 * @param closeAll True if all previous scenes should be closed.
+	 * @return The scene instance.
+	 */
+	public static synchronized <T extends Scene> T switchTo( T scene, boolean closeAll) {
 		if(closeAll) exitAll();
 		
-		T instance = null;
-
-		try {
-			// Create new menu instance from class
-			Class[] types = new Class[0];
-			ArrayList<Class> typelist = new ArrayList<Class>();
-			for (Object o : args) {
-				typelist.add(o.getClass());
-			}
-			types = typelist.toArray(types);
-			
-			instance = (T) menu.getConstructor(types).newInstance(args);
-			instance.setViewport(Screen.getWidth(), Screen.getHeight(), true);
-			scenes.add(instance);
-
-		} catch ( Exception e ) {
-			Gdx.app.error(TAG, "Error switching to menu '" + menu + "'", e);
-		}
-
-		return instance;
+		scenes.add(scene);
+		scene.update(true);
+		
+		return scene;
 	}
 	
 	/** Exits the currently showing scene. */
@@ -95,7 +100,32 @@ public class SceneManager implements Updateable {
 		}
 	}
 	
-	protected class SceneStack extends Stack<Scene> {
+	/**
+	 * Sets the draw all mode.
+	 * If set to true this will let the game render all open scenes,
+	 * instead of just the current (peek) one.
+	 * 
+	 * @param enable True or false to enable or disable
+	 */
+	public static void setDrawAllEnabled(boolean enable) {
+		drawAll = enable;
+	}
+	
+	/**  @return True if the game should render all open scenes (instead of just the peek). */
+	public static boolean isDrawAllEnabled() {
+		return drawAll;
+	}
+	
+	/**
+	 * Returns the content of all stored scenes.
+	 * 
+	 * @return A newly generated {@link Scene Scene[]} containing all scene instances.
+	 */
+	public Scene[] getScenes() {
+		return scenes.toArray(new Scene[scenes.size()]);
+	}
+	
+	public final class SceneStack extends Stack<Scene> {
 		private static final long serialVersionUID = 1L;
 
 		public SceneStack() {

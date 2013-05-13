@@ -2,8 +2,8 @@ package net.catacombsnatch.game.core.scene;
 
 import net.catacombsnatch.game.core.event.EventManager;
 import net.catacombsnatch.game.core.resource.Art;
-import net.catacombsnatch.game.core.screen.Updateable;
 import net.catacombsnatch.game.core.screen.Screen;
+import net.catacombsnatch.game.core.screen.Updateable;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -18,9 +18,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class Scene extends Stage implements Updateable {
+	/**
+	 * Holds the previous opened Scene.
+	 * This does not hold an old instance. This object holds only a "still active" scene.
+	 * 
+	 * Useful for pause menus.
+	 */
+	protected Scene ancestor;
+	
 	/** The background image */
 	protected Texture background;
-
+	
+	private boolean drawBackground = true;
 	private final Rectangle currentActorRect = new Rectangle();
 	private Vector2 mousePos = new Vector2();
 	
@@ -28,7 +37,7 @@ public class Scene extends Stage implements Updateable {
 	 * Called whenever this scene is getting created (or opened again).
 	 * For creation only actions use the constructor.
 	 * 
-	 * @return scene The {@link Scene} that was previously open.
+	 * @param scene The {@link Scene} that was previously open.
 	 */
 	public void enter(Scene scene) {
 		EventManager.registerListener(this);
@@ -38,7 +47,7 @@ public class Scene extends Stage implements Updateable {
 	 * Called when the game switches to a new scene while the old one
 	 * still remains "open".
 	 * 
-	 * @return scene The {@link Scene} is being switched to.
+	 * @param scene The {@link Scene} being switched to.
 	 */
 	public void leave(Scene scene) {
 		EventManager.unregisterListener(this);
@@ -58,7 +67,7 @@ public class Scene extends Stage implements Updateable {
 	
 	public void render(float delta) {
 		// Draw background
-		if(background != null) {
+		if(drawBackground && background != null) {
 			getSpriteBatch().begin();
 			getSpriteBatch().draw(background, 0, 0, Screen.getWidth(), Screen.getHeight());
 			getSpriteBatch().end();
@@ -96,6 +105,24 @@ public class Scene extends Stage implements Updateable {
 	 */
 	public void setBackground(Texture background) {
 		this.background = background;
+	}
+	
+	public boolean shouldDrawBackground() {
+		return drawBackground;
+	}
+	
+	public void setDrawBackground(boolean draw) {
+		this.drawBackground = draw;
+	}
+
+	/**
+	 * Sets the ancestor for this scene.
+	 * Usually only used by the {@link SceneManager}.
+	 * 
+	 * @param scene The "ancestor" scene.
+	 */
+	public void setAncestor(Scene scene) {
+		this.ancestor = scene;
 	}
 	
 	/**

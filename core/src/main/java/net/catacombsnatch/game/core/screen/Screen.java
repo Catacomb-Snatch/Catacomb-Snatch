@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.PixmapIO;
+import com.badlogic.gdx.graphics.Texture;
 
 public class Screen {
 	protected static int SCALE = 1;
@@ -97,4 +98,23 @@ public class Screen {
 		
 		return pixmap;
 	}
+	
+	/**
+	 * Creates a new raw 1x1 texture for background images.
+	 * 
+	 * @param color The color used to fill the one and only pixel
+	 * @return The newly generated Texture
+	 */
+	public static Texture createBlank(Color color) {
+		Pixmap pm = new Pixmap(1, 1, Format.RGBA8888);
+		
+		pm.setColor(color.r, color.g, color.b, color.a);
+		pm.drawPixel(0, 0);
+		
+		Texture tex = new Texture(pm);
+		pm.dispose();
+		
+		return tex;
+	}
+	
 }

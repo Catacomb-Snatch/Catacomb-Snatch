@@ -111,7 +111,9 @@ public class EventManager {
 		
 		public void remove(Object listener) {
 			Iterator<Listener> it = listeners.iterator();
-			while(it.hasNext()) if(it.next().equals(listener)) it.remove();
+			while(it.hasNext()) {
+				if(it.next().equals(listener)) it.remove();
+			}
 		}
 		
 		public List<Listener> getListeners() {

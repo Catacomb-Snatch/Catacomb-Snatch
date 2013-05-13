@@ -12,9 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 public class OptionsScene extends MenuScene {
 	
-	public PauseScreen subScene;
-	
-	public OptionsScene(PauseScreen subScene) {
+	public OptionsScene() {
 		super(Art.pyramid);
 		
 		addTextButton(Language.get("general.back"), 0, 0).addAction(new ReusableAction() {
@@ -25,16 +23,7 @@ public class OptionsScene extends MenuScene {
 			}
 		});
 		
-		this.subScene = subScene;
-		if (subScene != null) {
-			setBackground(subScene.bg);
-		}
-		
 		init(null);
-	}
-	
-	public OptionsScene() {
-		this(null);
 	}
 	
 	public void init(final OptionGroup group) {
@@ -46,7 +35,7 @@ public class OptionsScene extends MenuScene {
 				addTextButton(Language.get("option." + key), 0, 0).addAction(new ReusableAction() {
 					@Override
 					public boolean use(float delta) {
-						OptionsScene scene = SceneManager.switchTo(OptionsScene.class, false, subScene);
+						OptionsScene scene = SceneManager.switchTo(OptionsScene.class);
 						scene.init((OptionGroup) o);
 						return true;
 					}
@@ -82,21 +71,9 @@ public class OptionsScene extends MenuScene {
 
 	@Override
 	public void render(float delta) {
-		if (subScene != null) {
-			subScene.renderViews(this);
-		}
-		
 		super.render(delta);
 		
 		drawCharacter();
-	}
-	
-	@Override
-	public void update(boolean resize) {
-		if(resize) {
-			subScene.update(resize);
-		}
-		super.update(resize);
 	}
 	
 }

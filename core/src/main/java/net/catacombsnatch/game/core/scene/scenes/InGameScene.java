@@ -3,8 +3,10 @@ package net.catacombsnatch.game.core.scene.scenes;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.catacombsnatch.game.core.event.EventHandler;
 import net.catacombsnatch.game.core.event.input.InputManager;
 import net.catacombsnatch.game.core.event.input.Key;
+import net.catacombsnatch.game.core.event.input.events.KeyReleaseEvent;
 import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.scene.SceneManager;
 import net.catacombsnatch.game.core.screen.Screen;
@@ -18,7 +20,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class InGameScene extends Scene {
 	protected boolean initialized = false;
-	public PauseScreen paused;
+	protected boolean paused = false;
 	
 	/** The world we are playing in */
 	protected World world;
@@ -41,13 +43,25 @@ public class InGameScene extends Scene {
 	}
 	
 	@Override
+	public void enter(Scene before) {
+		paused = false;
+		SceneManager.setDrawAllEnabled(true);
+	}
+	
+	@Override
+	public void leave(Scene next) {
+		paused = true;
+		SceneManager.setDrawAllEnabled(false);
+	}
+	
+	@Override
 	public void render(float delta) {
 		if(!initialized) return;
 		
-		// Check keyboard inputs
-		int mx = 0, my = 0;
+		if (!paused) {
+			// Check keyboard inputs
+			int mx = 0, my = 0;
 		
-		if (paused == null) {
 			if(InputManager.isPressed(Key.MOVE_LEFT)){
 				mx = mx-10;
 			}
@@ -61,24 +75,17 @@ public class InGameScene extends Scene {
 				my = my-10;
 			}
 			
-			if (InputManager.isPressed(Key.BACK)){
-				//SceneManager.switchTo(TitleScreen.class, true); // TODO
-				SceneManager.switchTo(PauseScreen.class, false, this).blockBack = true; // TODO
+			for(View view : views) {
+				view.setTarget(view.getOffset().x + mx, view.getOffset().y + my);
 			}
-		}
 
-		for(View view : views) {
-			view.setTarget(view.getOffset().x + mx, view.getOffset().y + my);
+			// Tick, tock - the world is just a clock...
+			world.tick(delta);
 		}
 		
 		// Just some overlays
 		super.draw();
 		getSpriteBatch().begin();
-		
-		if (paused == null) {
-		// Tick, tock - the world is just a clock...
-			world.tick(delta);
-		}
 		
 		// Open the windows to actually see the outside!
 		for(View view : views) {
@@ -87,9 +94,9 @@ public class InGameScene extends Scene {
 	}
 	
 	public void destroy(){
-		initialized = false;
 		world = null;
 		views = null;
+		initialized = false;
 	}
 	
 	@Override
@@ -103,4 +110,16 @@ public class InGameScene extends Scene {
 			}
 		}
 	}
+	
+	@EventHandler
+	public void keyRelease(KeyReleaseEvent event) {
+		switch(event.getKey()) {
+			case BACK:
+				SceneManager.switchTo(PauseScreen.class);
+				break;
+			
+			default: // Do nothing ...
+		}
+	}
+
 }
