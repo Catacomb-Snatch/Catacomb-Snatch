@@ -70,8 +70,8 @@ public class OptionsScene extends MenuScene {
 	}
 
 	@Override
-	public void render(float delta) {
-		super.render(delta);
+	public void tick(float delta) {
+		super.tick(delta);
 		
 		drawCharacter();
 	}

@@ -107,7 +107,7 @@ public class Game implements ApplicationListener {
 		
 		if(SceneManager.isDrawAllEnabled()) {
 			for(Scene scene : sceneManager.getScenes()) {
-				scene.render(Gdx.graphics.getDeltaTime());
+				scene.tick(Gdx.graphics.getDeltaTime());
 				scene.getSpriteBatch().end();
 				
 				last = scene;
@@ -116,7 +116,7 @@ public class Game implements ApplicationListener {
 			last = SceneManager.getCurrent();
 			
 			if(last != null) {
-				last.render(Gdx.graphics.getDeltaTime());
+				last.tick(Gdx.graphics.getDeltaTime());
 				last.getSpriteBatch().end();
 			}
 		}

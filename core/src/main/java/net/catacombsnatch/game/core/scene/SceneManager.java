@@ -84,14 +84,14 @@ public class SceneManager implements Updateable {
 		return scene;
 	}
 	
-	/** Exits the currently showing scene. */
+	/** Exits the currently shown scene (if any). */
 	public static void exit() {
 		scenes.pop();
 	}
 	
 	/**
 	 * Exits all open scenes.
-	 * Please keep in mind that {@link #getCurrent() } will return null!
+	 * Please keep in mind that {@link #getCurrent()} will return null afterwards!
 	 */
 	public static void exitAll() {
 		// Clear stack until its empty
@@ -154,12 +154,15 @@ public class SceneManager implements Updateable {
 		public Scene pop() {
 			try {
 				Scene top = super.pop();
-				Scene peek = empty() ? null : peek(); 
 				
-				top.leave(peek);
-				top.exit();
-				
-				if (peek != null) peek.enter(top);
+				if(top != null) {
+					Scene peek = empty() ? null : peek(); 
+					
+					top.leave(peek);
+					top.exit();
+					
+					if (peek != null) peek.enter(top);
+				}				
 
 				return top;
 			} catch ( Exception e ) {

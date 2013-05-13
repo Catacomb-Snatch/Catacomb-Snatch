@@ -3,6 +3,7 @@ package net.catacombsnatch.game.core.scene;
 import net.catacombsnatch.game.core.event.EventManager;
 import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.screen.Screen;
+import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.screen.Updateable;
 
 import com.badlogic.gdx.Gdx;
@@ -17,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class Scene extends Stage implements Updateable {
+public class Scene extends Stage implements Updateable, Tickable {
 	/**
 	 * Holds the previous opened Scene.
 	 * This does not hold an old instance. This object holds only a "still active" scene.
@@ -65,7 +66,8 @@ public class Scene extends Stage implements Updateable {
 	@Override
 	public void update(boolean resize) {}
 	
-	public void render(float delta) {
+	@Override
+	public void tick(float delta) {
 		// Draw background
 		if(drawBackground && background != null) {
 			getSpriteBatch().begin();

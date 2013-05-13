@@ -1,7 +1,6 @@
 package net.catacombsnatch.game.core.scene.scenes;
 
 import net.catacombsnatch.game.core.Game;
-import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.resource.Language;
 import net.catacombsnatch.game.core.scene.MenuScene;
 import net.catacombsnatch.game.core.scene.ReusableAction;
@@ -41,12 +40,10 @@ public class PauseScreen extends MenuScene {
 		
 		init();
 	}
-	
+
 	@Override
-	public void render(float delta) {
-		super.render(delta);
-		
-		getSpriteBatch().draw(Art.logo, (Screen.getWidth() - Art.logo.getWidth()) / 2, Screen.getHeight() - (int) (1.5f * Art.logo.getHeight()));
+	public void tick(float delta) {
+		super.tick(delta);
 		
 		drawCharacter();
 	}

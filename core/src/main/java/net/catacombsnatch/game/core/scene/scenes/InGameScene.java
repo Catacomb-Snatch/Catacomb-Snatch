@@ -44,18 +44,21 @@ public class InGameScene extends Scene {
 	
 	@Override
 	public void enter(Scene before) {
+		super.enter(before);
+		
 		paused = false;
 		SceneManager.setDrawAllEnabled(true);
 	}
 	
 	@Override
 	public void leave(Scene next) {
+		super.leave(next);
+		
 		paused = true;
-		SceneManager.setDrawAllEnabled(false);
 	}
 	
 	@Override
-	public void render(float delta) {
+	public void tick(float delta) {
 		if(!initialized) return;
 		
 		if (!paused) {
@@ -83,20 +86,27 @@ public class InGameScene extends Scene {
 			world.tick(delta);
 		}
 		
-		// Just some overlays
-		super.draw();
+		
+		// Open the windows to see the world!
 		getSpriteBatch().begin();
 		
-		// Open the windows to actually see the outside!
 		for(View view : views) {
 			view.render(this);
 		}
+		
+		getSpriteBatch().end();
+		
+		// Just some overlays
+		super.tick(delta);
 	}
 	
-	public void destroy(){
+	@Override
+	public void exit() {
 		world = null;
 		views = null;
 		initialized = false;
+		
+		SceneManager.setDrawAllEnabled(false);
 	}
 	
 	@Override
