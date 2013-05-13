@@ -19,14 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class Scene extends Stage implements Updateable, Tickable {
-	/**
-	 * Holds the previous opened Scene.
-	 * This does not hold an old instance. This object holds only a "still active" scene.
-	 * 
-	 * Useful for pause menus.
-	 */
-	protected Scene ancestor;
-	
 	/** The background image */
 	protected Texture background;
 	
@@ -115,16 +107,6 @@ public class Scene extends Stage implements Updateable, Tickable {
 	
 	public void setDrawBackground(boolean draw) {
 		this.drawBackground = draw;
-	}
-
-	/**
-	 * Sets the ancestor for this scene.
-	 * Usually only used by the {@link SceneManager}.
-	 * 
-	 * @param scene The "ancestor" scene.
-	 */
-	public void setAncestor(Scene scene) {
-		this.ancestor = scene;
 	}
 	
 	/**
