@@ -1,15 +1,14 @@
 package net.catacombsnatch.game.core.world.tile.tiles;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
-
-import net.catacombsnatch.game.core.entity.components.Physics;
 import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.world.Direction;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.View;
 import net.catacombsnatch.game.core.world.tile.StaticTile;
 import net.catacombsnatch.game.core.world.tile.Tile;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 
 public class HoleTile extends StaticTile {
 	
@@ -64,10 +63,7 @@ public class HoleTile extends StaticTile {
 
 	@Override
 	public boolean canPass(long entity) {
-		Physics p = level.getEntityManager().getComponent(entity, Physics.class);
-		if(p != null && p.isWithin(getBounds())) {
-			// TODO Kill entity by "falling"
-		}
+		// TODO Kill entity by "falling"
 		
 		return true;
 	}

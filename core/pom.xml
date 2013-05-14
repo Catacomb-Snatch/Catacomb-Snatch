@@ -18,6 +18,12 @@
 			<id>core-libs</id>
 			<url>file://${project.basedir}/../lib</url>
 		</repository>
+		
+		<!-- Artemis entity system -->
+		<repository>
+			<id>artemis-system</id>
+			<url>https://maven.gemserk.com/nexus/content/repositories/snapshots/</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -32,6 +38,13 @@
 			<groupId>extensions</groupId>
 			<artifactId>gdx-controllers</artifactId>
 			<version>${gdx.version}</version>
+		</dependency>
+		
+		<!-- Artemis entity system -->
+		<dependency>
+			<groupId>com.gamadu.artemis</groupId>
+			<artifactId>artemis</artifactId>
+			<version>0.0.1-GEMSERK-SNAPSHOT</version>
 		</dependency>
 
 		<!-- SmartFox -->
@@ -70,11 +83,6 @@
 		    <artifactId>slf4j-nop</artifactId>
 		    <version>1.6.1</version>
 		</dependency>
-		<!-- <dependency>
-		    <groupId>org.slf4j</groupId>
-		    <artifactId>slf4j-simple</artifactId>
-		    <version>1.6.1</version>
-		</dependency> -->
 	</dependencies>
 
 	<build>

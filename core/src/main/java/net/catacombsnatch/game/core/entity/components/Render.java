@@ -1,28 +1,22 @@
 package net.catacombsnatch.game.core.entity.components;
 
-import net.catacombsnatch.game.core.entity.EntityComponent;
-import net.catacombsnatch.game.core.entity.EntityManager;
-import net.catacombsnatch.game.core.scene.Scene;
-import net.catacombsnatch.game.core.screen.Renderable;
+import net.catacombsnatch.game.core.entity.renderers.Renderer;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.artemis.Component;
 
-public class Render extends EntityComponent implements Renderable {
-	protected final Sprite sprite;
-
-	public Render( EntityManager manager, long id, Sprite sprite ) {
-		super(manager, id);
-		
-		this.sprite = sprite;
+public abstract class Render extends Component {
+	protected Renderer renderer;
+	
+	public Render(Renderer renderer) {
+		setRenderer(renderer);
 	}
-
-	@Override
-	public void render( Scene scene ) {
-		sprite.draw( scene.getSpriteBatch() );
+	
+	public Renderer getRenderer() {
+		return renderer;
 	}
-
-	public Sprite getSprite() {
-		return this.sprite;
+	
+	public final void setRenderer(Renderer renderer) {
+		this.renderer = renderer;
 	}
 
 }

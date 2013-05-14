@@ -11,8 +11,8 @@ import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.scene.SceneManager;
 import net.catacombsnatch.game.core.screen.Screen;
 import net.catacombsnatch.game.core.world.Difficulty;
-import net.catacombsnatch.game.core.world.World;
-import net.catacombsnatch.game.core.world.World.MapRotation;
+import net.catacombsnatch.game.core.world.Campaign;
+import net.catacombsnatch.game.core.world.Campaign.MapRotation;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.View;
 
@@ -23,7 +23,7 @@ public class InGameScene extends Scene {
 	protected boolean paused = false;
 	
 	/** The world we are playing in */
-	protected World world;
+	protected Campaign world;
 	
 	protected List<View> views;
 	
@@ -32,7 +32,7 @@ public class InGameScene extends Scene {
 	}
 	
 	public void init(Level level) {
-		world = new World(Difficulty.EASY, MapRotation.ONCE);
+		world = new Campaign(Difficulty.EASY, MapRotation.ONCE);
 		world.getLevels().add(level);
 		
 		views = new ArrayList<View>();

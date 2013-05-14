@@ -1,51 +1,62 @@
 package net.catacombsnatch.game.core.entity.components;
 
-import net.catacombsnatch.game.core.entity.EntityComponent;
-import net.catacombsnatch.game.core.entity.EntityManager;
-import net.catacombsnatch.game.core.screen.Tickable;
+import com.artemis.Component;
 
-public class Health extends EntityComponent implements Tickable {
-	protected int tick;
+public class Health extends Component {
 	protected boolean regenerate;
+	
 	protected int speed;
-	
-	public int health;
-	public int maxHealth;
+	protected int amount;
+	protected int health;
+	protected int maxHealth;
 
-	public Health(EntityManager manager, long id) {
-		super(manager, id);
-		
-		tick = 0;
-		regenerate = false;
+	public int tick;
+
+	public Health() {
+		regenerate = true;
+
 		speed = 60;
+		tick = 0;
+		
+		amount = 1;
+		health = 20;
+		maxHealth = 20;
+	}
+
+	public boolean canRegenerate() {
+		return regenerate;
 	}
 	
-	@Override
-	public void tick(float delta) {
-		if(regenerate) {
-			if(tick < speed) tick++;
-			
-			health++;
-			tick = 0;
-		}
-	}
-	
-	public void regenerate(boolean regen) {
+	public void setRegenerate(boolean regen) {
 		regenerate = regen;
 	}
 	
+	public int getRegenerationSpeed() {
+		return speed;
+	}
+
 	public void setRegenerationSpeed(int ticks) {
 		speed = ticks;
 	}
 	
-	public void heal( int hp ) {
+	public int getHealAmount() {
+		return amount;
+	}
+	
+	public void setHealAmount(int amnt) {
+		amount = amnt;
+	}
+	
+	public void heal(int hp) {
 		health += hp;
-		if ( health > maxHealth ) health = maxHealth;
+		
+		if (health > maxHealth) health = maxHealth;
 	}
 
-	public void damage( int dmg ) {
+	public void damage(int dmg) {
 		health -= dmg;
-		if ( health < 0 ) health = 0;
+		
+		if (health < 0) health = 0;
 	}
 
 	public boolean isAlive() {

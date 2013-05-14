@@ -1,18 +1,23 @@
 package net.catacombsnatch.game.core.world.level;
 
-import java.util.Iterator;
-
-import net.catacombsnatch.game.core.entity.EntityComponent;
-import net.catacombsnatch.game.core.entity.EntityManager;
+import net.catacombsnatch.game.core.entity.systems.HealthSystem;
 import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.util.Finishable;
 import net.catacombsnatch.game.core.world.level.generator.LevelGenerator;
 import net.catacombsnatch.game.core.world.tile.Tile;
 
-public class Level implements Tickable, Finishable {
-	protected EntityManager entityManager;
+import com.artemis.EntitySystem;
+import com.artemis.World;
+
+public class Level extends World implements Tickable, Finishable {
+	// Entity management
+	protected EntitySystem healthSystem;
+	protected EntitySystem renderSystem;
+	
+	// Tiles
 	protected Tile[] tiles;
 	
+	// General level information
 	protected LevelGenerator generator;
 	
 	protected int width, height;
@@ -21,13 +26,28 @@ public class Level implements Tickable, Finishable {
 	protected boolean finished = false;
 
 	public Level(LevelGenerator generator, int width, int height) {
-		this.generator = generator;
+		super();
+
+		// Entity management
+		healthSystem = new HealthSystem();
+		renderSystem = new HealthSystem();
 		
-		entityManager = new EntityManager();
-		tiles = new Tile[width * height];
+		// Tiles
+		this.tiles = new Tile[width * height];
+		
+		// General level information
+		this.generator = generator;
 		
 		this.width = width;
 		this.height = height;
+	}
+	
+	public void initialize() {		
+		// Add systems
+		getSystemManager().setSystem(healthSystem);
+		getSystemManager().setSystem(renderSystem);
+		
+		getSystemManager().initializeAll();
 	}
 	
 	@Override
@@ -39,37 +59,15 @@ public class Level implements Tickable, Finishable {
 			tile.tick(delta);
 		}
 		
-		// Tick through entity components (regenerate, physics, ...)
-		Iterator<EntityComponent> components = entityManager.getComponents().iterator();
+		// Update entities
+		loopStart();
 		
-		while(components.hasNext()) {
-			EntityComponent component = components.next();
-			if(!(component instanceof Tickable)) continue;
-			
-			((Tickable) component).tick(delta);
-		}
+		setDelta((int) delta);
+		
+		// Process systems
+		healthSystem.process();
 	}
 
-	@Override
-	public void setFinished(boolean finished) {
-		this.finished = finished;
-	}
-
-	@Override
-	public boolean hasFinished() {
-		return finished;
-	}
-	
-	/** @param debug True if debug mode should be activated. */
-	public void setDebugMode(boolean debug) {
-		this.debug = debug;
-	}
-	
-	/** @return True if debug mode is activated, otherwise false. */
-	public boolean isDebugModeActive() {
-		return debug;
-	}
-	
 	/** @return An array of all stored tiles (size = level width * level height). */
 	public Tile[] getTiles() {
 		return tiles;
@@ -101,6 +99,26 @@ public class Level implements Tickable, Finishable {
 		tiles[x + y * width] = tile;
 	}
 	
+	@Override
+	public void setFinished(boolean finished) {
+		this.finished = finished;
+	}
+
+	@Override
+	public boolean hasFinished() {
+		return finished;
+	}
+	
+	/** @param debug True if debug mode should be activated. */
+	public void setDebugMode(boolean debug) {
+		this.debug = debug;
+	}
+	
+	/** @return True if debug mode is activated, otherwise false. */
+	public boolean isDebugModeActive() {
+		return debug;
+	}
+	
 	/** @return The level width <b>in tiles</b> */
 	public int getWidth() {
 		return width;
@@ -109,11 +127,6 @@ public class Level implements Tickable, Finishable {
 	/** @return The level height <b>in tiles</b> */
 	public int getHeight() {
 		return height;
-	}
-	
-	/** @return The {@link EntityManager} for this level */
-	public EntityManager getEntityManager() {
-		return entityManager;
 	}
 	
 	/** @return The {@link LevelGenerator} used to generate this level */

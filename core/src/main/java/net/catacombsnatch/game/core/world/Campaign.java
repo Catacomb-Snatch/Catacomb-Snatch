@@ -10,18 +10,18 @@ import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.util.Finishable;
 import net.catacombsnatch.game.core.world.level.Level;
 
-public class World implements Tickable, Finishable {
+public class Campaign implements Tickable, Finishable {
 	protected List<Level> levels;
 	protected List<Player> players;
 
-	protected Difficulty difficulty;
-	protected MapRotation rotation;
+	protected final Difficulty difficulty;
+	protected final MapRotation rotation;
 	
 	protected Level currentLevel;
 	
 	protected boolean hasFinished;
 
-	public World( Difficulty diff, MapRotation rot ) {
+	public Campaign( Difficulty diff, MapRotation rot ) {
 		levels = new LinkedList<Level>();
 		players = new ArrayList<Player>();
 

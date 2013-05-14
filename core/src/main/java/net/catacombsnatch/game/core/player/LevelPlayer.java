@@ -1,16 +1,17 @@
 package net.catacombsnatch.game.core.player;
 
-import net.catacombsnatch.game.core.entity.EntityManager;
+import net.catacombsnatch.game.core.entity.EntityHelper;
 import net.catacombsnatch.game.core.entity.components.Health;
-import net.catacombsnatch.game.core.entity.components.Physics;
 import net.catacombsnatch.game.core.world.level.Level;
+
+import com.artemis.Entity;
+import com.artemis.EntityManager;
 
 public class LevelPlayer {
 	protected final Level level;
 	
-	protected long entityId;
+	protected Entity entity;
 	protected Health health;
-	protected Physics physics;
 
 	/**
 	 * Creates a new in-game (in level) player
@@ -21,10 +22,8 @@ public class LevelPlayer {
 	public LevelPlayer( Level level, int x, int y ) {
 		this.level = level;
 		
-		EntityManager eMng = level.getEntityManager();
-		entityId = eMng.createEntity();
-		health = eMng.addComponent( entityId, Health.class );
-		physics = eMng.addComponent( entityId, Physics.class, new Physics( eMng, entityId, x - 4, y - 4, 8, 8 ) );
+		entity = EntityHelper.createPlayerEntity(level);
+		health = entity.getComponent(Health.class);
 	}
 
 	/** @return The {@link Level} this player currently plays in. */
@@ -35,10 +34,10 @@ public class LevelPlayer {
 	/**
 	 * Returns the player entity
 	 * 
-	 * @return The player's entity id
+	 * @return The player's entity
 	 */
-	public long getEntityId() {
-		return entityId;
+	public Entity getEntity() {
+		return entity;
 	}
 
 	/**
@@ -48,15 +47,6 @@ public class LevelPlayer {
 	 */
 	public Health getHealth() {
 		return health;
-	}
-
-	/**
-	 * Returns the {@link Physics} component for this player
-	 * 
-	 * @return The {@link Physics} component
-	 */
-	public Physics getPhysics() {
-		return physics;
 	}
 	
 }
