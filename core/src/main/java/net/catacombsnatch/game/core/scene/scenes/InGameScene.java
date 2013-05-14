@@ -3,16 +3,18 @@ package net.catacombsnatch.game.core.scene.scenes;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.catacombsnatch.game.core.entity.systems.RenderSystem;
 import net.catacombsnatch.game.core.event.EventHandler;
 import net.catacombsnatch.game.core.event.input.InputManager;
 import net.catacombsnatch.game.core.event.input.Key;
 import net.catacombsnatch.game.core.event.input.events.KeyReleaseEvent;
+import net.catacombsnatch.game.core.player.LocalPlayer;
 import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.scene.SceneManager;
 import net.catacombsnatch.game.core.screen.Screen;
-import net.catacombsnatch.game.core.world.Difficulty;
 import net.catacombsnatch.game.core.world.Campaign;
 import net.catacombsnatch.game.core.world.Campaign.MapRotation;
+import net.catacombsnatch.game.core.world.Difficulty;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.View;
 
@@ -31,12 +33,17 @@ public class InGameScene extends Scene {
 		super();
 	}
 	
-	public void init(Level level) {
+	public void init(Level level) {  // TODO
 		world = new Campaign(Difficulty.EASY, MapRotation.ONCE);
+		
+		world.getPlayers().add(new LocalPlayer());
 		world.getLevels().add(level);
 		
 		views = new ArrayList<View>();
-		views.add(new View(level));
+		
+		View view = new View(level);
+		level.getSystemManager().setSystem(new RenderSystem(view));
+		views.add(view);		
 		
 		initialized = true;
 		update(true);

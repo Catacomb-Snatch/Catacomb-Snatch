@@ -2,10 +2,11 @@ package net.catacombsnatch.game.core.player;
 
 import net.catacombsnatch.game.core.entity.EntityHelper;
 import net.catacombsnatch.game.core.entity.components.Health;
+import net.catacombsnatch.game.core.entity.components.Render;
+import net.catacombsnatch.game.core.entity.renderers.PlayerRenderer;
 import net.catacombsnatch.game.core.world.level.Level;
 
 import com.artemis.Entity;
-import com.artemis.EntityManager;
 
 public class LevelPlayer {
 	protected final Level level;
@@ -16,13 +17,16 @@ public class LevelPlayer {
 	/**
 	 * Creates a new in-game (in level) player
 	 * 
-	 * @param manager The {@link EntityManager}
-	 * @param id The entity id
+	 * @param level The {@link Level} this player plays in
+	 * @param x The x-spawn coordinate
+	 * @param y The y-spawn coordinate
 	 */
 	public LevelPlayer( Level level, int x, int y ) {
 		this.level = level;
 		
 		entity = EntityHelper.createPlayerEntity(level);
+		entity.addComponent(new Render(new PlayerRenderer(level, entity)));
+		
 		health = entity.getComponent(Health.class);
 	}
 

@@ -1,11 +1,18 @@
 package net.catacombsnatch.game.core.player;
 
-public class LocalPlayer implements Player {
+import net.catacombsnatch.game.core.world.level.Level;
 
+public class LocalPlayer implements Player {
+	protected LevelPlayer lvlPlayer;
+	
 	@Override
 	public LevelPlayer getLevelPlayer() {
-		// TODO Auto-generated method stub
-		return null;
+		return lvlPlayer;
+	}
+
+	@Override
+	public void prepareLevelPlayer(Level level) {
+		lvlPlayer = new LevelPlayer(level, 0, 0); // TODO get spawn coords from level
 	}
 
 }

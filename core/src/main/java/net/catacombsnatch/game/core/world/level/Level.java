@@ -1,18 +1,18 @@
 package net.catacombsnatch.game.core.world.level;
 
 import net.catacombsnatch.game.core.entity.systems.HealthSystem;
+import net.catacombsnatch.game.core.player.LevelPlayer;
 import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.util.Finishable;
 import net.catacombsnatch.game.core.world.level.generator.LevelGenerator;
 import net.catacombsnatch.game.core.world.tile.Tile;
 
-import com.artemis.EntitySystem;
 import com.artemis.World;
+import com.badlogic.gdx.utils.Array;
 
 public class Level extends World implements Tickable, Finishable {
 	// Entity management
-	protected EntitySystem healthSystem;
-	protected EntitySystem renderSystem;
+	protected Array<LevelPlayer> players;
 	
 	// Tiles
 	protected Tile[] tiles;
@@ -22,6 +22,8 @@ public class Level extends World implements Tickable, Finishable {
 	
 	protected int width, height;
 	
+	protected long lastMillis;
+	
 	protected boolean debug = false;
 	protected boolean finished = false;
 
@@ -29,8 +31,7 @@ public class Level extends World implements Tickable, Finishable {
 		super();
 
 		// Entity management
-		healthSystem = new HealthSystem();
-		renderSystem = new HealthSystem();
+		players = new Array<LevelPlayer>();
 		
 		// Tiles
 		this.tiles = new Tile[width * height];
@@ -42,16 +43,17 @@ public class Level extends World implements Tickable, Finishable {
 		this.height = height;
 	}
 	
-	public void initialize() {		
+	public void initialize() {
 		// Add systems
-		getSystemManager().setSystem(healthSystem);
-		getSystemManager().setSystem(renderSystem);
+		getSystemManager().setSystem(new HealthSystem());
 		
 		getSystemManager().initializeAll();
 	}
 	
 	@Override
 	public void tick(float delta) {
+		lastMillis = System.currentTimeMillis();
+
 		// Tick through tiles (for animations, ...)
 		for(Tile tile : tiles) {
 			if(tile == null) continue;
@@ -61,11 +63,21 @@ public class Level extends World implements Tickable, Finishable {
 		
 		// Update entities
 		loopStart();
-		
-		setDelta((int) delta);
+		setDelta((int) (System.currentTimeMillis() - lastMillis));
 		
 		// Process systems
-		healthSystem.process();
+		for(int i = 0; i < getSystemManager().getSystems().size(); i++) {
+			getSystemManager().getSystems().get(i).process();
+		}
+	}
+	
+	/**
+	 * Adds a player to the current level.
+	 * 
+	 * @param player The {@link LevelPlayer} to add
+	 */
+	public void addPlayer(LevelPlayer player) {
+		players.add(player);
 	}
 
 	/** @return An array of all stored tiles (size = level width * level height). */

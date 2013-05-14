@@ -24,7 +24,7 @@ public class HealthSystem extends EntityProcessingSystem {
 		// Get health component
 		Health health = heathMapper.get(e);
 		
-		// Update the entitie's health
+		// Update the entity's health
 		if(health.canRegenerate()) {
 			if(health.tick < health.getRegenerationSpeed()) {
 				health.tick++;

@@ -36,14 +36,24 @@ public class Campaign implements Tickable, Finishable {
 		
 		if(currentLevel == null || currentLevel.hasFinished()) {
 			Level next = getRotation().getNext(getLevels());
-			if(next == null) setFinished(true);
+			if(next == null) {
+				setFinished(true);
+				return;
+			}
+			
+			// Prepare next level
+			for(Player player : getPlayers()) {
+				player.prepareLevelPlayer(next);
+				
+				next.addPlayer(player.getLevelPlayer());
+			}
+			
+			next.initialize();
 			
 			currentLevel = next;
 		}
 		
-		if(currentLevel != null) {
-			currentLevel.tick(delta);
-		}
+		currentLevel.tick(delta);
 	}
 
 	@Override

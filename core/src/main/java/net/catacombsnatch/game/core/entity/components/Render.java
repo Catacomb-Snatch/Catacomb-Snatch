@@ -4,7 +4,7 @@ import net.catacombsnatch.game.core.entity.renderers.Renderer;
 
 import com.artemis.Component;
 
-public abstract class Render extends Component {
+public class Render extends Component {
 	protected Renderer renderer;
 	
 	public Render(Renderer renderer) {
