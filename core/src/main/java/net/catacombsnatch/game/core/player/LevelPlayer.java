@@ -19,7 +19,7 @@ public class LevelPlayer {
 	 * @param x The x-spawn coordinate
 	 * @param y The y-spawn coordinate
 	 */
-	public LevelPlayer( Level level, int x, int y ) {
+	public LevelPlayer( Level level ) {
 		this.level = level;
 		
 		entity = EntityFactory.createPlayerEntity(level);

@@ -12,7 +12,7 @@ public class LocalPlayer implements Player {
 
 	@Override
 	public void prepareLevelPlayer(Level level) {
-		lvlPlayer = new LevelPlayer(level, 0, 0); // TODO get spawn coords from level
+		lvlPlayer = new LevelPlayer(level);
 	}
 
 }

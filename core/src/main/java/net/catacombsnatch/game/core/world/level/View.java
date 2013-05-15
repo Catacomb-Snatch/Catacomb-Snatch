@@ -34,7 +34,9 @@ public class View implements Renderable, Updateable {
 		minimap = new Minimap(level, this);
 		
 		renderer = new RenderSystem(this);
-		level.setSystem(renderer, true);
+		
+		level.setSystem(renderer);
+		level.initialize();
 	}
 	
 	@Override
@@ -43,7 +45,7 @@ public class View implements Renderable, Updateable {
 		
 		if(target != null) {
 			// "Camera" movement
-			offset = offset.lerp(target, Gdx.graphics.getDeltaTime() * 1.5f);
+			offset = offset.lerp(target, Gdx.graphics.getDeltaTime());
 			
 			// Draw tiles
 			rendered = 0; // Reset counter
@@ -61,7 +63,6 @@ public class View implements Renderable, Updateable {
 			
 			// Render entities
 			renderer.setGraphics(scene.getSpriteBatch());
-			renderer.process();
 		}
 		
 		// Draw overlays

@@ -46,18 +46,13 @@ public class Level extends World implements Tickable, Finishable {
 		
 		this.width = width;
 		this.height = height;
-	}
-	
-	@Override
-	public void initialize() {
+
 		// Add managers
 		setManager(new GroupManager());
-
+		
 		// Add systems
 		setSystem(new HealthSystem());
 		setSystem(new MovementSystem());
-		
-		super.initialize();
 	}
 	
 	@Override
