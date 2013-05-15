@@ -9,5 +9,5 @@ public enum Key {
 	MOVE_LEFT, MOVE_RIGHT, MOVE_UP, MOVE_DOWN,
 	
 	// Action keys
-	USE, BACK, FIRE, SPRINT;
+	USE, BACK, FIRE, SPRINT, MENU;
 }

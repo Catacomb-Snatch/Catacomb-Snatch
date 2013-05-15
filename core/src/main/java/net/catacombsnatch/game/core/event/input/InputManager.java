@@ -19,14 +19,20 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.PovDirection;
+import com.badlogic.gdx.controllers.mappings.Ouya;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
 
 public class InputManager implements InputProcessor, ControllerListener {
+	public final static String TAG = "[InputManager]";
+	
+	public static final float OUYA_STICK_DEADZONE = 0.25F;
+	
 	protected static KeyMap keyboard;
 	protected static Map<Controller, KeyMap> controllers;
 	protected static Map<Key, Boolean> pressed;
+	private static Key lastKey = Key.UNKNOWN;
 	static {
 		keyboard = KeyMap.KEYBOARD;
 		controllers = new HashMap<Controller, KeyMap>();
@@ -166,17 +172,19 @@ public class InputManager implements InputProcessor, ControllerListener {
 
 	@Override
 	public void connected(Controller controller) {
+		Gdx.app.log(TAG, "Controller "+controller.getName()+" connected.");
 		EventManager.callEvent(new ControllerConnectEvent(controller));
 	}
 
 	@Override
 	public void disconnected(Controller controller) {
+		Gdx.app.log(TAG, "Controller "+controller.getName()+" disconnected.");
 		EventManager.callEvent(new ControllerDisconnectEvent(controller));
 	}
 
 	@Override
 	public boolean buttonDown(Controller controller, int button) {
-		System.out.println(button);
+		Gdx.app.log(TAG, "Controller: "+controller+" Button: "+button);
 		
 		InputSource source = InputSource.CONTROLLER;
 		
@@ -205,21 +213,89 @@ public class InputManager implements InputProcessor, ControllerListener {
 
 	@Override
 	public boolean axisMoved(Controller controller, int axisCode, float value) {
+		//Gdx.app.log(TAG, "Controller: "+controller.getName()+" Axis: "+axisCode+" Value: "+value);
+		if(controller.getName().equals(Ouya.ID)) {
+		   // we know it's an Ouya controller, so we can use the Ouya codes
+			/*switch(axisCode){
+			case Ouya.AXIS_LEFT_X:
+				
+			break;
+			}*/
+		   float LS_X = controller.getAxis(Ouya.AXIS_LEFT_X);
+		   float LS_Y = controller.getAxis(Ouya.AXIS_LEFT_Y);
+		   float RS_X = controller.getAxis(Ouya.AXIS_RIGHT_X);
+		   float RS_Y = controller.getAxis(Ouya.AXIS_RIGHT_Y);
+		   float L2 = controller.getAxis(Ouya.AXIS_LEFT_TRIGGER);
+		   float R2 = controller.getAxis(Ouya.AXIS_RIGHT_TRIGGER);
+		   
+		   float axisX = LS_X;
+		   float axisY = LS_Y;
+		   if (axisX * axisX + axisY * axisY < OUYA_STICK_DEADZONE * OUYA_STICK_DEADZONE) {
+			   axisX = axisY = 0.0f;
+		   }
+		   Gdx.app.log(TAG, "Controller: "+controller.getName()+" X: "+axisX+" Y: "+axisY);
+		}
 		return false; // TODO
 	}
 
 	@Override
 	public boolean povMoved(Controller controller, int povCode, PovDirection value) {
-		return false; // TODO
+		Gdx.app.log(TAG, "Controller: "+controller.getName()+" povCode: "+povCode+" Value: "+value);
+		InputSource source = InputSource.CONTROLLER;
+		
+		this.axisMoved(controller, 5, controller.getAxis(5));
+		this.axisMoved(controller, 6, controller.getAxis(6));
+		Gdx.app.log(TAG, "Controller: "+controller.getName()+" Axis5 Value: "+controller.getAxis(5));
+		Gdx.app.log(TAG, "Controller: "+controller.getName()+" Axis6 Value: "+controller.getAxis(6));
+		
+		if (value == PovDirection.south){
+			Key key = Key.MOVE_DOWN;
+			pressed.put(key, true);
+			KeyPressedEvent event = new KeyPressedEvent(source, key, controller);
+			EventManager.callEvent(event);
+			lastKey = key;
+		}
+		else if (value == PovDirection.north){
+			Key key = Key.MOVE_UP;
+			pressed.put(key, true);
+			KeyPressedEvent event = new KeyPressedEvent(source, key, controller);
+			EventManager.callEvent(event);
+			lastKey = key;
+		}
+		else if (value == PovDirection.west){
+			Key key = Key.MOVE_LEFT;
+			pressed.put(key, true);
+			KeyPressedEvent event = new KeyPressedEvent(source, key, controller);
+			EventManager.callEvent(event);
+			lastKey = key;
+		}
+		else if (value == PovDirection.east){
+			Key key = Key.MOVE_RIGHT;
+			pressed.put(key, true);
+			KeyPressedEvent event = new KeyPressedEvent(source, key, controller);
+			EventManager.callEvent(event);
+			lastKey = key;
+		}
+		else{
+			if (lastKey != Key.UNKNOWN){
+				pressed.put(lastKey, false);			
+				KeyReleaseEvent event = new KeyReleaseEvent(source, lastKey, controller);
+				EventManager.callEvent(event);
+			}
+		}
+		
+		return true; // TODO
 	}
 
 	@Override
 	public boolean xSliderMoved(Controller controller, int sliderCode, boolean value) {
+		Gdx.app.log(TAG, "Controller: "+controller.getName()+" sliderX: "+sliderCode+" Value: "+value);
 		return false; // TODO
 	}
 
 	@Override
 	public boolean ySliderMoved(Controller controller, int sliderCode, boolean value) {
+		Gdx.app.log(TAG, "Controller: "+controller.getName()+" sliderY: "+sliderCode+" Value: "+value);
 		return false; // TODO
 	}
 

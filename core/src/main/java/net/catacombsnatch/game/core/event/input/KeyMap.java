@@ -33,12 +33,15 @@ public class KeyMap {
 			CONTROLLER.setFor(Key.MOVE_DOWN, InputSource.CONTROLLER, Ouya.BUTTON_DPAD_DOWN);
 			CONTROLLER.setFor(Key.USE, InputSource.CONTROLLER, Ouya.BUTTON_O);
 			CONTROLLER.setFor(Key.BACK, InputSource.CONTROLLER, Ouya.BUTTON_A);
-			CONTROLLER.setFor(Key.FIRE, InputSource.CONTROLLER, Ouya.AXIS_RIGHT_TRIGGER);	
+			CONTROLLER.setFor(Key.FIRE, InputSource.CONTROLLER, Ouya.AXIS_RIGHT_TRIGGER);
+			CONTROLLER.setFor(Key.MENU, InputSource.CONTROLLER, 82);
 		}else{
 			// Gamepad controller
-			CONTROLLER.setFor(Key.USE, InputSource.CONTROLLER, 3);
-			CONTROLLER.setFor(Key.FIRE, InputSource.CONTROLLER, 2);
+			CONTROLLER.setFor(Key.USE, InputSource.CONTROLLER, 2);
+			CONTROLLER.setFor(Key.BACK, InputSource.CONTROLLER, 1);
+			CONTROLLER.setFor(Key.FIRE, InputSource.CONTROLLER, 7);
 			CONTROLLER.setFor(Key.SPRINT, InputSource.CONTROLLER, 6);
+			CONTROLLER.setFor(Key.MENU, InputSource.CONTROLLER, 9);
 		}
 		
 	}
