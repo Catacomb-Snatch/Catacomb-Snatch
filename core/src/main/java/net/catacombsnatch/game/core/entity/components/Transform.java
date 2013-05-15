@@ -9,12 +9,20 @@ public class Transform extends Component {
 	protected Vector2 vec;
 	protected Direction dir;
 	
-	public Transform(float x, float y) {
-		setLocation(x, y);
+	public Transform(Vector2 position) {
+		vec = position;
 		setDirection(Direction.SOUTH);
 	}
 	
+	public Transform(float x, float y) {
+		this(new Vector2(x, y));
+	}
+	
 	// Positioning
+	
+	public Vector2 getPosition() {
+		return vec;
+	}
 	
 	public float getX() {
 		return vec.x;

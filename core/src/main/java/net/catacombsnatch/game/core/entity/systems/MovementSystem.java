@@ -27,6 +27,8 @@ public class MovementSystem extends EntityProcessingSystem {
 		
 		t.addX(v.getVelocityX());
 		t.addY(v.getVelocityY());
+		
+		v.reset();
 	}
 
 }

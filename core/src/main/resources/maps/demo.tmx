@@ -35,5 +35,7 @@
   <object name="mummy" gid="5" x="96" y="1344"/>
   <object name="mummy" gid="5" x="96" y="928"/>
   <object name="mummy" gid="5" x="96" y="672"/>
+  <object name="Lord_Lard" type="spawnPoint" gid="3" x="640" y="1504"/>
+  <object name="Herr_von_Speck" type="spawnPoint" gid="3" x="640" y="96"/>
  </objectgroup>
 </map>

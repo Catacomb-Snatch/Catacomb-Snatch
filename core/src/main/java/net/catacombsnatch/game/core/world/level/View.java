@@ -19,6 +19,8 @@ public class View implements Renderable, Updateable {
 	protected int rendered;
 	protected Vector2 offset, target;
 	
+	protected RenderSystem renderer;
+	
 	protected Sprite panel;
 	
 	protected Minimap minimap;
@@ -31,31 +33,38 @@ public class View implements Renderable, Updateable {
 		
 		minimap = new Minimap(level, this);
 		
-		level.setSystem(new RenderSystem(this));
+		renderer = new RenderSystem(this);
+		level.setSystem(renderer, true);
 	}
 	
 	@Override
 	public void render( Scene scene ) {
-		if(viewport == null || target == null) return;
+		if(viewport == null) return;
 		
-		// "Camera" movement
-		offset = target.lerp(offset, Gdx.graphics.getDeltaTime());
-		
-		// Draw tiles
-		rendered = 0; // Reset counter
-		
-		//for(float y = (viewport.height + offset.y) / Tile.HEIGHT + 2; y >= (viewport.y + offset.y) / Tile.HEIGHT - 4; y--) {
-		for(float y = (viewport.y - offset.y) / Tile.HEIGHT - 4; y <= (viewport.height - offset.y) / Tile.HEIGHT + 2; y++) {
-			for(float x = (viewport.x + offset.x) / Tile.WIDTH - 2; x < (viewport.width + offset.x) / Tile.WIDTH + 4; x++) {
-				Tile tile = level.getTile((int) x, (int) y);
-				
-				if(tile != null && tile.shouldRender(this)) {
-					tile.render(scene.getSpriteBatch(), this);
-					rendered++;
+		if(target != null) {
+			// "Camera" movement
+			offset = offset.lerp(target, Gdx.graphics.getDeltaTime() * 1.5f);
+			
+			// Draw tiles
+			rendered = 0; // Reset counter
+			
+			for(float y = (viewport.y - offset.y) / Tile.HEIGHT - 4; y <= (viewport.height - offset.y) / Tile.HEIGHT + 2; y++) {
+				for(float x = (viewport.x + offset.x) / Tile.WIDTH - 2; x < (viewport.width + offset.x) / Tile.WIDTH + 4; x++) {
+					Tile tile = level.getTile((int) x, (int) y);
+					
+					if(tile != null && tile.shouldRender(this)) {
+						tile.render(scene.getSpriteBatch(), this);
+						rendered++;
+					}
 				}
 			}
+			
+			// Render entities
+			renderer.setGraphics(scene.getSpriteBatch());
+			renderer.process();
 		}
 		
+		// Draw overlays
 		panel.draw(scene.getSpriteBatch());
 		
 		minimap.render(scene);
@@ -63,11 +72,11 @@ public class View implements Renderable, Updateable {
 	
 	@Override
 	public void update(boolean resize) {
-		if(viewport == null) return;
+		if(viewport == null || !resize) return;
 		
 		panel.setPosition((viewport.getWidth() - panel.getWidth()) / 2, viewport.getHeight() - panel.getHeight());
 		
-		minimap.update(true);
+		minimap.update(resize);
 	}
 
 	/**
@@ -100,10 +109,7 @@ public class View implements Renderable, Updateable {
 	
 	/** @return The current view port + offset. */
 	public Rectangle getViewportOffset() {
-		Rectangle r = new Rectangle(viewport);
-		r.setX(viewport.x+offset.x);
-		r.setY(viewport.y-offset.y);
-		return r;
+		return new Rectangle(viewport.x + offset.x, viewport.y - offset.y, viewport.width, viewport.height);
 	}
 
 }

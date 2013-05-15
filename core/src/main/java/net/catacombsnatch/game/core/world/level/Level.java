@@ -9,6 +9,8 @@ import net.catacombsnatch.game.core.world.level.generator.LevelGenerator;
 import net.catacombsnatch.game.core.world.tile.Tile;
 
 import com.artemis.World;
+import com.artemis.managers.GroupManager;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 public class Level extends World implements Tickable, Finishable {
@@ -21,6 +23,8 @@ public class Level extends World implements Tickable, Finishable {
 	// General level information
 	protected LevelGenerator generator;
 	
+	protected Array<Vector2> spawns;
+	
 	protected int width, height;
 	
 	protected boolean debug = false;
@@ -30,7 +34,7 @@ public class Level extends World implements Tickable, Finishable {
 		super();
 
 		// Entity management
-		players = new Array<LevelPlayer>();
+		this.players = new Array<LevelPlayer>();
 		
 		// Tiles
 		this.tiles = new Tile[width * height];
@@ -38,15 +42,22 @@ public class Level extends World implements Tickable, Finishable {
 		// General level information
 		this.generator = generator;
 		
+		this.spawns = generator.getSpawnLocations();
+		
 		this.width = width;
 		this.height = height;
 	}
 	
 	@Override
 	public void initialize() {
+		// Add managers
+		setManager(new GroupManager());
+
 		// Add systems
 		setSystem(new HealthSystem());
 		setSystem(new MovementSystem());
+		
+		super.initialize();
 	}
 	
 	@Override
@@ -58,14 +69,9 @@ public class Level extends World implements Tickable, Finishable {
 			tile.tick(delta);
 		}
 		
-		// Update entities
+		// Update entities and process systems
 		process();
 		setDelta(delta);
-		
-		// Process systems
-		for(int i = 0; i < getSystems().size(); i++) {
-			getSystems().get(i).process();
-		}
 	}
 	
 	/**
@@ -141,6 +147,10 @@ public class Level extends World implements Tickable, Finishable {
 	/** @return The {@link LevelGenerator} used to generate this level */
 	public LevelGenerator getGenerator() {
 		return generator;
+	}
+	
+	public Vector2 getNextSpawnLocation() {
+		return (spawns.size == 0) ? null : spawns.removeIndex(spawns.size - 1);
 	}
 	
 }

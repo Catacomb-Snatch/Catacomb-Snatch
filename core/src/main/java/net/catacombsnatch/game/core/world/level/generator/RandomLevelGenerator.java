@@ -11,6 +11,9 @@ import net.catacombsnatch.game.core.world.tile.tiles.DestroyableWallTile;
 import net.catacombsnatch.game.core.world.tile.tiles.FloorTile;
 import net.catacombsnatch.game.core.world.tile.tiles.WallTile;
 
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
+
 public class RandomLevelGenerator extends LevelGenerator {
 	
 	public static class Cell {
@@ -255,6 +258,11 @@ public class RandomLevelGenerator extends LevelGenerator {
 		}
 		
 		return level;
+	}
+
+	@Override
+	public Array<Vector2> getSpawnLocations() {
+		return new Array<Vector2>(new Vector2[] { new Vector2(0, 0) }); // TODO: @AngelDE!
 	}
 
 }

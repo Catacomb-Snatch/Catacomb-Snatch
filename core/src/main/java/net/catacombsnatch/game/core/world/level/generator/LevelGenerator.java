@@ -9,6 +9,9 @@ import java.util.Random;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.generator.options.GeneratorOption;
 
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
+
 public abstract class LevelGenerator {
 	protected Random random;
 	protected List<GeneratorOption<?>> options;
@@ -24,9 +27,19 @@ public abstract class LevelGenerator {
 		options = new ArrayList<GeneratorOption<?>>();
 	}
 	
-	
+	/**
+	 * Generates a new Level
+	 * 
+	 * @return The newly generated level
+	 */
 	public abstract Level generate();
 	
+	/**
+	 * A list of all possible spawn points <b>for players</b>.
+	 * 
+	 * @return An array containing all possible spawn point vectors.
+	 */
+	public abstract Array<Vector2> getSpawnLocations();
 	
 	/** @return The random number generator for this level. */
 	public Random randomizer() {

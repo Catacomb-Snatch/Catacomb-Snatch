@@ -17,21 +17,23 @@ public class PlayerRenderer extends Renderer {
 	
 	public PlayerRenderer(Level level, Entity entity) {
 		super(level, entity);
-	}
 
-	@Override
-	public void initialize() {
 		animations = new Animation[Direction.count];
 		
-		animations[Direction.NORTH.getFace()] = new Animation(1f, new Array<TextureRegion>(Art.lordLard[0]), Animation.LOOP);
+		for(Direction direction : Direction.values()) {
+			int face = direction.getFace();
+			animations[face] = new Animation(1f, new Array<TextureRegion>(Art.lordLard[face]), Animation.LOOP);
+		}
 	}
 
 	@Override
 	public void render(SpriteBatch graphics) {
+		if(graphics == null) return;
+		
 		Transform t = entity.getComponent(Transform.class);
 		Animation ani = animations[t.getDirection().getFace()];
 		
-		graphics.draw(ani.getKeyFrame(Gdx.graphics.getDeltaTime()), t.getX(), t.getY());
+		if(ani != null) graphics.draw(ani.getKeyFrame(Gdx.graphics.getDeltaTime()), t.getX(), t.getY());
 	}
 
 }

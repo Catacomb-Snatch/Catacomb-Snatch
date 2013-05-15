@@ -9,13 +9,15 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.EntityProcessingSystem;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
 public class RenderSystem extends EntityProcessingSystem {
 	@Mapper protected ComponentMapper<Render> renderMapper;
 	@Mapper protected ComponentMapper<Transform> positionMapper;
 	
-	protected View view;
+	protected final View view;
+	protected SpriteBatch graphics;
 	
 	@SuppressWarnings("unchecked")
 	public RenderSystem(View view) {
@@ -32,8 +34,12 @@ public class RenderSystem extends EntityProcessingSystem {
 		if (pos.getX() >= rect.x && pos.getY() >= rect.y &&
 			pos.getX() < rect.width && pos.getY() < rect.width) {
 			
-			renderMapper.get(e).getRenderer().render(null); // TODO ?
+			renderMapper.get(e).getRenderer().render(graphics);
 		}
+	}
+	
+	public void setGraphics(SpriteBatch graphics) {
+		this.graphics = graphics;
 	}
 
 }

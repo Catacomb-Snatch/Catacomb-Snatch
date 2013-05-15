@@ -13,10 +13,10 @@ public class EntityFactory {
 
 	public static Entity createPlayerEntity(Level level) {
 		Entity player = level.createEntity();
-		EntityHelper.addToGroup(level, player, "players");
+		EntityHelper.addToGroup(player, "players");
 		
-		player.addComponent(new Health());
-		player.addComponent(new Transform(0, 0)); // Get correct spawn position
+		player.addComponent(new Health(20));
+		player.addComponent(new Transform(level.getNextSpawnLocation())); // TODO: This can return null!
 		player.addComponent(new Velocity());
 		player.addComponent(new Render(new PlayerRenderer(level, player)));
 		

@@ -10,8 +10,16 @@ public class Velocity extends Component {
 		vel = new Vector2();
 	}
 	
+	public void force(float mx, float my) {
+		vel.add(mx, my);
+	}
+	
 	public void normalize() {
 		vel.nor();
+	}
+	
+	public void reset() {
+		vel.set(0, 0);
 	}
 	
 	public float getVelocityX() {
