@@ -1,9 +1,7 @@
 package net.catacombsnatch.game.core.player;
 
-import net.catacombsnatch.game.core.entity.EntityHelper;
+import net.catacombsnatch.game.core.entity.EntityFactory;
 import net.catacombsnatch.game.core.entity.components.Health;
-import net.catacombsnatch.game.core.entity.components.Render;
-import net.catacombsnatch.game.core.entity.renderers.PlayerRenderer;
 import net.catacombsnatch.game.core.world.level.Level;
 
 import com.artemis.Entity;
@@ -21,11 +19,10 @@ public class LevelPlayer {
 	 * @param x The x-spawn coordinate
 	 * @param y The y-spawn coordinate
 	 */
-	public LevelPlayer( Level level, int x, int y ) {
+	public LevelPlayer( Level level ) {
 		this.level = level;
 		
-		entity = EntityHelper.createPlayerEntity(level);
-		entity.addComponent(new Render(new PlayerRenderer(level, entity)));
+		entity = EntityFactory.createPlayerEntity(level);
 		
 		health = entity.getComponent(Health.class);
 	}

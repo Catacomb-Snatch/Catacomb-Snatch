@@ -2,23 +2,20 @@ package net.catacombsnatch.game.core.entity.systems;
 
 import net.catacombsnatch.game.core.entity.components.Health;
 
+import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
-import com.artemis.EntityProcessingSystem;
+import com.artemis.annotations.Mapper;
+import com.artemis.systems.EntityProcessingSystem;
 
 public class HealthSystem extends EntityProcessingSystem {
-	protected ComponentMapper<Health> heathMapper;
+	@Mapper protected ComponentMapper<Health> heathMapper;
 	
 	@SuppressWarnings("unchecked")
 	public HealthSystem() {
-		super(Health.class);
+		super(Aspect.getAspectForAll(Health.class));
 	}
 
-	@Override
-	protected void initialize() {		
-		heathMapper = new ComponentMapper<Health>(Health.class, world.getEntityManager());
-	}
-	
 	@Override
 	protected void process(Entity e) {
 		// Get health component

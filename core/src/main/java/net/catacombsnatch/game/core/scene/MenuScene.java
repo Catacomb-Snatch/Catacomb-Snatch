@@ -5,6 +5,7 @@ import net.catacombsnatch.game.core.event.input.events.KeyReleaseEvent;
 import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.scene.scenes.TitleScreen;
 import net.catacombsnatch.game.core.screen.Screen;
+import net.catacombsnatch.game.core.world.Direction;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,7 +21,6 @@ public abstract class MenuScene extends Scene {
 	
 	protected int index = 0;
 	
-	
 	public MenuScene(Texture bg) {
 		super();
 		
@@ -28,7 +28,7 @@ public abstract class MenuScene extends Scene {
 		setBackground(bg);
 		
 		// Add animated character cursor
-		ani = new Animation(0.2f, new Array<TextureRegion>(Art.lordLard[0]), Animation.LOOP);
+		ani = new Animation(0.2f, new Array<TextureRegion>(Art.lordLard[Direction.EAST.getFace()]), Animation.LOOP);
 	}
 	
 	protected void init() {

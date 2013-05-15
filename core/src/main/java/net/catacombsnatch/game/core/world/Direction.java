@@ -6,10 +6,10 @@ import com.badlogic.gdx.math.Vector2;
 
 public enum Direction {
 	// Linear sides
-	NORTH(0, 0, -1, 0x1), EAST(2, 1, 0, 0x2), SOUTH(4, 0, 1, 0x4), WEST(6, -1, 0, 0x8),
+	NORTH(4, 0, -1, 0x1), EAST(6, 1, 0, 0x2), SOUTH(0, 0, 1, 0x4), WEST(2, -1, 0, 0x8),
 	
 	// Edges
-	NORTH_EAST(1, 1, -1, 0x9), EAST_SOUTH(3, 1, 1, 0x10), SOUTH_WEST(5, -1, 1, 0x12), WEST_NORTH(7, -1, -1, 0xF);
+	NORTH_EAST(5, 1, -1, 0x9), EAST_SOUTH(7, 1, 1, 0x10), SOUTH_WEST(1, -1, 1, 0x12), WEST_NORTH(3, -1, -1, 0xF);
 	
 	public final static int count = values().length;
 	

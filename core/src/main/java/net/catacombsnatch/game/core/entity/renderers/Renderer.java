@@ -14,8 +14,6 @@ public abstract class Renderer {
 		this.entity = entity;
 	}
 	
-	public abstract void initialize();
-	
 	public abstract void render(SpriteBatch graphics);
 	
 }

@@ -1,6 +1,7 @@
 package net.catacombsnatch.game.core.world.level;
 
 import net.catacombsnatch.game.core.entity.systems.HealthSystem;
+import net.catacombsnatch.game.core.entity.systems.MovementSystem;
 import net.catacombsnatch.game.core.player.LevelPlayer;
 import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.util.Finishable;
@@ -8,6 +9,8 @@ import net.catacombsnatch.game.core.world.level.generator.LevelGenerator;
 import net.catacombsnatch.game.core.world.tile.Tile;
 
 import com.artemis.World;
+import com.artemis.managers.GroupManager;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 public class Level extends World implements Tickable, Finishable {
@@ -20,9 +23,9 @@ public class Level extends World implements Tickable, Finishable {
 	// General level information
 	protected LevelGenerator generator;
 	
-	protected int width, height;
+	protected Array<Vector2> spawns;
 	
-	protected long lastMillis;
+	protected int width, height;
 	
 	protected boolean debug = false;
 	protected boolean finished = false;
@@ -31,7 +34,7 @@ public class Level extends World implements Tickable, Finishable {
 		super();
 
 		// Entity management
-		players = new Array<LevelPlayer>();
+		this.players = new Array<LevelPlayer>();
 		
 		// Tiles
 		this.tiles = new Tile[width * height];
@@ -39,21 +42,21 @@ public class Level extends World implements Tickable, Finishable {
 		// General level information
 		this.generator = generator;
 		
+		this.spawns = generator.getSpawnLocations();
+		
 		this.width = width;
 		this.height = height;
-	}
-	
-	public void initialize() {
-		// Add systems
-		getSystemManager().setSystem(new HealthSystem());
+
+		// Add managers
+		setManager(new GroupManager());
 		
-		getSystemManager().initializeAll();
+		// Add systems
+		setSystem(new HealthSystem());
+		setSystem(new MovementSystem());
 	}
 	
 	@Override
 	public void tick(float delta) {
-		lastMillis = System.currentTimeMillis();
-
 		// Tick through tiles (for animations, ...)
 		for(Tile tile : tiles) {
 			if(tile == null) continue;
@@ -61,14 +64,9 @@ public class Level extends World implements Tickable, Finishable {
 			tile.tick(delta);
 		}
 		
-		// Update entities
-		loopStart();
-		setDelta((int) (System.currentTimeMillis() - lastMillis));
-		
-		// Process systems
-		for(int i = 0; i < getSystemManager().getSystems().size(); i++) {
-			getSystemManager().getSystems().get(i).process();
-		}
+		// Update entities and process systems
+		process();
+		setDelta(delta);
 	}
 	
 	/**
@@ -144,6 +142,10 @@ public class Level extends World implements Tickable, Finishable {
 	/** @return The {@link LevelGenerator} used to generate this level */
 	public LevelGenerator getGenerator() {
 		return generator;
+	}
+	
+	public Vector2 getNextSpawnLocation() {
+		return (spawns.size == 0) ? null : spawns.removeIndex(spawns.size - 1);
 	}
 	
 }

@@ -42,6 +42,7 @@ public class Campaign implements Tickable, Finishable {
 			}
 			
 			// Prepare next level
+			
 			for(Player player : getPlayers()) {
 				player.prepareLevelPlayer(next);
 				
@@ -49,7 +50,7 @@ public class Campaign implements Tickable, Finishable {
 			}
 			
 			next.initialize();
-			
+
 			currentLevel = next;
 		}
 		

@@ -25,8 +25,7 @@ public class StartDemoScene extends MenuScene {
 		addTextButton(Language.get("scene.title.start"), 0, 0).addAction(new ReusableAction() {
 			@Override
 			public boolean use(float delta) {
-				InGameScene scene = SceneManager.switchTo(InGameScene.class, true);
-				scene.init(new TmxLevelGenerator("maps/demo.tmx").generate());
+				SceneManager.switchTo(new InGameScene(new TmxLevelGenerator("maps/demo.tmx").generate()), true);
 				return true;
 			}
 		});
@@ -34,8 +33,7 @@ public class StartDemoScene extends MenuScene {
 		addTextButton(Language.get("scene.title.demo"), 0, 0).addAction(new ReusableAction() {
 			@Override
 			public boolean use(float delta) {
-				InGameScene scene = SceneManager.switchTo(InGameScene.class, true);
-				scene.init(new DebugLevelGenerator().generate());
+				SceneManager.switchTo(new InGameScene(new DebugLevelGenerator().generate()), true);
 				return true;
 			}
 		});
@@ -43,8 +41,7 @@ public class StartDemoScene extends MenuScene {
 		addTextButton(Language.get("scene.title.demo"), 0, 0).addAction(new ReusableAction() {
 			@Override
 			public boolean use(float delta) {
-				InGameScene scene = SceneManager.switchTo(InGameScene.class, true);
-				scene.init(new RandomLevelGenerator().generate()); //TODO
+				SceneManager.switchTo(new InGameScene(new RandomLevelGenerator().generate()), true);
 				return true;
 			}
 		});

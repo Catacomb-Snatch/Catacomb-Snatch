@@ -32,7 +32,7 @@ public class Art {
 			pyramid = load("screen/pyramid.png");
 
 			// Load characters
-			lordLard = cut("player/lord_lard.png", 23, 32);
+			lordLard = cut("player/lord_lard.png", 32, 32);
 
 			// Load tiles
 			tiles_floor = cut("tiles/floor.png", 32, 32)[0];

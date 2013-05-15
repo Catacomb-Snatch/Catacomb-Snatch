@@ -12,15 +12,15 @@ public class Health extends Component {
 
 	public int tick;
 
-	public Health() {
+	public Health(int max) {
 		regenerate = true;
 
 		speed = 60;
 		tick = 0;
 		
 		amount = 1;
-		health = 20;
-		maxHealth = 20;
+		maxHealth = max;
+		health = maxHealth;
 	}
 
 	public boolean canRegenerate() {
