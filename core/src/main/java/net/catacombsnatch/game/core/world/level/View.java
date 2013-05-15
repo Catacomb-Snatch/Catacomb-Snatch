@@ -1,5 +1,6 @@
 package net.catacombsnatch.game.core.world.level;
 
+import net.catacombsnatch.game.core.entity.systems.RenderSystem;
 import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.screen.Renderable;
@@ -29,11 +30,13 @@ public class View implements Renderable, Updateable {
 		panel = new Sprite(Art.skin.getAtlas().findRegion("player-panel"));
 		
 		minimap = new Minimap(level, this);
+		
+		level.setSystem(new RenderSystem(this));
 	}
 	
 	@Override
 	public void render( Scene scene ) {
-		if(viewport == null) return;
+		if(viewport == null || target == null) return;
 		
 		// "Camera" movement
 		offset = target.lerp(offset, Gdx.graphics.getDeltaTime());
@@ -70,11 +73,10 @@ public class View implements Renderable, Updateable {
 	/**
 	 * Moves the view offset.
 	 * 
-	 * @param x Amount of pixels to move along the x-coordinate
-	 * @param y Amount of pixels to move along the y-coordinate
+	 * @param target The new target vector
 	 */
-	public void setTarget(float x, float y) {
-		target = new Vector2(x, y);
+	public void setTarget(Vector2 target) {
+		this.target = target;
 	}
 	
 	public void setViewport(Rectangle view) {

@@ -3,10 +3,7 @@ package net.catacombsnatch.game.core.scene.scenes;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.catacombsnatch.game.core.entity.systems.RenderSystem;
 import net.catacombsnatch.game.core.event.EventHandler;
-import net.catacombsnatch.game.core.event.input.InputManager;
-import net.catacombsnatch.game.core.event.input.Key;
 import net.catacombsnatch.game.core.event.input.events.KeyReleaseEvent;
 import net.catacombsnatch.game.core.player.LocalPlayer;
 import net.catacombsnatch.game.core.scene.Scene;
@@ -25,25 +22,20 @@ public class InGameScene extends Scene {
 	protected boolean paused = false;
 	
 	/** The world we are playing in */
-	protected Campaign world;
+	protected Campaign campaign;
 	
 	protected List<View> views;
 	
-	public InGameScene() {
-		super();
-	}
-	
 	public void init(Level level) {  // TODO
-		world = new Campaign(Difficulty.EASY, MapRotation.ONCE);
+		campaign = new Campaign(Difficulty.EASY, MapRotation.ONCE);
 		
-		world.getPlayers().add(new LocalPlayer());
-		world.getLevels().add(level);
+		campaign.getPlayers().add(new LocalPlayer());
+		campaign.getLevels().add(level);
 		
 		views = new ArrayList<View>();
 		
 		View view = new View(level);
-		level.getSystemManager().setSystem(new RenderSystem(view));
-		views.add(view);		
+		views.add(view);
 		
 		initialized = true;
 		update(true);
@@ -69,32 +61,11 @@ public class InGameScene extends Scene {
 		if(!initialized) return;
 		
 		if (!paused) {
-			// Check keyboard inputs
-			int mx = 0, my = 0;
-		
-			if(InputManager.isPressed(Key.MOVE_LEFT)){
-				mx = mx-10;
-			}
-			if(InputManager.isPressed(Key.MOVE_RIGHT)){
-				mx = mx+10;
-			}
-			if(InputManager.isPressed(Key.MOVE_UP)){
-				my = my+10;
-			}
-			if(InputManager.isPressed(Key.MOVE_DOWN)){
-				my = my-10;
-			}
-			
-			for(View view : views) {
-				view.setTarget(view.getOffset().x + mx, view.getOffset().y + my);
-			}
-
-			// Tick, tock - the world is just a clock...
-			world.tick(delta);
+			// Tick, tock - the campaign is just a clock...
+			campaign.tick(delta);
 		}
 		
-		
-		// Open the windows to see the world!
+		// Open the windows to see what's happening!
 		getSpriteBatch().begin();
 		
 		for(View view : views) {
@@ -109,7 +80,7 @@ public class InGameScene extends Scene {
 	
 	@Override
 	public void exit() {
-		world = null;
+		campaign = null;
 		views = null;
 		initialized = false;
 		

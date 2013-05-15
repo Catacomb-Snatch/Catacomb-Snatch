@@ -18,12 +18,6 @@
 			<id>core-libs</id>
 			<url>file://${project.basedir}/../lib</url>
 		</repository>
-		
-		<!-- Artemis entity system -->
-		<repository>
-			<id>artemis-system</id>
-			<url>https://maven.gemserk.com/nexus/content/repositories/snapshots/</url>
-		</repository>
 	</repositories>
 
 	<dependencies>
@@ -42,9 +36,9 @@
 		
 		<!-- Artemis entity system -->
 		<dependency>
-			<groupId>com.gamadu.artemis</groupId>
+			<groupId>artemis</groupId>
 			<artifactId>artemis</artifactId>
-			<version>0.0.1-GEMSERK-SNAPSHOT</version>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<!-- SmartFox -->

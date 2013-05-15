@@ -1,6 +1,7 @@
 package net.catacombsnatch.game.core.world.level;
 
 import net.catacombsnatch.game.core.entity.systems.HealthSystem;
+import net.catacombsnatch.game.core.entity.systems.MovementSystem;
 import net.catacombsnatch.game.core.player.LevelPlayer;
 import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.util.Finishable;
@@ -22,8 +23,6 @@ public class Level extends World implements Tickable, Finishable {
 	
 	protected int width, height;
 	
-	protected long lastMillis;
-	
 	protected boolean debug = false;
 	protected boolean finished = false;
 
@@ -43,17 +42,15 @@ public class Level extends World implements Tickable, Finishable {
 		this.height = height;
 	}
 	
+	@Override
 	public void initialize() {
 		// Add systems
-		getSystemManager().setSystem(new HealthSystem());
-		
-		getSystemManager().initializeAll();
+		setSystem(new HealthSystem());
+		setSystem(new MovementSystem());
 	}
 	
 	@Override
 	public void tick(float delta) {
-		lastMillis = System.currentTimeMillis();
-
 		// Tick through tiles (for animations, ...)
 		for(Tile tile : tiles) {
 			if(tile == null) continue;
@@ -62,12 +59,12 @@ public class Level extends World implements Tickable, Finishable {
 		}
 		
 		// Update entities
-		loopStart();
-		setDelta((int) (System.currentTimeMillis() - lastMillis));
+		process();
+		setDelta(delta);
 		
 		// Process systems
-		for(int i = 0; i < getSystemManager().getSystems().size(); i++) {
-			getSystemManager().getSystems().get(i).process();
+		for(int i = 0; i < getSystems().size(); i++) {
+			getSystems().get(i).process();
 		}
 	}
 	

@@ -28,6 +28,14 @@ public class Transform extends Component {
 		vec = new Vector2(x, y);
 	}
 	
+	public void addX(float x) {
+		vec.x += x;
+	}
+
+	public void addY(float y) {
+		vec.y += y;
+	}
+	
 	public float getDistanceTo(Transform other) {
 		return other.vec.dst(vec);
 	}
