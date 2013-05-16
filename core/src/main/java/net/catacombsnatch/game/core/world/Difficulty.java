@@ -34,7 +34,7 @@ public class Difficulty {
 
 	private final boolean mobRegenerationAllowed;
 
-	private Difficulty( String name, float mobHealthModifier, float mobStrengthModifier, float mobSpawnModifier, float shopCostsModifier, boolean mobRegeneration, int regenerationInterval, int allowedMobDensity, int coinLifespan ) {
+	public Difficulty( String name, float mobHealthModifier, float mobStrengthModifier, float mobSpawnModifier, float shopCostsModifier, boolean mobRegeneration, int regenerationInterval, int allowedMobDensity, int coinLifespan ) {
 		this.name = name;
 
 		this.mobHealthModifier = mobHealthModifier;

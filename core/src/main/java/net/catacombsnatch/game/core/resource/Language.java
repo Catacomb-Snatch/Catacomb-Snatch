@@ -1,5 +1,6 @@
 package net.catacombsnatch.game.core.resource;
 
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,13 +19,13 @@ public class Language {
 	public final static String DIRECTORY = "lang/";
 	public final static String DEFAULT = "en";
 	
-	protected final static Map<String, Properties> languages;
+	protected final static Map<String, LanguageEntry> languages;
 	protected final static List<Locale> vanilla;
-	protected static Properties last;
+	protected static LanguageEntry last;
 	protected static String language;
 	
 	static {
-		languages = new HashMap<String, Properties>();
+		languages = new HashMap<String, LanguageEntry>();
 		vanilla = new ArrayList<Locale>();
 		
 		try {
@@ -93,13 +94,14 @@ public class Language {
 			last = languages.get(language);
 		}
 		
-		if ( last != null && last.containsKey( property ) ) {
-			return last.getProperty( property );
+		if (last != null) {
+			String msg = last.getMessage(property);
+			if(msg != null) return msg;
 		}
 		
-		Properties fallback = languages.get(DEFAULT);
+		LanguageEntry fallback = languages.get(DEFAULT);
 		if(fallback != null) {
-			String str = fallback.getProperty(property);
+			String str = fallback.getMessage(property);
 			if(str != null) return str;
 		}
 		
@@ -115,7 +117,15 @@ public class Language {
 	 * @return The formatted language string
 	 */
 	public static String getf( String property, Object... args ) {
-		return MessageFormat.format( get( property ), args );
+		MessageFormat format = null;
+		LanguageEntry lang = last;
+		
+		if(last == null) last = languages.get(language);
+		if (lang == null) lang = languages.get(DEFAULT);
+		
+		format = lang.getFormat(property);
+		
+		return format != null ? format.format(args) : "{" + property + "}";
 	}
 	
 	
@@ -128,14 +138,14 @@ public class Language {
 	protected static boolean loadFile( FileHandle file ) {
 		if(!file.isDirectory() && file.extension().equalsIgnoreCase("lang")) {
 			try {
-				Properties lang = languages.get(file.name());
+				LanguageEntry lang = languages.get(file.name());
 
 				if(lang == null) {
-					lang = new Properties();
+					lang = new LanguageEntry(new Properties());
 					languages.put(file.nameWithoutExtension(), lang);
 				}
 
-				lang.load(file.read());
+				lang.addProperties(file);
 
 			} catch (Exception io) {
 				Gdx.app.error(TAG, "Could not load language file with name " + file.nameWithoutExtension(), io);
@@ -147,6 +157,36 @@ public class Language {
 		}
 		
 		return true;
+	}
+	
+	protected static class LanguageEntry {
+		protected final Properties strings;
+		protected final Map<String, MessageFormat> msgCache;
+		
+		public LanguageEntry(Properties properties) {
+			strings = properties;
+			msgCache = new HashMap<String, MessageFormat>();
+		}
+		
+		public void addProperties(FileHandle file) throws IOException {
+			strings.load(file.read());
+		}
+		
+		public String getMessage(String key) {
+			return strings.getProperty(key);
+		}
+		
+		public MessageFormat getFormat(String key) {
+			MessageFormat format = msgCache.get(key);
+			
+			if(format == null) {
+				format = new MessageFormat(strings.getProperty(key));
+				msgCache.put(key, format);
+			}
+			
+			return format;
+		}
+		
 	}
 	
 }
