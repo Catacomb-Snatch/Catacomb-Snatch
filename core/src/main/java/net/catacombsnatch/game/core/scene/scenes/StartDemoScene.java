@@ -25,7 +25,7 @@ public class StartDemoScene extends MenuScene {
 		addTextButton(Language.get("scene.title.start"), 0, 0).addAction(new ReusableAction() {
 			@Override
 			public boolean use(float delta) {
-				SceneManager.switchTo(new InGameScene(new TmxLevelGenerator("maps/demo.tmx").generate()), true);
+				SceneManager.switchTo(new GameScene(new TmxLevelGenerator("maps/demo.tmx").generate()), true);
 				return true;
 			}
 		});
@@ -33,7 +33,7 @@ public class StartDemoScene extends MenuScene {
 		addTextButton(Language.get("scene.title.demo"), 0, 0).addAction(new ReusableAction() {
 			@Override
 			public boolean use(float delta) {
-				SceneManager.switchTo(new InGameScene(new DebugLevelGenerator().generate()), true);
+				SceneManager.switchTo(new GameScene(new DebugLevelGenerator().generate()), true);
 				return true;
 			}
 		});
@@ -41,7 +41,7 @@ public class StartDemoScene extends MenuScene {
 		addTextButton(Language.get("scene.title.demo"), 0, 0).addAction(new ReusableAction() {
 			@Override
 			public boolean use(float delta) {
-				SceneManager.switchTo(new InGameScene(new RandomLevelGenerator().generate()), true);
+				SceneManager.switchTo(new GameScene(new RandomLevelGenerator().generate()), true);
 				return true;
 			}
 		});
@@ -55,5 +55,4 @@ public class StartDemoScene extends MenuScene {
 		
 		drawCharacter();
 	}
-
 }

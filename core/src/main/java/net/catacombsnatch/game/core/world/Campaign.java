@@ -5,12 +5,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import net.catacombsnatch.game.core.player.LocalPlayer;
 import net.catacombsnatch.game.core.player.Player;
 import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.util.Finishable;
 import net.catacombsnatch.game.core.world.level.Level;
 
 public class Campaign implements Tickable, Finishable {
+	
 	protected List<Level> levels;
 	protected List<Player> players;
 
@@ -91,6 +93,19 @@ public class Campaign implements Tickable, Finishable {
 	}
 
 	/**
+	 * Returns the game's local player
+	 * 
+	 * @return the local player or null if there isn't one (unlikely)
+	 */
+	public Player getLocalPlayer() {
+		for(Player p : players) {
+			if(p instanceof LocalPlayer) {
+				return p;
+			}
+		}
+		return null;
+	}
+	/**
 	 * Returns the world's difficulty.
 	 * 
 	 * @return The {@link Difficulty}
@@ -111,22 +126,30 @@ public class Campaign implements Tickable, Finishable {
 	/**
 	 * Defines the next level returned by {@link #getNext(List)}.
 	 * <ul>
-	 * <li><code>ONCE</code> same as linear (see below) but will not jump back to the beginning (no endless mode).</li>
+	 * <li><code>FIRST</code> only plays the first map (best used in campaigns with only one map)</li>
+	 * <li><code>ONCE</code> same as linear (see below) but will not jump back to the beginning (no endless mode)</li>
 	 * <li><code>LINEAR</code> chooses the next map in the level list.</li>
 	 * <li><code>RANDOM</code> chooses a random level as the next one.</li>
 	 * </ul>
 	 */
 	public abstract static class MapRotation {
-		public final static MapRotation ONCE = new MapRotation() {
+		public final static class FIRST extends MapRotation {
+			@Override
+			public Level getNext(List<Level> levels) {
+				return levels.size() == 0 ? null : levels.get(0);
+			}
+		}
+		
+		public final static class ONCE extends MapRotation {
 			protected int next = 0;
 			
 			@Override
 			public Level getNext(List<Level> levels) {
 				return next < levels.size() ? levels.get(next++): null;
 			}
-		};
+		}
 		
-		public final static MapRotation LINEAR = new MapRotation() {
+		public final static class LINEAR extends MapRotation {
 			protected int next = 0;
 			
 			@Override
@@ -134,16 +157,16 @@ public class Campaign implements Tickable, Finishable {
 				if(next >= levels.size()) next = 0;
 				return levels.get(next);
 			}
-		};
+		}
 		
-		public final static MapRotation RANDOM = new MapRotation() {
+		public final static class RANDOM extends MapRotation {
 			protected Random r = new Random();
 			
 			@Override
 			public Level getNext(List<Level> levels) {
 				return levels.get(r.nextInt(levels.size()));
 			}
-		};
+		}
 		
 		/**
 		 * Returns the next level that should be played.
