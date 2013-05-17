@@ -33,7 +33,7 @@ public class InGameScene extends Scene {
 	public InGameScene(Level level) {  // TODO
 		super();
 		
-		campaign = new Campaign(Difficulty.EASY, MapRotation.ONCE);
+		campaign = new Campaign(Difficulty.EASY, MapRotation.LINEAR);
 		
 		campaign.getPlayers().add(new LocalPlayer());
 		campaign.getLevels().add(level);
