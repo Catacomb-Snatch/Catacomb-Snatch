@@ -1,5 +1,9 @@
 package net.catacombsnatch.game.core.scene.scenes;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.catacombsnatch.game.core.Game;
 import net.catacombsnatch.game.core.entity.components.Transform;
 import net.catacombsnatch.game.core.entity.components.Velocity;
 import net.catacombsnatch.game.core.event.EventHandler;
@@ -22,17 +26,22 @@ import com.badlogic.gdx.math.Rectangle;
 public class GameScene extends Scene {
 	protected boolean paused = false;
 	
-	/** The world we are playing in */
+	/** The campaign we are playing in */
 	protected Campaign campaign;
 	
-	protected View view;
+	protected List<View> views;
 	
 	public GameScene(Level level) {  // TODO complete
 		super();
 		
 		campaign = new Campaign(Difficulty.EASY, new MapRotation.FIRST());
 		
-		campaign.getPlayers().add(new LocalPlayer());
+		for(Player player : Game.getLocalPlayers()) {
+			if(player == null) continue;
+			
+			campaign.getPlayers().add(player);
+		}
+		
 		campaign.getLevels().add(level);
 	}
 	
@@ -57,6 +66,7 @@ public class GameScene extends Scene {
 			if(campaign.hasFinished()) {
 				SceneManager.exit();
 			}
+			
 			// Tick, tock - the campaign is just a clock...
 			campaign.tick(delta);
 			
@@ -76,16 +86,24 @@ public class GameScene extends Scene {
 		// Open the windows to see what's happening!
 		getSpriteBatch().begin();
 		
-		if(view == null) {
-			view = new View(campaign.getCurrentLevel());
-			view.setViewport(new Rectangle(0, 0, Screen.getWidth(), Screen.getHeight()));
-			view.update(true);
+		if(views == null) {
+			views = new ArrayList<View>();
 			
-			Transform t = campaign.getLocalPlayer().getLevelPlayer().getEntity().getComponent(Transform.class);
-			view.setTarget(t.getPosition());
+			for(Player player : campaign.getPlayers()) {
+				if(!(player instanceof LocalPlayer)) continue;
+				
+				View view = new View(campaign.getCurrentLevel());
+				view.setTarget(player.getLevelPlayer().getEntity().getComponent(Transform.class).getPosition());
+
+				views.add(view);
+			}
+			
+			update(true); // Update viewports
 		}
 		
-		view.render(this);
+		for(View view : views) {
+			view.render(this);
+		}
 		
 		getSpriteBatch().end();
 		
@@ -96,7 +114,7 @@ public class GameScene extends Scene {
 	@Override
 	public void exit() {
 		campaign = null;
-		view = null;
+		views = null;
 		
 		SceneManager.setDrawAllEnabled(false);
 		super.exit();
@@ -104,11 +122,26 @@ public class GameScene extends Scene {
 	
 	@Override
 	public void update(boolean resize) {
-		if(!resize) return;
+		if(!resize || views == null) return;
 		
-		if(view != null) {
-			view.setViewport(new Rectangle(0, 0, Screen.getWidth(), Screen.getHeight()));
-			view.update(true);
+		float w = Screen.getWidth(), h = Screen.getHeight();
+		
+		/*
+		// This did not work: (Trying to split the screen here...)
+		
+		for(float p = 0, s = views.size(); p < s; p++) {
+			boolean quarters = s > (s / 2);
+			float n = p / s * w, m = w / s;
+			
+			View view = views.get((int) p);
+			
+			view.setViewport(new Rectangle(n, quarters ? h / 2 : 0, m, quarters ? h / 2 : h ));
+			view.update(resize);
+		}*/
+		
+		for(View view : views) {
+			view.setViewport(new Rectangle(0, 0, w, h));
+			view.update(resize);
 		}
 	}
 	

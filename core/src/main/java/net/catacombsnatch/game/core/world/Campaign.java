@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import net.catacombsnatch.game.core.player.LocalPlayer;
 import net.catacombsnatch.game.core.player.Player;
 import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.util.Finishable;
@@ -91,20 +90,7 @@ public class Campaign implements Tickable, Finishable {
 	public List<Player> getPlayers() {
 		return players;
 	}
-
-	/**
-	 * Returns the game's local player
-	 * 
-	 * @return the local player or null if there isn't one (unlikely)
-	 */
-	public Player getLocalPlayer() {
-		for(Player p : players) {
-			if(p instanceof LocalPlayer) {
-				return p;
-			}
-		}
-		return null;
-	}
+	
 	/**
 	 * Returns the world's difficulty.
 	 * 

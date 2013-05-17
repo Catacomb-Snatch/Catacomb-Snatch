@@ -10,6 +10,8 @@ import net.catacombsnatch.game.core.event.EventManager;
 import net.catacombsnatch.game.core.event.input.InputManager;
 import net.catacombsnatch.game.core.event.input.Key;
 import net.catacombsnatch.game.core.event.input.events.KeyPressedEvent;
+import net.catacombsnatch.game.core.player.LocalPlayer;
+import net.catacombsnatch.game.core.player.Player;
 import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.resource.Language;
 import net.catacombsnatch.game.core.resource.options.DefaultOptions;
@@ -35,6 +37,8 @@ public class Game implements ApplicationListener {
 	protected InputManager input;
 	protected Language language;
 	protected SceneManager sceneManager;
+	
+	protected static Player[] localPlayers;
 
 	public static ISoundPlayer sound;
 	public static Options options;
@@ -79,6 +83,9 @@ public class Game implements ApplicationListener {
 		EventManager.registerListener(this);
 		
 		// Dive in :)
+		localPlayers = new Player[4];
+		localPlayers[0] = new LocalPlayer();
+		
 		SceneManager.switchTo(TitleScreen.class);
 		
 		fpsLabel = new Label("FPS", Art.skin);
@@ -166,6 +173,16 @@ public class Game implements ApplicationListener {
 			default:
 				Screen.saveScreenshot(Gdx.files.external("screen_"+(new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime()))+".png"));
 		}
+	}
+	
+	/**
+	 * Returns all local players.<br />
+	 * <b>The maximum number of <em>local</em> players is 4!</b>
+	 * 
+	 * @return A {@link Player Player[]} containing all local players.
+	 */
+	public static Player[] getLocalPlayers() {
+		return localPlayers;
 	}
 	
 }
