@@ -3,7 +3,6 @@ package net.catacombsnatch.game.core.entity;
 import net.catacombsnatch.game.core.entity.components.Animations;
 import net.catacombsnatch.game.core.entity.components.Health;
 import net.catacombsnatch.game.core.entity.components.Position;
-import net.catacombsnatch.game.core.entity.components.Rotation;
 import net.catacombsnatch.game.core.entity.components.Sprite;
 import net.catacombsnatch.game.core.entity.components.Velocity;
 import net.catacombsnatch.game.core.resource.Art;
@@ -19,7 +18,6 @@ public final class EntityFactory {
 		
 		player.addComponent(new Health(20));
 		player.addComponent(new Position(level.getNextSpawnLocation())); // TODO: This can return null!
-		player.addComponent(new Rotation());
 		player.addComponent(new Velocity());
 		player.addComponent(new Animations(Art.lordLard));
 		

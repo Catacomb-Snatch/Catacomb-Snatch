@@ -1,5 +1,6 @@
 package net.catacombsnatch.game.core.entity.components;
 
+import net.catacombsnatch.game.core.entity.components.Sprite.Layer;
 import net.catacombsnatch.game.core.resource.Art;
 
 import com.artemis.Component;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class Animations extends Component {
 
+	public Layer layer = Layer.ACTORS;
 	private final Animation[] animations;
 	private float stateTime;
 	
