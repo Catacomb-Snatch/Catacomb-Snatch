@@ -10,7 +10,8 @@ import net.catacombsnatch.game.core.event.EventManager;
 import net.catacombsnatch.game.core.event.input.InputManager;
 import net.catacombsnatch.game.core.event.input.Key;
 import net.catacombsnatch.game.core.event.input.events.KeyPressedEvent;
-import net.catacombsnatch.game.core.entity.Player;
+import net.catacombsnatch.game.core.player.LocalPlayer;
+import net.catacombsnatch.game.core.player.Player;
 import net.catacombsnatch.game.core.resource.Art;
 import net.catacombsnatch.game.core.resource.Language;
 import net.catacombsnatch.game.core.resource.options.DefaultOptions;
@@ -83,7 +84,7 @@ public class Game implements ApplicationListener {
 		
 		// Dive in :)
 		localPlayers = new Player[4];
-		localPlayers[0] = new Player("Catacomb-Snatch Dev");
+		localPlayers[0] = new LocalPlayer();
 		
 		SceneManager.switchTo(TitleScreen.class);
 		

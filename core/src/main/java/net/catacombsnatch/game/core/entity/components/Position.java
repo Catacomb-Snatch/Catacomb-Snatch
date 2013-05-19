@@ -3,9 +3,9 @@ package net.catacombsnatch.game.core.entity.components;
 import com.artemis.Component;
 import com.badlogic.gdx.math.Vector2;
 
-public final class Position extends Component {
+public class Position extends Component {
 
-	public final Vector2 vec;
+	protected Vector2 vec;
 
 	public Position(Vector2 position) {
 		vec = position;
@@ -46,7 +46,8 @@ public final class Position extends Component {
 	}
 	
 	/** see {@link Vector2#dst2} */
-	public float getDistance2To(Position other) {
+	public float getDistanceSqrTo(Position other) {
 		return other.vec.dst2(vec);
 	}
+	
 }

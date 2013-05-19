@@ -4,20 +4,23 @@ import net.catacombsnatch.game.core.world.tile.Tile;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Represents a direction or relative location.
+ * 
+ * <p>Linear sides: {@link #NORTH}, {@link #EAST}, {@link #SOUTH} and {@link #WEST}.</p>
+ * <p>Edges: {@link #NORTH_EAST}, {@link #EAST_SOUTH}, {@link #SOUTH_WEST} and {@link #WEST_NORTH}.</p> 
+ */
 public enum Direction {
-	/* 
-	 * DEV NOTE: re-ordered these so rotations can be made
-	 * based on enum ordinals see {@link Rotation#rotate}
-	 */
-	
-	// Linear sides (NORTH, EAST, SOUTH, WEST)
-	// Edges (NORTH_EAST, EAST_SOUTH, SOUTH_WEST, WEST_NORTH)
+
 	NORTH(4, 0, -1, 0x1),
 	NORTH_EAST(5, 1, -1, 0x9), 
+
 	EAST(6, 1, 0, 0x2),
 	EAST_SOUTH(7, 1, 1, 0x10), 
+	
 	SOUTH(0, 0, 1, 0x4),
 	SOUTH_WEST(1, -1, 1, 0x12), 
+	
 	WEST(2, -1, 0, 0x8),
 	WEST_NORTH(3, -1, -1, 0xF);
 	
@@ -34,15 +37,19 @@ public enum Direction {
 	}
 	
 	public static Direction getDirectionFor(Vector2 vec) {
-		int x = (vec.x < 0) ? -1 : (vec.x == 0) ? 0 : 1;
-		int y = (vec.y < 0) ? -1 : (vec.x == 0) ? 0 : 1;
-		Vector2 cmp = new Vector2(x, y);
+		return getDirectionFor(vec.x, vec.y);
+	}
+	
+	public static Direction getDirectionFor(float x, float y) {
+		Vector2 cmp = new Vector2((x < 0) ? -1 : (x == 0) ? 0 : 1, (y < 0) ? -1 : (x == 0) ? 0 : 1);
 		Direction[] dirs = Direction.values();
+		
 		for(int i = 0; i < dirs.length; i++) {
-			if(dirs[i].vector.equals(cmp)) {
-				return dirs[i];
-			}
+			if(!dirs[i].vector.equals(cmp)) continue;
+			
+			return dirs[i];
 		}
+		
 		return NORTH;
 	}
 	
@@ -75,4 +82,5 @@ public enum Direction {
 	public boolean isEdge() {
 		return weight > 0x8;
 	}
+	
 }

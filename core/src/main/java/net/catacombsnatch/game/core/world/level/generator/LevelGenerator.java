@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import net.catacombsnatch.game.core.world.Campaign;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.generator.options.GeneratorOption;
 
@@ -28,11 +29,12 @@ public abstract class LevelGenerator {
 	}
 	
 	/**
-	 * Generates a new Level
+	 * Generates a new Level for the given {@link Campaign}
 	 * 
+	 * @param campaign The campaign triggered this generation
 	 * @return The newly generated level
 	 */
-	public abstract Level generate();
+	public abstract Level generate(Campaign campaign);
 	
 	/**
 	 * A list of all possible spawn points <b>for players</b>.

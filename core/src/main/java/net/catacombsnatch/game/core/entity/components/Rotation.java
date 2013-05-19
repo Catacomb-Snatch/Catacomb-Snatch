@@ -1,13 +1,13 @@
 package net.catacombsnatch.game.core.entity.components;
 
+import net.catacombsnatch.game.core.world.Direction;
+
 import com.artemis.Component;
 import com.badlogic.gdx.math.Vector2;
 
-import net.catacombsnatch.game.core.world.Direction;
+public class Rotation extends Component {
 
-public final class Rotation extends Component {
-
-	private Direction dir;
+	protected Direction dir;
 	
 	public Rotation(Direction d) {
 		dir = d;
@@ -18,7 +18,7 @@ public final class Rotation extends Component {
 	}
 	
 	public Rotation() {
-		dir = Direction.EAST;
+		this(Direction.SOUTH);
 	}
 
 	public Direction getDirection() {
@@ -30,14 +30,12 @@ public final class Rotation extends Component {
 	}
 	
 	/**
-	 * rotates by `turns.' If turns is negative
-	 * it rotates counter clockwise, else clock-
-	 * wise. each turn constitutes the smallest
-	 * directional change.
+	 * Rotates by `turns.' If turns is negative it rotates counter clockwise, else
+	 * clockwise. each turn constitutes the smallest directional change.
 	 * 
 	 * Current that is 45 degrees.
 	 * 
-	 * @param turns number of turns to make
+	 * @param turns Number of turns to make
 	 */
 	public void rotate(int turns) {
 		int ord = dir.ordinal();
@@ -47,4 +45,5 @@ public final class Rotation extends Component {
 		
 		dir = Direction.values()[index];
 	}
+	
 }

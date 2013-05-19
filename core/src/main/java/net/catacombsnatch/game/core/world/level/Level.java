@@ -1,11 +1,12 @@
 package net.catacombsnatch.game.core.world.level;
 
-import net.catacombsnatch.game.core.entity.Player;
 import net.catacombsnatch.game.core.entity.systems.HealthSystem;
 import net.catacombsnatch.game.core.entity.systems.MovementSystem;
-import net.catacombsnatch.game.core.entity.systems.RenderSystem;
+import net.catacombsnatch.game.core.player.LevelPlayer;
+import net.catacombsnatch.game.core.player.Player;
 import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.util.Finishable;
+import net.catacombsnatch.game.core.world.Campaign;
 import net.catacombsnatch.game.core.world.level.generator.LevelGenerator;
 import net.catacombsnatch.game.core.world.tile.Tile;
 
@@ -16,13 +17,14 @@ import com.badlogic.gdx.utils.Array;
 
 public class Level extends World implements Tickable, Finishable {
 	// Entity management
-	protected Array<Player> players;
+	protected Array<LevelPlayer> players;
 	
 	// Tiles
 	protected Tile[] tiles;
 	
 	// General level information
-	protected LevelGenerator generator;
+	protected final Campaign campaign;
+	protected final LevelGenerator generator;
 	
 	protected Array<Vector2> spawns;
 	
@@ -30,17 +32,19 @@ public class Level extends World implements Tickable, Finishable {
 	
 	protected boolean debug = false;
 	protected boolean finished = false;
+	protected boolean initialized = false;
 
-	public Level(LevelGenerator generator, int width, int height) {
+	public Level(Campaign campaign, LevelGenerator generator, int width, int height) {
 		super();
 
 		// Entity management
-		this.players = new Array<Player>();
+		this.players = new Array<LevelPlayer>();
 		
 		// Tiles
 		this.tiles = new Tile[width * height];
 		
 		// General level information
+		this.campaign = campaign;
 		this.generator = generator;
 		
 		this.spawns = generator.getSpawnLocations();
@@ -54,13 +58,24 @@ public class Level extends World implements Tickable, Finishable {
 		// Add systems
 		setSystem(new HealthSystem());
 		setSystem(new MovementSystem());
-		setSystem(new RenderSystem());
+	}
+	
+	@Override
+	public void initialize() {
+		super.initialize();
 		
-		initialize();
+		// Add players
+		for(Player player : campaign.getPlayers()) {
+			players.add(player.getLevelPlayer());
+		}
+		
+		initialized = true;
 	}
 	
 	@Override
 	public void tick(float delta) {
+		if(!initialized) return;
+		
 		// Tick through tiles (for animations, ...)
 		for(Tile tile : tiles) {
 			if(tile == null) continue;
@@ -71,16 +86,6 @@ public class Level extends World implements Tickable, Finishable {
 		// Update entities and process systems
 		setDelta(delta);
 		process();
-	}
-	
-	/**
-	 * Adds a player to the current level.
-	 * 
-	 * @param player The {@link Player} to add
-	 */
-	public void addPlayer(Player player) {
-		players.add(player);
-		player.addToLevel(this);
 	}
 
 	/** @return An array of all stored tiles (size = level width * level height). */
@@ -144,6 +149,11 @@ public class Level extends World implements Tickable, Finishable {
 		return height;
 	}
 	
+	/** @return The {@link Campaign} that started this level. */
+	public Campaign getCampaign() {
+		return campaign;
+	}
+	
 	/** @return The {@link LevelGenerator} used to generate this level */
 	public LevelGenerator getGenerator() {
 		return generator;
@@ -153,7 +163,4 @@ public class Level extends World implements Tickable, Finishable {
 		return (spawns.size == 0) ? null : spawns.removeIndex(spawns.size - 1);
 	}
 
-	public void updateRenderSystem(View view) {
-		getSystem(RenderSystem.class).setView(view);
-	}
 }

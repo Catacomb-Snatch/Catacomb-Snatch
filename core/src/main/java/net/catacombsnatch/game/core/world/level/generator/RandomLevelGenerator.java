@@ -3,6 +3,7 @@ package net.catacombsnatch.game.core.world.level.generator;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import net.catacombsnatch.game.core.world.Campaign;
 import net.catacombsnatch.game.core.world.Direction;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.generator.RandomLevelGenerator.Cell.Type;
@@ -190,7 +191,7 @@ public class RandomLevelGenerator extends LevelGenerator {
 	public HashMap<Integer, Cell> cellMap;
 	
 	@Override
-	public Level generate() {
+	public Level generate(Campaign campaign) {
 		/*
 		 * Some thoughts on generation:
 		 * 
@@ -206,7 +207,7 @@ public class RandomLevelGenerator extends LevelGenerator {
 		
 		// TODO
 		
-		Level level = new Level(this, width+1, height+1);
+		Level level = new Level(campaign, this, width+1, height+1);
 		
 		if (cellMap == null) {
 			cellMap = new HashMap<Integer, Cell>();

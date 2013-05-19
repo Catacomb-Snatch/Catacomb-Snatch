@@ -1,6 +1,6 @@
 package net.catacombsnatch.game.core.statistic.achievement;
 
-import net.catacombsnatch.game.core.entity.Player;
+import net.catacombsnatch.game.core.player.Player;
 
 import com.badlogic.gdx.graphics.Texture;
 

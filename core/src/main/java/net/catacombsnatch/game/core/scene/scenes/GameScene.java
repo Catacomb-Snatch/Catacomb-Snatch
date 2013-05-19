@@ -10,7 +10,8 @@ import net.catacombsnatch.game.core.event.EventHandler;
 import net.catacombsnatch.game.core.event.input.InputManager;
 import net.catacombsnatch.game.core.event.input.Key;
 import net.catacombsnatch.game.core.event.input.events.KeyReleaseEvent;
-import net.catacombsnatch.game.core.entity.Player;
+import net.catacombsnatch.game.core.player.LocalPlayer;
+import net.catacombsnatch.game.core.player.Player;
 import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.scene.SceneManager;
 import net.catacombsnatch.game.core.screen.Screen;
@@ -19,6 +20,7 @@ import net.catacombsnatch.game.core.world.Campaign.MapRotation;
 import net.catacombsnatch.game.core.world.Difficulty;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.View;
+import net.catacombsnatch.game.core.world.level.generator.LevelGenerator;
 
 import com.badlogic.gdx.math.Rectangle;
 
@@ -30,7 +32,7 @@ public class GameScene extends Scene {
 	
 	protected List<View> views;
 	
-	public GameScene(Level level) {  // TODO complete
+	public GameScene(LevelGenerator generator) {  // TODO complete
 		super();
 		
 		campaign = new Campaign(Difficulty.EASY, new MapRotation.FIRST());
@@ -41,6 +43,7 @@ public class GameScene extends Scene {
 			campaign.getPlayers().add(player);
 		}
 		
+		Level level = generator.generate(campaign);
 		campaign.getLevels().add(level);
 	}
 	
@@ -61,14 +64,36 @@ public class GameScene extends Scene {
 	
 	@Override
 	public void tick(float delta) {
+		if(campaign.hasFinished()) {
+			SceneManager.exit();
+			return;
+		}
+		
 		if (!paused) {
-			if(campaign.hasFinished()) {
-				SceneManager.exit();
-			}
-			
 			// Tick, tock - the campaign is just a clock...
 			campaign.tick(delta);
 			
+			// Prepare views for rendering and level initialization
+			if(views == null) {
+				Level level = campaign.getCurrentLevel();
+				views = new ArrayList<View>();
+				
+				for(Player player : campaign.getPlayers()) {
+					if(!(player instanceof LocalPlayer)) continue;
+					
+					player.prepareLevelPlayer(level);
+					
+					View view = new View(level);
+					view.setTarget(player.getLevelPlayer().getEntity().getComponent(Position.class).getPosition());
+					
+					views.add(view);
+				}
+				
+				update(true); // Update viewports
+				
+				level.initialize(); // Initialize renderer(s)
+			}
+
 			// Player movement
 			int mx = 0, my = 0;
 			
@@ -78,27 +103,12 @@ public class GameScene extends Scene {
 			if(InputManager.isPressed(Key.MOVE_DOWN)) my--;
 			
 			for(Player player : campaign.getPlayers()) {
-				player.getEntity().getComponent(Velocity.class).force(mx, my);
+				player.getLevelPlayer().getEntity().getComponent(Velocity.class).force(mx, my);
 			}
 		}
 		
 		// Open the windows to see what's happening!
 		getSpriteBatch().begin();
-		
-		if(views == null) {
-			views = new ArrayList<View>();
-			
-			for(Player player : campaign.getPlayers()) {
-				if(!player.local) continue;
-				
-				View view = new View(campaign.getCurrentLevel());
-				view.setTarget(player.getEntity().getComponent(Position.class).getPosition());
-
-				views.add(view);
-			}
-			
-			update(true); // Update viewports
-		}
 		
 		for(View view : views) {
 			view.render(this);

@@ -33,7 +33,7 @@ public class View implements Renderable, Updateable {
 		
 		minimap = new Minimap(level, this);
 		
-		renderer = level.getSystem(RenderSystem.class);
+		renderer = level.setSystem(new RenderSystem(this), true);
 	}
 	
 	@Override
@@ -60,7 +60,6 @@ public class View implements Renderable, Updateable {
 			
 			// Render entities
 			renderer.setGraphics(scene.getSpriteBatch());
-			renderer.setView(this);
 			renderer.process();
 		}
 		
@@ -111,4 +110,5 @@ public class View implements Renderable, Updateable {
 	public Rectangle getViewportOffset() {
 		return new Rectangle(viewport.x + offset.x, viewport.y - offset.y, viewport.width, viewport.height);
 	}
+
 }

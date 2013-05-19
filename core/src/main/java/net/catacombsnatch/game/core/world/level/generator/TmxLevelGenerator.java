@@ -1,5 +1,6 @@
 package net.catacombsnatch.game.core.world.level.generator;
 
+import net.catacombsnatch.game.core.world.Campaign;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.level.generator.options.GeneratorStringOption;
 import net.catacombsnatch.game.core.world.tile.Tile;
@@ -34,7 +35,7 @@ public class TmxLevelGenerator extends LevelGenerator {
 	}
 	
 	@Override
-	public Level generate() {
+	public Level generate(Campaign campaign) {
 		Level level = null;
 		
 		GeneratorStringOption empty = (GeneratorStringOption) getOption("emptyTile");
@@ -46,7 +47,7 @@ public class TmxLevelGenerator extends LevelGenerator {
 				
 				TiledMapTileLayer tileLayer = (TiledMapTileLayer) layer;
 				if(level == null) {
-					level = new Level(this, tileLayer.getWidth(), tileLayer.getHeight());
+					level = new Level(campaign, this, tileLayer.getWidth(), tileLayer.getHeight());
 				}
 				
 				for(int x = 0; x < tileLayer.getWidth(); x++) {

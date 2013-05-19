@@ -1,5 +1,6 @@
 package net.catacombsnatch.game.core.world.level.generator;
 
+import net.catacombsnatch.game.core.world.Campaign;
 import net.catacombsnatch.game.core.world.level.Level;
 import net.catacombsnatch.game.core.world.tile.Tile;
 import net.catacombsnatch.game.core.world.tile.TileRegistry;
@@ -10,8 +11,8 @@ import com.badlogic.gdx.utils.Array;
 public class DebugLevelGenerator extends LevelGenerator {
 
 	@Override
-	public Level generate() {
-		Level level = new Level(this, TileRegistry.getTypes().size(), 1);
+	public Level generate(Campaign campaign) {
+		Level level = new Level(campaign, this, TileRegistry.getTypes().size(), 1);
 		
 		int i = 0;
 		for(String type : TileRegistry.getTypes()) {
