@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.catacombsnatch.game.core.Game;
-import net.catacombsnatch.game.core.entity.components.Transform;
+import net.catacombsnatch.game.core.entity.components.Position;
 import net.catacombsnatch.game.core.entity.components.Velocity;
 import net.catacombsnatch.game.core.event.EventHandler;
 import net.catacombsnatch.game.core.event.input.InputManager;
 import net.catacombsnatch.game.core.event.input.Key;
 import net.catacombsnatch.game.core.event.input.events.KeyReleaseEvent;
-import net.catacombsnatch.game.core.player.LocalPlayer;
-import net.catacombsnatch.game.core.player.Player;
+import net.catacombsnatch.game.core.entity.Player;
 import net.catacombsnatch.game.core.scene.Scene;
 import net.catacombsnatch.game.core.scene.SceneManager;
 import net.catacombsnatch.game.core.screen.Screen;
@@ -79,7 +78,7 @@ public class GameScene extends Scene {
 			if(InputManager.isPressed(Key.MOVE_DOWN)) my--;
 			
 			for(Player player : campaign.getPlayers()) {
-				player.getLevelPlayer().getEntity().getComponent(Velocity.class).force(mx, my);
+				player.getEntity().getComponent(Velocity.class).force(mx, my);
 			}
 		}
 		
@@ -90,10 +89,10 @@ public class GameScene extends Scene {
 			views = new ArrayList<View>();
 			
 			for(Player player : campaign.getPlayers()) {
-				if(!(player instanceof LocalPlayer)) continue;
+				if(!player.local) continue;
 				
 				View view = new View(campaign.getCurrentLevel());
-				view.setTarget(player.getLevelPlayer().getEntity().getComponent(Transform.class).getPosition());
+				view.setTarget(player.getEntity().getComponent(Position.class).getPosition());
 
 				views.add(view);
 			}

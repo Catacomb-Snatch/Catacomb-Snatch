@@ -33,10 +33,7 @@ public class View implements Renderable, Updateable {
 		
 		minimap = new Minimap(level, this);
 		
-		renderer = new RenderSystem(this);
-		
-		level.setSystem(renderer);
-		level.initialize();
+		renderer = level.getSystem(RenderSystem.class);
 	}
 	
 	@Override
@@ -45,7 +42,7 @@ public class View implements Renderable, Updateable {
 		
 		if(target != null) {
 			// "Camera" movement
-			offset = offset.lerp(target, Gdx.graphics.getDeltaTime());
+			offset.lerp(target, Gdx.graphics.getDeltaTime());
 			
 			// Draw tiles
 			rendered = 0; // Reset counter
@@ -63,6 +60,8 @@ public class View implements Renderable, Updateable {
 			
 			// Render entities
 			renderer.setGraphics(scene.getSpriteBatch());
+			renderer.setView(this);
+			renderer.process();
 		}
 		
 		// Draw overlays
@@ -112,5 +111,4 @@ public class View implements Renderable, Updateable {
 	public Rectangle getViewportOffset() {
 		return new Rectangle(viewport.x + offset.x, viewport.y - offset.y, viewport.width, viewport.height);
 	}
-
 }

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import net.catacombsnatch.game.core.player.Player;
+import net.catacombsnatch.game.core.entity.Player;
 import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.util.Finishable;
 import net.catacombsnatch.game.core.world.level.Level;
@@ -45,9 +45,7 @@ public class Campaign implements Tickable, Finishable {
 			// Prepare next level
 			
 			for(Player player : getPlayers()) {
-				player.prepareLevelPlayer(next);
-				
-				next.addPlayer(player.getLevelPlayer());
+				next.addPlayer(player);
 			}
 			
 			next.initialize();

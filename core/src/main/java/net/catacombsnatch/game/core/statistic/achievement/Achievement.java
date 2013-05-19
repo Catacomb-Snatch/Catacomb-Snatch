@@ -1,10 +1,11 @@
 package net.catacombsnatch.game.core.statistic.achievement;
 
-import net.catacombsnatch.game.core.player.Player;
+import net.catacombsnatch.game.core.entity.Player;
 
 import com.badlogic.gdx.graphics.Texture;
 
 public abstract class Achievement {
+	
 	protected final AchievementType type;
 	protected final Texture icon;
 	protected final String name, description;
@@ -43,5 +44,4 @@ public abstract class Achievement {
 	public String getDescription() {
 		return description;
 	}
-	
 }

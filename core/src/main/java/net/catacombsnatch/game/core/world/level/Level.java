@@ -1,8 +1,9 @@
 package net.catacombsnatch.game.core.world.level;
 
+import net.catacombsnatch.game.core.entity.Player;
 import net.catacombsnatch.game.core.entity.systems.HealthSystem;
 import net.catacombsnatch.game.core.entity.systems.MovementSystem;
-import net.catacombsnatch.game.core.player.LevelPlayer;
+import net.catacombsnatch.game.core.entity.systems.RenderSystem;
 import net.catacombsnatch.game.core.screen.Tickable;
 import net.catacombsnatch.game.core.util.Finishable;
 import net.catacombsnatch.game.core.world.level.generator.LevelGenerator;
@@ -15,7 +16,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class Level extends World implements Tickable, Finishable {
 	// Entity management
-	protected Array<LevelPlayer> players;
+	protected Array<Player> players;
 	
 	// Tiles
 	protected Tile[] tiles;
@@ -34,7 +35,7 @@ public class Level extends World implements Tickable, Finishable {
 		super();
 
 		// Entity management
-		this.players = new Array<LevelPlayer>();
+		this.players = new Array<Player>();
 		
 		// Tiles
 		this.tiles = new Tile[width * height];
@@ -53,6 +54,9 @@ public class Level extends World implements Tickable, Finishable {
 		// Add systems
 		setSystem(new HealthSystem());
 		setSystem(new MovementSystem());
+		setSystem(new RenderSystem());
+		
+		initialize();
 	}
 	
 	@Override
@@ -65,17 +69,18 @@ public class Level extends World implements Tickable, Finishable {
 		}
 		
 		// Update entities and process systems
-		process();
 		setDelta(delta);
+		process();
 	}
 	
 	/**
 	 * Adds a player to the current level.
 	 * 
-	 * @param player The {@link LevelPlayer} to add
+	 * @param player The {@link Player} to add
 	 */
-	public void addPlayer(LevelPlayer player) {
+	public void addPlayer(Player player) {
 		players.add(player);
+		player.addToLevel(this);
 	}
 
 	/** @return An array of all stored tiles (size = level width * level height). */
@@ -147,5 +152,8 @@ public class Level extends World implements Tickable, Finishable {
 	public Vector2 getNextSpawnLocation() {
 		return (spawns.size == 0) ? null : spawns.removeIndex(spawns.size - 1);
 	}
-	
+
+	public void updateRenderSystem(View view) {
+		getSystem(RenderSystem.class).setView(view);
+	}
 }
