@@ -43,4 +43,9 @@ local.properties
 # Mac dust
 *.DS_Store
 
+# Netbeans
 */nbactions.xml
+
+# IntelliJ
+.idea
+*.iml

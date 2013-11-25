@@ -1,15 +1,14 @@
 package net.catacombsnatch.game.core.entity.systems;
 
-import net.catacombsnatch.game.core.entity.components.Position;
-import net.catacombsnatch.game.core.entity.components.Rotation;
-import net.catacombsnatch.game.core.entity.components.Velocity;
-import net.catacombsnatch.game.core.world.Direction;
-
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.EntityProcessingSystem;
+import net.catacombsnatch.game.core.entity.components.Position;
+import net.catacombsnatch.game.core.entity.components.Rotation;
+import net.catacombsnatch.game.core.entity.components.Velocity;
+import net.catacombsnatch.game.core.world.Direction;
 
 public class MovementSystem extends EntityProcessingSystem {
 	
@@ -20,7 +19,7 @@ public class MovementSystem extends EntityProcessingSystem {
 	
 	@SuppressWarnings("unchecked")
 	public MovementSystem() {
-		super(Aspect.getAspectForAll(Position.class, Velocity.class).one(Rotation.class));
+		super(Aspect.getAspectForAll(Position.class, Velocity.class));
 	}
 
 	@Override
@@ -37,6 +36,8 @@ public class MovementSystem extends EntityProcessingSystem {
 		if(r != null) r.setDirection(Direction.getDirectionFor(v.getVelocityX(), v.getVelocityY()));
 		
 		v.reset(); 
+
+		p.setDirection(Direction.getDirectionFor(v.getVelocity()));
 	}
 	
 }

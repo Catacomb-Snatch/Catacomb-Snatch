@@ -1,17 +1,15 @@
 package net.catacombsnatch.game.core.world.level;
 
-import net.catacombsnatch.game.core.entity.systems.RenderSystem;
-import net.catacombsnatch.game.core.resource.Art;
-import net.catacombsnatch.game.core.scene.Scene;
-import net.catacombsnatch.game.core.screen.Renderable;
-import net.catacombsnatch.game.core.screen.Screen;
-import net.catacombsnatch.game.core.screen.Updateable;
-import net.catacombsnatch.game.core.world.tile.Tile;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import net.catacombsnatch.game.core.entity.systems.RenderSystem;
+import net.catacombsnatch.game.core.resource.Art;
+import net.catacombsnatch.game.core.scene.Scene;
+import net.catacombsnatch.game.core.screen.Renderable;
+import net.catacombsnatch.game.core.screen.Updateable;
+import net.catacombsnatch.game.core.world.tile.Tile;
 
 public class View implements Renderable, Updateable {
 	protected Level level;
@@ -33,7 +31,7 @@ public class View implements Renderable, Updateable {
 		
 		minimap = new Minimap(level, this);
 		
-		renderer = level.setSystem(new RenderSystem(this), true);
+		renderer = level.setSystem(new RenderSystem(), true);
 	}
 	
 	@Override
@@ -91,7 +89,7 @@ public class View implements Renderable, Updateable {
 		viewport = view;
 	}
 	
-	/** @return The number of tiles rendered during the last {@link #render(Screen)} call. */
+	/** @return The number of tiles rendered during the last {@link #render(Scene)} call. */
 	public int getLastRenderedTileCount() {
 		return rendered;
 	}

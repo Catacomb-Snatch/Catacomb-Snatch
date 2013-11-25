@@ -4,30 +4,34 @@ import com.artemis.Component;
 import com.badlogic.gdx.math.Vector2;
 
 public class Velocity extends Component {
-	protected Vector2 vel;
+	
+	public Vector2 vec;
 	
 	public Velocity() {
-		vel = new Vector2();
+		vec = new Vector2();
 	}
 	
 	public void force(float mx, float my) {
-		vel.add(mx, my);
+		vec.add(mx, my);
 	}
 	
 	public void normalize() {
-		vel.nor();
+		vec.nor();
 	}
 	
 	public void reset() {
-		vel.set(0, 0);
+		vec.set(0, 0);
 	}
 	
 	public float getVelocityX() {
-		return vel.x;
+		return vec.x;
 	}
 	
 	public float getVelocityY() {
-		return vel.y;
+		return vec.y;
 	}
 	
+	public Vector2 getVelocity() {
+		return vec;
+	}
 }
