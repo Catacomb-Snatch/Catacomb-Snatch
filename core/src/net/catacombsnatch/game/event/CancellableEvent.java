@@ -1,14 +1,16 @@
 package net.catacombsnatch.game.event;
 
-/** Represents a cancellable event */
+/**
+ * Represents a cancellable event
+ */
 public class CancellableEvent extends Event {
-	private boolean cancelled = false;
-	
-	public boolean isCancelled() {
-		return cancelled;
-	}
-	
-	public void setCancelled(boolean cancelled) {
-		this.cancelled = cancelled;
-	}
+    private boolean cancelled = false;
+
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
+    }
 }

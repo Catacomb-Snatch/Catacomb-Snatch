@@ -10,14 +10,14 @@ import net.catacombsnatch.game.event.Event;
  * <b>This event ignores the cancelled result</b>
  */
 public class ControllerDisconnectEvent extends Event {
-	protected final Controller controller;
-	
-	public ControllerDisconnectEvent(Controller controller) {
-		this.controller = controller;
-	}
+    protected final Controller controller;
 
-	public Controller getController() {
-		return controller;
-	}
-	
+    public ControllerDisconnectEvent(Controller controller) {
+        this.controller = controller;
+    }
+
+    public Controller getController() {
+        return controller;
+    }
+
 }

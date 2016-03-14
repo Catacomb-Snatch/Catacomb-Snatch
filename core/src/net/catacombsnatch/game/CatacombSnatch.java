@@ -31,156 +31,156 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class CatacombSnatch extends ApplicationAdapter {
-	public final static String TAG = "[Core]";
+    public final static String TAG = "[Core]";
 
-	protected InputManager input;
-	protected Language language;
-	protected SceneManager sceneManager;
+    protected InputManager input;
+    protected Language language;
+    protected SceneManager sceneManager;
 
-	protected static Player[] localPlayers;
+    protected static Player[] localPlayers;
 
-	public static ISoundPlayer sound;
-	public static Options options;
+    public static ISoundPlayer sound;
+    public static Options options;
 
-	private Label fpsLabel;
+    private Label fpsLabel;
 
-	private final PlatformDependent platform;
+    private final PlatformDependent platform;
 
-	public CatacombSnatch(PlatformDependent platform) {
-		this.platform = platform;
-	}
+    public CatacombSnatch(PlatformDependent platform) {
+        this.platform = platform;
+    }
 
-	@Override
-	public void create() {
-		Gdx.app.setLogLevel(Application.LOG_INFO | Application.LOG_DEBUG | Application.LOG_ERROR);
+    @Override
+    public void create() {
+        Gdx.app.setLogLevel(Application.LOG_INFO | Application.LOG_DEBUG | Application.LOG_ERROR);
 
-		// Load static content
-		Language.set("en");
+        // Load static content
+        Language.set("en");
 
-		if ( !Art.loadResources() ) Gdx.app.exit();
+        if (!Art.loadResources()) Gdx.app.exit();
 
-		// Load options
-		options = new PreferenceOptions("catacombsnatch-options.xml");
-		DefaultOptions.setDefaults();
+        // Load options
+        options = new PreferenceOptions("catacombsnatch-options.xml");
+        DefaultOptions.setDefaults();
 
-		// Load sound system
-		try {
-			sound = new GdxSoundPlayer();
-		} catch ( Exception e ) {
-			Gdx.app.log(TAG, "Could not enable sound system, falling back to NoSound!", e);
-			sound = new NoSoundPlayer();
-		}
+        // Load sound system
+        try {
+            sound = new GdxSoundPlayer();
+        } catch (Exception e) {
+            Gdx.app.log(TAG, "Could not enable sound system, falling back to NoSound!", e);
+            sound = new NoSoundPlayer();
+        }
 
-		// Load main managers
-		sceneManager = new SceneManager();
+        // Load main managers
+        sceneManager = new SceneManager();
 
-		input = new InputManager();
-		Gdx.input.setInputProcessor(input);
-		platform.create();
+        input = new InputManager();
+        Gdx.input.setInputProcessor(input);
+        platform.create();
 
-		Controllers.addListener(input);
-		EventManager.registerListener(this);
+        Controllers.addListener(input);
+        EventManager.registerListener(this);
 
-		// Dive in :)
-		localPlayers = new Player[4];
-		localPlayers[0] = new LocalPlayer();
+        // Dive in :)
+        localPlayers = new Player[4];
+        localPlayers[0] = new LocalPlayer();
 
-		SceneManager.switchTo(TitleScreen.class);
+        SceneManager.switchTo(TitleScreen.class);
 
-		fpsLabel = new Label("FPS", Art.skin);
-	}
+        fpsLabel = new Label("FPS", Art.skin);
+    }
 
-	@Override
-	public void resize( int width, int height ) {
-		Screen.resize(width, height);
-		sceneManager.update(true);
-	}
+    @Override
+    public void resize(int width, int height) {
+        Screen.resize(width, height);
+        sceneManager.update(true);
+    }
 
-	@Override
-	public void render() {
-		Screen.clear();
+    @Override
+    public void render() {
+        Screen.clear();
 
-		Scene last = null;
+        Scene last = null;
 
-		if(SceneManager.isDrawAllEnabled()) {
-			for(Scene scene : sceneManager.getScenes()) {
-				if(scene.hasBeenClosed()) continue;
+        if (SceneManager.isDrawAllEnabled()) {
+            for (Scene scene : sceneManager.getScenes()) {
+                if (scene.hasBeenClosed()) continue;
 
-				scene.tick(Gdx.graphics.getDeltaTime());
-				scene.getBatch().end();
+                scene.tick(Gdx.graphics.getDeltaTime());
+                scene.getBatch().end();
 
-				last = scene;
-			}
-		} else {
-			last = SceneManager.getCurrent();
+                last = scene;
+            }
+        } else {
+            last = SceneManager.getCurrent();
 
-			if(last != null) {
-				last.tick(Gdx.graphics.getDeltaTime());
-				last.getBatch().end();
-			}
-		}
+            if (last != null) {
+                last.tick(Gdx.graphics.getDeltaTime());
+                last.getBatch().end();
+            }
+        }
 
-		if(last != null && (Boolean) DefaultOptions.DEBUG.get()) {
-			last.getBatch().begin();
+        if (last != null && (Boolean) DefaultOptions.DEBUG.get()) {
+            last.getBatch().begin();
 
-			fpsLabel.setText(Gdx.graphics.getFramesPerSecond() + " FPS");
-			fpsLabel.draw(last.getBatch(), 1);
+            fpsLabel.setText(Gdx.graphics.getFramesPerSecond() + " FPS");
+            fpsLabel.draw(last.getBatch(), 1);
 
-			last.getBatch().end();
-		}
-	}
+            last.getBatch().end();
+        }
+    }
 
-	@Override
-	public void pause() {
-		sound.pauseBackgroundMusic();
-	}
+    @Override
+    public void pause() {
+        sound.pauseBackgroundMusic();
+    }
 
-	@Override
-	public void resume() {
-		sound.resumeBackgroundMusic();
-	}
+    @Override
+    public void resume() {
+        sound.resumeBackgroundMusic();
+    }
 
-	@Override
-	public void dispose() {
-		SceneManager.exitAll();
-		Art.unloadResources();
-		sound.shutdown();
-		platform.dispose();
-		options.save();
-	}
+    @Override
+    public void dispose() {
+        SceneManager.exitAll();
+        Art.unloadResources();
+        sound.shutdown();
+        platform.dispose();
+        options.save();
+    }
 
-	@EventHandler
-	public void keyPressed(KeyPressedEvent event) {
-		if(event.getKey() != Key.SCREENSHOT) return;
+    @EventHandler
+    public void keyPressed(KeyPressedEvent event) {
+        if (event.getKey() != Key.SCREENSHOT) return;
 
-		switch (Gdx.app.getType()) {
-			case Desktop:
-				String path = "";
+        switch (Gdx.app.getType()) {
+            case Desktop:
+                String path = "";
 
-				try {
-					String rawpath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-					path = URLDecoder.decode(rawpath, "UTF-8");
-				} catch (Exception e) {
-					Gdx.app.error(TAG, "Error getting path", e);
-				}
+                try {
+                    String rawpath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+                    path = URLDecoder.decode(rawpath, "UTF-8");
+                } catch (Exception e) {
+                    Gdx.app.error(TAG, "Error getting path", e);
+                }
 
-				File dir = new File(path).getParentFile();
-				File logfile = new File(dir, "screen_"+(new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime()))+".png");
-				Screen.saveScreenshot(Gdx.files.absolute(logfile.getPath()));
-				break;
+                File dir = new File(path).getParentFile();
+                File logfile = new File(dir, "screen_" + (new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime())) + ".png");
+                Screen.saveScreenshot(Gdx.files.absolute(logfile.getPath()));
+                break;
 
-			default:
-				Screen.saveScreenshot(Gdx.files.external("screen_"+(new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime()))+".png"));
-		}
-	}
+            default:
+                Screen.saveScreenshot(Gdx.files.external("screen_" + (new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime())) + ".png"));
+        }
+    }
 
-	/**
-	 * Returns all local players.<br />
-	 * <b>The maximum number of <em>local</em> players is 4!</b>
-	 *
-	 * @return A {@link Player Player[]} containing all local players.
-	 */
-	public static Player[] getLocalPlayers() {
-		return localPlayers;
-	}
+    /**
+     * Returns all local players.<br />
+     * <b>The maximum number of <em>local</em> players is 4!</b>
+     *
+     * @return A {@link Player Player[]} containing all local players.
+     */
+    public static Player[] getLocalPlayers() {
+        return localPlayers;
+    }
 }

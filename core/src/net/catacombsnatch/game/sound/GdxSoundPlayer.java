@@ -11,289 +11,289 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
 public class GdxSoundPlayer implements ISoundPlayer {
-	public final static String TAG = "[SoundPlayer]";
-	
-	private float listenerX = 0.0f;
-	private float listenerY = 0.0f;
+    public final static String TAG = "[SoundPlayer]";
 
-	private float maxSoundDistance = 200.0f;
+    private float listenerX = 0.0f;
+    private float listenerY = 0.0f;
 
-	private boolean paused = false;
-	private boolean muted = false;
-	private float musicVolume = 0.5f;
-	private float soundVolume = 1.0f;
+    private float maxSoundDistance = 200.0f;
 
-	private long timeBetweenSongs = 10; // in seconds
-	private long songEnded = 0;
+    private boolean paused = false;
+    private boolean muted = false;
+    private float musicVolume = 0.5f;
+    private float soundVolume = 1.0f;
 
-	private Map<String, Music> musicMap;
-	private Map<String, Sound> soundsMap;
+    private long timeBetweenSongs = 10; // in seconds
+    private long songEnded = 0;
 
-	private List<Music> backgroundMusicList;
-	private int backgroundPlaying;
-	private boolean backgroundIsPlaying = false;
-	private boolean TitleIsPlaying = false;
-	private boolean TheEndIsPlaying = false;
-	
+    private Map<String, Music> musicMap;
+    private Map<String, Sound> soundsMap;
 
-	public GdxSoundPlayer() {
-		// Initialize all lists
-		soundsMap = new HashMap<String, Sound>();
-		musicMap = new HashMap<String, Music>();
-		backgroundMusicList = new ArrayList<Music>();
+    private List<Music> backgroundMusicList;
+    private int backgroundPlaying;
+    private boolean backgroundIsPlaying = false;
+    private boolean TitleIsPlaying = false;
+    private boolean TheEndIsPlaying = false;
 
-		// Load music
-		loadMusic( Sounds.TITLE_THEME );
-		loadMusic( Sounds.END_THEME );
-		loadMusic( Sounds.BACKGROUND_TRACK_1 );
-		loadMusic( Sounds.BACKGROUND_TRACK_2 );
-		loadMusic( Sounds.BACKGROUND_TRACK_3 );
-		loadMusic( Sounds.BACKGROUND_TRACK_4 );
 
-		// Load sounds
-		loadSound( Sounds.SOUND_SHOT_1 );
-		loadSound( Sounds.SOUND_EXPLOSION );
-	}
+    public GdxSoundPlayer() {
+        // Initialize all lists
+        soundsMap = new HashMap<String, Sound>();
+        musicMap = new HashMap<String, Music>();
+        backgroundMusicList = new ArrayList<Music>();
 
-	private void loadMusic( Sounds music ) {
-		try {
-			Gdx.app.log(TAG, Gdx.files.internal("music/"+music.name+".ogg").file().getAbsolutePath());
-			Music file = Gdx.audio.newMusic( Gdx.files.internal( "music/" + music.name + ".ogg" ) );
-			// If background track, add to playlist
-			if ( music.name.toLowerCase().startsWith( "background" ) ) backgroundMusicList.add( file );
+        // Load music
+        loadMusic(Sounds.TITLE_THEME);
+        loadMusic(Sounds.END_THEME);
+        loadMusic(Sounds.BACKGROUND_TRACK_1);
+        loadMusic(Sounds.BACKGROUND_TRACK_2);
+        loadMusic(Sounds.BACKGROUND_TRACK_3);
+        loadMusic(Sounds.BACKGROUND_TRACK_4);
 
-			musicMap.put( music.name, file );
+        // Load sounds
+        loadSound(Sounds.SOUND_SHOT_1);
+        loadSound(Sounds.SOUND_EXPLOSION);
+    }
 
-		} catch (GdxRuntimeException e){
-			Gdx.app.log(TAG, "Error loading musicfile: " + music.name + ": " + e.getMessage());
-		}
-	}
+    private void loadMusic(Sounds music) {
+        try {
+            Gdx.app.log(TAG, Gdx.files.internal("music/" + music.name + ".ogg").file().getAbsolutePath());
+            Music file = Gdx.audio.newMusic(Gdx.files.internal("music/" + music.name + ".ogg"));
+            // If background track, add to playlist
+            if (music.name.toLowerCase().startsWith("background")) backgroundMusicList.add(file);
 
-	private void loadSound( Sounds sound ) {
-		try{
-			soundsMap.put( sound.name, Gdx.audio.newSound( Gdx.files.internal( "sound/" + sound.name + ".wav" ) ) );
-		}catch (GdxRuntimeException e){
-			Gdx.app.log(TAG, "Error loading soundfile: " + sound.name);
-		}
-	}
+            musicMap.put(music.name, file);
 
-	private Music getMusic( Sounds music ) {
-		return musicMap.get( music.name );
-	}
+        } catch (GdxRuntimeException e) {
+            Gdx.app.log(TAG, "Error loading musicfile: " + music.name + ": " + e.getMessage());
+        }
+    }
 
-	@Override
-	public void startTitleMusic() {
-		stopBackgroundMusic();
-		stopEndMusic();
+    private void loadSound(Sounds sound) {
+        try {
+            soundsMap.put(sound.name, Gdx.audio.newSound(Gdx.files.internal("sound/" + sound.name + ".wav")));
+        } catch (GdxRuntimeException e) {
+            Gdx.app.log(TAG, "Error loading soundfile: " + sound.name);
+        }
+    }
 
-		Music titleMusic = getMusic( Sounds.TITLE_THEME );
-		if (titleMusic == null){
-			return;
-		}
-		if ( musicVolume > 0.0f && !titleMusic.isPlaying() && !paused ) {
-			titleMusic.setLooping( true );
-			titleMusic.setVolume( musicVolume );
-			titleMusic.play();
-		}
-		TitleIsPlaying = true;
-	}
+    private Music getMusic(Sounds music) {
+        return musicMap.get(music.name);
+    }
 
-	@Override
-	public void stopTitleMusic() {
-		Music titleMusic = getMusic( Sounds.TITLE_THEME );
-		if (titleMusic == null){
-			return;
-		}
-		if ( titleMusic.isPlaying() ){
-			titleMusic.stop();
-		}
-		TitleIsPlaying = false;
-	}
+    @Override
+    public void startTitleMusic() {
+        stopBackgroundMusic();
+        stopEndMusic();
 
-	@Override
-	public void startEndMusic() {
-		stopBackgroundMusic();
-		stopTitleMusic();
+        Music titleMusic = getMusic(Sounds.TITLE_THEME);
+        if (titleMusic == null) {
+            return;
+        }
+        if (musicVolume > 0.0f && !titleMusic.isPlaying() && !paused) {
+            titleMusic.setLooping(true);
+            titleMusic.setVolume(musicVolume);
+            titleMusic.play();
+        }
+        TitleIsPlaying = true;
+    }
 
-		Music endMusic = getMusic( Sounds.END_THEME );
-		if (endMusic == null){
-			return;
-		}
-		if ( musicVolume > 0.0f && !endMusic.isPlaying() && !paused ) {
-			endMusic.setLooping( true );
-			endMusic.setVolume( musicVolume );
-			endMusic.play();
-		}
-		TheEndIsPlaying = true;
-	}
+    @Override
+    public void stopTitleMusic() {
+        Music titleMusic = getMusic(Sounds.TITLE_THEME);
+        if (titleMusic == null) {
+            return;
+        }
+        if (titleMusic.isPlaying()) {
+            titleMusic.stop();
+        }
+        TitleIsPlaying = false;
+    }
 
-	@Override
-	public void stopEndMusic() {
-		Music endMusic = getMusic( Sounds.END_THEME );
-		if (endMusic == null){
-			return;
-		}
-		if ( endMusic.isPlaying() ){
-			endMusic.stop();
-		}
-		TheEndIsPlaying = false;
-	}
+    @Override
+    public void startEndMusic() {
+        stopBackgroundMusic();
+        stopTitleMusic();
 
-	@Override
-	public void startBackgroundMusic() {
-		stopTitleMusic();
-		stopEndMusic();
+        Music endMusic = getMusic(Sounds.END_THEME);
+        if (endMusic == null) {
+            return;
+        }
+        if (musicVolume > 0.0f && !endMusic.isPlaying() && !paused) {
+            endMusic.setLooping(true);
+            endMusic.setVolume(musicVolume);
+            endMusic.play();
+        }
+        TheEndIsPlaying = true;
+    }
 
-		if ( musicVolume > 0.0f && backgroundMusicList.size() > 0 && !paused ) {
-			if ( backgroundPlaying < 0 ) backgroundPlaying = 0;
+    @Override
+    public void stopEndMusic() {
+        Music endMusic = getMusic(Sounds.END_THEME);
+        if (endMusic == null) {
+            return;
+        }
+        if (endMusic.isPlaying()) {
+            endMusic.stop();
+        }
+        TheEndIsPlaying = false;
+    }
 
-			Music music = backgroundMusicList.get( backgroundPlaying );
-			if (music == null) return;
-			if ( !music.isPlaying() ) {
-				if ( songEnded == 0 ) {
-					songEnded = System.currentTimeMillis();
-					backgroundPlaying = (backgroundPlaying + 1) >= backgroundMusicList.size() ? 0 : backgroundPlaying + 1;
+    @Override
+    public void startBackgroundMusic() {
+        stopTitleMusic();
+        stopEndMusic();
 
-					music = backgroundMusicList.get( backgroundPlaying );
-				}
+        if (musicVolume > 0.0f && backgroundMusicList.size() > 0 && !paused) {
+            if (backgroundPlaying < 0) backgroundPlaying = 0;
 
-				if ( songEnded == 0 || (songEnded + (timeBetweenSongs * 1000)) < System.currentTimeMillis() ) {
-					music.setLooping( false );
-					music.setVolume( musicVolume );
-					music.play();
+            Music music = backgroundMusicList.get(backgroundPlaying);
+            if (music == null) return;
+            if (!music.isPlaying()) {
+                if (songEnded == 0) {
+                    songEnded = System.currentTimeMillis();
+                    backgroundPlaying = (backgroundPlaying + 1) >= backgroundMusicList.size() ? 0 : backgroundPlaying + 1;
 
-					songEnded = 0;
-				}
-			}
-		}
-		backgroundIsPlaying = true;
-	}
+                    music = backgroundMusicList.get(backgroundPlaying);
+                }
 
-	@Override
-	public void stopBackgroundMusic() {
-		if ( backgroundPlaying < 0 ) return;
+                if (songEnded == 0 || (songEnded + (timeBetweenSongs * 1000)) < System.currentTimeMillis()) {
+                    music.setLooping(false);
+                    music.setVolume(musicVolume);
+                    music.play();
 
-		for ( Music m : backgroundMusicList ) {
-			if ( m.isPlaying() ) m.stop();
-		}
+                    songEnded = 0;
+                }
+            }
+        }
+        backgroundIsPlaying = true;
+    }
 
-		backgroundPlaying = -1;
-		backgroundIsPlaying = false;
-	}
+    @Override
+    public void stopBackgroundMusic() {
+        if (backgroundPlaying < 0) return;
 
-	@Override
-	public void pauseBackgroundMusic() {
-		paused = true;
-		
-		if ( backgroundPlaying >= 0 ) backgroundMusicList.get( backgroundPlaying ).pause();
-		Music music;
-		
-		music = getMusic( Sounds.TITLE_THEME );
-		if (music != null && TitleIsPlaying){ 
-			music.pause();
-		}
-		music = getMusic( Sounds.END_THEME );
-		if (music != null && TheEndIsPlaying){ 
-			music.pause();
-		}
-	}
+        for (Music m : backgroundMusicList) {
+            if (m.isPlaying()) m.stop();
+        }
 
-	@Override
-	public void resumeBackgroundMusic() {
-		paused = false;
+        backgroundPlaying = -1;
+        backgroundIsPlaying = false;
+    }
 
-		if ( backgroundPlaying >= 0 ) backgroundMusicList.get( backgroundPlaying ).play();
-		if (TitleIsPlaying){
-			getMusic( Sounds.TITLE_THEME ).play();
-		}
-		if (TheEndIsPlaying){
-			getMusic( Sounds.END_THEME ).play();
-		}
-	}
+    @Override
+    public void pauseBackgroundMusic() {
+        paused = true;
 
-	@Override
-	public void setListenerPosition( float x, float y ) {
-		listenerX = x;
-		listenerY = y;
-	}
+        if (backgroundPlaying >= 0) backgroundMusicList.get(backgroundPlaying).pause();
+        Music music;
 
-	@Override
-	public boolean playSound( String soundName, float x, float y ) {
-		return playSound( soundName, x, y, false );
-	}
+        music = getMusic(Sounds.TITLE_THEME);
+        if (music != null && TitleIsPlaying) {
+            music.pause();
+        }
+        music = getMusic(Sounds.END_THEME);
+        if (music != null && TheEndIsPlaying) {
+            music.pause();
+        }
+    }
 
-	@Override
-	public boolean playSound( String soundName, float x, float y, boolean blocking ) {
-		if ( soundVolume > 0.0f ) {
-			if ( soundsMap.containsKey( soundName ) ) {
-				// TODO
+    @Override
+    public void resumeBackgroundMusic() {
+        paused = false;
 
-				// angle -> pan
-				double angle = Math.toDegrees( Math.atan2( x - listenerX, y - listenerY ) );
-				if ( angle < 0 ) angle += 360;
+        if (backgroundPlaying >= 0) backgroundMusicList.get(backgroundPlaying).play();
+        if (TitleIsPlaying) {
+            getMusic(Sounds.TITLE_THEME).play();
+        }
+        if (TheEndIsPlaying) {
+            getMusic(Sounds.END_THEME).play();
+        }
+    }
 
-				float pan = (float) Math.sin( Math.toRadians( angle ) );
+    @Override
+    public void setListenerPosition(float x, float y) {
+        listenerX = x;
+        listenerY = y;
+    }
 
-				// distance
-				double difx = (x - listenerX) * (x - listenerX);
-				double dify = (y - listenerY) * (y - listenerY);
-				float distance = (float) Math.sqrt( difx + dify );
+    @Override
+    public boolean playSound(String soundName, float x, float y) {
+        return playSound(soundName, x, y, false);
+    }
 
-				float distanceVolume = soundVolume - (distance / maxSoundDistance);
-				if ( distanceVolume > soundVolume ) distanceVolume = soundVolume;
-				if ( distanceVolume < 0.0f ) distanceVolume = 0.0f;
+    @Override
+    public boolean playSound(String soundName, float x, float y, boolean blocking) {
+        if (soundVolume > 0.0f) {
+            if (soundsMap.containsKey(soundName)) {
+                // TODO
 
-				soundsMap.get( soundName ).play( distanceVolume, 1, pan );
+                // angle -> pan
+                double angle = Math.toDegrees(Math.atan2(x - listenerX, y - listenerY));
+                if (angle < 0) angle += 360;
 
-				return true;
-			}
-		}
+                float pan = (float) Math.sin(Math.toRadians(angle));
 
-		return false;
-	}
+                // distance
+                double difx = (x - listenerX) * (x - listenerX);
+                double dify = (y - listenerY) * (y - listenerY);
+                float distance = (float) Math.sqrt(difx + dify);
 
-	@Override
-	public void shutdown() {
-		Music music;
-		// unloading Title music
-		stopTitleMusic();
-		music = getMusic( Sounds.TITLE_THEME );
-		if (music != null){
-			music.dispose();
-		}
+                float distanceVolume = soundVolume - (distance / maxSoundDistance);
+                if (distanceVolume > soundVolume) distanceVolume = soundVolume;
+                if (distanceVolume < 0.0f) distanceVolume = 0.0f;
 
-		// unloading End music
-		stopEndMusic();
-		music = getMusic( Sounds.END_THEME );
-		if (music != null){
-			music.dispose();
-		}
-		
-		// unloading Background music
-		stopBackgroundMusic();
+                soundsMap.get(soundName).play(distanceVolume, 1, pan);
 
-		for ( Music m : backgroundMusicList ) {
-			if ( m.isPlaying() ) m.stop();
-			m.dispose();
-		}
+                return true;
+            }
+        }
 
-		// unloading sounds
-		if ( soundsMap.size() > 0 ) {
-			for ( Sound s : soundsMap.values() ) {
-				s.stop();
-				s.dispose();
-			}
-		}
-	}
+        return false;
+    }
 
-	@Override
-	public boolean isMuted() {
-		return muted;
-	}
+    @Override
+    public void shutdown() {
+        Music music;
+        // unloading Title music
+        stopTitleMusic();
+        music = getMusic(Sounds.TITLE_THEME);
+        if (music != null) {
+            music.dispose();
+        }
 
-	@Override
-	public void setMuted( boolean muted ) {
-		this.muted = muted;
-	}
+        // unloading End music
+        stopEndMusic();
+        music = getMusic(Sounds.END_THEME);
+        if (music != null) {
+            music.dispose();
+        }
+
+        // unloading Background music
+        stopBackgroundMusic();
+
+        for (Music m : backgroundMusicList) {
+            if (m.isPlaying()) m.stop();
+            m.dispose();
+        }
+
+        // unloading sounds
+        if (soundsMap.size() > 0) {
+            for (Sound s : soundsMap.values()) {
+                s.stop();
+                s.dispose();
+            }
+        }
+    }
+
+    @Override
+    public boolean isMuted() {
+        return muted;
+    }
+
+    @Override
+    public void setMuted(boolean muted) {
+        this.muted = muted;
+    }
 
 }

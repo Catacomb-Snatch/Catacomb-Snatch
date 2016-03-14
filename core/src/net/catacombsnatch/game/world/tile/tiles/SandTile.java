@@ -6,26 +6,26 @@ import net.catacombsnatch.game.world.tile.StaticTile;
 
 public class SandTile extends StaticTile {
 
-	public SandTile() {
-		super(getColor(Art.tiles_sand[0]));
-	}
-	
-	@Override
-	public void init(Level level, int x, int y) {
-		this.level = level;
-		setTexture(Art.tiles_sand[0]);
-		
-		super.init(level, x, y);
-	}
+    public SandTile() {
+        super(getColor(Art.tiles_sand[0]));
+    }
 
-	@Override
-	public void update() {
-		// Nothing to do ... yet
-	}
+    @Override
+    public void init(Level level, int x, int y) {
+        this.level = level;
+        setTexture(Art.tiles_sand[0]);
 
-	@Override
-	public boolean canPass(long entity) {
-		return true;
-	}
+        super.init(level, x, y);
+    }
+
+    @Override
+    public void update() {
+        // Nothing to do ... yet
+    }
+
+    @Override
+    public boolean canPass(long entity) {
+        return true;
+    }
 
 }

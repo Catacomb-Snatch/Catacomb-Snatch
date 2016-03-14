@@ -13,29 +13,29 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
 public class PlayerRenderer extends Renderer {
-	protected Animation[] animations;
-	
-	public PlayerRenderer(Entity entity) {
-		super(entity);
+    protected Animation[] animations;
 
-		animations = new Animation[Direction.count];
-		
-		for(Direction direction : Direction.values()) {
-			int face = direction.getFace();
-			animations[face] = new Animation(1f, new Array<TextureRegion>(Art.lordLard[face]), Animation.PlayMode.LOOP);
-		}
-	}
+    public PlayerRenderer(Entity entity) {
+        super(entity);
 
-	@Override
-	public void render(SpriteBatch graphics) {
-		if(graphics == null) return;
-		
-		Animation ani = animations[entity.getComponent(Rotation.class).getDirection().getFace()];
-		
-		if(ani != null) {
-			Position pos = entity.getComponent(Position.class);
-			graphics.draw(ani.getKeyFrame(Gdx.graphics.getDeltaTime()), pos.getPosition().x, pos.getPosition().y);
-		}
-	}
+        animations = new Animation[Direction.count];
+
+        for (Direction direction : Direction.values()) {
+            int face = direction.getFace();
+            animations[face] = new Animation(1f, new Array<TextureRegion>(Art.lordLard[face]), Animation.PlayMode.LOOP);
+        }
+    }
+
+    @Override
+    public void render(SpriteBatch graphics) {
+        if (graphics == null) return;
+
+        Animation ani = animations[entity.getComponent(Rotation.class).getDirection().getFace()];
+
+        if (ani != null) {
+            Position pos = entity.getComponent(Position.class);
+            graphics.draw(ani.getKeyFrame(Gdx.graphics.getDeltaTime()), pos.getPosition().x, pos.getPosition().y);
+        }
+    }
 
 }

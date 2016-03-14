@@ -8,26 +8,26 @@ import net.catacombsnatch.game.world.tile.StaticTile;
 
 public class WallTile extends StaticTile {
 
-	public WallTile() {
-		super(getColor(Art.tiles_walls[1]));
-	}
-	
-	@Override
-	public void init(Level level, int x, int y) {
-		this.level = level;
-		setRandomTexture(Arrays.copyOfRange(Art.tiles_walls, 1, Art.tiles_walls.length));
-		
-		super.init(level, x, y);
-	}
+    public WallTile() {
+        super(getColor(Art.tiles_walls[1]));
+    }
 
-	@Override
-	public boolean canPass(long entity) {
-		return false;
-	}
+    @Override
+    public void init(Level level, int x, int y) {
+        this.level = level;
+        setRandomTexture(Arrays.copyOfRange(Art.tiles_walls, 1, Art.tiles_walls.length));
 
-	@Override
-	public void update() {
-		// Nothing to do ... yet
-	}
+        super.init(level, x, y);
+    }
+
+    @Override
+    public boolean canPass(long entity) {
+        return false;
+    }
+
+    @Override
+    public void update() {
+        // Nothing to do ... yet
+    }
 
 }

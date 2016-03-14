@@ -2,17 +2,17 @@ package net.catacombsnatch.game.world.level.generator.options;
 
 public class GeneratorStringOption extends GeneratorOption<String> {
 
-	public GeneratorStringOption(String name) {
-		super(name);
-	}
-	
-	public GeneratorStringOption(String name, String defaultValue) {
-		super(name, defaultValue);
-	}
+    public GeneratorStringOption(String name) {
+        super(name);
+    }
 
-	@Override
-	public String parseOption(String option) {
-		return option;
-	}
+    public GeneratorStringOption(String name, String defaultValue) {
+        super(name, defaultValue);
+    }
+
+    @Override
+    public String parseOption(String option) {
+        return option;
+    }
 
 }

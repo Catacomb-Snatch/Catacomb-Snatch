@@ -3,68 +3,68 @@ package net.catacombsnatch.game.entity.components;
 import com.artemis.Component;
 
 public class Health extends Component {
-	protected boolean regenerate;
-	
-	protected int speed;
-	protected int amount;
-	protected int health;
-	protected int maxHealth;
+    protected boolean regenerate;
 
-	public int tick;
+    protected int speed;
+    protected int amount;
+    protected int health;
+    protected int maxHealth;
 
-	public Health(int max) {
-		regenerate = true;
+    public int tick;
 
-		speed = 60;
-		tick = 0;
-		
-		amount = 1;
-		maxHealth = max;
-		health = maxHealth;
-	}
+    public Health(int max) {
+        regenerate = true;
 
-	public boolean canRegenerate() {
-		return regenerate;
-	}
-	
-	public void setRegenerate(boolean regen) {
-		regenerate = regen;
-	}
-	
-	public int getRegenerationSpeed() {
-		return speed;
-	}
+        speed = 60;
+        tick = 0;
 
-	public void setRegenerationSpeed(int ticks) {
-		speed = ticks;
-	}
-	
-	public int getHealAmount() {
-		return amount;
-	}
-	
-	public void setHealAmount(int amnt) {
-		amount = amnt;
-	}
-	
-	public void heal(int hp) {
-		health += hp;
-		
-		if (health > maxHealth) health = maxHealth;
-	}
+        amount = 1;
+        maxHealth = max;
+        health = maxHealth;
+    }
 
-	public void damage(int dmg) {
-		health -= dmg;
-		
-		if (health < 0) health = 0;
-	}
+    public boolean canRegenerate() {
+        return regenerate;
+    }
 
-	public boolean isAlive() {
-		return health > 0;
-	}
+    public void setRegenerate(boolean regen) {
+        regenerate = regen;
+    }
 
-	public float getHealthPercentage() {
-		return (float) (health) / (float) (maxHealth);
-	}
+    public int getRegenerationSpeed() {
+        return speed;
+    }
+
+    public void setRegenerationSpeed(int ticks) {
+        speed = ticks;
+    }
+
+    public int getHealAmount() {
+        return amount;
+    }
+
+    public void setHealAmount(int amnt) {
+        amount = amnt;
+    }
+
+    public void heal(int hp) {
+        health += hp;
+
+        if (health > maxHealth) health = maxHealth;
+    }
+
+    public void damage(int dmg) {
+        health -= dmg;
+
+        if (health < 0) health = 0;
+    }
+
+    public boolean isAlive() {
+        return health > 0;
+    }
+
+    public float getHealthPercentage() {
+        return (float) (health) / (float) (maxHealth);
+    }
 
 }

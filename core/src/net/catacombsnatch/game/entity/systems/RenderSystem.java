@@ -20,74 +20,78 @@ import java.util.Comparator;
 import java.util.List;
 
 public class RenderSystem extends EntityProcessingSystem {
-	@Wire protected ComponentMapper<Render> renderMapper;
-	@Wire protected ComponentMapper<Sprite> sprMapper;
-	@Wire protected ComponentMapper<Animations> aniMapper;
-	@Wire protected ComponentMapper<Position> posMapper;
-	
-	private List<Entity> sortedEntities;
-	protected View view;
-	protected SpriteBatch graphics;
-	
-	@SuppressWarnings("unchecked")
-	public RenderSystem() {
-		super(Aspect.all(Position.class).one(Sprite.class, Animations.class));
-	}
+    @Wire
+    protected ComponentMapper<Render> renderMapper;
+    @Wire
+    protected ComponentMapper<Sprite> sprMapper;
+    @Wire
+    protected ComponentMapper<Animations> aniMapper;
+    @Wire
+    protected ComponentMapper<Position> posMapper;
 
-	@Override
-	protected void initialize() {
-		sortedEntities = new ArrayList<Entity>();
-	}
-	
-	@Override
-	public boolean checkProcessing() {
-		return view != null && graphics != null;
-	}
+    private List<Entity> sortedEntities;
+    protected View view;
+    protected SpriteBatch graphics;
+
+    @SuppressWarnings("unchecked")
+    public RenderSystem() {
+        super(Aspect.all(Position.class).one(Sprite.class, Animations.class));
+    }
+
+    @Override
+    protected void initialize() {
+        sortedEntities = new ArrayList<Entity>();
+    }
+
+    @Override
+    public boolean checkProcessing() {
+        return view != null && graphics != null;
+    }
 
 
-	@Override
-	protected void process(Entity e) {
-		Render render = renderMapper.get(e);
-		Position p = posMapper.get(e);
+    @Override
+    protected void process(Entity e) {
+        Render render = renderMapper.get(e);
+        Position p = posMapper.get(e);
 
-		int face = p.getDirection().getFace();
-		
-		aniMapper.get(e).updateStateTime(Gdx.graphics.getDeltaTime());
+        int face = p.getDirection().getFace();
 
-		Rectangle rect = view.getViewport();
-		if (p.getX() >= rect.x && p.getY() >= rect.y &&
-			p.getX() < rect.width && p.getY() < rect.width) {
-			
-			render.getRenderer().render(graphics);
-		}
-	}
-	
-	@Override
-	public void end() {
-		graphics = null;
-	}
+        aniMapper.get(e).updateStateTime(Gdx.graphics.getDeltaTime());
 
-	@Override
-	public void inserted(Entity e) {
-		sortedEntities.add(e);
+        Rectangle rect = view.getViewport();
+        if (p.getX() >= rect.x && p.getY() >= rect.y &&
+                p.getX() < rect.width && p.getY() < rect.width) {
 
-		Collections.sort(sortedEntities, new Comparator<Entity>() {
-			@Override
-			public int compare(Entity e1, Entity e2) {
-				Animations s1 = aniMapper.get(e1);
-				Animations s2 = aniMapper.get(e2);
-				return s1.layer.compareTo(s2.layer);
-			}
-		});
-	}
+            render.getRenderer().render(graphics);
+        }
+    }
 
-	@Override
-	public void removed(Entity e) {
-		sortedEntities.remove(e);
-	}
+    @Override
+    public void end() {
+        graphics = null;
+    }
 
-	public void setGraphics(SpriteBatch graphics) {
-		this.graphics = graphics;
-	}
+    @Override
+    public void inserted(Entity e) {
+        sortedEntities.add(e);
+
+        Collections.sort(sortedEntities, new Comparator<Entity>() {
+            @Override
+            public int compare(Entity e1, Entity e2) {
+                Animations s1 = aniMapper.get(e1);
+                Animations s2 = aniMapper.get(e2);
+                return s1.layer.compareTo(s2.layer);
+            }
+        });
+    }
+
+    @Override
+    public void removed(Entity e) {
+        sortedEntities.remove(e);
+    }
+
+    public void setGraphics(SpriteBatch graphics) {
+        this.graphics = graphics;
+    }
 
 }
