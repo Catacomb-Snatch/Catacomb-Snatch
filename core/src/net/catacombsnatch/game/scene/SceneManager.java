@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import net.catacombsnatch.game.screen.Screen;
 import net.catacombsnatch.game.screen.Updateable;
 
-import java.util.Iterator;
 import java.util.Stack;
 
 public class SceneManager implements Updateable {
@@ -20,10 +19,10 @@ public class SceneManager implements Updateable {
 
     @Override
     public void update(boolean resize) {
-        Iterator<Scene> openScenes = scenes.iterator();
-
-        while (openScenes.hasNext()) {
-            update(openScenes.next());
+        if (resize) {
+            for (Scene scene : scenes) {
+                update(scene);
+            }
         }
     }
 
