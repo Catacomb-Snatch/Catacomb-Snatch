@@ -27,7 +27,7 @@ import net.catacombsnatch.game.sound.NoSoundPlayer;
 
 import java.io.File;
 import java.net.URLDecoder;
-import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.Calendar;
 
 public class CatacombSnatch extends ApplicationAdapter {
@@ -153,6 +153,8 @@ public class CatacombSnatch extends ApplicationAdapter {
     public void keyPressed(KeyPressedEvent event) {
         if (event.getKey() != Key.SCREENSHOT) return;
 
+        String filename = "screen_" + (DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime())) + ".png";
+
         switch (Gdx.app.getType()) {
             case Desktop:
                 String path = "";
@@ -165,12 +167,12 @@ public class CatacombSnatch extends ApplicationAdapter {
                 }
 
                 File dir = new File(path).getParentFile();
-                File logfile = new File(dir, "screen_" + (new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime())) + ".png");
+                File logfile = new File(dir, filename);
                 Screen.saveScreenshot(Gdx.files.absolute(logfile.getPath()));
                 break;
 
             default:
-                Screen.saveScreenshot(Gdx.files.external("screen_" + (new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime())) + ".png"));
+                Screen.saveScreenshot(Gdx.files.external(filename));
         }
     }
 
