@@ -1,51 +1,64 @@
-# Maven #
-core/target/*
-desktop/target/*
-android/target/
-android/bin/
-android/gen/
+## Java
 
-# Java stuff #
 *.class
-
-# Package Files #
 *.war
 *.ear
+hs_err_pid*
 
-# Eclipse dust #
-*.pydevproject
+## GWT
+war/
+html/war/gwt_bree/
+html/gwt-unitCache/
+.apt_generated/
+html/war/WEB-INF/deploy/
+html/war/WEB-INF/classes/
+.gwt/
+gwt-unitCache/
+www-test/
+.gwt-tmp/
+
+## Android Studio and Intellij and Android in general
+android/libs/armeabi/
+android/libs/armeabi-v7a/
+android/libs/x86/
+android/gen/
+.idea/
+*.ipr
+*.iws
+*.iml
+out/
+com_crashlytics_export_strings.xml
+
+## Eclipse
+.classpath
 .project
 .metadata
-bin/**
-tmp/**
-tmp/**/*
+**/bin/
+tmp/
 *.tmp
 *.bak
 *.swp
 *~.nib
 local.properties
-.classpath
 .settings/
 .loadpath
-
-# External tool builders
 .externalToolBuilders/
-
-# Locally stored "Eclipse launch configurations"
 *.launch
 
-# CDT-specific
-.cproject
+## NetBeans
+**/nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
 
-# PDT-specific
-.buildpath
+## Gradle
 
-# Mac dust
-*.DS_Store
+.gradle
+gradle-app.setting
+build/
 
-# Netbeans
-*/nbactions.xml
-
-# IntelliJ
-.idea
-*.iml
+## OS Specific
+.DS_Store
