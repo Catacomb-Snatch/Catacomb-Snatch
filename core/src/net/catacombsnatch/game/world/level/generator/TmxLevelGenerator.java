@@ -69,8 +69,8 @@ public class TmxLevelGenerator extends LevelGenerator {
 					String type = obj.getProperties().get("type", String.class);
 					
 					if("spawnPoint".equalsIgnoreCase(type)) {
-						float x = obj.getProperties().get("x", Integer.class);
-						float y = obj.getProperties().get("y", Integer.class);
+						float x = obj.getProperties().get("x", Float.class);
+						float y = obj.getProperties().get("y", Float.class);
 
 						spawns.add(new Vector2(x, y).add(0.5f, 0.5f));  
 					}
