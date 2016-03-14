@@ -129,7 +129,7 @@ public class SceneManager implements Updateable {
     }
 
     protected static void update(Scene scene) {
-        scene.getViewport().setScreenSize(Screen.getWidth(), Screen.getHeight());
+        scene.getViewport().update(Screen.getWidth(), Screen.getHeight(), true);
         scene.update(true);
     }
 
