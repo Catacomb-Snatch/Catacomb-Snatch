@@ -19,7 +19,8 @@ public class DesktopLauncher {
 		System.out.println("Starting game in DESKTOP mode!");
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.useGL30 = true;
+		// TODO Re-enable if it got fixed on all systems (currently throws a shader error)
+		// config.useGL30 = true;
 		config.title = "Catacomb Snatch";
 		config.width = GAME_WIDTH;
 		config.height = GAME_HEIGHT;
