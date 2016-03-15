@@ -1,29 +1,43 @@
-language: java
-jdk: oraclejdk7
-env:
-    global:
-    - "ARTIFACTS_AWS_REGION=us-east-1"
-    - "ARTIFACTS_S3_BUCKET=builds.catacombsnatch.net"
-    - secure: "klyzaKQjpBXjR/1RLD9iCFA6f7KL2zUfxzmQRrlrkksMt7hMyzC8PALkxs4u\nfGXUv0+Eq6cTacHHR0szhMb9hTJA8678qLmZxbAlHlqaSs++WpGaU59y5Ap2\n0e7C42JWgtO/p8CNt5NdznnISdYUWI4UyIoDnmyF2oCaNEP1SVs="
-    - secure: "KrVr7iCqHp+DRPT6OP5f4QFYPRprEGJ2sbbz7IPh637TwH7YuOQqWBgATfja\nEAiNq08Q3rc5TSqOHLSrApx7wcfu4BjBe3xcRPwc7qdZm0xYjmhcT0rGhjkR\ni20x/etaRXDNnnlA/2JX9VRK+zxQf9rrSkAuCmW+WNBf1NXH6x8="
-    matrix:
-    - ANDROID_SDKS=sysimg-16            ANDROID_TARGET=android-16  ANDROID_ABI=armeabi-v7a
-    - ANDROID_SDKS=android-17,sysimg-17 ANDROID_TARGET=android-17  ANDROID_ABI=armeabi-v7a
+language: android # can be 'java' if there is no android build target
+android:
+  components:
+  - build-tools-20.0.0
+  - android-20
+jdk: oraclejdk8
+
+# Cache gradle dependencies (should be faster to download them from cache)
+cache:
+  directories:
+  - $HOME/.gradle/wrapper
+  - $HOME/.gradle/caches/modules-2/files-2.1
+
+# Setup environment
 before_install:
-    # Install base Android SDK
-    - sudo apt-get update -qq
-    - if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch; fi
-    - wget http://dl.google.com/android/android-sdk_r21.0.1-linux.tgz
-    - tar xzf android-sdk_r21.0.1-linux.tgz
-    - export ANDROID_HOME=$PWD/android-sdk-linux
-    - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+- chmod +x gradlew
 
-    # Install required Android components.
-    - android update sdk --filter platform-tools,android-16,extra-android-support,$ANDROID_SDKS --no-ui --force
+# Default gradle task will be run automatically on build, no need to define it
 
-#Config found on http://rkistner.github.com/android/2013/02/05/android-builds-on-travis-ci/
-
-before_script:
-    - "gem install travis-artifacts"
-after_test:
-    - "travis-artifacts upload --target-path artifacts/$TRAVIS_BUILD_ID/$TRAVIS_JOB_ID"
+before_deploy:
+# Generate a packaged jar for the desktop-project and rename it to include the tag
+- ./gradlew desktop:dist
+- mv desktop/build/libs/desktop-1.0.jar desktop/build/libs/Catacomb-Snatch-$TRAVIS_TAG.jar
+# Generate a packaged apk for the android-project and rename it (this apk is unsigned/unaligned)
+- ./gradlew android:assembleRelease
+- mv android/build/outputs/apk/android-release-unsigned.apk android/build/outputs/apk/Catacomb-Snatch-$TRAVIS_TAG-unaligned.apk
+# Generate and zip deployment files for the HTML project
+- ./gradlew html:dist
+- zip -r Catacomb-Snatch-$TRAVIS_TAG.zip ./html/build/dist/
+deploy:
+  provider: releases
+  api_key:
+    secure: O0udMd1RmlnP4dPvSyiIkbFMh0HI9UV2vsJSvSo91nSzsFS4U8FHYA9NUtbzqxtqs9JUZ2dbGwvJEjCYw7EzxaI02FbDjUfh6wGqHF3ZHUvjB5YO4V9g5IEURnl8om/JfBWvm4HkEijFBV/pJlsKzoPQUebBxFrLdV6vqcXOZMY=
+  file:
+  # Define which files should be deployed to GitHub
+  - desktop/build/libs/Catacomb-Snatch-$TRAVIS_TAG.jar
+  - android/build/outputs/apk/Catacomb-Snatch-$TRAVIS_TAG-unaligned.apk
+  - Catacomb-Snatch-$TRAVIS_TAG.zip
+  on:
+    tag: true
+    repo: Catacomb-Snatch/Catacomb-Snatch
+    branches: master
+    condition: "$TRAVIS_TAG =~ ^v\d+\.\d+\.\d+.*$" # Only deploy tags that match something like v1.0.0
