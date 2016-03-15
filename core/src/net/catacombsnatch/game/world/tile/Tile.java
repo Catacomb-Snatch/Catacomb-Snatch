@@ -65,8 +65,6 @@ public abstract class Tile implements Tickable {
      *
      * @param graphics The {@link SpriteBatch} to use
      * @param view     The view to render on
-     * @param xOffset  The x offset
-     * @param yOffset  The y offset
      */
     public abstract void render(SpriteBatch graphics, View view);
 
@@ -92,8 +90,7 @@ public abstract class Tile implements Tickable {
      * @return The tile, if found, otherwise null.
      */
     public Tile getRelative(Direction dir) {
-        Vector2 vec = dir.getFor(position.x, position.y);
-        return level.getTile((int) vec.x, (int) vec.y);
+        return level.getTile((int) (position.x + dir.getX()), (int) (position.y + dir.getY()));
     }
 
     public Tile getRelative(int x, int y) {
@@ -121,19 +118,23 @@ public abstract class Tile implements Tickable {
         float t = region.getRegionHeight() * region.getRegionWidth();
         float r = 0, g = 0, b = 0;
 
-        Color c = new Color();
-        for (int y = region.getRegionY(); y < region.getRegionHeight(); y++) {
-            for (int x = region.getRegionX(); x < region.getRegionWidth(); x++) {
-                Color.rgba8888ToColor(c, pixmap.getPixel(x, y));
-
-                r += c.r;
-                g += c.g;
-                b += c.b;
+        for (int y = region.getRegionY(); y < region.getRegionY() + region.getRegionHeight(); y++) {
+            for (int x = region.getRegionX(); x < region.getRegionX() + region.getRegionWidth(); x++) {
+                int p = pixmap.getPixel(x, y);
+                if (((p & 0x000000ff)) / 255f < 0.0625f) {
+                    t--;
+                    continue;
+                }
+                r += ((p & 0xff000000) >>> 24) / 255f;
+                g += ((p & 0x00ff0000) >>> 16) / 255f;
+                b += ((p & 0x0000ff00) >>> 8) / 255f;
             }
         }
 
-        pixmap.dispose();
-        return ((int) ((r / t) * 255) << 24) | ((int) ((g / t) * 255) << 16) | ((int) ((b / t) * 255) << 8) | 255;
+        if (region.getTexture().getTextureData().disposePixmap()) {
+            pixmap.dispose();
+        }
+        return Color.rgba8888(r/t, g/t, b/t, 1f);
     }
 
 }

@@ -12,13 +12,14 @@ public class DebugLevelGenerator extends LevelGenerator {
 
     @Override
     public Level generate(Campaign campaign) {
-        Level level = new Level(campaign, this, TileRegistry.getTypes().size(), 1);
+        Level level = new Level(campaign, this, TileRegistry.getTypes().size, TileRegistry.getTypes().size);
 
         int i = 0;
         for (String type : TileRegistry.getTypes()) {
             Tile tile = TileRegistry.createFor(type, level, i, 0);
             if (tile != null) level.getTiles()[i] = tile;
-
+            tile = TileRegistry.createFor(type, level, 0, i);
+            if(tile != null) level.getTiles()[i*level.getWidth()] = tile;
             i++;
         }
 

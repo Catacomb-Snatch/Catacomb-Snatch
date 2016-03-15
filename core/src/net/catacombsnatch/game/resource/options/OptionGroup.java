@@ -1,9 +1,7 @@
 package net.catacombsnatch.game.resource.options;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 
 /**
  * Represents an option section
@@ -14,7 +12,7 @@ public class OptionGroup {
     protected OptionGroup parent;
     protected String name;
 
-    protected Map<String, Object> map;
+    protected ObjectMap<String, Object> map;
 
 
     protected OptionGroup(Options options, String name) {
@@ -25,12 +23,12 @@ public class OptionGroup {
         this(options, name, parent, null);
     }
 
-    protected OptionGroup(Options options, String name, OptionGroup parent, Map<String, Object> defaults) {
+    protected OptionGroup(Options options, String name, OptionGroup parent, ObjectMap<String, Object> defaults) {
         this.options = options;
         this.name = name;
         this.parent = parent;
 
-        map = defaults == null ? new HashMap<String, Object>() : defaults;
+        map = defaults == null ? new ObjectMap<String, Object>() : defaults;
     }
 
 	
@@ -49,10 +47,10 @@ public class OptionGroup {
     }
 
     public OptionGroup createGroup(String name) {
-        return createGroup(name, new HashMap<String, Object>());
+        return createGroup(name, new ObjectMap<String, Object>());
     }
 
-    public OptionGroup createGroup(String name, Map<String, Object> defaults) {
+    public OptionGroup createGroup(String name, ObjectMap<String, Object> defaults) {
         OptionGroup group = new OptionGroup(options, name, this, defaults);
         group.map.put(name, group);
 
@@ -120,17 +118,21 @@ public class OptionGroup {
 	
 	/* ------------ Value / Key related functions ------------ */
 
-    public Set<String> getKeys() {
+    public Array<String> getKeys() {
         return getKeys(true);
     }
 
-    public Set<String> getKeys(boolean deep) {
-        Set<String> keys = map.keySet();
+    public Array<String> getKeys(boolean deep) {
+        Array<String> keys = new Array<String>();
 
-        if (deep) for (Entry<String, Object> e : map.entrySet()) {
-            if (!(e.getValue() instanceof OptionGroup)) continue;
+        for (String key : map.keys()) {
+            keys.add(key);
+        }
 
-            keys.addAll(((OptionGroup) e.getValue()).getKeys(true));
+        if(deep) for(ObjectMap.Entry<String, Object> e: map.entries()) {
+            if(!(e.value instanceof OptionGroup)) continue;
+
+            keys.addAll(((OptionGroup) e.value).getKeys(true));
         }
 
         return keys;
@@ -138,7 +140,7 @@ public class OptionGroup {
 
     public boolean isSet(String key) {
         KeyPair pair = getPair(key);
-        return pair != null ? pair.group.map.containsKey(pair.key) : false;
+        return pair != null && pair.group.map.containsKey(pair.key);
     }
 
     public Object get(String key) {

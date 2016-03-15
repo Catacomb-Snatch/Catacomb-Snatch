@@ -1,14 +1,11 @@
 package net.catacombsnatch.game.sound;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.ObjectMap;
 
 public class GdxSoundPlayer implements ISoundPlayer {
     public final static String TAG = "[SoundPlayer]";
@@ -26,10 +23,10 @@ public class GdxSoundPlayer implements ISoundPlayer {
     private long timeBetweenSongs = 10; // in seconds
     private long songEnded = 0;
 
-    private Map<String, Music> musicMap;
-    private Map<String, Sound> soundsMap;
+    private ObjectMap<String, Music> musicMap;
+    private ObjectMap<String, Sound> soundsMap;
 
-    private List<Music> backgroundMusicList;
+    private Array<Music> backgroundMusicList;
     private int backgroundPlaying;
     private boolean backgroundIsPlaying = false;
     private boolean TitleIsPlaying = false;
@@ -38,9 +35,9 @@ public class GdxSoundPlayer implements ISoundPlayer {
 
     public GdxSoundPlayer() {
         // Initialize all lists
-        soundsMap = new HashMap<String, Sound>();
-        musicMap = new HashMap<String, Music>();
-        backgroundMusicList = new ArrayList<Music>();
+        soundsMap = new ObjectMap<String, Sound>();
+        musicMap = new ObjectMap<String, Music>();
+        backgroundMusicList = new Array<Music>();
 
         // Load music
         loadMusic(Sounds.TITLE_THEME);
@@ -144,7 +141,7 @@ public class GdxSoundPlayer implements ISoundPlayer {
         stopTitleMusic();
         stopEndMusic();
 
-        if (musicVolume > 0.0f && backgroundMusicList.size() > 0 && !paused) {
+        if (musicVolume > 0.0f && backgroundMusicList.size > 0 && !paused) {
             if (backgroundPlaying < 0) backgroundPlaying = 0;
 
             Music music = backgroundMusicList.get(backgroundPlaying);
@@ -152,7 +149,7 @@ public class GdxSoundPlayer implements ISoundPlayer {
             if (!music.isPlaying()) {
                 if (songEnded == 0) {
                     songEnded = System.currentTimeMillis();
-                    backgroundPlaying = (backgroundPlaying + 1) >= backgroundMusicList.size() ? 0 : backgroundPlaying + 1;
+                    backgroundPlaying = (backgroundPlaying + 1) >= backgroundMusicList.size ? 0 : backgroundPlaying + 1;
 
                     music = backgroundMusicList.get(backgroundPlaying);
                 }
@@ -278,7 +275,7 @@ public class GdxSoundPlayer implements ISoundPlayer {
         }
 
         // unloading sounds
-        if (soundsMap.size() > 0) {
+        if (soundsMap.size > 0) {
             for (Sound s : soundsMap.values()) {
                 s.stop();
                 s.dispose();

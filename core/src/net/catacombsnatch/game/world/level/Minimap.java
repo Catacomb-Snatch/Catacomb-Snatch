@@ -1,8 +1,7 @@
 package net.catacombsnatch.game.world.level;
 
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import net.catacombsnatch.game.resource.Art;
 import net.catacombsnatch.game.scene.Scene;
@@ -15,8 +14,7 @@ public class Minimap implements Renderable {
     protected View view;
     protected Sprite sprite;
 
-    protected Texture map;
-    protected Pixmap pm;
+    protected static TextureRegion pixel;
 
     public Minimap(Level level, View view) {
         this.level = level;
@@ -24,10 +22,12 @@ public class Minimap implements Renderable {
 
         sprite = new Sprite(Art.skin.getAtlas().findRegion("minimap-frame"));
 
-        map = new Texture(new Pixmap(40, 40, Pixmap.Format.RGBA8888), true);
+        if (pixel == null) {
+            pixel = Art.skin.getAtlas().findRegion("white");
+        }
     }
 
-    Rectangle vp = new Rectangle();
+    protected Rectangle vp = new Rectangle();
 
     @Override
     public void render(Scene scene) {
@@ -37,25 +37,29 @@ public class Minimap implements Renderable {
         vp.x += view.offset.x;
         vp.y += view.offset.y;
 
-        vp.x -= Screen.getWidth() / 2;
-        vp.y += Screen.getHeight() / 2;
-
-        pm = new Pixmap(40, 40, Pixmap.Format.RGBA8888);
-
         for (Tile tile : level.getTiles()) {
             if (tile == null) continue;
 
-            pm.drawPixel((int) tile.getPosition().x - (int) (vp.x / Tile.WIDTH), (int) tile.getPosition().y - (int) (vp.height / Tile.HEIGHT) - (int) (vp.y / Tile.HEIGHT),
-                    tile.getMinimapColor());
+            float px = sprite.getX() + 7f;
+            px += 2 * (int)((tile.getPosition().x - (vp.x / Tile.WIDTH) + (vp.width / 2f / Tile.WIDTH)));
+            float py = sprite.getY() + 7f;
+            py += 2 * (int)((-tile.getPosition().y + (vp.height / Tile.HEIGHT) - (vp.y / Tile.HEIGHT) - (vp.height / 2f / Tile.HEIGHT)));
+
+            if (px >= sprite.getX() + 7f && py >= sprite.getY() + 7f &&
+                    px < sprite.getX() + 82f && py < sprite.getY() + 82f) {
+                int color = tile.getMinimapColor();
+                scene.getSpriteBatch().setColor(
+                        ((color & 0xff000000) >>> 24) / 255f,
+                        ((color & 0x00ff0000) >>> 16) / 255f,
+                        ((color & 0x0000ff00) >>> 8) / 255f,
+                        1f);
+                scene.getSpriteBatch().draw(pixel, px, py, 2f, 2f);
+            }
         }
 
         // TODO add entity icons
 
-        map.draw(pm, 0, 0);
-
-        pm.dispose();
-
-        scene.getBatch().draw(map, sprite.getX() + 6, sprite.getY() + 5 + 80, 80, -80);
+        scene.getSpriteBatch().setColor(1f, 1f, 1f, 1f);
     }
 
     public void update(boolean resize) {

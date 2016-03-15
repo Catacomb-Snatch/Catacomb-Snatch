@@ -9,6 +9,7 @@ import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.controllers.mappings.Ouya;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.ObjectMap;
 import net.catacombsnatch.game.event.EventManager;
 import net.catacombsnatch.game.event.input.events.ControllerConnectEvent;
 import net.catacombsnatch.game.event.input.events.ControllerDisconnectEvent;
@@ -18,10 +19,6 @@ import net.catacombsnatch.game.event.input.events.KeyTypeEvent;
 import net.catacombsnatch.game.scene.Scene;
 import net.catacombsnatch.game.scene.SceneManager;
 
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-
 
 public class InputManager implements InputProcessor, ControllerListener {
     public final static String TAG = "[InputManager]";
@@ -29,14 +26,14 @@ public class InputManager implements InputProcessor, ControllerListener {
     public static final float OUYA_STICK_DEADZONE = 0.25F;
 
     protected static KeyMap keyboard;
-    protected static Map<Controller, KeyMap> controllers;
-    protected static Map<Key, Boolean> pressed;
+    protected static ObjectMap<Controller, KeyMap> controllers;
+    protected static ObjectMap<Key, Boolean> pressed;
     private static Key lastKey = Key.UNKNOWN;
 
     static {
         keyboard = KeyMap.KEYBOARD;
-        controllers = new HashMap<Controller, KeyMap>();
-        pressed = new EnumMap<Key, Boolean>(Key.class);
+        controllers = new ObjectMap<Controller, KeyMap>();
+        pressed = new ObjectMap<Key, Boolean>();
     }
 
     public static boolean isKeyboardEnabled() {

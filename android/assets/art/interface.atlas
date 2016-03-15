@@ -113,3 +113,10 @@ player-bar
   orig: 93, 60
   offset: 0, 0
   index: 1
+white
+  rotate: false
+  xy: 0, 127
+  size: 1, 1
+  orig: 0, 127
+  offset: 0, 0
+  index: 0

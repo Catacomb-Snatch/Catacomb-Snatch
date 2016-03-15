@@ -1,18 +1,17 @@
 package net.catacombsnatch.game.scene.scenes;
 
 import net.catacombsnatch.game.CatacombSnatch;
+import net.catacombsnatch.game.resource.Art;
 import net.catacombsnatch.game.resource.Language;
 import net.catacombsnatch.game.scene.MenuScene;
 import net.catacombsnatch.game.scene.ReusableAction;
 import net.catacombsnatch.game.scene.SceneManager;
-import net.catacombsnatch.game.screen.Screen;
-
-import com.badlogic.gdx.graphics.Color;
 
 public class PauseScreen extends MenuScene {
 
     public PauseScreen() {
-        super(Screen.createBlank(new Color(0f, 0f, 0f, 0.45f)));
+        super(Art.skin.getAtlas().findRegion("white"));
+        getBackgroundColor().set(0f, 0f, 0f, 0.45f);
 
         addTextButton(Language.get("scene.pause.title"), 0, 0).addAction(new ReusableAction() {
             @Override

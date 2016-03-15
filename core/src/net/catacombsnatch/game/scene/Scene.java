@@ -1,13 +1,9 @@
 package net.catacombsnatch.game.scene;
 
-import net.catacombsnatch.game.event.EventManager;
-import net.catacombsnatch.game.resource.Art;
-import net.catacombsnatch.game.screen.Screen;
-import net.catacombsnatch.game.screen.Tickable;
-import net.catacombsnatch.game.screen.Updateable;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -17,17 +13,28 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import net.catacombsnatch.game.event.EventManager;
+import net.catacombsnatch.game.resource.Art;
+import net.catacombsnatch.game.screen.Screen;
+import net.catacombsnatch.game.screen.Tickable;
+import net.catacombsnatch.game.screen.Updateable;
 
 public class Scene extends Stage implements Updateable, Tickable {
     /**
      * The background image
      */
-    protected Texture background;
+    protected TextureRegion background;
+    protected Color backgroundColor = new Color(1f, 1f, 1f, 1f);
 
     private boolean exit = false;
     private boolean drawBackground = true;
     private final Rectangle currentActorRect = new Rectangle();
     private Vector2 mousePos = new Vector2();
+
+    public Scene() {
+        super(new ScreenViewport());
+    }
 
     /**
      * Called whenever this scene is getting created (or opened again).
@@ -68,6 +75,7 @@ public class Scene extends Stage implements Updateable, Tickable {
         // Draw background
         if (drawBackground && background != null) {
             getBatch().begin();
+            getBatch().setColor(backgroundColor);
             getBatch().draw(background, 0, 0, Screen.getWidth(), Screen.getHeight());
             getBatch().end();
         }
@@ -102,8 +110,17 @@ public class Scene extends Stage implements Updateable, Tickable {
      *
      * @param background The background texture to set
      */
-    public void setBackground(Texture background) {
+    public void setBackground(TextureRegion background) {
         this.background = background;
+    }
+
+    /**
+     * Returns the background color as mutable object
+     *
+     * @return Modifiable color instance
+     */
+    public Color getBackgroundColor() {
+        return backgroundColor;
     }
 
     public boolean shouldDrawBackground() {
@@ -150,4 +167,7 @@ public class Scene extends Stage implements Updateable, Tickable {
         return null;
     }
 
+    public SpriteBatch getSpriteBatch() {
+        return (SpriteBatch) getBatch();
+    }
 }

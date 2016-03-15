@@ -1,19 +1,17 @@
 package net.catacombsnatch.game.world;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-
+import com.badlogic.gdx.utils.Array;
 import net.catacombsnatch.game.player.Player;
 import net.catacombsnatch.game.screen.Tickable;
 import net.catacombsnatch.game.util.Finishable;
 import net.catacombsnatch.game.world.level.Level;
 
+import java.util.Random;
+
 public class Campaign implements Tickable, Finishable {
 
-    protected List<Level> levels;
-    protected List<Player> players;
+    protected Array<Level> levels;
+    protected Array<Player> players;
 
     protected final Difficulty difficulty;
     protected final MapRotation rotation;
@@ -23,8 +21,8 @@ public class Campaign implements Tickable, Finishable {
     protected boolean hasFinished;
 
     public Campaign(Difficulty diff, MapRotation rot) {
-        levels = new LinkedList<Level>();
-        players = new ArrayList<Player>();
+        levels = new Array<Level>();
+        players = new Array<Player>();
 
         difficulty = diff;
         rotation = rot;
@@ -70,7 +68,7 @@ public class Campaign implements Tickable, Finishable {
      *
      * @return The list of levels in this world
      */
-    public List<Level> getLevels() {
+    public Array<Level> getLevels() {
         return levels;
     }
 
@@ -79,7 +77,7 @@ public class Campaign implements Tickable, Finishable {
      *
      * @return The list of players in this world
      */
-    public List<Player> getPlayers() {
+    public Array<Player> getPlayers() {
         return players;
     }
 
@@ -102,7 +100,7 @@ public class Campaign implements Tickable, Finishable {
     }
 
     /**
-     * Defines the next level returned by {@link #getNext(List)}.
+     * Defines the next level returned by {@link #getNext(Array)}.
      * <ul>
      * <li><code>FIRST</code> only plays the first map (best used in campaigns with only one map)</li>
      * <li><code>ONCE</code> same as linear (see below) but will not jump back to the beginning (no endless mode)</li>
@@ -113,8 +111,8 @@ public class Campaign implements Tickable, Finishable {
     public abstract static class MapRotation {
         public final static class FIRST extends MapRotation {
             @Override
-            public Level getNext(List<Level> levels) {
-                return levels.size() == 0 ? null : levels.get(0);
+            public Level getNext(Array<Level> levels) {
+                return levels.size == 0 ? null : levels.get(0);
             }
         }
 
@@ -122,8 +120,8 @@ public class Campaign implements Tickable, Finishable {
             protected int next = 0;
 
             @Override
-            public Level getNext(List<Level> levels) {
-                return next < levels.size() ? levels.get(next++) : null;
+            public Level getNext(Array<Level> levels) {
+                return next < levels.size ? levels.get(next++) : null;
             }
         }
 
@@ -131,8 +129,8 @@ public class Campaign implements Tickable, Finishable {
             protected int next = 0;
 
             @Override
-            public Level getNext(List<Level> levels) {
-                if (next >= levels.size()) next = 0;
+            public Level getNext(Array<Level> levels) {
+                if (next >= levels.size) next = 0;
                 return levels.get(next);
             }
         }
@@ -141,8 +139,8 @@ public class Campaign implements Tickable, Finishable {
             protected Random r = new Random();
 
             @Override
-            public Level getNext(List<Level> levels) {
-                return levels.get(r.nextInt(levels.size()));
+            public Level getNext(Array<Level> levels) {
+                return levels.get(r.nextInt(levels.size));
             }
         }
 
@@ -153,6 +151,6 @@ public class Campaign implements Tickable, Finishable {
          * @param levels The list of levels to choose from
          * @return The next level, otherwise null.
          */
-        public abstract Level getNext(List<Level> levels);
+        public abstract Level getNext(Array<Level> levels);
     }
 }

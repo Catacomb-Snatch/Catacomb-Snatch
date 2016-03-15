@@ -1,11 +1,10 @@
 package net.catacombsnatch.game.resource.options;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 
 public abstract class Options extends OptionGroup {
-    protected List<String> changedList;
+    protected Array<String> changedList;
 
     public Options(String name) {
         this(name, null);
@@ -15,15 +14,15 @@ public abstract class Options extends OptionGroup {
         this(name, parent, null);
     }
 
-    public Options(String name, OptionGroup parent, Map<String, Object> defaults) {
+    public Options(String name, OptionGroup parent, ObjectMap<String, Object> defaults) {
         super(null, name, parent, defaults);
 
         options = this;
     }
 
     protected void addChange(String key) {
-        if (changedList == null) changedList = new ArrayList<String>();
-        if (!changedList.contains(key)) changedList.add(key);
+        if(changedList == null) changedList = new Array<String>();
+        if(!changedList.contains(key, false)) changedList.add(key);
     }
 
     public abstract void save();

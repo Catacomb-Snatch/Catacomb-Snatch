@@ -1,7 +1,5 @@
 package net.catacombsnatch.game.world;
 
-import net.catacombsnatch.game.world.tile.Tile;
-
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -77,7 +75,7 @@ public enum Direction {
     }
 
     /**
-     * @return A mask used in {@link Tile}s for drawing edges and corners.
+     * @return A mask used in {@link net.catacombsnatch.game.world.tile.Tile}s for drawing edges and corners.
      */
     public byte getMask() {
         return isEdge() ? (byte) (weight >> 3) : weight;

@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.PixmapIO;
-import com.badlogic.gdx.graphics.Texture;
 
 import java.nio.ByteBuffer;
 
@@ -19,8 +18,8 @@ public class Screen {
     }
 
     public static void resize(int width, int height) {
-        /*if(width > 800 && height > 600) SCALE = 2;
-        else SCALE = 1;*/
+        if(width > 800 && height > 600) SCALE = 2;
+        else SCALE = 1;
     }
 
     /**
@@ -102,22 +101,8 @@ public class Screen {
         return pixmap;
     }
 
-    /**
-     * Creates a new raw 1x1 texture for background images.
-     *
-     * @param color The color used to fill the one and only pixel
-     * @return The newly generated Texture
-     */
-    public static Texture createBlank(Color color) {
-        Pixmap pm = new Pixmap(1, 1, Format.RGBA8888);
-
-        pm.setColor(color.r, color.g, color.b, color.a);
-        pm.drawPixel(0, 0);
-
-        Texture tex = new Texture(pm);
-        pm.dispose();
-
-        return tex;
+    public static int getScale() {
+        return SCALE;
     }
 
 }

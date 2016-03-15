@@ -1,18 +1,16 @@
 package net.catacombsnatch.game.scene;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Array;
 import net.catacombsnatch.game.event.EventHandler;
 import net.catacombsnatch.game.event.input.events.KeyReleaseEvent;
 import net.catacombsnatch.game.resource.Art;
 import net.catacombsnatch.game.scene.scenes.TitleScreen;
 import net.catacombsnatch.game.screen.Screen;
 import net.catacombsnatch.game.world.Direction;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.utils.Array;
 
 public abstract class MenuScene extends Scene {
     private final Animation ani;
@@ -21,7 +19,7 @@ public abstract class MenuScene extends Scene {
 
     protected int index = 0;
 
-    public MenuScene(Texture bg) {
+    public MenuScene(TextureRegion bg) {
         super();
 
         // Set background texture
@@ -74,7 +72,8 @@ public abstract class MenuScene extends Scene {
                 break;
 
             case BACK:
-                if (SceneManager.getCurrent().getClass() != TitleScreen.class) {
+                //Typecast to Object due to an unsolved bug in IntelliJ
+                if (((Object) SceneManager.getCurrent()).getClass() != TitleScreen.class){
                     SceneManager.exit();
                 }
 

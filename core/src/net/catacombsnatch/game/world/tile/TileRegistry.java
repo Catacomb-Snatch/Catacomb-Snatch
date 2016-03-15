@@ -1,23 +1,19 @@
 package net.catacombsnatch.game.world.tile;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 import net.catacombsnatch.game.world.level.Level;
 import net.catacombsnatch.game.world.tile.tiles.DestroyableWallTile;
 import net.catacombsnatch.game.world.tile.tiles.FloorTile;
 import net.catacombsnatch.game.world.tile.tiles.SandTile;
 import net.catacombsnatch.game.world.tile.tiles.WallTile;
 
-import com.badlogic.gdx.Gdx;
-
 public class TileRegistry {
-    protected final static Map<String, Class<? extends Tile>> registry;
+    protected final static ObjectMap<String, Class<? extends Tile>> registry;
 
     static {
-        registry = new HashMap<String, Class<? extends Tile>>();
+        registry = new ObjectMap<String, Class<? extends Tile>>();
 
         // Register default tiles
         register(FloorTile.class, "floor");
@@ -31,8 +27,12 @@ public class TileRegistry {
         registry.put(as, tile);
     }
 
-    public static Collection<String> getTypes() {
-        return Collections.unmodifiableCollection(registry.keySet());
+    public static Array<String> getTypes() {
+        Array<String> types = new Array<String>();
+        for (String type : registry.keys()) {
+            types.add(type);
+        }
+        return types;
     }
 
     @SuppressWarnings("unchecked")

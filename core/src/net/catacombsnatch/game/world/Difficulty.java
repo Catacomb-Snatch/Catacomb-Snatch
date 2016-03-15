@@ -1,8 +1,6 @@
 package net.catacombsnatch.game.world;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.badlogic.gdx.utils.ObjectMap;
 import net.catacombsnatch.game.resource.Language;
 
 public class Difficulty {
@@ -11,10 +9,10 @@ public class Difficulty {
     public final static Difficulty HARD = new Difficulty("difficulty.hard", 3, 3, .5f, 1.5f, true, 25, 12, 15);
     public final static Difficulty NIGHTMARE = new Difficulty("difficulty.nightmare", 6, 5, .25f, 2.5f, true, 15, 100000, 10);
 
-    private final static Map<String, Difficulty> registry;
+    private final static ObjectMap<String, Difficulty> registry;
 
     static {
-        registry = new HashMap<String, Difficulty>();
+        registry = new ObjectMap<String, Difficulty>();
 
         EASY.register("easy");
         NORMAL.register("normal");
@@ -99,7 +97,7 @@ public class Difficulty {
     /**
      * Returns the calculated shop costs in this {@link Difficulty}.
      *
-     * @param baseFrequency The base costs
+     * @param baseCosts The base costs
      * @return The calculated shop costs
      */
     public float getShopCosts(float baseCosts) {
@@ -145,7 +143,7 @@ public class Difficulty {
     /**
      * Look up a Difficulty by its registered name
      *
-     * @param ordinal The name to look up for
+     * @param name The name to look up for
      * @return The found {@link Difficulty}
      */
     public static Difficulty getByName(String name) {

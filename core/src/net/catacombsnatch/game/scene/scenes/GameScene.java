@@ -1,6 +1,7 @@
 package net.catacombsnatch.game.scene.scenes;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Array;
 import net.catacombsnatch.game.CatacombSnatch;
 import net.catacombsnatch.game.entity.components.Position;
 import net.catacombsnatch.game.entity.components.Velocity;
@@ -14,14 +15,10 @@ import net.catacombsnatch.game.scene.Scene;
 import net.catacombsnatch.game.scene.SceneManager;
 import net.catacombsnatch.game.screen.Screen;
 import net.catacombsnatch.game.world.Campaign;
-import net.catacombsnatch.game.world.Campaign.MapRotation;
 import net.catacombsnatch.game.world.Difficulty;
 import net.catacombsnatch.game.world.level.Level;
 import net.catacombsnatch.game.world.level.View;
 import net.catacombsnatch.game.world.level.generator.LevelGenerator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GameScene extends Scene {
     protected boolean paused = false;
@@ -31,12 +28,12 @@ public class GameScene extends Scene {
      */
     protected Campaign campaign;
 
-    protected List<View> views;
+    protected Array<View> views;
 
     public GameScene(LevelGenerator generator) {  // TODO complete
         super();
 
-        campaign = new Campaign(Difficulty.EASY, new MapRotation.FIRST());
+        campaign = new Campaign(Difficulty.EASY, new Campaign.MapRotation.FIRST());
 
         for (Player player : CatacombSnatch.getLocalPlayers()) {
             if (player == null) continue;
@@ -77,7 +74,8 @@ public class GameScene extends Scene {
             // Prepare views for rendering and level initialization
             if (views == null) {
                 Level level = campaign.getCurrentLevel();
-                views = new ArrayList<View>();
+                level.initialize(); // Initialize renderer(s) and Artemis world
+                views = new Array<View>();
 
                 for (Player player : campaign.getPlayers()) {
                     if (!(player instanceof LocalPlayer)) continue;
@@ -91,8 +89,6 @@ public class GameScene extends Scene {
                 }
 
                 update(true); // Update viewports
-
-                level.initialize(); // Initialize renderer(s)
             }
 
             // Player movement
@@ -145,12 +141,12 @@ public class GameScene extends Scene {
 			
 			View view = views.get((int) p);
 			
-			view.setViewport(new Rectangle(n, quarters ? h / 2 : 0, m, quarters ? h / 2 : h ));
+			view.setViewport(n, quarters ? h / 2 : 0, m, quarters ? h / 2 : h );
 			view.update(resize);
 		}*/
 
         for (View view : views) {
-            view.setViewport(new Rectangle(0, 0, w, h));
+            view.setViewport(0, 0, w, h);
             view.update(resize);
         }
     }

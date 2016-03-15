@@ -63,15 +63,19 @@ public abstract class StaticTile extends Tile {
 
     @Override
     public boolean shouldRender(View view) {
-        return view.getViewportOffset().overlaps(new Rectangle(
-                getBounds().x,
-                getBounds().y - region.getRegionHeight(),
-                getBounds().width,
-                region.getRegionHeight() * 2));
+        float x = getBounds().x;
+        float y = getBounds().y - region.getRegionHeight();
+        float w = getBounds().width;
+        float h = region.getRegionHeight()*2;
+        float rx = view.getOffset().x + view.getViewport().x;
+        float ry = -(view.getOffset().y - view.getViewport().y);
+        float rw = view.getViewport().width;
+        float rh = view.getViewport().height;
+        return x <= rx + rw && x + w >= rx && y <= ry + rh && y + h >= ry;
     }
 
     protected void renderTile(SpriteBatch graphics, View view, TextureRegion tile) {
-        graphics.draw(tile, bb.x - view.getOffset().x, view.getViewport().height - (bb.y + view.getOffset().y));
+        graphics.draw(tile, bb.x - view.getViewportOffset().x, -bb.y - view.getViewportOffset().y);
     }
 
 }

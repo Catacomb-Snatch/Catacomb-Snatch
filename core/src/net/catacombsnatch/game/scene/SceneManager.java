@@ -1,6 +1,7 @@
 package net.catacombsnatch.game.scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import net.catacombsnatch.game.screen.Screen;
 import net.catacombsnatch.game.screen.Updateable;
 
@@ -129,7 +130,10 @@ public class SceneManager implements Updateable {
     }
 
     protected static void update(Scene scene) {
-        scene.getViewport().update(Screen.getWidth(), Screen.getHeight(), true);
+        if (scene.getViewport() instanceof ScreenViewport) {
+            ((ScreenViewport)scene.getViewport()).setUnitsPerPixel(1f/Screen.getScale());
+        }
+        scene.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
         scene.update(true);
     }
 

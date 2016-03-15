@@ -1,21 +1,16 @@
 package net.catacombsnatch.game.world.level.generator;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import net.catacombsnatch.game.world.Campaign;
 import net.catacombsnatch.game.world.level.Level;
 import net.catacombsnatch.game.world.level.generator.options.GeneratorOption;
 
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
+import java.util.Random;
 
 public abstract class LevelGenerator {
     protected Random random;
-    protected List<GeneratorOption<?>> options;
+    protected Array<GeneratorOption<?>> options;
 
 
     public LevelGenerator() {
@@ -25,11 +20,11 @@ public abstract class LevelGenerator {
     public LevelGenerator(Random r) {
         random = r;
 
-        options = new ArrayList<GeneratorOption<?>>();
+        options = new Array<GeneratorOption<?>>();
     }
 
     /**
-     * Generates a new Level for the given {@link Campaign}
+     * Generates a new Level for the given {@link net.catacombsnatch.game.world.Campaign}
      *
      * @param campaign The campaign triggered this generation
      * @return The newly generated level
@@ -50,14 +45,14 @@ public abstract class LevelGenerator {
         return random;
     }
 
-    public Collection<String> getOptions() {
-        List<String> keys = new ArrayList<String>();
+    public Array<String> getOptions() {
+        Array<String> keys = new Array<String>();
 
         for (GeneratorOption<?> option : options) {
             keys.add(option.getName());
         }
 
-        return Collections.unmodifiableCollection(keys);
+        return keys;
     }
 
     public GeneratorOption<?> getOption(String name) {

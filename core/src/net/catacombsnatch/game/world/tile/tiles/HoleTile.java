@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Rectangle;
 public class HoleTile extends StaticTile {
 
     public HoleTile() {
-        super(0xFF000000); // Black
+        super(0x000000FF); // Black
     }
 
     @Override
@@ -54,10 +54,9 @@ public class HoleTile extends StaticTile {
             northtile = tmptile;
         }
         if (northtile != null && !(northtile instanceof HoleTile)) {
-            Rectangle origbb = new Rectangle(northtile.getBounds());
             northtile.getBounds().y += HEIGHT;
             northtile.render(graphics, view);
-            northtile.getBounds().set(origbb);
+            northtile.getBounds().y-=HEIGHT;
         }
         renderTile(graphics, view, region);
     }

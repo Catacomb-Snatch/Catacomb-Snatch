@@ -12,8 +12,8 @@ public class Art {
 
     public static Skin skin;
 
-    public static Texture pyramid;
-    public static Texture logo;
+    public static TextureRegion pyramid;
+    public static TextureRegion logo;
 
     public static TextureRegion[][] lordLard;
     public static TextureRegion[] tiles_floor, tiles_sand, tiles_walls, tiles_hole, tiles_shadows;
@@ -29,7 +29,7 @@ public class Art {
             skin = new Skin(Gdx.files.internal("art/interface.skin"), new TextureAtlas("art/interface.atlas"));
 
             // Load backgrounds
-            pyramid = load("screen/pyramid.png");
+            pyramid = new TextureRegion(load("screen/pyramid.png"));
 
             // Load characters
             lordLard = cut("player/lord_lard.png", 32, 32);
@@ -42,7 +42,7 @@ public class Art {
             tiles_hole = cut("tiles/hole.png", 32, 32)[0];
 
             // Load extras
-            logo = load("logo.png");
+            logo = new TextureRegion(load("logo.png"));
 
             return true;
         } catch (Exception e) {
@@ -65,8 +65,8 @@ public class Art {
         dispose(tiles_shadows);
 
         skin.dispose();
-        pyramid.dispose();
-        logo.dispose();
+        pyramid.getTexture().dispose();
+        logo.getTexture().dispose();
     }
 
     private static Texture load(String path) {

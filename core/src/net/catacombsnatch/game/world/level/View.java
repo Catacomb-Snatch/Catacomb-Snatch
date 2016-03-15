@@ -46,8 +46,8 @@ public class View implements Renderable, Updateable {
             // Draw tiles
             rendered = 0; // Reset counter
 
-            for (float y = (viewport.y - offset.y) / Tile.HEIGHT - 4; y <= (viewport.height - offset.y) / Tile.HEIGHT + 2; y++) {
-                for (float x = (viewport.x + offset.x) / Tile.WIDTH - 2; x < (viewport.width + offset.x) / Tile.WIDTH + 4; x++) {
+            for(float y = (viewport.y - viewport.height - offset.y) / Tile.HEIGHT - 2; y <= -(viewport.y + offset.y) / Tile.HEIGHT + 4; y++) {
+                for(float x = (viewport.x + offset.x) / Tile.WIDTH - 2; x < (viewport.x + viewport.width + offset.x) / Tile.WIDTH + 2; x++) {
                     Tile tile = level.getTile((int) x, (int) y);
 
                     if (tile != null && tile.shouldRender(this)) {
@@ -72,6 +72,9 @@ public class View implements Renderable, Updateable {
     public void update(boolean resize) {
         if (viewport == null || !resize) return;
 
+        viewport.x -= viewport.width / 2f;
+        viewport.y -= viewport.height / 2f;
+
         panel.setPosition((viewport.getWidth() - panel.getWidth()) / 2, viewport.getHeight() - panel.getHeight());
 
         minimap.update(resize);
@@ -88,6 +91,14 @@ public class View implements Renderable, Updateable {
 
     public void setViewport(Rectangle view) {
         viewport = view;
+    }
+
+    public void setViewport(float x, float y, float w, float h) {
+        if (viewport == null) {
+            viewport = new Rectangle(x, y, w, h);
+        } else {
+            viewport.set(x, y, w, h);
+        }
     }
 
     /**
@@ -111,11 +122,12 @@ public class View implements Renderable, Updateable {
         return viewport;
     }
 
+    protected Vector2 viewportOffset = new Vector2();
     /**
      * @return The current view port + offset.
      */
-    public Rectangle getViewportOffset() {
-        return new Rectangle(viewport.x + offset.x, viewport.y - offset.y, viewport.width, viewport.height);
+    public Vector2 getViewportOffset() {
+        return viewportOffset.set(offset).add(viewport.x, viewport.y);
     }
 
 }
