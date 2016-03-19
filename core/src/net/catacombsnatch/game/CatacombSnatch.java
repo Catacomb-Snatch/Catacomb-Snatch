@@ -54,9 +54,6 @@ public class CatacombSnatch extends ApplicationAdapter {
     public void create() {
         Gdx.app.setLogLevel(Application.LOG_INFO | Application.LOG_DEBUG | Application.LOG_ERROR);
 
-        // Load static content
-        Language.set("en");
-
         if (!Art.loadResources()) Gdx.app.exit();
 
         // Load options

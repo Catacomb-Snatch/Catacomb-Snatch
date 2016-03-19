@@ -1,10 +1,12 @@
 package net.catacombsnatch.game.util;
 
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.Array;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 public class FileUtil {
 
@@ -20,17 +22,18 @@ public class FileUtil {
      * @return A list of all parsed lines (commented lines will be ignored)
      * @throws IOException
      */
-    public static Array<String> readSimpleFile(FileHandle handle) throws IOException {
-        if (handle.isDirectory()) return null;
+    public static List<String> readSimpleFile(FileHandle handle) throws IOException {
+        if (handle.isDirectory()) return Collections.emptyList();
 
-        Array<String> lines = new Array<String>();
-        BufferedReader br = new BufferedReader(handle.reader());
-        String line;
+        final List<String> lines = new LinkedList<>();
+        try (BufferedReader br = new BufferedReader(handle.reader())) {
+            String line;
 
-        while ((line = br.readLine()) != null) {
-            if (line.startsWith("#") || line.trim().length() < 1) continue; // 2 because of '\n'
-
-            lines.add(line);
+            while ((line = br.readLine()) != null) {
+                if (!line.startsWith("#") && line.trim().length() >= 1) {
+                    lines.add(line);
+                }
+            }
         }
 
         return lines;

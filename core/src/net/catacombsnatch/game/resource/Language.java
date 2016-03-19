@@ -2,51 +2,50 @@ package net.catacombsnatch.game.resource;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ObjectMap;
+import gnu.trove.map.hash.THashMap;
 import net.catacombsnatch.game.util.FileUtil;
 
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
 public class Language {
-    public final static String TAG = "[Language]";
-    public final static String DIRECTORY = "lang/";
-    public final static String DEFAULT = "en";
+    private final static String TAG = "[Language]";
+    private final static String DIRECTORY = "lang/";
+    private final static Locale FALLBACK = Locale.ENGLISH;
 
-    protected final static ObjectMap<String, LanguageEntry> languages;
-    protected final static Array<Locale> vanilla;
-    protected static LanguageEntry last;
-    protected static String language;
+    private final static Map<Locale, LanguageEntry> LANGUAGES;
+
+    private static LanguageEntry last;
+    private static Locale language;
 
     static {
-        languages = new ObjectMap<String, LanguageEntry>();
-        vanilla = new Array<Locale>();
+        LANGUAGES = new THashMap<>();
 
         try {
             Gdx.app.debug(TAG, "Reading default languages");
 
-            Array<String> langs = FileUtil.readSimpleFile(Gdx.files.internal(DIRECTORY + "index"));
+            // Read all language files listed inside the index
+            FileHandle file;
+            for (String s : FileUtil.readSimpleFile(Gdx.files.internal(DIRECTORY + "index"))) {
+                file = Gdx.files.internal(DIRECTORY + s);
 
-            for (String s : langs) {
-                FileHandle file = Gdx.files.internal(DIRECTORY + s);
-
-                if (file != null) {
-                    vanilla.add(new Locale(file.name()));
+                if (file == null) {
+                    Gdx.app.error(TAG, "Could not find file for: " + s);
+                } else {
                     loadFile(file);
-                } else throw new Exception("Could not find file for: " + s);
+                }
             }
+
+            // Set to system language by default TODO make this read the configuration instead
+            set(Locale.getDefault());
 
         } catch (Exception ex) {
             Gdx.app.error(TAG, "Error reading default languages", ex);
         }
     }
-
 
     /**
      * Loads language files from a {@link FileHandle}.
@@ -69,17 +68,15 @@ public class Language {
         return outcome;
     }
 
-
     /**
      * Sets the current language.
      *
-     * @param lang The language to set (e.g. 'en').
+     * @param locale The language to set (e.g. 'en').
      */
-    public static void set(String lang) {
-        language = lang;
-        last = languages.get(language);
+    public static void set(Locale locale) {
+        language = locale;
+        last = LANGUAGES.get(language);
     }
-
 
     /**
      * Returns a language string by property key.
@@ -87,47 +84,27 @@ public class Language {
      * @param property The property key
      * @return The language string
      */
-    public static String get(String property) {
+    public static String get(String property, Object... args) {
+        // We are keeping a reference to the current language
+        // to reduce lookup time (searching the map).
         if (last == null) {
-            // We are keeping a reference to the current language
-            // to reduce lookup time (searching the map).
-            last = languages.get(language);
+            last = LANGUAGES.get(language);
         }
 
+        MessageFormat format;
         if (last != null) {
-            String msg = last.getMessage(property);
-            if (msg != null) return msg;
+            format = last.getFormat(property);
+            if (format != null) return format.format(args);
         }
 
-        LanguageEntry fallback = languages.get(DEFAULT);
+        final LanguageEntry fallback = LANGUAGES.get(FALLBACK);
         if (fallback != null) {
-            String str = fallback.getMessage(property);
-            if (str != null) return str;
+            format = fallback.getFormat(property);
+            if (format != null) return format.format(args);
         }
 
         return "{" + property + "}";
     }
-
-
-    /**
-     * Returns a language string with arguments by property key.
-     *
-     * @param property The property key
-     * @param args     The arguments
-     * @return The formatted language string
-     */
-    public static String getf(String property, Object... args) {
-        MessageFormat format = null;
-        LanguageEntry lang = last;
-
-        if (last == null) last = languages.get(language);
-        if (lang == null) lang = languages.get(DEFAULT);
-
-        format = lang.getFormat(property);
-
-        return format != null ? format.format(args) : "{" + property + "}";
-    }
-
 
     /**
      * Loads a language from a {@link FileHandle}
@@ -135,14 +112,20 @@ public class Language {
      * @param file The {@link FileHandle} of the language file to load
      * @return True on success, otherwise false
      */
-    protected static boolean loadFile(FileHandle file) {
+    public static boolean loadFile(FileHandle file) {
+        if (file == null) {
+            return false;
+        }
+
         if (!file.isDirectory() && file.extension().equalsIgnoreCase("lang")) {
             try {
-                LanguageEntry lang = languages.get(file.name());
+                Locale locale = Locale.forLanguageTag(file.nameWithoutExtension());
+                LanguageEntry lang = LANGUAGES.get(locale);
 
                 if (lang == null) {
-                    lang = new LanguageEntry(new Properties());
-                    languages.put(file.nameWithoutExtension(), lang);
+
+                    lang = new LanguageEntry(locale);
+                    LANGUAGES.put(locale, lang);
                 }
 
                 lang.addProperties(file);
@@ -151,7 +134,6 @@ public class Language {
                 Gdx.app.error(TAG, "Could not load language file with name " + file.nameWithoutExtension(), io);
                 return false;
             }
-
         } else {
             Gdx.app.debug(TAG, "Ignored " + file.name() + " while loading language file");
         }
@@ -159,29 +141,34 @@ public class Language {
         return true;
     }
 
-    protected static class LanguageEntry {
-        protected final Properties strings;
-        protected final Map<String, MessageFormat> msgCache;
 
-        public LanguageEntry(Properties properties) {
-            strings = properties;
-            msgCache = new HashMap<String, MessageFormat>();
+    private static class LanguageEntry {
+        private final Properties strings;
+        private final Map<String, MessageFormat> formatCache;
+        private final Locale locale;
+
+        private LanguageEntry(Locale locale) {
+            this.locale = locale;
+
+            strings = new Properties();
+            formatCache = new THashMap<>();
         }
 
-        public void addProperties(FileHandle file) throws IOException {
+        private void addProperties(FileHandle file) throws IOException {
             strings.load(file.read());
         }
 
-        public String getMessage(String key) {
-            return strings.getProperty(key);
-        }
-
-        public MessageFormat getFormat(String key) {
-            MessageFormat format = msgCache.get(key);
+        private MessageFormat getFormat(String key) {
+            MessageFormat format = formatCache.get(key);
 
             if (format == null) {
-                format = new MessageFormat(strings.getProperty(key));
-                msgCache.put(key, format);
+                final String content = strings.getProperty(key);
+                if (content == null) {
+                    return null;
+                }
+
+                format = new MessageFormat(content, locale);
+                formatCache.put(key, format);
             }
 
             return format;
