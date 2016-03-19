@@ -4,7 +4,6 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import net.catacombsnatch.game.event.EventHandler;
 import net.catacombsnatch.game.event.EventManager;
 import net.catacombsnatch.game.event.input.InputManager;
@@ -41,8 +40,6 @@ public class CatacombSnatch extends ApplicationAdapter {
 
     public static ISoundPlayer sound;
     public static Options options;
-
-    private Label fpsLabel;
 
     private final PlatformDependent platform;
 
@@ -83,8 +80,6 @@ public class CatacombSnatch extends ApplicationAdapter {
         localPlayers[0] = new LocalPlayer();
 
         SceneManager.switchTo(TitleScreen.class);
-
-        fpsLabel = new Label("FPS", Art.skin);
     }
 
     @Override
@@ -118,12 +113,8 @@ public class CatacombSnatch extends ApplicationAdapter {
         }
 
         if (last != null && (Boolean) DefaultOptions.DEBUG.get()) {
-            last.getBatch().begin();
-
-            fpsLabel.setText(Gdx.graphics.getFramesPerSecond() + " FPS");
-            fpsLabel.draw(last.getBatch(), 1);
-
-            last.getBatch().end();
+            Monitoring.update("fps", Gdx.graphics.getFramesPerSecond());
+            Monitoring.render(last.getBatch());
         }
     }
 
