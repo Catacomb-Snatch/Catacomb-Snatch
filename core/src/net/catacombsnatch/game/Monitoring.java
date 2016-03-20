@@ -77,7 +77,7 @@ public class Monitoring {
                 renderer.rectLine(
                         x, y,
                         x += 2,
-                        y = Math.max(base, base + Math.round((property.values[i] - property.minimum) / property.maximum * 36)),
+                        y = Math.max(base, base + Math.round(property.values[i] / property.maximum * 36)),
                         2);
             }
 
