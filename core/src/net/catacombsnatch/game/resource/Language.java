@@ -119,11 +119,10 @@ public class Language {
 
         if (!file.isDirectory() && file.extension().equalsIgnoreCase("lang")) {
             try {
-                Locale locale = Locale.forLanguageTag(file.nameWithoutExtension());
+                Locale locale = new Locale(file.nameWithoutExtension());
                 LanguageEntry lang = LANGUAGES.get(locale);
 
                 if (lang == null) {
-
                     lang = new LanguageEntry(locale);
                     LANGUAGES.put(locale, lang);
                 }
