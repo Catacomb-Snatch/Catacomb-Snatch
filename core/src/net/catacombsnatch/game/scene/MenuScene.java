@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.utils.Array;
 import net.catacombsnatch.game.event.EventHandler;
 import net.catacombsnatch.game.event.input.events.KeyReleaseEvent;
@@ -25,14 +27,21 @@ public abstract class MenuScene extends Scene {
         // Set background texture
         setBackground(bg);
 
-        // Add animated character cursor
-        ani = new Animation(0.2f, new Array<TextureRegion>(Art.lordLard[Direction.EAST.getFace()]), Animation.PlayMode.LOOP);
+        // Add animated character cursor (synchronized to the title melody, please do not change this speed!)
+        ani = new Animation(0.33f / 2, new Array<>(Art.lordLard[Direction.EAST.getFace()]), Animation.PlayMode.LOOP);
     }
 
     protected void init() {
         // Set actor width
         for (Actor actor : getActors()) {
             actor.setWidth(150);
+            actor.addListener(new EventListener() {
+                @Override
+                public boolean handle(Event event) {
+                    aniY = (int) event.getListenerActor().getY();
+                    return true;
+                }
+            });
         }
 
         // Set index to the topmost actor
@@ -72,11 +81,9 @@ public abstract class MenuScene extends Scene {
                 break;
 
             case BACK:
-                //Typecast to Object due to an unsolved bug in IntelliJ
-                if (((Object) SceneManager.getCurrent()).getClass() != TitleScreen.class){
+                if (SceneManager.getCurrent().getClass() != TitleScreen.class){
                     SceneManager.exit();
                 }
-
                 break;
 
             default:
