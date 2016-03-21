@@ -18,6 +18,7 @@ import java.util.Map;
  * @version 1.0
  */
 public class Monitoring {
+    private static final int SAMPLES = 128;
     private static final Map<String, Property> PROPERTIES = new THashMap<>();
     private static final Color[] COLORS = {
             new Color(0x8E8E93),
@@ -56,6 +57,11 @@ public class Monitoring {
         property.values[size] = value;
     }
 
+    public static float get(String name) {
+        final Property property = PROPERTIES.get(name);
+        return property != null ? property.values[SAMPLES - 1] : Float.NaN;
+    }
+
     public static void remove(String name) {
         PROPERTIES.remove(name);
     }
@@ -73,15 +79,12 @@ public class Monitoring {
             renderer.setColor(property.color);
 
             base = y;
-            for (int x = 64, i = 0; i < property.values.length; i++) {
-                renderer.rectLine(
-                        x, y,
-                        x += 2,
-                        y = Math.max(base, base + Math.round(property.values[i] / property.maximum * 36)),
-                        2);
+            for (int x = 64, i = 0; i < SAMPLES; i++) {
+                renderer.rectLine(x, y, x += 2,
+                        y = Math.max(base, base + Math.round(property.values[i] / property.maximum * 36)), 2);
             }
 
-            y += 48;
+            y = base + 48;
         }
 
         renderer.end();
@@ -99,7 +102,7 @@ public class Monitoring {
             font.draw(batch, "min:", 2, y + 10);
             font.draw(batch, Float.toString(property.minimum), 26, y + 10);
             font.draw(batch, "val:", 2, y);
-            font.draw(batch, Float.toString(property.values[property.values.length - 1]), 26, y);
+            font.draw(batch, Float.toString(property.values[SAMPLES - 1]), 26, y);
 
             y += 48;
         }
@@ -109,7 +112,7 @@ public class Monitoring {
 
 
     private static class Property {
-        private final float[] values = new float[128];
+        private final float[] values = new float[SAMPLES];
         private float maximum = Float.MIN_VALUE;
         private float minimum = Float.MAX_VALUE;
         private Color color;

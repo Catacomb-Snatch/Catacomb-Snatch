@@ -1,38 +1,38 @@
 package net.catacombsnatch.game.world.level;
 
-import com.badlogic.gdx.Gdx;
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import net.catacombsnatch.game.Monitoring;
 import net.catacombsnatch.game.entity.systems.RenderSystem;
 import net.catacombsnatch.game.resource.Art;
 import net.catacombsnatch.game.scene.Scene;
 import net.catacombsnatch.game.screen.Renderable;
 import net.catacombsnatch.game.screen.Updateable;
-import net.catacombsnatch.game.world.tile.Tile;
+
+import static net.catacombsnatch.game.world.tiles.Tiles.SIZE;
 
 public class View implements Renderable, Updateable {
-    protected Level level;
-    protected Rectangle viewport;
-    protected int rendered;
-    protected Vector2 offset, target;
+    public static final String DEBUG_TILES_RENDERED = "view_tiles"; // TODO make this work with multiple views
 
+    private final Level level;
+    private Rectangle viewport;
+
+    protected Vector2 offset;
+    protected Vector2 target;
     protected RenderSystem renderer;
-
     protected Sprite panel;
+    protected MiniMap miniMap;
 
-    protected Minimap minimap;
 
-    public View(Level lvl) {
-        level = lvl;
+    public View(Level level) {
+        this.level = level;
 
         offset = new Vector2();
         panel = new Sprite(Art.skin.getAtlas().findRegion("player-panel"));
 
-        minimap = new Minimap(level, this);
-
-        renderer = Level.renderSystem;
+        miniMap = new MiniMap(this.level, this);
     }
 
     @Override
@@ -41,31 +41,33 @@ public class View implements Renderable, Updateable {
 
         if (target != null) {
             // "Camera" movement
-            offset.lerp(target, Gdx.graphics.getDeltaTime());
+            offset.lerp(target, 0.5f);
 
             // Draw tiles
-            rendered = 0; // Reset counter
+            int rendered = 0;
 
-            for(float y = (viewport.y - viewport.height - offset.y) / Tile.HEIGHT - 2; y <= -(viewport.y + offset.y) / Tile.HEIGHT + 4; y++) {
-                for(float x = (viewport.x + offset.x) / Tile.WIDTH - 2; x < (viewport.x + viewport.width + offset.x) / Tile.WIDTH + 2; x++) {
-                    Tile tile = level.getTile((int) x, (int) y);
+            for(float y = (viewport.y - viewport.height - offset.y) / SIZE - 2; y <= -(viewport.y + offset.y) / SIZE + 4; y++) {
+                for(float x = (viewport.x + offset.x) / SIZE - 2; x < (viewport.x + viewport.width + offset.x) / SIZE + 2; x++) {
+                    Entity tile = level.getTile((int) x, (int) y);
 
-                    if (tile != null && tile.shouldRender(this)) {
-                        tile.render((SpriteBatch) scene.getBatch(), this);
+//                    if (tile != null && tile.shouldRender(this)) {
+//                        tile.render((SpriteBatch) scene.getBatch(), this);
                         rendered++;
-                    }
+//                    }
                 }
             }
 
+            Monitoring.update(DEBUG_TILES_RENDERED, rendered);
+
             // Render entities
-            renderer.setGraphics((SpriteBatch) scene.getBatch());
-            renderer.process();
+//            renderer.setGraphics((SpriteBatch) scene.getBatch());
+//            renderer.process();
         }
 
         // Draw overlays
         panel.draw(scene.getBatch());
 
-        minimap.render(scene);
+//        miniMap.render(scene);
     }
 
     @Override
@@ -76,8 +78,7 @@ public class View implements Renderable, Updateable {
         viewport.y -= viewport.height / 2f;
 
         panel.setPosition((viewport.getWidth() - panel.getWidth()) / 2, viewport.getHeight() - panel.getHeight());
-
-        minimap.update(resize);
+        miniMap.update(true);
     }
 
     /**
@@ -102,13 +103,6 @@ public class View implements Renderable, Updateable {
     }
 
     /**
-     * @return The number of tiles rendered during the last {@link #render(Scene)} call.
-     */
-    public int getLastRenderedTileCount() {
-        return rendered;
-    }
-
-    /**
      * @return The current view offset.
      */
     public Vector2 getOffset() {
@@ -122,7 +116,8 @@ public class View implements Renderable, Updateable {
         return viewport;
     }
 
-    protected Vector2 viewportOffset = new Vector2();
+    private Vector2 viewportOffset = new Vector2();
+
     /**
      * @return The current view port + offset.
      */

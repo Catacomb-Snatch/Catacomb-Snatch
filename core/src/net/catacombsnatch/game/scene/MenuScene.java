@@ -18,8 +18,8 @@ public abstract class MenuScene extends Scene {
     private final Animation ani;
     private float tick;
     private int aniX, aniY;
+    private int index = 0;
 
-    protected int index = 0;
 
     public MenuScene(TextureRegion bg) {
         super();
@@ -81,7 +81,7 @@ public abstract class MenuScene extends Scene {
                 break;
 
             case BACK:
-                if (SceneManager.getCurrent().getClass() != TitleScreen.class){
+                if (!(SceneManager.getCurrent() instanceof TitleScreen)){
                     SceneManager.exit();
                 }
                 break;

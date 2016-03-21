@@ -1,18 +1,15 @@
 package net.catacombsnatch.game.entity.components;
 
-import net.catacombsnatch.game.entity.components.Sprite.Layer;
-import net.catacombsnatch.game.resource.Art;
-
-import com.artemis.Component;
+import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import net.catacombsnatch.game.resource.Art;
 
-public class Animations extends Component {
-
-    public Layer layer = Layer.ACTORS;
+public class Animations implements Component {
     private final Animation[] animations;
     private float stateTime;
+
 
     public Animations(Animation a) {
         animations = new Animation[]{a};
@@ -33,7 +30,7 @@ public class Animations extends Component {
     public Animations(TextureRegion[][] r) {
         animations = new Animation[r.length];
         for (int i = 0; i < r.length; i++) {
-            animations[i] = new Animation(0.2f, new Array<TextureRegion>(Art.lordLard[i]), Animation.PlayMode.LOOP);
+            animations[i] = new Animation(0.2f, new Array<>(Art.lordLard[i]), Animation.PlayMode.LOOP);
         }
     }
 
@@ -61,4 +58,5 @@ public class Animations extends Component {
     public int count() {
         return animations.length;
     }
+
 }

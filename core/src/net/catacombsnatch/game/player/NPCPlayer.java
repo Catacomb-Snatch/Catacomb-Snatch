@@ -1,19 +1,13 @@
 package net.catacombsnatch.game.player;
 
+import com.badlogic.ashley.core.Entity;
 import net.catacombsnatch.game.world.level.Level;
 
 public class NPCPlayer implements Player {
 
     @Override
-    public LevelPlayer getLevelPlayer() {
-        // TODO Auto-generated method stub
+    public Entity createEntity(Level level) {
         return null;
-    }
-
-    @Override
-    public void prepareLevelPlayer(Level level) {
-        // TODO Auto-generated method stub
-
     }
 
 }

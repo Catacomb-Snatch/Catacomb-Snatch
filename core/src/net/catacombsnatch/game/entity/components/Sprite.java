@@ -1,31 +1,15 @@
 package net.catacombsnatch.game.entity.components;
 
-import com.artemis.Component;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Sprite extends Component {
+public class Sprite implements Component {
+    public TextureRegion texture;
 
-    public static enum Layer {
-        FLOOR,
-        ACTORS,
-        LIGHTS,
-        WALLS,
-        PARTICLES;
 
-        public int getLayerId() {
-            return ordinal();
-        }
+    public Sprite set(TextureRegion t) {
+        this.texture = t;
+        return this;
     }
 
-    public Layer layer = Layer.ACTORS;
-    public final TextureRegion t;
-
-    public Sprite(TextureRegion t) {
-        this.t = t;
-    }
-
-    public Sprite(Texture t) {
-        this.t = new TextureRegion(t);
-    }
 }

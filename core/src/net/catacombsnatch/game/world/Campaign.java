@@ -9,23 +9,29 @@ import net.catacombsnatch.game.world.level.Level;
 import java.util.Random;
 
 public class Campaign implements Tickable, Finishable {
+    private Level currentLevel;
+    private boolean hasFinished;
 
-    protected Array<Level> levels;
-    protected Array<Player> players;
+    /** A list of all available levels inside this campaign */
+    public final Array<Level> levels;
 
-    protected final Difficulty difficulty;
-    protected final MapRotation rotation;
+    /** A list of all participating players, although this only says which ones want to join in the games themselves */
+    public final Array<Player> players;
 
-    protected Level currentLevel;
+    /** The global campaign difficulty */
+    public final Difficulty difficulty;
 
-    protected boolean hasFinished;
+    /** The rotation which indicates which next level will be played */
+    public final MapRotation rotation;
 
-    public Campaign(Difficulty diff, MapRotation rot) {
-        levels = new Array<Level>();
-        players = new Array<Player>();
 
-        difficulty = diff;
-        rotation = rot;
+    public Campaign(Difficulty difficulty, MapRotation rotation) {
+        levels = new Array<>();
+        players = new Array<>();
+
+        this.difficulty = difficulty;
+        this.rotation = rotation;
+
         hasFinished = false;
     }
 
@@ -34,7 +40,7 @@ public class Campaign implements Tickable, Finishable {
         if (hasFinished()) return;
 
         if (currentLevel == null || currentLevel.hasFinished()) {
-            Level next = getRotation().getNext(getLevels());
+            final Level next = rotation.getNext(levels);
             if (next == null) {
                 setFinished(true);
                 return;
@@ -63,41 +69,6 @@ public class Campaign implements Tickable, Finishable {
         return currentLevel;
     }
 
-    /**
-     * Returns a list of levels inside this world.
-     *
-     * @return The list of levels in this world
-     */
-    public Array<Level> getLevels() {
-        return levels;
-    }
-
-    /**
-     * Returns a list of players inside this world
-     *
-     * @return The list of players in this world
-     */
-    public Array<Player> getPlayers() {
-        return players;
-    }
-
-    /**
-     * Returns the world's difficulty.
-     *
-     * @return The {@link Difficulty}
-     */
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
-
-    /**
-     * Returns the map rotation type.
-     *
-     * @return The {@link MapRotation}
-     */
-    public MapRotation getRotation() {
-        return rotation;
-    }
 
     /**
      * Defines the next level returned by {@link #getNext(Array)}.
@@ -112,12 +83,12 @@ public class Campaign implements Tickable, Finishable {
         public final static class FIRST extends MapRotation {
             @Override
             public Level getNext(Array<Level> levels) {
-                return levels.size == 0 ? null : levels.get(0);
+                return levels.size == 0 ? null : levels.first();
             }
         }
 
         public final static class ONCE extends MapRotation {
-            protected int next = 0;
+            private int next = 0;
 
             @Override
             public Level getNext(Array<Level> levels) {
@@ -126,12 +97,12 @@ public class Campaign implements Tickable, Finishable {
         }
 
         public final static class LINEAR extends MapRotation {
-            protected int next = 0;
+            private int next = 0;
 
             @Override
             public Level getNext(Array<Level> levels) {
                 if (next >= levels.size) next = 0;
-                return levels.get(next);
+                return levels.get(next++);
             }
         }
 
@@ -152,5 +123,7 @@ public class Campaign implements Tickable, Finishable {
          * @return The next level, otherwise null.
          */
         public abstract Level getNext(Array<Level> levels);
+
     }
+
 }

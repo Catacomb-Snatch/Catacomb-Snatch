@@ -12,7 +12,6 @@ import net.catacombsnatch.game.event.input.events.KeyPressedEvent;
 import net.catacombsnatch.game.player.LocalPlayer;
 import net.catacombsnatch.game.player.Player;
 import net.catacombsnatch.game.resource.Art;
-import net.catacombsnatch.game.resource.Language;
 import net.catacombsnatch.game.resource.options.DefaultOptions;
 import net.catacombsnatch.game.resource.options.Options;
 import net.catacombsnatch.game.resource.options.PreferenceOptions;
@@ -30,18 +29,18 @@ import java.text.DateFormat;
 import java.util.Calendar;
 
 public class CatacombSnatch extends ApplicationAdapter {
-    public final static String TAG = "[Core]";
+    private final static String TAG = "[Core]";
 
-    protected InputManager input;
-    protected Language language;
-    protected SceneManager sceneManager;
+    private InputManager input;
+    private SceneManager sceneManager;
 
-    protected static Player[] localPlayers;
+    private static Player[] localPlayers;
 
     public static ISoundPlayer sound;
     public static Options options;
 
     private final PlatformDependent platform;
+
 
     public CatacombSnatch(PlatformDependent platform) {
         this.platform = platform;

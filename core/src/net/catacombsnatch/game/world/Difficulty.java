@@ -4,21 +4,12 @@ import com.badlogic.gdx.utils.ObjectMap;
 import net.catacombsnatch.game.resource.Language;
 
 public class Difficulty {
-    public final static Difficulty EASY = new Difficulty("difficulty.easy", .5f, .5f, 1.5f, .5f, false, 25, 3, 30);
-    public final static Difficulty NORMAL = new Difficulty("difficulty.normal", 1, 1, 1, 1, false, 25, 7, 20);
-    public final static Difficulty HARD = new Difficulty("difficulty.hard", 3, 3, .5f, 1.5f, true, 25, 12, 15);
-    public final static Difficulty NIGHTMARE = new Difficulty("difficulty.nightmare", 6, 5, .25f, 2.5f, true, 15, 100000, 10);
+    private final static ObjectMap<String, Difficulty> registry = new ObjectMap<>();
 
-    private final static ObjectMap<String, Difficulty> registry;
-
-    static {
-        registry = new ObjectMap<String, Difficulty>();
-
-        EASY.register("easy");
-        NORMAL.register("normal");
-        HARD.register("hard");
-        NIGHTMARE.register("nightmare");
-    }
+    public final static Difficulty EASY = new Difficulty("difficulty.easy", .5f, .5f, 1.5f, .5f, false, 25, 3, 30).register("easy");
+    public final static Difficulty NORMAL = new Difficulty("difficulty.normal", 1, 1, 1, 1, false, 25, 7, 20).register("normal");
+    public final static Difficulty HARD = new Difficulty("difficulty.hard", 3, 3, .5f, 1.5f, true, 25, 12, 15).register("hard");
+    public final static Difficulty NIGHTMARE = new Difficulty("difficulty.nightmare", 6, 5, .25f, 2.5f, true, 15, 100000, 10).register("nightmare");
 
     private final String name;
 
@@ -33,7 +24,9 @@ public class Difficulty {
 
     private final boolean mobRegenerationAllowed;
 
-    public Difficulty(String name, float mobHealthModifier, float mobStrengthModifier, float mobSpawnModifier, float shopCostsModifier, boolean mobRegeneration, int regenerationInterval, int allowedMobDensity, int coinLifespan) {
+    public Difficulty(String name,float mobHealthModifier, float mobStrengthModifier, float mobSpawnModifier,
+                      float shopCostsModifier, boolean mobRegeneration, int regenerationInterval, int allowedMobDensity,
+                      int coinLifespan) {
         this.name = name;
 
         this.mobHealthModifier = mobHealthModifier;
@@ -51,8 +44,9 @@ public class Difficulty {
      *
      * @param as The internal registration name
      */
-    protected final void register(String as) {
+    protected final Difficulty register(String as) {
         registry.put(as, this);
+        return this;
     }
 
     /**
@@ -154,4 +148,5 @@ public class Difficulty {
     public String toString() {
         return name;
     }
+
 }

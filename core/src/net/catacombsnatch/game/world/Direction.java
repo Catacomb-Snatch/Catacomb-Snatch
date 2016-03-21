@@ -4,12 +4,10 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * Represents a direction or relative location.
- * <p>
  * <p>Linear sides: {@link #NORTH}, {@link #EAST}, {@link #SOUTH} and {@link #WEST}.</p>
  * <p>Edges: {@link #NORTH_EAST}, {@link #EAST_SOUTH}, {@link #SOUTH_WEST} and {@link #WEST_NORTH}.</p>
  */
 public enum Direction {
-
     NORTH(4, 0, -1, 0x1),
     NORTH_EAST(5, 1, -1, 0x9),
 
@@ -22,13 +20,14 @@ public enum Direction {
     WEST(2, -1, 0, 0x8),
     WEST_NORTH(3, -1, -1, 0xF);
 
-    public final static int count = values().length;
+    public static final int count = values().length;
+    public static final Direction[] values = values();
 
     private int face;
     private Vector2 vector;
     private byte weight;
 
-    private Direction(int f, float x, float y, int b) {
+    Direction(int f, float x, float y, int b) {
         face = f;
         vector = new Vector2(x, y);
         weight = (byte) b;
@@ -39,13 +38,12 @@ public enum Direction {
     }
 
     public static Direction getDirectionFor(float x, float y) {
-        Vector2 cmp = new Vector2((x < 0) ? -1 : (x == 0) ? 0 : 1, (y < 0) ? -1 : (x == 0) ? 0 : 1);
-        Direction[] dirs = Direction.values();
+        final Vector2 cmp = new Vector2((x < 0) ? -1 : (x == 0) ? 0 : 1, (y < 0) ? -1 : (x == 0) ? 0 : 1);
 
-        for (int i = 0; i < dirs.length; i++) {
-            if (!dirs[i].vector.equals(cmp)) continue;
-
-            return dirs[i];
+        for (Direction dir : values) {
+            if (dir.vector.equals(cmp)) {
+                return dir;
+            }
         }
 
         return NORTH;
@@ -75,7 +73,7 @@ public enum Direction {
     }
 
     /**
-     * @return A mask used in {@link net.catacombsnatch.game.world.tile.Tile}s for drawing edges and corners.
+     * @return A mask used in {@link net.catacombsnatch.game.world.tiles.Tile Tiles} for drawing edges and corners.
      */
     public byte getMask() {
         return isEdge() ? (byte) (weight >> 3) : weight;

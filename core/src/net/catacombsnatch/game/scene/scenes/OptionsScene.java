@@ -47,7 +47,7 @@ public class OptionsScene extends MenuScene {
                 final TextButton button = addTextButton(Language.get("option." + key + (b ? ".disable" : ".enable")), 0, 0);
 
                 button.addAction(new ReusableAction() {
-                    protected boolean down = b;
+                    private boolean down = b;
 
                     @Override
                     public boolean use(float delta) {

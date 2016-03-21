@@ -2,25 +2,30 @@ package net.catacombsnatch.game.world.level.generator;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import gnu.trove.map.hash.THashMap;
 import net.catacombsnatch.game.world.Campaign;
 import net.catacombsnatch.game.world.level.Level;
 import net.catacombsnatch.game.world.level.generator.options.GeneratorOption;
 
+import java.util.Collections;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 public abstract class LevelGenerator {
-    protected Random random;
-    protected Array<GeneratorOption<?>> options;
+    private final Map<String, GeneratorOption<?>> options;
+
+    /** The random number generator for this level. */
+    public final Random random;
 
 
     public LevelGenerator() {
         this(new Random());
     }
 
-    public LevelGenerator(Random r) {
-        random = r;
-
-        options = new Array<GeneratorOption<?>>();
+    public LevelGenerator(Random random) {
+        this.random = random;
+        options = new THashMap<>();
     }
 
     /**
@@ -38,31 +43,16 @@ public abstract class LevelGenerator {
      */
     public abstract Array<Vector2> getSpawnLocations();
 
-    /**
-     * @return The random number generator for this level.
-     */
-    public Random randomizer() {
-        return random;
+    public void addOption(GeneratorOption value) {
+        options.put(value.name.toLowerCase(), value);
     }
 
-    public Array<String> getOptions() {
-        Array<String> keys = new Array<String>();
-
-        for (GeneratorOption<?> option : options) {
-            keys.add(option.getName());
-        }
-
-        return keys;
+    public Set<String> getOptions() {
+        return Collections.unmodifiableSet(options.keySet());
     }
 
     public GeneratorOption<?> getOption(String name) {
-        for (GeneratorOption<?> option : options) {
-            if (!option.getName().equalsIgnoreCase(name)) continue;
-
-            return option;
-        }
-
-        return null;
+        return options.get(name.toLowerCase());
     }
 
 }

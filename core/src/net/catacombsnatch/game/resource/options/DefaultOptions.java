@@ -1,8 +1,7 @@
 package net.catacombsnatch.game.resource.options;
 
-import net.catacombsnatch.game.CatacombSnatch;
-
 import com.badlogic.gdx.Gdx;
+import net.catacombsnatch.game.CatacombSnatch;
 
 public enum DefaultOptions {
     DEBUG("debugMode", true),

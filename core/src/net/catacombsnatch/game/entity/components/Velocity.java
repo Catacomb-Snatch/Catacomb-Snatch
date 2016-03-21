@@ -1,37 +1,35 @@
 package net.catacombsnatch.game.entity.components;
 
-import com.artemis.Component;
+import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
 
-public class Velocity extends Component {
+public class Velocity implements Component {
+    public final Vector2 vector;
 
-    public Vector2 vec;
 
     public Velocity() {
-        vec = new Vector2();
+        vector = new Vector2();
     }
 
-    public void force(float mx, float my) {
-        vec.add(mx, my);
+    public void add(float mx, float my) {
+        vector.add(mx, my);
     }
 
     public void normalize() {
-        vec.nor();
+        vector.nor();
     }
 
-    public void reset() {
-        vec.set(0, 0);
+    public Velocity reset() {
+        vector.set(0, 0);
+        return this;
     }
 
-    public float getVelocityX() {
-        return vec.x;
+    public float x() {
+        return vector.x;
     }
 
-    public float getVelocityY() {
-        return vec.y;
+    public float y() {
+        return vector.y;
     }
 
-    public Vector2 getVelocity() {
-        return vec;
-    }
 }

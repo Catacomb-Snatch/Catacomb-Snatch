@@ -1,49 +1,29 @@
 package net.catacombsnatch.game.entity.components;
 
+import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.math.Vector2;
 import net.catacombsnatch.game.world.Direction;
 
-import com.artemis.Component;
-import com.badlogic.gdx.math.Vector2;
+public class Rotation implements Component {
+    public Direction direction = Direction.SOUTH;
 
-public class Rotation extends Component {
 
-    protected Direction dir;
-
-    public Rotation(Direction d) {
-        dir = d;
-    }
-
-    public Rotation(Vector2 v) {
-        dir = Direction.getDirectionFor(v);
-    }
-
-    public Rotation() {
-        this(Direction.SOUTH);
-    }
-
-    public Direction getDirection() {
-        return dir;
-    }
-
-    public void setDirection(Direction d) {
-        dir = d;
+    public void forVector(Vector2 vector) {
+        direction = Direction.getDirectionFor(vector);
     }
 
     /**
-     * Rotates by `turns.' If turns is negative it rotates counter clockwise, else
-     * clockwise. each turn constitutes the smallest directional change.
-     * <p>
-     * Current that is 45 degrees.
+     * Rotates by 'turns' (Currently in 45 degrees).
+     * If the number is negative, it rotates counter clockwise, else clockwise.
+     * Each turn constitutes the smallest directional change.
      *
      * @param turns Number of turns to make
      */
     public void rotate(int turns) {
-        int ord = dir.ordinal();
-        int index = ord + turns;
+        int index = direction.ordinal() + turns;
         if (index < 0) index += Direction.count;
-        index = index % Direction.count;
 
-        dir = Direction.values()[index];
+        direction = Direction.values[index % Direction.count];
     }
 
 }

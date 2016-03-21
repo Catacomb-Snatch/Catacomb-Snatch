@@ -1,26 +1,48 @@
 package net.catacombsnatch.game.entity.systems;
 
-import com.artemis.Aspect;
-import com.artemis.ComponentMapper;
-import com.artemis.Entity;
-import com.artemis.annotations.Wire;
-import com.artemis.systems.EntityProcessingSystem;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
-import net.catacombsnatch.game.entity.components.Animations;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.systems.SortedIteratingSystem;
+import net.catacombsnatch.game.entity.Entities;
 import net.catacombsnatch.game.entity.components.Position;
-import net.catacombsnatch.game.entity.components.Render;
 import net.catacombsnatch.game.entity.components.Sprite;
-import net.catacombsnatch.game.world.level.View;
+import net.catacombsnatch.game.scene.Scene;
+import net.catacombsnatch.game.scene.SceneManager;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
-public class RenderSystem extends EntityProcessingSystem {
-    @Wire
+public class RenderSystem extends SortedIteratingSystem {
+    private Scene scene;
+
+
+    public RenderSystem() {
+        super(Family.all(Position.class, Sprite.class).get(), new Comparator<Entity>() {
+            @Override
+            public int compare(Entity a, Entity b) {
+                return Float.compare(Entities.position.get(b).y(), Entities.position.get(a).y());
+            }
+        });
+    }
+
+    @Override
+    public void update(float deltaTime) {
+        scene = SceneManager.getCurrent();
+
+        if (scene != null) {
+            scene.getBatch().begin();
+            super.update(deltaTime);
+            scene.getBatch().end();
+        }
+    }
+
+    @Override
+    protected void processEntity(Entity entity, float deltaTime) {
+        final Position position = Entities.position.get(entity);
+        scene.getBatch().draw(Entities.sprite.get(entity).texture, position.x(), position.y());
+    }
+
+
+    /*@Wire
     protected ComponentMapper<Render> renderMapper;
     @Wire
     protected ComponentMapper<Sprite> sprMapper;
@@ -92,6 +114,6 @@ public class RenderSystem extends EntityProcessingSystem {
 
     public void setGraphics(SpriteBatch graphics) {
         this.graphics = graphics;
-    }
+    }     */
 
 }

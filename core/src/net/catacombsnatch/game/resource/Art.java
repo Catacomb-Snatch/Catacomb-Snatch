@@ -81,15 +81,16 @@ public class Art {
         return TextureRegion.split(tex, w, h);
     }
 
-    private static void dispose(TextureRegion[][] tex) {
-        for (int i = 0; i < tex.length; i++) {
-            dispose(tex[i]);
+    private static void dispose(TextureRegion[][] regions) {
+        for (TextureRegion[] subRegions : regions) {
+            dispose(subRegions);
         }
     }
 
-    private static void dispose(TextureRegion[] tex) {
-        for (int i = 0; i < tex.length; i++) {
-            tex[i].getTexture().dispose();
+    private static void dispose(TextureRegion[] regions) {
+        for (TextureRegion region : regions) {
+            region.getTexture().dispose();
         }
     }
+
 }

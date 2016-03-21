@@ -1,51 +1,14 @@
 package net.catacombsnatch.game.entity.components;
 
-import com.artemis.Component;
+import com.badlogic.ashley.core.Component;
 
-public class Health extends Component {
-    protected boolean regenerate;
-
-    protected int speed;
-    protected int amount;
-    protected int health;
-    protected int maxHealth;
-
-    public int tick;
-
-    public Health(int max) {
-        regenerate = true;
-
-        speed = 60;
-        tick = 0;
-
-        amount = 1;
-        maxHealth = max;
-        health = maxHealth;
-    }
-
-    public boolean canRegenerate() {
-        return regenerate;
-    }
-
-    public void setRegenerate(boolean regen) {
-        regenerate = regen;
-    }
-
-    public int getRegenerationSpeed() {
-        return speed;
-    }
-
-    public void setRegenerationSpeed(int ticks) {
-        speed = ticks;
-    }
-
-    public int getHealAmount() {
-        return amount;
-    }
-
-    public void setHealAmount(int amnt) {
-        amount = amnt;
-    }
+public class Health implements Component {
+    public boolean canHeal;
+    public int healSpeed;
+    public int healTick;
+    public int healAmount;
+    public int health;
+    public int maxHealth;
 
     public void heal(int hp) {
         health += hp;
@@ -65,6 +28,17 @@ public class Health extends Component {
 
     public float getHealthPercentage() {
         return (float) (health) / (float) (maxHealth);
+    }
+
+    public Health reset(int health) {
+        maxHealth = health;
+        health = maxHealth;
+        healSpeed = 60;
+        healTick = 0;
+        healAmount = 1;
+        canHeal = true;
+
+        return this;
     }
 
 }
