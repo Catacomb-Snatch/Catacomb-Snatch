@@ -34,6 +34,7 @@ public class Monitoring {
     };
 
     private static BitmapFont font;
+    private static ShapeRenderer renderer;
 
 
     public static void update(String name, boolean value) {
@@ -71,7 +72,10 @@ public class Monitoring {
             font = Art.skin.get(Label.LabelStyle.class).font;
         }
 
-        final ShapeRenderer renderer = new ShapeRenderer();
+        if (renderer == null) {
+            renderer = new ShapeRenderer();
+        }
+
         renderer.begin(ShapeRenderer.ShapeType.Filled);
 
         int y = 1, base;
@@ -98,11 +102,11 @@ public class Monitoring {
 
             font.draw(batch, entry.getKey(), 2, y + 30);
             font.draw(batch, "max:", 2, y + 20);
-            font.draw(batch, Float.toString(property.maximum), 26, y + 20);
+            font.draw(batch, "" + property.maximum, 26, y + 20);
             font.draw(batch, "min:", 2, y + 10);
-            font.draw(batch, Float.toString(property.minimum), 26, y + 10);
+            font.draw(batch, "" + property.minimum, 26, y + 10);
             font.draw(batch, "val:", 2, y);
-            font.draw(batch, Float.toString(property.values[SAMPLES - 1]), 26, y);
+            font.draw(batch, "" + property.values[SAMPLES - 1], 26, y);
 
             y += 48;
         }
