@@ -76,6 +76,7 @@ public class Monitoring {
             renderer = new ShapeRenderer();
         }
 
+        renderer.setProjectionMatrix(batch.getProjectionMatrix());
         renderer.begin(ShapeRenderer.ShapeType.Filled);
 
         int y = 1, base;
