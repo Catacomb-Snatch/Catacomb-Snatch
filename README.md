@@ -5,7 +5,7 @@ Catacomb-Snatch
 
 Catacomb Snatch Community Edition
 
-Okay. Better road map for what I'm doing
+The roadmap for what I'm doing!
 
 ☐ Full conversion to Unity
   - ☐ Converting Scripts
