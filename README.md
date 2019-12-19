@@ -13,6 +13,6 @@ The roadmap for what I'm doing!
   - ☐ Texture thingies
     - ☐ I figure out what each texture does. I think I know most of them, just not sure on a few.
     - ☐ Everything Animated
-    - ☑️ Textures ready to go (Hopefuly. I at least slit all of them using the built in Texture editor. I call that a win.)
+    - ☑️ Textures ready to go (Hopefuly. I at least split all of them using the built in Texture editor. I call that a win.)
     
   
