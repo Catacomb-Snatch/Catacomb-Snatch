@@ -15,4 +15,4 @@ The roadmap for what I'm doing!
     - ☐ Everything Animated
     - ☑️ Textures ready to go (Hopefuly. I at least split all of them using the built in Texture editor. I call that a win.)
     
-  
+  DO NOT DOWNLOAD THIS FORK. I AM IN THE MIDDLE OF DELETING EVERYTHING SO I CAN PUT ALL THE UNITY STUFF HERE. IF YOU WANT TO USE THE JAVA VERSION, GO TO THE MAIN REPO, NOT HERE.
