@@ -18,6 +18,6 @@ The roadmap for what I'm doing!
   DO NOT DOWNLOAD THIS FORK. I AM IN THE MIDDLE OF DELETING EVERYTHING SO I CAN PUT ALL THE UNITY STUFF HERE. IF YOU WANT TO USE THE JAVA VERSION, GO TO THE MAIN REPO, NOT HERE.
 
   Are you deleting everything here one at a time? 
-  Yes. 
+  "Yes." 
   You mad man. Why?
-  No space on laptop for Git clients ;-;. I also have never been able to understand how to use either the original Git client or Git Desktop... so... ¯\_(ツ)_/¯
+  "No space on laptop for Git clients ;-;. I also have never been able to understand how to use either the original Git client or Git Desktop... so... ¯\_(ツ)_/¯"
