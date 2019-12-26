@@ -1,0 +1,162 @@
+﻿# Game texts encoded in UTF-8
+
+build.rail = DU BENÖTIGST {0} COINS UM EINE SCHIENE ZU PLATZIEREN
+build.droid = DU BENÖTIGST {0} COINS UM EINEN RAIL DROID ZU PLATZIEREN
+build.removeRail = DU BENÖTIGST {0} COINS UM EINE SCHIENE ZU ENTFERNEN
+
+back = ZURÜCK
+cancel = ABBRECHEN
+select = AUSWÄHLEN
+
+credits.leadDev = LEITENDER ENTWICKLER:
+credits.maintainers = PROJEKT VERWALTUNG:
+credits.communityMan = COMMUNITY VERWALTUNG:
+credits.others = UND DANKE AN ALLE MITWIRKENDEN, INSBESONDERE:
+credits.note = DIESES PROJEKT WIRD NUN ALS COMMUNITY PROJEKT ENTWICKELT
+
+diffselect.title = WÄHLE EINEN SCHWIERIGKEITSGRAD
+diffselect.start = SPIEL STARTEN
+diffselect.easy = LEICHT
+diffselect.normal = NORMAL
+diffselect.hard = SCHWER
+diffselect.nightmare = ALBTRAUM
+
+gameplay.player1Win = {0} GEWINNT WOOHOO
+gameplay.player2Win = {0} GEWINNT YAY
+gameplay.player1Name = LORD LARD
+gameplay.player2Name = HERR VON SPECK
+gameplay.player3Name = DUCHESS DONUT
+gameplay.player4Name = COUNTESS CRULLER
+gameplay.FPS = FPS: {0}
+gameplay.latency = PING: {0}
+gameplay.cantPickup = DU KANNST DAS NICHT AUFHEBEN!
+
+help.goal = ZIEL
+help.help1 = SAMMLE ALS ERSTER 
+help.help2 = 50 LADUNGEN DES SCHATZES
+help.help3 = AUS DEM KELCH. DIESER BEFINDET 
+help.help4 = SICH IN DER MITTE DER KARTE.
+help.turret = GESCHÜTZ
+help.turret1 = SCHIESST AUF GEGNER RUNDHERUM.
+help.turret2 =
+help.turret3 =
+help.collector = SAMMLER
+help.collector1 = SAUGT COINS RUNDHERUM AUF. HEB IHN 
+help.collector2 = AUF, UM DIE GESAMMELTEN COINS ZU 
+help.collector3 = ERHALTEN.
+help.bomb = BOMBE
+help.bomb1 = SPRENGT DIE RISSIGEN WÄNDE.
+help.bomb2 = ANSCHIESSEN DAMIT SIE DETONIERT.
+help.bomb3 =
+help.rails = GLEISE
+help.rails1 = BENÖTIGT FÜR RAIL-DROIDS. DRÜCKE
+help.rails2 = 'BAUEN' AUF DER ERSTEN SCHIENE UM 
+help.rails3 = EINEN DROIDEN ZU PLATZIEREN (50 GOLD)
+
+keys.up = HOCH
+keys.down = RUNTER
+keys.left = LINKS
+keys.right = RECHTS
+keys.sprint = RENNEN
+keys.fire = SCHIESSEN
+keys.fireUp = SCHUSS HOCH
+keys.fireDown = SCHUSS RUNTER
+keys.fireLeft = SCHUSS LINKS
+keys.fireRight = SCHUSS RECHTS
+keys.use = BENUTZEN
+keys.build = BAUEN
+keys.upgrade = UPGRADE
+keys.chat = CHAT
+keys.weaponSlot = WAFFE {0}
+keys.cycleLeft = NÄCHSTE WAFFE
+keys.cycleRight = VORH. WAFFE
+keys.console = KONSOLE
+
+
+leveleditor.title = LEVEL EDITOR
+leveleditor.new = NEU
+leveleditor.open = ÖFFNEN
+leveleditor.save = SPEICHERN
+leveleditor.enterLevelName = LEVEL NAME EINGEBEN:
+
+levelselect.title = WÄHLE EIN LEVEL
+levelselect.start = WÄHLEN
+levelselect.update = AKTUALISIEREN
+
+mp.waitingForClient = WARTE AUF WEITERE SPIELER:
+mp.enterIP = GEBE DIE IP-ADRESSE DES HOSTS EIN:
+mp.localIP = DEINE LOKALE IP:
+mp.externalIP = DEINE EXTERNE IP:
+mp.join = BEITRETEN
+
+options.on = AN
+options.off = AUS
+options.keyBindings = TASTENBELEGUNG
+options.characterSelect = SPIELER AUSW.
+options.trapmouse = MAUS FANGEN
+options.fullscreen = VOLLBILDMODUS
+options.showfps = ZEIGE FPS
+options.music = MUSIK
+options.sounds = GERÄUSCHE
+options.sound_and_video = VIDEO & SOUND
+options.volume = LAUTST.
+options.mute = STUMM
+options.creative = CREATIVE MODE
+options.alternative = ALTERNATIV SPIELER SKIN
+options.credits = CREDITS
+options.locale_selection = SPRACHE WÄHLEN
+
+character.text = WÄHLE DEINEN SPIELER!
+character.select = AUSWÄHLEN
+
+pausemenu.help = HILFE
+pausemenu.backtomain = HAUPTMENÜ
+pausemenu.resume = FORTSETZEN 
+pausemenu.exit = SPIEL BEENDEN
+
+exitmenu.headline = MÖCHTEST DU DAS SPIEL WIRKLICH BEENDEN?
+exitmenu.cancel = NEIN 
+exitmenu.exit = JA
+
+player.hasDied = {0} IST GESTORBEN!
+player.score = {0}: {1}%
+player.cost = {0}
+player.health = {0}%
+player.money = {0}
+player.nextLevel = {0}
+player.exp = {0}
+player.level = {0}
+
+shop.turretTooltipTitle = GESCHÜTZ
+shop.turretTooltipLine1 = Genutzt zur Verteidigung.
+shop.turretTooltipLine2 = Greift Gegner in der Nähe an.
+shop.harvesterTooltipTitle = SAMMLER
+shop.harvesterTooltipLine1 = Sammelt Geld in der Nähe ein.
+shop.harvesterTooltipLine2 = Nutze es um das Geld zu bekommen.
+shop.bombTooltipTitle = BOMBE
+shop.bombTooltipLine1 = Zerstört rissige Wände. Benutzen
+shop.bombTooltipLine2 = um Abkürzungen frei zu sprengen.
+
+shop.rifleTooltipTitle = BÜCHSE
+shop.rifleTooltipLine1 = Standard Waffe.
+shop.rifleTooltipLine2 = Guter Allrounder.
+shop.shotgunTooltipTitle = SCHROTFLINTE
+shop.shotgunTooltipLine1 = Schuß deckt große Fläche ab.
+shop.shotgunTooltipLine2 = Hoher Schaden, kurze Reichweite.
+shop.raygunTooltipTitle = STRAHLENKANONE
+shop.raygunTooltipLine1 = Schüße prallen von Wänden ab.
+shop.raygunTooltipLine2 = Jeder Abpraller erhöht den Schaden.
+
+
+titlemenu.start = STARTEN
+titlemenu.host = HOST
+titlemenu.join = BEITRETEN
+titlemenu.help = ANLEITUNG
+titlemenu.options = OPTIONEN
+titlemenu.levelEditor = LEVEL EDITOR
+titlemenu.exit = SCHLIESSEN
+titlemenu.sound_and_video = VIDEO UND SOUND
+
+upgrade.full = BEREITS VOLL AUSGEBAUT!
+upgrade.notEnoughMoney = DU HAST NICHT GENUG GELD ({0})
+upgrade.to = AUF LEVEL {0} AUSGEBAUT

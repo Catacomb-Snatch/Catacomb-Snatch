@@ -1,0 +1,2563 @@
+fileFormatVersion: 2
+guid: 18ae3e1d76d29804cae84981ca30d23e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2019874218940407116
+    second: panel_xpbar_0
+  - first:
+      213: 1428763990400157703
+    second: panel_xpbar_1
+  - first:
+      213: -2155935344361141169
+    second: panel_xpbar_2
+  - first:
+      213: 7854843515044073562
+    second: panel_xpbar_3
+  - first:
+      213: -4472510638074506853
+    second: panel_xpbar_4
+  - first:
+      213: 8463979482477805076
+    second: panel_xpbar_5
+  - first:
+      213: -4991555813709921813
+    second: panel_xpbar_6
+  - first:
+      213: 6912886233780228146
+    second: panel_xpbar_7
+  - first:
+      213: -4047332300665087592
+    second: panel_xpbar_8
+  - first:
+      213: 7874097715877521704
+    second: panel_xpbar_9
+  - first:
+      213: -5176072903142226541
+    second: panel_xpbar_10
+  - first:
+      213: -2764563372574814057
+    second: panel_xpbar_11
+  - first:
+      213: -6750510146914406766
+    second: panel_xpbar_12
+  - first:
+      213: 9197473941422134195
+    second: panel_xpbar_13
+  - first:
+      213: -7216287150580955968
+    second: panel_xpbar_14
+  - first:
+      213: -4407388734267594
+    second: panel_xpbar_15
+  - first:
+      213: -1144887209571114372
+    second: panel_xpbar_16
+  - first:
+      213: -5668673188409349970
+    second: panel_xpbar_17
+  - first:
+      213: 1759023770794713685
+    second: panel_xpbar_18
+  - first:
+      213: 1912668544439440668
+    second: panel_xpbar_19
+  - first:
+      213: -9212809009459278620
+    second: panel_xpbar_20
+  - first:
+      213: 3675934166848640200
+    second: panel_xpbar_21
+  - first:
+      213: -1277791707103583470
+    second: panel_xpbar_22
+  - first:
+      213: 6730530736920774991
+    second: panel_xpbar_23
+  - first:
+      213: 1275368257924835424
+    second: panel_xpbar_24
+  - first:
+      213: 11849881109815413
+    second: panel_xpbar_25
+  - first:
+      213: 7672722687638397148
+    second: panel_xpbar_26
+  - first:
+      213: -3077169364952128863
+    second: panel_xpbar_27
+  - first:
+      213: -5707863483328243847
+    second: panel_xpbar_28
+  - first:
+      213: 3214487897170650283
+    second: panel_xpbar_29
+  - first:
+      213: 6567158712937791493
+    second: panel_xpbar_30
+  - first:
+      213: 5294001764997988472
+    second: panel_xpbar_31
+  - first:
+      213: 218595017615998598
+    second: panel_xpbar_32
+  - first:
+      213: -7078091194653251923
+    second: panel_xpbar_33
+  - first:
+      213: -1132451346575854242
+    second: panel_xpbar_34
+  - first:
+      213: 9083248302142479635
+    second: panel_xpbar_35
+  - first:
+      213: 7681128403008330393
+    second: panel_xpbar_36
+  - first:
+      213: -83482399109983241
+    second: panel_xpbar_37
+  - first:
+      213: -6767765368361443773
+    second: panel_xpbar_38
+  - first:
+      213: 6057912144629332960
+    second: panel_xpbar_39
+  - first:
+      213: 4213546078313677440
+    second: panel_xpbar_40
+  - first:
+      213: -6201723350492447280
+    second: panel_xpbar_41
+  - first:
+      213: 6453491697749287067
+    second: panel_xpbar_42
+  - first:
+      213: 924836248050504211
+    second: panel_xpbar_43
+  - first:
+      213: -3053086909213749523
+    second: panel_xpbar_44
+  - first:
+      213: -6311781040526514692
+    second: panel_xpbar_45
+  - first:
+      213: 3557340276098124966
+    second: panel_xpbar_46
+  - first:
+      213: 6068477807890254806
+    second: panel_xpbar_47
+  - first:
+      213: 7416319275007178468
+    second: panel_xpbar_48
+  - first:
+      213: 7518801280297371300
+    second: panel_xpbar_49
+  - first:
+      213: -4290120749399221119
+    second: panel_xpbar_50
+  - first:
+      213: 4554143590223165010
+    second: panel_xpbar_51
+  - first:
+      213: -8275033927381173234
+    second: panel_xpbar_52
+  - first:
+      213: -7360714769303166038
+    second: panel_xpbar_53
+  - first:
+      213: -6677744005580683138
+    second: panel_xpbar_54
+  - first:
+      213: 3385576116203459758
+    second: panel_xpbar_55
+  - first:
+      213: -354994057896665707
+    second: panel_xpbar_56
+  - first:
+      213: 1243559327992504817
+    second: panel_xpbar_57
+  - first:
+      213: 197087951030641478
+    second: panel_xpbar_58
+  - first:
+      213: -1916332178759149801
+    second: panel_xpbar_59
+  - first:
+      213: 4307999277833813758
+    second: panel_xpbar_60
+  - first:
+      213: 8667659152881449453
+    second: panel_xpbar_61
+  - first:
+      213: -2835640605743921034
+    second: panel_xpbar_62
+  - first:
+      213: 6219693235568538460
+    second: panel_xpbar_63
+  - first:
+      213: 6359118340032158179
+    second: panel_xpbar_64
+  - first:
+      213: 1671362600083177512
+    second: panel_xpbar_65
+  - first:
+      213: -5779064313423604318
+    second: panel_xpbar_66
+  - first:
+      213: -4193264524485678733
+    second: panel_xpbar_67
+  - first:
+      213: 5623219654880631637
+    second: panel_xpbar_68
+  - first:
+      213: -3096877351887506092
+    second: panel_xpbar_69
+  - first:
+      213: 6882218571209603450
+    second: panel_xpbar_70
+  - first:
+      213: -2721839024421031781
+    second: panel_xpbar_71
+  - first:
+      213: -1710646474716822622
+    second: panel_xpbar_72
+  - first:
+      213: -3499157187275643211
+    second: panel_xpbar_73
+  - first:
+      213: -2072391664933996231
+    second: panel_xpbar_74
+  - first:
+      213: 2613312909373720734
+    second: panel_xpbar_75
+  - first:
+      213: 6226926909040319347
+    second: panel_xpbar_76
+  - first:
+      213: -5709048017239348996
+    second: panel_xpbar_77
+  - first:
+      213: 5671589725759997689
+    second: panel_xpbar_78
+  - first:
+      213: -1560655434985959008
+    second: panel_xpbar_79
+  - first:
+      213: -3585753301791250701
+    second: panel_xpbar_80
+  - first:
+      213: -6245192905949993471
+    second: panel_xpbar_81
+  - first:
+      213: -7774523860223312350
+    second: panel_xpbar_82
+  - first:
+      213: -2741796404676568913
+    second: panel_xpbar_83
+  - first:
+      213: 1969732389069487581
+    second: panel_xpbar_84
+  - first:
+      213: -5297700763622213850
+    second: panel_xpbar_85
+  - first:
+      213: -3863182120486467284
+    second: panel_xpbar_86
+  - first:
+      213: 2460195206910879840
+    second: panel_xpbar_87
+  - first:
+      213: 6980063491376691931
+    second: panel_xpbar_88
+  - first:
+      213: -7657233093878556464
+    second: panel_xpbar_89
+  - first:
+      213: -6259903865687441024
+    second: panel_xpbar_90
+  - first:
+      213: -4553054545202229134
+    second: panel_xpbar_91
+  - first:
+      213: 1016162720315931802
+    second: panel_xpbar_92
+  - first:
+      213: -5855332323778958583
+    second: panel_xpbar_93
+  - first:
+      213: -64347640845913094
+    second: panel_xpbar_94
+  - first:
+      213: -5512173841041524995
+    second: panel_xpbar_95
+  - first:
+      213: 1902337724985852663
+    second: panel_xpbar_96
+  - first:
+      213: -5151584747340255389
+    second: panel_xpbar_97
+  - first:
+      213: 8304163587754052163
+    second: panel_xpbar_98
+  - first:
+      213: -1746343468755335400
+    second: panel_xpbar_99
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: panel_xpbar_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 599.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b200842dc8a584841af5b63c9f907539
+      internalID: -2019874218940407116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 593.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 641b3b7b39f948a4a814675b5af8abd8
+      internalID: 1428763990400157703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 587.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 447ceeec24ccba942b07e58a44d80aff
+      internalID: -2155935344361141169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 581.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4043f8c287d521479edcfb39c310544
+      internalID: 7854843515044073562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 575.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a519c5313e598fd47a54b902abe0512d
+      internalID: -4472510638074506853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 569.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef5175cb6f5f29a4b927a2a040085dd0
+      internalID: 8463979482477805076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 563.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98142eea038c9664aabbfc966f1412ca
+      internalID: -4991555813709921813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 557.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e54abd7ded2c9834f87d54386d5f9ee7
+      internalID: 6912886233780228146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 551.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c54a702630757e4a9900386a51a03c9
+      internalID: -4047332300665087592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 545.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 345a47b7b267ea348bb17a468da7b144
+      internalID: 7874097715877521704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 539.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd227df5dff0f4f4fa5a1ffd77d86508
+      internalID: -5176072903142226541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 533.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cb270e9c284ece41949cd10c8f66405
+      internalID: -2764563372574814057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 527.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbea12c5741e759438fc961b3aa6a381
+      internalID: -6750510146914406766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 521.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97ba32f7f8466ce409994f62366a20f4
+      internalID: 9197473941422134195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 515.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72f4c118f327ded4d8f9b8559136a7bf
+      internalID: -7216287150580955968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 509.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73219bdd8c2291244aaa41e7dbad9096
+      internalID: -4407388734267594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 503.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6214bf96ca80d2c499edd8f7c4c17693
+      internalID: -1144887209571114372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 497.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ceab629d034df074dbf96824eb203d83
+      internalID: -5668673188409349970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 491.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4b0bce509d8a684aa38ee1ee74bf020
+      internalID: 1759023770794713685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 485.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed2374dadd652c14e98e12a5e23ed1d0
+      internalID: 1912668544439440668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 479.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: beafa9de623b22a4fa0dcf35e69a93c8
+      internalID: -9212809009459278620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 473.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ccb12814b2cf1947a228d09223a8ad2
+      internalID: 3675934166848640200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 467.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dea74571bf5c9c41a026822e9c3c63f
+      internalID: -1277791707103583470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 461.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 605627157b054724391ff670cb4d27de
+      internalID: 6730530736920774991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 455.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a12b9246a6682742a7bd56d5abfe4b6
+      internalID: 1275368257924835424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 449.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2862a0f22cdadd74c9c60e18f8f664b1
+      internalID: 11849881109815413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 443.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b616faba1c539440a607233ffec5bc4
+      internalID: 7672722687638397148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 437.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4599b514830c83f49af7fb13f76279dc
+      internalID: -3077169364952128863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 431.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc7afca6a49feea43b75c69438d6838c
+      internalID: -5707863483328243847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_29
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 425.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4a2698235104dd40a952294da2eae93
+      internalID: 3214487897170650283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 419.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bef110392ce14fb409e956fe06bdba00
+      internalID: 6567158712937791493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_31
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 413.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a467be154bea3d6489c9dc9ad26ddedb
+      internalID: 5294001764997988472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 407.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83e36b581f4394541bba5dd3d402d15d
+      internalID: 218595017615998598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_33
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 401.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35f7fffbd4eb2e34fb7380ac25c9dcb2
+      internalID: -7078091194653251923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_34
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 395.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f467fc34324a4449be75e3b19191bae
+      internalID: -1132451346575854242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 389.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b9e63b2537550940aea1163084e8e25
+      internalID: 9083248302142479635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 383.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15b089be02fd00a4f8f4e5bde996900b
+      internalID: 7681128403008330393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_37
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 377.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 234bd562623dd2140ada372227f1424c
+      internalID: -83482399109983241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_38
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 371.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96a625c20bccb8e4abda7a0a1f4ed1ae
+      internalID: -6767765368361443773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_39
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 365.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 477399b12c01aee41a7f28f6353c843d
+      internalID: 6057912144629332960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 359.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc71f96f29df1084ebf13e37b224e622
+      internalID: 4213546078313677440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_41
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 353.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df6596835cf275e48adeef0a9210e0df
+      internalID: -6201723350492447280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 347.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a48612e0307d13e4dbd7d90fa75c887a
+      internalID: 6453491697749287067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_43
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 341.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05499ad64c914b44fa9d28178a21ccd9
+      internalID: 924836248050504211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_44
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 335.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0eb5dce96068abc4b8ead7e374c2c5af
+      internalID: -3053086909213749523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 329.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ec30b7c45ba5a8498bfef728976d86a
+      internalID: -6311781040526514692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_46
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 323.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1b5fdfdc42f1544ab974d418917864b
+      internalID: 3557340276098124966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_47
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 317.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f92a12d527e6684985907acbc160f92
+      internalID: 6068477807890254806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 311.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c388382a522b37447a4e2d65f807395b
+      internalID: 7416319275007178468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_49
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 305.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 926846bdc468b2a498b991665af667af
+      internalID: 7518801280297371300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 299.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 027de9b5691ffe14e937a3c0988d1c98
+      internalID: -4290120749399221119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_51
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 293.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d8c5ffcd8335aa49a5f353be3529791
+      internalID: 4554143590223165010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_52
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 287.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6360fc00550569e4fbabbb6a98dd7de0
+      internalID: -8275033927381173234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_53
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 281.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79a3d3f5f3da063409aa7b3202d28d43
+      internalID: -7360714769303166038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_54
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 275.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b365271a2edc6a4c9efe865c43e24d6
+      internalID: -6677744005580683138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_55
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 269.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1cfcbdfa93db874aabe6efb9e86f3c7
+      internalID: 3385576116203459758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_56
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 263.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2097b12d028f39b40ab960d4865a3363
+      internalID: -354994057896665707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_57
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 257.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9417202c7976b544b05f02f7b3c9a21
+      internalID: 1243559327992504817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_58
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 251.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64661ec14d166da4c8ba1f410e323623
+      internalID: 197087951030641478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_59
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 245.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76231a695225d3b45a21d5075f4cf2c5
+      internalID: -1916332178759149801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 239.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ecaa88e9267bd24a829fc89b32b266c
+      internalID: 4307999277833813758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_61
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 233.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b98d260edbc7ffd41b07fa7fb41e1bcc
+      internalID: 8667659152881449453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_62
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 227.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e5e6f7fc476288468b6d16df4860f04
+      internalID: -2835640605743921034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_63
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 221.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1a95aac7999eb84ab9044d2ef80f3f1
+      internalID: 6219693235568538460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_64
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 215.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9af529777b22f04bac72f70adca6bc3
+      internalID: 6359118340032158179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_65
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 209.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d440572f77ab8354981349067146deef
+      internalID: 1671362600083177512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_66
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 203.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfa1ca11df6ca3c49a6a206a78153de7
+      internalID: -5779064313423604318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_67
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 197.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5a9b68d69904b4448555750fdcf5150
+      internalID: -4193264524485678733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_68
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 191.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8156329b0b0c491419a2449e5e0823e4
+      internalID: 5623219654880631637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_69
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 185.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93febd53a4992d44f8c353e0ed4b401a
+      internalID: -3096877351887506092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_70
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 179.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abe6ffeb7d910bc48ab1128c257ca288
+      internalID: 6882218571209603450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_71
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 173.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79eb71311b816c045aa13c2d2ca1eacb
+      internalID: -2721839024421031781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_72
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 167.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06d31ea324048e84183793093bf44729
+      internalID: -1710646474716822622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_73
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 161.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abd7335f84275dd4aa74f6e986e5a4f8
+      internalID: -3499157187275643211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_74
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 155.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be0bcb123a09361499344f4a3b1c657e
+      internalID: -2072391664933996231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_75
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 149.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d2ae53736bb89442956c1a79fc65d31
+      internalID: 2613312909373720734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_76
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 143.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95ee3927bce3f3d4f9fc9a992ef7fab2
+      internalID: 6226926909040319347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_77
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 137.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa16241c4f097f44fb7d030944f65fbb
+      internalID: -5709048017239348996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_78
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 131.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 410f21ff66e67d44eaeb54c5136ad70a
+      internalID: 5671589725759997689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_79
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 125.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4affced607d6a64db29a3fcc1b600a8
+      internalID: -1560655434985959008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 119.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69a218d2580826349b3c75792f07ae35
+      internalID: -3585753301791250701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_81
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 113.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5b2a773b76c9da479068611dbc039d6
+      internalID: -6245192905949993471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_82
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 107.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9db3f5f0ae4b3714eb6702eab7b44a69
+      internalID: -7774523860223312350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_83
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 101.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e81a0ba554a1db840a527aaa022cca28
+      internalID: -2741796404676568913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_84
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 95.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d9c91b6ee6ba5142811b11d5a5b477e
+      internalID: 1969732389069487581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_85
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 89.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 335b346e452d9e24f8c6c1d2b83f8c94
+      internalID: -5297700763622213850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_86
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 83.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45a864f08b228e44d90b40008ee1568c
+      internalID: -3863182120486467284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_87
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 77.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0ebcf89b74010d479bcb4d64c9c9258
+      internalID: 2460195206910879840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_88
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 71.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca3a9d1f74413c842b014dce993b7184
+      internalID: 6980063491376691931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_89
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 65.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c87413b38d99ca4da5c3dda9e76ea2a
+      internalID: -7657233093878556464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_90
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 59.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de65d092dd479514ca2521df6905d0b3
+      internalID: -6259903865687441024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_91
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 53.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee98151aa8385f8478cae48704b99898
+      internalID: -4553054545202229134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_92
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 47.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca14383135842ed4f94541b303ae08d6
+      internalID: 1016162720315931802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_93
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 41.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a85dab26d1260e42b514d52cfab2872
+      internalID: -5855332323778958583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_94
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 35.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32e65b84bc89993488643d3db9ea673f
+      internalID: -64347640845913094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_95
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 29.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2fb76779ece99748a87c3ebc83de125
+      internalID: -5512173841041524995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_96
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 23.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f951b63fd0d230a47be4550908aa1ac2
+      internalID: 1902337724985852663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_97
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 17.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d64ea6f283770d4bb6e226f50cde20b
+      internalID: -5151584747340255389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_98
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 11.940001
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b453ae3d2c1fd254b8c1c66f92d573a0
+      internalID: 8304163587754052163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: panel_xpbar_99
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5.94
+        width: 100
+        height: 6.06
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccf0c374a920d404ba8b3360cf9ae894
+      internalID: -1746343468755335400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

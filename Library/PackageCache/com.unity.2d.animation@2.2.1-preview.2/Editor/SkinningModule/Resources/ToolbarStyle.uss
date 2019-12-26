@@ -1,0 +1,76 @@
+/**********************************************************************************************************************/
+/* Toolbar                                                                                                         */
+/**********************************************************************************************************************/
+
+.Toolbar {
+     flex:0 0 auto;
+}
+
+Button {
+    align-items: center;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    flex-direction : row;
+    border-left-width:6px;
+    border-right-width:6px;
+    border-bottom-width:4px;
+    border-top-width:4px;
+    padding-left:0;
+    padding-right:0;
+    padding-bottom:2px;
+    padding-top:2px;
+}
+
+Button > Image {
+    width: 16px;
+    height: 16px;
+}
+
+.Collapse Button {
+    margin-top: -1px;
+    width: 26px;
+    height: 26px;
+}
+
+Button > .unity-label {
+    margin-left: 2px;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    -unity-text-align : middle-left;
+}
+
+.Collapse Button > Label {
+    visibility : hidden;
+    position : Absolute;
+}
+
+Button.Checked > Label {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+PopupWindow{
+    margin-left :-4px;
+    border-left-width :2px;
+    border-right-width :2px;
+    margin-top : 0;
+    margin-bottom : -4px;
+    background-image: resource("Builtin Skins/LightSkin/images/PopupWindowOff.png");
+}
+
+.Dark PopupWindow{
+    background-image: resource("Builtin Skins/DarkSkin/images/PopupWindowOff.png");
+}
+
+.Collapse PopupWindow
+{
+    margin-bottom : -25px;
+    color: rgba(255, 255, 255, 0);
+    background-image:none;
+}

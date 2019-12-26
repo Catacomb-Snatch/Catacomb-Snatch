@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf7219bab7fe46a1ad266029b2fee19, type: 3}
+  m_Name: Readme
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2800000, guid: ce89233faf9aade478753a79b96f035a, type: 3}
+  iconMaxWidth: 192
+  title: Readme
+  sections:
+  - heading: Hello!
+    text: 'Welcome to the Unity version of Catacomb Snatch! I am the current coder
+      of the Unity version, 64BitUniverse. The somewhat original project can be found
+      at the link below. '
+    linkText: Somewhat original Catacomb Snatch
+    url: http://catacombsnatch.net/index.html
+  - heading: What is this?
+    text: Catacomb Snatch is a dungeon crawler of sourts. I think of it as a bit of
+      a battle royal, but without droping into random places. You can play solo, or
+      with a friend, and hopefuly up to 4 people at once! The goal is to find the
+      treasure, and be the first to get the most. You do have obsticals, including
+      monsters that roam the anchient ruins you are exploring, breakable walls, traps,
+      and of course, the other players.
+    linkText: 
+    url: 
+  - heading: Who are you?
+    text: A random college student in the USA
+    linkText: 
+    url: 
+  - heading: Why does this exist?
+    text: This game was made by Mojang, and then updated by a guy on GitHub named
+      Maescool and was updated reguaraly up untill 2014. I liked it back then, and
+      I like it now, so I'm fixing it up.
+    linkText: 
+    url: 
+  - heading: Why are you using Unity?
+    text: As far as I know, the original project was supposed to span several platofrms
+      including iOS, tvOS, Andorid, and others. The original code was completly in
+      Java, and didn't have an engine associated with it (engine as in Unreal Editor
+      or Unity). The GitHub team tried to use libGDX, but it lost iOS support and
+      most packages that were used in the original code were out dated and not updated
+      for a long time. Also, with the whole thing of Oracle cracking down on Java
+      Runtime Enviroment stuff, Unity made sense to me.
+    linkText: 
+    url: 
+  - heading: Credits
+    text: First off, the original game was made by Mojang AB during a make a game
+      in a week chellenge, or soemthing to that end. It was originaly released in
+      a Humble Bundle and then the source code was released to the world. We don't
+      know what the licensing is for the assests. Because of that, we are not looking
+      to use this game to make money, and it will stay as an opensource project. Use
+      of these sprites and resources out side of Catacomb Snatch may not be permited.
+      Use at your own risk.
+    linkText: Mojang doesn't have a dedicated website anymore, so I'll just put Minecraft's
+    url: minecraft.net
+  - heading: 
+    text: 'The original person who made the more updated version of the game: Maescool.
+      With out his work, this wouldn''t be as robust as it is.'
+    linkText: 
+    url: 
+  - heading: 
+    text: 'Members of the GitHub group for CatacombSnatch who updated the code untill
+      2016: Maescool, spaceemotion, Kyle Brodie, and Luke Fisher'
+    linkText: GitHub (Where you can also find these files in a fork that I made)
+    url: https://github.com/Catacomb-Snatch
+  loadedLayout: 1

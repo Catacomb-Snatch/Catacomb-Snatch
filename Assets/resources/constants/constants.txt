@@ -1,0 +1,89 @@
+﻿# Do not delete this line
+
+options.locale_af = AFRIKAANS
+options.locale_de = DEUTSCH
+options.locale_en = ENGLISH
+options.locale_es = ESPAÑOL
+options.locale_fr = FRANÇAIS
+options.locale_ind = INDONESIA
+options.locale_it = ITALIANO
+options.locale_nl = NEDERLANDS
+options.locale_pl = POLSKI
+options.locale_pt_br = PORTUGUÊS
+options.locale_ru = РУССКИЙ
+options.locale_sl = SLOVENSKI
+options.locale_sv = SVENSKT
+
+com.mojang.mojam.entity.mob.Bat.deathPoints=1
+com.mojang.mojam.entity.mob.Bat.strength=1
+com.mojang.mojam.entity.mob.Bat.health=1
+com.mojang.mojam.entity.mob.Bat.speed=1
+com.mojang.mojam.entity.mob.Bat.limp=0
+
+com.mojang.mojam.entity.mob.Mummy.deathPoints=4
+com.mojang.mojam.entity.mob.Mummy.strength=2
+com.mojang.mojam.entity.mob.Mummy.health=7
+com.mojang.mojam.entity.mob.Mummy.speed=0.5
+com.mojang.mojam.entity.mob.Mummy.limp=3
+
+com.mojang.mojam.entity.mob.Scarab.deathPoints=4
+com.mojang.mojam.entity.mob.Scarab.strength=2
+com.mojang.mojam.entity.mob.Scarab.health=5
+com.mojang.mojam.entity.mob.Scarab.speed=0.7
+com.mojang.mojam.entity.mob.Scarab.limp=4
+
+com.mojang.mojam.entity.mob.Snake.deathPoints=2
+com.mojang.mojam.entity.mob.Snake.strength=1
+com.mojang.mojam.entity.mob.Snake.health=3
+com.mojang.mojam.entity.mob.Snake.speed=1.5
+com.mojang.mojam.entity.mob.Snake.limp=4
+
+com.mojang.mojam.entity.mob.Pharao.deathPoints=30
+com.mojang.mojam.entity.mob.Pharao.strength=3
+com.mojang.mojam.entity.mob.Pharao.health=40
+com.mojang.mojam.entity.mob.Pharao.speed=1.0
+com.mojang.mojam.entity.mob.Pharao.limp=3
+
+com.mojang.mojam.entity.mob.pather.Soldier.deathPoints=30
+com.mojang.mojam.entity.mob.pather.Soldier.strength=0
+com.mojang.mojam.entity.mob.pather.Soldier.health=40
+com.mojang.mojam.entity.mob.pather.Soldier.speed=1.0
+com.mojang.mojam.entity.mob.pather.Soldier.limp=3
+
+com.mojang.mojam.entity.weapon.Rifle.bulletDamage=0.5
+com.mojang.mojam.entity.weapon.Rifle.accuracy=0.15
+com.mojang.mojam.entity.weapon.Rifle.shootDelay=5
+
+com.mojang.mojam.entity.weapon.SoldierRifle.bulletDamage=0.5
+com.mojang.mojam.entity.weapon.SoldierRifle.accuracy=0.5
+com.mojang.mojam.entity.weapon.SoldierRifle.shootDelay=15
+
+com.mojang.mojam.entity.weapon.Raygun.bulletDamage=1.5
+com.mojang.mojam.entity.weapon.Raygun.accuracy=0.05
+com.mojang.mojam.entity.weapon.Raygun.shootDelay=10
+
+com.mojang.mojam.entity.weapon.Shotgun.bulletDamage=4.5
+com.mojang.mojam.entity.weapon.Shotgun.accuracy=0.06
+com.mojang.mojam.entity.weapon.Shotgun.shootDelay=35
+
+com.mojang.mojam.entity.weapon.VenomShooter.bulletDamage=0.5
+com.mojang.mojam.entity.weapon.VenomShooter.accuracy=0.15
+com.mojang.mojam.entity.weapon.VenomShooter.shootDelay=5
+
+com.mojang.mojam.entity.weapon.Cannon.bulletDamage=30
+com.mojang.mojam.entity.weapon.Cannon.accuracy=0.0
+com.mojang.mojam.entity.weapon.Cannon.shootDelay=900
+
+com.mojang.mojam.entity.weapon.Flamethrower.bulletDamage=0.5
+com.mojang.mojam.entity.weapon.Flamethrower.accuracy=0.06
+com.mojang.mojam.entity.weapon.Flamethrower.shootDelay=2
+
+com.mojang.mojam.entity.weapon.ElephantGun.bulletDamage=15
+com.mojang.mojam.entity.weapon.ElephantGun.accuracy=0.05
+com.mojang.mojam.entity.weapon.ElephantGun.shootDelay=120
+
+com.mojang.mojam.entity.weapon.Machete.bulletDamage=2
+com.mojang.mojam.entity.weapon.Machete.attackDelay=35
+
+com.mojang.mojam.entity.weapon.Melee.bulletDamage=1.5
+com.mojang.mojam.entity.weapon.Melee.attackDelay=30

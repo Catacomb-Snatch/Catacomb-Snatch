@@ -1,0 +1,8 @@
+# --------------------------------------------------------------
+# Index of all available "vanilla" languages
+# --------------------------------------------------------------
+# Listed files will be automatically loaded when the game starts
+# This is needed because LibGdx cannot list files inside a .jar
+# --------------------------------------------------------------
+
+en.lang

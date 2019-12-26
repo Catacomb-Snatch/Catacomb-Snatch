@@ -1,0 +1,169 @@
+# Game texts encoded in UTF-8
+
+build.rail = TI SERVONO {0} PER COSTRUIRE UNA ROTAIA
+build.droid = TI SERVONO {0} PER COSTRUIRE UN DROIDE
+build.removeRail = TI SERVONO {0} PER RIMUOVERE UNA ROTAIA
+
+back = INDIETRO
+cancel = ANNULLA
+select = SELEZIONA
+
+character.text = SELEZIONA IL PERSONAGGIO!
+character.select = SELEZIONA
+
+credits.leadDev = LEAD DEVELOPER:
+credits.maintainers = PROJECT MAINTAINERS:
+credits.communityMan = COMMUNITY MAINTAINERS:
+credits.others = AND THANKS TO ALL CONTRIBUTORS, INCLUDING:
+credits.note = THIS PROJECT IS NOW MAINTAINED AS A COMMUNITY PROJECT
+
+diffselect.title = SCEGLI LA DIFFICOLTA
+diffselect.start = GIOCA
+diffselect.easy = FACILE
+diffselect.normal = NORMALE
+diffselect.hard = DIFFICILE
+diffselect.nightmare = INCUBO
+
+exitmenu.headline = VUOI VERAMENTE USCIRE DAL GIOCO?
+exitmenu.cancel = NO 
+exitmenu.exit = SÌ
+
+gameplay.player1Win = {0} VITTORIA WOOHOO
+gameplay.player2Win = {0} VITTORIA EVVAI
+gameplay.player1Name = LORD LARD
+gameplay.player2Name = HERR VON SPECK
+gameplay.player3Name = DUCHESS DONUT
+gameplay.player4Name = COUNTESS CRULLER
+gameplay.FPS = FPS: {0}
+gameplay.latency = LATENZA: {0}
+gameplay.cantPickup = NON PUOI PRENDERLO!
+gameplay.weaponAlready = POSSIEDI GIÀ QUEST'ARMA!
+
+help.goal = SCOPO
+help.help1 = RACCOGLI 50 LOTTI
+help.help2 = DEL TESORO CHE SI TROVA
+help.help3 = AL CENTRO DELLA MAPPA
+help.help4 = PRIMA DEL TUO AVVERSARIO(I)
+help.turret = TORRETTA
+help.turret1 = SPARA AI NEMICI CHE LA CIRCONDANO.
+help.collector = COLLECTOR
+help.collector1 = RACCOGLIE LE MONETE INTORNO AD ESSO.
+help.collector2 = RACCOGLIERLO PER RICEVERE LE MONETE.
+help.bomb = BOMBA
+help.bomb1 = UTILIZZATO PER DISTRUGGERE LE PARETI. 
+help.bomb2 = SPARA PER DETONARLA.
+help.rails = ROTAIE
+help.rails1 = USATE NEL TRASPORTO DI DROIDI 
+help.rails2 = PER RACCOGLIERE IL TESORO.
+help.rails3 = PER COMPRARE UN DROIDE (50 MONETE)
+
+keys.up = AVANTI
+keys.down = INDIETRO
+keys.left = SINISTRA
+keys.right=  DESTRA
+keys.sprint = SCATTA
+keys.fire = SPARA
+keys.fireUp = SPARA IN ALTO
+keys.fireDown = SPARA IN BASSO
+keys.fireLeft = SPARA A SX
+keys.fireRight = SPARA A DX
+keys.use = USA
+keys.build = COSTRUISCI
+keys.upgrade = POTENZIA
+keys.chat = CHAT
+keys.weaponSlot = ARMA N. {0}
+keys.cycleLeft = ARMA SUCC.
+keys.cycleRight = ARMA PREC.
+
+leveleditor.title = LEVEL EDITOR
+leveleditor.new = NUOVO
+leveleditor.open = APRI
+leveleditor.save = SALVA
+leveleditor.enterLevelName = NOME LIVELLO:
+
+levelselect.title = SCEGLI UN LIVELLO
+levelselect.start = GIOCA
+levelselect.update = AGGIORNA
+
+mp.waitingForClient = ATTENDERE CHE UN CLIENT SI UNISCA...
+mp.enterIP = INSERISCI L'INDIRIZZO IP DELL'HOST:
+mp.localIP = IL TUO IP LOCALE:
+mp.externalIP = IL TUO IP ESTERNO:
+mp.join = UNISCITI
+mp.mismatch = VERSIONI NON CORRISPONDENTI!
+mp.server = SERVER
+mp.client = CLIENT
+
+options.on = ON
+options.off = OFF
+options.keyBindings = CONTROLLI
+options.characterSelect = SEL. PERSONAGGIO
+options.trapmouse = INTRAPPOLA MOUSE NELLA FINESTRA
+options.fullscreen = SCHERMO INTERO
+options.opengl = OPENGL
+options.showfps = MOSTRA FPS
+options.music = MUSICA
+options.sounds = SUONI
+options.volume = VOLUME
+options.sound_and_video = VIDEO AND SOUND
+options.locale_selection = LINGUA
+options.mute = DISATTIVATA
+options.creative = CREATIVE MODE
+options.alternative = PERSONAGGIO ALTERNATIVO
+options.credits = CREDITI
+options.openal = Sound system OpenAL
+options.smallscale = FINESTRA PICCOLA
+options.enableMods = ABILITA MOD (RICHIEDE RIAVVIO)
+
+pausemenu.help = AIUTO
+pausemenu.backtomain = MENU
+pausemenu.resume = RIPRENDI
+pausemenu.exit = ESCI
+
+player.hasDied = {0} È MORTO!
+player.score = {0}: {1}%
+player.cost = {0}
+player.health = {0}%
+player.money = {0}
+player.nextLevel = {0}
+player.exp = {0}
+player.level = {0}
+
+shop.turretTooltipTitle = TORRETTA
+shop.turretTooltipLine1 = Usata per difendersi.
+shop.turretTooltipLine2 = Attaca i nemici nelle vicinanze.
+shop.harvesterTooltipTitle = HARVESTER
+shop.harvesterTooltipLine1 = Raccoglie il tesoro
+shop.harvesterTooltipLine2 = Recupera il bottino.
+shop.bombTooltipTitle = BOMBA
+shop.bombTooltipLine1 = Distrugge i muri.
+shop.bombTooltipLine2 = Usata per crare scorciatoie.
+
+shop.soldierTooltipTitle = SOLDATO
+shop.soldierTooltipLine1 = Usato per attaccare. Attacca i
+shop.soldierTooltipLine2 = nemici, Raccoglie le monete.
+
+shop.rifleTooltipTitle = FUCILE
+shop.rifleTooltipLine1 = L'arma predefinita.
+shop.rifleTooltipLine2 = Va bene per tutto.
+shop.shotgunTooltipTitle = SHOTGUN
+shop.shotgunTooltipLine1 = I colpi coprono un'area più grande.
+shop.shotgunTooltipLine2 = Alto danno, corto raggio.
+shop.raygunTooltipTitle = ENERGY GUN
+shop.raygunTooltipLine1 = I colpi rimbalzano sulle pareti.
+shop.raygunTooltipLine2 = Ogni rimbalzo aumenta i danni.
+
+titlemenu.start = GIOCA
+titlemenu.host = OSPITA
+titlemenu.join = UNISCITI
+titlemenu.help = COME GIOCARE
+titlemenu.options = OPZIONI
+titlemenu.levelEditor = LEVEL EDITOR
+titlemenu.exit = ESCI
+
+upgrade.full = POTENZIATO AL MASSIMO!
+upgrade.notEnoughMoney = NON HAI ABBASTANZA MONETE ({0})
+upgrade.to = POTENZIATO AL LIVELLO {0}
+
+download.downloading = SCARICO..
+download.unpacking = SCOMPATTO..

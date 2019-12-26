@@ -1,0 +1,50 @@
+#AutoGenerateWeightImage {
+    background-image: resource("Icons/Light/Generate_Weights");
+}
+
+
+#WeightPainterSliderImage {
+    background-image: resource("Icons/Light/Weight_Slider");
+}
+
+#WeightPainterBrushImage {
+    background-image: resource("Icons/Light/Weight_Brush");
+}
+
+#BoneInfluenceWidgetImage {
+    background-image: resource("Icons/Light/Bone_Influence");
+}
+
+.Checked #AutoGenerateWeightImage {
+    background-image: resource("Icons/Selected/Generate_Weights");
+}
+
+
+.Checked #WeightPainterSliderImage {
+    background-image: resource("Icons/Selected/Weight_Slider");
+}
+
+.Checked #WeightPainterBrushImage {
+    background-image: resource("Icons/Selected/Weight_Brush");
+}
+
+.Checked #BoneInfluenceWidgetImage {
+    background-image: resource("Icons/Selected/Bone_Influence");
+}
+
+.Dark #AutoGenerateWeightImage {
+    background-image: resource("Icons/Dark/d_Generate_Weights");
+}
+
+
+.Dark #WeightPainterSliderImage {
+    background-image: resource("Icons/Dark/d_Weight_Slider");
+}
+
+.Dark #WeightPainterBrushImage {
+    background-image: resource("Icons/Dark/d_Weight_Brush");
+}
+
+.Dark #BoneInfluenceWidgetImage {
+    background-image: resource("Icons/Dark/d_Bone_Influence");
+}
