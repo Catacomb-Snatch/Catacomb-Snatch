@@ -15,3 +15,4 @@ The roadmap for what I'm doing!
     - ☐ Everything Animated
     - ☑️ Textures ready to go (Hopefuly. I at least split all of them using the built in Texture editor. I call that a win.)
     
+If you would like to help with this, download this repo, unzip it, get rid of the travis file and readme if you want, and open the Unity Hub. Press add, and locate where you unzipped the repo and you are done.
