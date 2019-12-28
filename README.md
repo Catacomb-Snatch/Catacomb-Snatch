@@ -17,4 +17,6 @@ The roadmap for what I'm doing!
     
 If you would like to help with this, download this repo, unzip it, get rid of the travis file and readme if you want, and open the Unity Hub. Press add, and locate where you unzipped the repo and you are done.
 
+Unity version used: 2019.2.15f1
+
 I use 2D Pixel Perfect in this project, which needs 2D IK I think. You can find them in the Package Manager
