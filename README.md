@@ -7,8 +7,11 @@ The roadmap for what I'm doing!
 
 ☐ Full conversion to Unity
   - ☐ Converting Scripts
-    - ☐ Getting scripts like GameManager working
+    - ☐ AI routing
     - ☐ Scripts for moving things
+    - ☐ Making the walls walls
+    - ☐ Floor
+    - ☐ Gun mechanics
   - ☐ Texture thingies
     - ☑️ I figure out what each texture does. I think I know most of them, just not sure on a few.
     - ☐ Everything Animated
