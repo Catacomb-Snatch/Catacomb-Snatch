@@ -11,7 +11,8 @@ The roadmap for what I'm doing!
     - ☐ Scripts for moving things
     - ☐ Making the walls walls
     - ☐ Floor
-    - ☐ Gun mechanics
+    - ☐ Gun mechanics (Following your mouse, bouncy bullets, auto aim for phone users)
+    - ☐ Manual keybindings/Controller support
   - ☐ Texture thingies
     - ☑️ I figure out what each texture does. I think I know most of them, just not sure on a few.
     - ☐ Everything Animated
@@ -19,6 +20,6 @@ The roadmap for what I'm doing!
     
 If you would like to help with this, download this repo, unzip it, get rid of the travis file and readme if you want, and open the Unity Hub. Press add, and locate where you unzipped the repo and you are done.
 
-Unity version used: 2019.2.15f1
+Unity version used: 2019.2
 
-I use 2D Pixel Perfect in this project, which needs 2D IK I think. You can find them in the Package Manager
+I want to use 2D Pixel Perfect in this project to scale sprites depending on what device you use. It needs 2D IK, I think, but both Pacages get installed automaticaly, and they are in the Package Manager if something goes wrong.
