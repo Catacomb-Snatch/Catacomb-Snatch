@@ -18,7 +18,7 @@ The roadmap for what I'm doing!
     - ☑️ Everything Animated
     - ☑️ Textures ready to go (Hopefuly. I at least split all of them using the built in Texture editor. I call that a win.)
     - ☐ Rotate everything 90 degrees on the x axis 
-         (With the way Unity defualys sprites, if you try to go backwards or forwars, you move further or closer to the camera)
+         (With the way Unity defualts sprites, if you try to go backwards or forwards, you move further or closer to the camera)
     
 If you would like to help with this, download this repo, unzip it, get rid of the travis file and readme if you want, and open the Unity Hub. Press add, and locate where you unzipped the repo and you are done.
 
