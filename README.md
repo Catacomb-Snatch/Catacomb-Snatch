@@ -25,3 +25,6 @@ If you would like to help with this, download this repo, unzip it, get rid of th
 Unity version used: 2019.2
 
 I want to use 2D Pixel Perfect in this project to scale sprites depending on what device you use. It needs 2D IK, I think, but both Pacages get installed automaticaly, and they are in the Package Manager if something goes wrong.
+
+I'm also using SuperTiled2Unity, since the orignial Catacomb Maps were made with it. I don't know if it's i nthe assets store, so here's the website:
+https://seanba.itch.io/supertiled2unity
