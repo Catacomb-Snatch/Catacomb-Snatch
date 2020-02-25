@@ -71,4 +71,17 @@ MonoBehaviour:
       2016: Maescool, spaceemotion, Kyle Brodie, and Luke Fisher'
     linkText: GitHub (Where you can also find these files in a fork that I made)
     url: https://github.com/Catacomb-Snatch
+  - heading: 
+    text: For the code, I've been using both Sebastain League's tutorial 'Create a
+      Game (Unity 5)' and Unity's 2D Roguelike tutorial.
+    linkText: Sebastain League's YouTube
+    url: https://www.youtube.com/user/Cercopithecan
+  - heading: 
+    text: 
+    linkText: Create a Game (Unity 5) series
+    url: https://www.youtube.com/playlist?list=PLFt_AvWsXl0ctd4dgE1F8g3uec4zKNRV0
+  - heading: 
+    text: 
+    linkText: Unity's 2D Roguelike Tutorial
+    url: https://learn.unity.com/project/2d-roguelike-tutorial
   loadedLayout: 1
