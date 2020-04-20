@@ -4,7 +4,7 @@ Catacomb-Snatch
 
 The roadmap for what I'm doing!
 
-☐ Full conversion to Unity
+- ☐ Full conversion to Unity
     - ☑️ Character can move
     - ☐ AI routing and scripts for moving mobs
     - ☐ Making the walls... walls
@@ -12,7 +12,8 @@ The roadmap for what I'm doing!
     - ☐ Making Rails connect to each other
     - ☐ Gun mechanics (Following your mouse, bouncy bullets, auto aim for phone users. If anyone knows a good way to do Raycast in 2D             Unity, hit me up)
     - ☐ Manual keybindings/Controller support
-  - ☑️ Texture thingies are done as far as I'm concerned.
+    
+  ☑️ Texture thingies are done as far as I'm concerned.
     
 If you would like to help with this, download this repo, unzip it, get rid of the readme if you want, and open the Unity Hub. Press add, and locate where you unzipped the repo and you are done on the Unity front. Tiled was used in the original Java game, and we are using it in this. You can download it at https://www.mapeditor.org/ . SuperTiled2Unity sbould automaticaly install, but if it doesn't it's linked below.
 
