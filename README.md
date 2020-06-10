@@ -6,8 +6,8 @@ The roadmap for what I'm doing!
 
 - ☐ Full conversion to Unity
     - ☑️ Character can move
-    - ☐ AI routing and scripts for moving mobs
-    - ☐ Making the walls... walls
+    - ☐ AI routing and scripts for moving mobs (Close)
+    - ☐ Making the walls act like... walls
     - ☐ Tile randomazation
     - ☐ Making Rails connect to each other
     - ☐ Gun mechanics (Following your mouse, bouncy bullets, auto aim for phone users. If anyone knows a good way to do Raycast in 2D             Unity, hit me up)
