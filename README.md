@@ -17,7 +17,7 @@ The roadmap for what I'm doing!
     
 If you would like to help with this, download this repo, unzip it, and open the Unity Hub. Press add, and locate where you unzipped the repo. If you are using Visual Studio, you'll need to go to Edit > Prefrences > External Tools > External Script Editor (It's the first one on the 'External Tools' page). Select 'Visual Studio (Whatever edition you have)', and now you are done with setup with Unity.
 
-Tiled was used in the original Java game, and we are using it in this. You can download it at https://www.mapeditor.org/ SuperTiled2Unity sbould automaticaly install, but if it doesn't it's linked below.
+Tiled was used in the original Java game, and we are using it in this. You can download it at https://www.mapeditor.org/ SuperTiled2Unity sbould automaticaly install, but if it doesn't here you go: 
 https://seanba.itch.io/supertiled2unity
 
 Unity version used: 2019.2.x (Will update to 2020 when it's out of beta, and then again to the LTS version of 2020)
