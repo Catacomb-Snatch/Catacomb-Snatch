@@ -16,7 +16,11 @@ The roadmap for what I'm doing!
   ☐ Texture thingies aren't done
      - ☐ Animations for other characters, mainly need to make idle ones for them
     
-If you would like to help with this, download this repo, unzip it, and open the Unity Hub. Press add, and locate where you unzipped the repo. If you are using Visual Studio, you'll need to go to Edit > Prefrences > External Tools > External Script Editor (It's the first one on the 'External Tools' page). Select 'Visual Studio (Whatever edition you have)', and now you are done with setup with Unity.
+If you would like to help with this, download this repo, unzip it, and open the Unity Hub. Press add, and locate where you unzipped the repo. 
+
+If you are using Windows (Visual Studio), you'll need to go to Edit > Prefrences > External Tools > External Script Editor (It's the first one on the 'External Tools' page). Select 'Visual Studio (Whatever edition you have)', and now you are done with setup with Unity.
+
+If you are using Mac, I think you'll be using MonoDevelop. The process is the same as Windows, just it will have MonoDevelop in External Script Editor
 
 Tiled was used in the original Java game, and we are using it in this. You can download it at https://www.mapeditor.org/ SuperTiled2Unity sbould automaticaly install, but if it doesn't here you go: 
 https://seanba.itch.io/supertiled2unity
