@@ -5,15 +5,16 @@ Catacomb-Snatch
 The roadmap for what I'm doing!
 
 - ☐ Full conversion to Unity
-    - ☑️  Character can move
+    - ☑️ Character can move
     - ☐ AI routing and scripts for moving mobs (Close)
     - ☐ Making the walls act like... walls
     - ☐ Tile randomazation
     - ☐ Making Rails connect to each other
-    - ☐ Gun mechanics (Following your mouse, bouncy bullets, auto aim for phone users. If anyone knows a good way to do Raycast in 2D             Unity, hit me up)
+    - ☐ Gun mechanics (Following your mouse, bouncy bullets, auto aim for phone users)
     - ☐ Manual keybindings/Controller support
     
-  ☑️  Texture thingies are done as far as I'm concerned.
+  ☐ Texture thingies aren't done
+     - ☐ Animations for other characters, mainly need to make idle ones for them
     
 If you would like to help with this, download this repo, unzip it, and open the Unity Hub. Press add, and locate where you unzipped the repo. If you are using Visual Studio, you'll need to go to Edit > Prefrences > External Tools > External Script Editor (It's the first one on the 'External Tools' page). Select 'Visual Studio (Whatever edition you have)', and now you are done with setup with Unity.
 
