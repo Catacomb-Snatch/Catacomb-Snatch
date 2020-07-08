@@ -7,6 +7,8 @@ The roadmap for what I'm doing!
 - ☐ Full conversion to Unity
     - ☑️ Character can move
     - ☐ AI routing and scripts for moving mobs (Close)
+    - ☐ Able to pick up Turrets/Vacuums
+    - ☐ Turrets/Vacuums have AI
     - ☑️ Making the walls act like... walls
     - ☐ Tile randomazation
     - ☐ Making Rails connect to each other
