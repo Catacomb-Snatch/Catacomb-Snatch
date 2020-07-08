@@ -27,4 +27,4 @@ https://seanba.itch.io/supertiled2unity
 
 Unity version used: 2019.4.x (Move up to that to see if something is fixed) Will update to 2020 when it's out of beta, and then again to the LTS version of 2020
 
-I want to use 2D Pixel Perfect in this project to scale sprites depending on what device you use. It needs 2D IK, I think, but both Packages get installed automaticaly, and they are in the Package Manager if something goes wrong.
+~~I want to use 2D Pixel Perfect in this project to scale sprites depending on what device you use. It needs 2D IK, I think, but both Packages get installed automaticaly, and they are in the Package Manager if something goes wrong.~~ It's still installed, but I have no plans to use it yet.
