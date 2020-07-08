@@ -24,7 +24,7 @@ If you are using Windows (Visual Studio), you'll need to go to Edit > Prefrences
 
 If you are using Mac, I think you'll be using MonoDevelop. The process is the same as Windows, just it will have MonoDevelop in External Script Editor
 
-Tiled was used in the original Java game, and we are using it in this. You can download it at https://www.mapeditor.org/ SuperTiled2Unity sbould automaticaly install, but if it doesn't here you go: 
+Tiled was used in the original Java game, and we are using it in this. You can download it at https://www.mapeditor.org/ SuperTiled2Unity should automaticaly install, but if it doesn't here you go: 
 https://seanba.itch.io/supertiled2unity
 
 Unity version used: 2019.4.x (Move up to that to see if something is fixed) Will update to 2020 when it's out of beta, and then again to the LTS version of 2020
