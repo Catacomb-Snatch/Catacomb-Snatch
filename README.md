@@ -25,6 +25,6 @@ If you are using Mac, I think you'll be using MonoDevelop. The process is the sa
 Tiled was used in the original Java game, and we are using it in this. You can download it at https://www.mapeditor.org/ SuperTiled2Unity sbould automaticaly install, but if it doesn't here you go: 
 https://seanba.itch.io/supertiled2unity
 
-Unity version used: 2019.2.x (Will update to 2020 when it's out of beta, and then again to the LTS version of 2020)
+Unity version used: 2019.4.x (Move up to that to see if something is fixed) Will update to 2020 when it's out of beta, and then again to the LTS version of 2020
 
 I want to use 2D Pixel Perfect in this project to scale sprites depending on what device you use. It needs 2D IK, I think, but both Packages get installed automaticaly, and they are in the Package Manager if something goes wrong.
