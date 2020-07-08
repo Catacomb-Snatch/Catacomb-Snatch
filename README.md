@@ -7,7 +7,7 @@ The roadmap for what I'm doing!
 - ☐ Full conversion to Unity
     - ☑️ Character can move
     - ☐ AI routing and scripts for moving mobs (Close)
-    - ☐ Making the walls act like... walls
+    - ☑️ Making the walls act like... walls
     - ☐ Tile randomazation
     - ☐ Making Rails connect to each other
     - ☐ Gun mechanics (Following your mouse, bouncy bullets, auto aim for phone users)
