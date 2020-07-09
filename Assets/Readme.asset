@@ -23,9 +23,8 @@ MonoBehaviour:
     linkText: Somewhat original Catacomb Snatch
     url: http://catacombsnatch.net/index.html
   - heading: What is this?
-    text: Catacomb Snatch is a dungeon crawler of sourts. I think of it as a bit of
-      a battle royal, but without droping into random places. You can play solo, or
-      with a friend, and hopefuly up to 4 people at once! The goal is to find the
+    text: Catacomb Snatch is a dungeon crawler that can be co-op. You can play solo,
+      or with a friend, and hopefuly up to 4 people at once! The goal is to find the
       treasure, and be the first to get the most. You do have obsticals, including
       monsters that roam the anchient ruins you are exploring, breakable walls, traps,
       and of course, the other players.
@@ -72,8 +71,10 @@ MonoBehaviour:
     linkText: GitHub (Where you can also find these files in a fork that I made)
     url: https://github.com/Catacomb-Snatch
   - heading: 
-    text: For the code, I've been using both Sebastain League's tutorial 'Create a
-      Game (Unity 5)' and Unity's 2D Roguelike tutorial.
+    text: For the code, I started out using Sebastain League's tutorial 'Create a
+      Game (Unity 5)', but Mr. League's was mainly for Unity 3D. The main resources
+      I use now are Unity's Roguelike tutorial and the YouTuber Brakeys' tutorials
+      for 2D Unity
     linkText: Sebastain League's YouTube
     url: https://www.youtube.com/user/Cercopithecan
   - heading: 
@@ -84,4 +85,8 @@ MonoBehaviour:
     text: 
     linkText: Unity's 2D Roguelike Tutorial
     url: https://learn.unity.com/project/2d-roguelike-tutorial
+  - heading: 
+    text: 
+    linkText: Brackeys' YouTube
+    url: https://www.youtube.com/channel/UCYbK_tjZ2OrIZFBvU6CCMiA
   loadedLayout: 1
