@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Main Menues.unity
+- path: Assets/Scenes/CatacombSnatch.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

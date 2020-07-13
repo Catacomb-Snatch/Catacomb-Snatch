@@ -6,10 +6,10 @@ Font:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Font-Small-Gold
+  m_Name: Font-Small-White
   serializedVersion: 5
-  m_LineSpacing: 0.1
-  m_DefaultMaterial: {fileID: 2100000, guid: 9483b8931a965b34c9ccb6cfe1d22d07, type: 2}
+  m_LineSpacing: 6
+  m_DefaultMaterial: {fileID: 2100000, guid: 652161ece85877140a1f731e41ee61fa, type: 2}
   m_FontSize: 0
   m_Texture: {fileID: 0}
   m_AsciiStartOffset: 0

@@ -8,7 +8,7 @@ Font:
   m_PrefabAsset: {fileID: 0}
   m_Name: Font-Red
   serializedVersion: 5
-  m_LineSpacing: 0.1
+  m_LineSpacing: 15
   m_DefaultMaterial: {fileID: 2100000, guid: e6253ba8015d40c47b4b2b4f42c6e867, type: 2}
   m_FontSize: 0
   m_Texture: {fileID: 0}
