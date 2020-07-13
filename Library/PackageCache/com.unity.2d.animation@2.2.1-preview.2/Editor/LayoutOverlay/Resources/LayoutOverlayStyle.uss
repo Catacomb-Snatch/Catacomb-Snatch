@@ -1,0 +1,142 @@
+/**********************************************************************************************************************/
+/* LayoutOverlay                                                                                                         */
+/**********************************************************************************************************************/
+
+LayoutOverlay {
+    flex-direction: column-reverse;
+    overflow: hidden;
+}
+
+LayoutOverlay.HasScrollbar {
+    margin-right: 18px;
+    margin-bottom: 18px;
+}
+
+//Disable Horizontal Toolbar until needed
+LayoutOverlay > #HorizontalToolbar {
+    height: 0;
+}
+
+LayoutOverlay > #HorizontalHolder {
+    flex:1 auto;
+    flex-direction: row;
+}
+
+LayoutOverlay > #HorizontalHolder > #VerticalToolbar {
+    width: 140px;
+}
+
+LayoutOverlay > #HorizontalHolder > #VerticalToolbar.Collapse {
+    width: 50px;
+}
+
+LayoutOverlay > #HorizontalHolder > #LeftOverlay {
+    flex-grow: 1;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+LayoutOverlay > #HorizontalHolder > #RightOverlay {
+
+    flex-grow: 1;
+    flex-direction: column-reverse;
+    flex-wrap: wrap-reverse;
+    align-items: flex-start;
+}
+
+LayoutOverlay > #DropdownOverlay {
+    height: 0;
+    width: 0;
+}
+
+LayoutOverlay > #HorizontalHolder > #RightOverlay PopupWindow {
+    flex:1 0 auto;
+    width : 280px;
+    padding-left : 12px;
+    padding-bottom : 15px;
+    padding-right : 12px;
+}
+
+LayoutOverlay > #HorizontalHolder > #RightOverlay PopupWindow > #unity-content-container {
+    flex:1 0 auto;
+}
+
+LayoutOverlay > #HorizontalHolder > #RightOverlay PopupWindow .form-row {
+    max-height : 20px;
+    flex-direction: row;
+    margin-left : 0;
+    margin-right : 0;
+    margin-top : 0;
+    margin-bottom : 0;
+}
+
+LayoutOverlay > #HorizontalHolder > #RightOverlay PopupWindow .form-row-space {
+    height : 5px;
+}
+
+LayoutOverlay > #HorizontalHolder > #RightOverlay PopupWindow .form-editor {
+    flex-direction: row;
+    flex: 6;
+}
+
+LayoutOverlay > #HorizontalHolder > #RightOverlay PopupWindow .slider-field {
+    flex: 3;
+}
+
+LayoutOverlay > #HorizontalHolder > #RightOverlay PopupWindow Label {
+    flex: 4;
+    margin-right : 4px;
+    margin-left : 4px;
+    margin-top : 2px;
+    margin-bottom : 2px;
+}
+
+LayoutOverlay > #HorizontalHolder > #RightOverlay PopupWindow EnumField {
+    flex: 1;
+    margin-left : 0;
+    margin-top : 0;
+    margin-bottom : 0;
+    align-self: center;
+}
+
+LayoutOverlay > #HorizontalHolder > #RightOverlay PopupWindow PopupField {
+    flex: 1;
+    margin-left : 0;
+    margin-top : 0;
+    margin-bottom : 0;
+    align-self: center;
+}
+
+LayoutOverlay > #HorizontalHolder > #RightOverlay PopupWindow .unity-slider__input{
+    margin-left :1px;
+}
+
+LayoutOverlay > #HorizontalHolder > #RightOverlay PopupWindow Slider {
+    flex: 7;
+    margin-left : 4px;
+    margin-top :2px;
+    margin-right : 10px;
+    margin-bottom :2px;
+}
+
+LayoutOverlay > #HorizontalHolder > #RightOverlay PopupWindow Button {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 3px;
+    flex : 1 0 auto;
+    margin-left :4px;
+    margin-right :4px;
+    border-left-width:6px;
+    border-right-width:6px;
+    border-bottom-width:4px;
+    border-top-width:4px;
+}
+
+LayoutOverlay > #HorizontalHolder > #RightOverlay PopupWindow Toggle {
+    align-self : center;
+    margin-bottom: 4px;
+}
