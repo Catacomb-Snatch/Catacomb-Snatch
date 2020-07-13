@@ -18,7 +18,7 @@ The roadmap for what I'm doing!
   ☐ Texture thingies aren't done
      - ☐ Animations for other characters, mainly need to make idle ones for them
     
-If you would like to help with this, download this repo, unzip it, and open the Unity Hub. Press add, and locate where you unzipped the repo. 
+If you would like to help with this, download this repo, unzip it, and open the Unity Hub. Press the ADD button in the Projects tab, and locate where you unzipped the repo. 
 
 If you are using Windows (Visual Studio), you'll need to go to Edit > Prefrences > External Tools > External Script Editor (It's the first one on the 'External Tools' page). Select 'Visual Studio (Whatever edition you have)', and now you are done with setup with Unity.
 
